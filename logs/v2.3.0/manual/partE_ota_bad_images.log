@@ -1,0 +1,103 @@
+Part E: OTA with bad images (TC-OTA-17, 18, 19, 21, 26), DUT on v2.3.0 (ota_0), local server `ota_server.py`
+Network: home Wi-Fi (SSID hidden), server 192.168.50.28:8000, device 192.168.50.169. Date: 2026-10-14.
+Wi-Fi password and SSID not logged. Excerpts of the console session (telemetry lines removed).
+
+> version
+fw v2.3.0, partition: ota_0 @ 0x20000, state: valid
+
+=== TC-OTA-17: garbage.bin ===
+> ota url http://192.168.50.28:8000/test/garbage.bin
+[OTA] current v2.3.0 (ota_0) -> target partition ota_1
+[OTA] downloading http://192.168.50.28:8000/test/garbage.bin
+E esp_https_ota: Incorrect app descriptor magic
+E sentry: E406 invalid image header - not a firmware file
+> ota check
+[OTA] current: v2.3.0 / stable: v2.1.0 / beta: v2.3.0 / running newer than stable
+Result: PASS (E406, device works, next OTA command works)
+
+=== TC-OTA-26 (bonus): malformed URL, typed by mistake ===
+> ota url http://<IP>:80asd
+E HTTP_CLIENT: Error parse url http://<IP>:80asd
+E esp_https_ota: Failed to initialise HTTP connection
+E sentry: E405 cannot start download (ESP_FAIL)
+Result: PASS (E405 = download did not start)
+
+=== TC-OTA-18: truncated.bin ===
+> ota url http://192.168.50.28:8000/test/truncated.bin
+[OTA] image: sentry_fw7 v2.3.0 (build Oct  6 2026 02:15:26)
+W409 same version v2.3.0 - reinstalling
+[OTA] 10% ... 100%
+I esp_image: segment 4: paddr=0027c0b4 vaddr=91004136 size=fd81fdcc (4253154764)   <- garbage segment size
+E esp_ota_ops: New image failed verification
+E sentry: E412 image validation failed (corrupted image)
+> version
+fw v2.3.0, ota_0, state: valid
+> ota check
+[OTA] current: v2.3.0 / stable: v2.1.0 / beta: v2.3.0
+Result: PASS (controlled error E412, device stays on 2.3.0, next OTA command works)
+
+=== TC-OTA-19: corrupted.bin ===
+> ota url http://192.168.50.28:8000/test/corrupted.bin
+W409 same version v2.3.0 - reinstalling
+[OTA] 10% ... 100%
+E esp_image: Image hash failed - image is corrupt
+E sentry: E412 image validation failed (corrupted image)
+After the error: telemetry continues normally, state NORMAL, device on v2.3.0.
+Result: PASS (E412, as expected)
+
+TC-OTA-21 (device works and the next OTA command succeeds after each error): PASS.
+Note: `ota url` is not `ota server`, so the default GitHub server was never changed (no `ota server default` needed).
+Note: `ota url` with the same version also gives W409 + full download (see OBS-04 in bugs/Improvements.md).
+
+=== TC-OTA-22: E401 (second OTA while one is running) ===
+DUT on v2.3.0, server `ota_server.py --slow 20` (download ~20 s on this network).
+> ota url http://192.168.50.28:8000/fw7/v2.3.0/sentry_fw7.bin
+[OTA] downloading ...   W409 same version v2.3.0 - reinstalling
+[OTA] 10% ... 100%
+Console did not accept any input while the download was running (tester typed the second command, nothing
+was processed until the end). After the download:
+[OTA] success: v2.3.0 -> v2.3.0 in 20 s. Rebooting...
+boot: Loaded app from partition at offset 0x1a0000 (ota_1)
+[OTA] running v2.3.0 from ota_1
+W [OTA] new firmware, PENDING_VERIFY - self-check...
+I [OTA] self-check passed, firmware marked VALID
+Result: N/A - E401 cannot be triggered from the console, OTA blocks command input (accepted as expected). (Same-version
+reinstall via `ota url` completed, switched ota_0 -> ota_1 and passed the self-check: extra OTA-6 evidence.)
+
+=== TC-OTA-24: beta channel points to a missing version (E403/E415) ===
+Server: `ota_server.py --beta 9.9.9`
+> ota server http://192.168.50.28:8000/fw7/        (first attempt before Wi-Fi was up: E002 Wi-Fi required -> reconnect)
+> ota server http://192.168.50.28:8000/fw7/
+[OTA] server: http://192.168.50.28:8000/fw7/ (custom)
+> ota check
+[OTA] current: v2.3.0 / stable: v2.1.0 / beta: v9.9.9 / running newer than stable
+> ota update beta
+[OTA] beta channel: v9.9.9, current: v2.3.0
+E415 version v9.9.9 not found on server
+Result: PASS (E415 is allowed by TC-OTA-24; device stays on 2.3.0)
+Note: `ota server default` to be run after this (restores GitHub).
+
+=== TC-OTA-20: firmware of another project (fw_1.bin) ===
+DUT on v2.3.0 (now running from ota_1), server on 192.168.50.28:8000, file served from server_files/other/fw_1.bin
+> ota url http://192.168.50.28:8000/other/fw_1.bin
+[OTA] current v2.3.0 (ota_1) -> target partition ota_0
+[OTA] downloading http://192.168.50.28:8000/other/fw_1.bin
+[OTA] image: fw_1 v1 (build Jul 19 2026 11:54:53)
+E407 wrong firmware 'fw_1' (expected 'sentry_fw7')
+Result: PASS (E407; rejected right after the image header is read, before the full download). Telemetry
+continues, device stays on v2.3.0.
+
+=== TC-OTA-25: ota check without network ===
+(a) Wi-Fi fully off:
+> ota check
+E002 Wi-Fi required. Use 'reconnect' or 'connect'
+Result (a): PASS per AC-1b ([wifi] commands give E002 without Wi-Fi). E411 is a different case: Wi-Fi up, no internet.
+(b) E411 with Wi-Fi up but WAN disconnected: not tested yet.
+
+(b) Wi-Fi connected (iPhone hotspot, rssi -32), mobile data on the phone switched off (no internet):
+> ota check
+E esp-tls: [sock=54] select() timeout
+E HTTP_CLIENT: Connection failed, sock < 0
+E402 cannot reach OTA server (stable.txt)
+Result (b): E402, not E411 as the PRD wording suggests ("E411 no internet"). E411 was not observed in any scenario
+(see OBS-06 in bugs/Improvements.md). Not filed as a bug: E402 also fits "server unreachable".

@@ -1,0 +1,17 @@
+# tests/functional/test_states.py::test_emergency_refused_from_debug_when_requested_by_name
+# fw v2.1.0  2026-10-11 19:00:52
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.30s] RX:
+I (11823) sentry: [AUTH] operator qa_swm on watch, console 2
+I (11853) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.30s] TX: state debug
+[    1.16s] RX:
+W (12123) sentry: [STATE] 1 NORMAL -> 2 DEBUG (by command)
+I (12123) sentry: [STATE] DEBUG (maintenance): raw transducer data, LED blink codes, parser diagnostics
+I (12123) sentry: [V] 'state' done in 3 ms
+[    1.16s] TX: state emergency
+[    2.03s] RX:
+I (12993) sentry: [DBG] cmd 'state' args 'emergency' need 2
+W (12993) sentry: [STATE] 2 DEBUG -> 4 EMERGENCY (by command)
+E (12993) sentry: [EMERGENCY] EMERGENCY SURFACING. Module locked. Allowed: help, status, whoami, version, health now, reboot. Exit: reboot only

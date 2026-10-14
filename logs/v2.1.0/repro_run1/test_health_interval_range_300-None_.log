@@ -1,0 +1,10 @@
+# tests/functional/test_boundaries.py::test_health_interval_range[300-None]
+# fw v2.1.0  2026-10-11 18:30:23
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.11s] RX:
+I (11089) sentry: [AUTH] operator qa_swm on watch, console 2
+[    0.11s] TX: health interval 300
+[    1.02s] RX:
+E (11199) sentry: E902 interval must be 10-300 s
+I (11249) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)

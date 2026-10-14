@@ -1,0 +1,121 @@
+OTA evidence: v2.1.0 (stable) -> v2.3.0 (beta), default GitHub server
+Date: 2026-10-13
+Tool: framework/tools/ota_210_to_230.py (+ two follow-up checks after a console encoding crash, see note at the end)
+
+=== Setting distinctive values before OTA (for OTA-10 persistence check) ===
+> lamp color purple          -> [BEACON] color: purple (160,0,255)
+> lamp brightness 37         -> [BEACON] brightness: 37%
+> lamp mode breathe          -> [BEACON] mode: breathe
+> lamp scene save 3          -> [BEACON] scene 3 saved
+> relay auto on              -> [VALVE] auto on - valve opens on sonar proximity alarm
+> relay status                 [VALVE] closed, auto on, cycles 108
+> distance calibrate 15      -> calibrated: measured 11.3 cm, offset +3.7 cm
+> distance filter off        -> [SONAR] filter off
+> distance alarm 77          -> [SONAR] alarm at 77 cm
+> health interval 45         -> [TELEMETRY] interval 45 s
+
+=== BEFORE snapshot (fw v2.1.0) ===
+whoami:        user: qa_swm, access: user
+lamp status:   off, color (160,0,255), brightness 37%, mode breathe, timer off
+lamp scene 3:  scene 3 loaded: (160,0,255) 37% breathe
+relay status:  closed, auto on, cycles 108
+health:        auto on, interval 45 s (now 45 s in NORMAL)
+ota:           running v2.1.0 in ota_0 (valid); previous: none (ota_1 is empty)
+ota check:     current v2.1.0, stable v2.1.0, beta v2.3.0, up to date (stable)
+
+=== ota update beta: full transcript ===
+I (46789) esp-x509-crt-bundle: Certificate validated
+I (48019) sentry: [OTA] beta channel: v2.3.0, current: v2.1.0
+I (48989) esp-x509-crt-bundle: Certificate validated
+I (50299) sentry: [OTA] current v2.1.0 (ota_0) -> target partition ota_1
+I (50299) sentry: [OTA] downloading https://raw.githubusercontent.com/BohdanHorbanych/esp32-ota-files/main/fw7/v2.3.0/sentry_fw7.bin
+I (51009) esp-x509-crt-bundle: Certificate validated
+I (52519) esp_https_ota: Starting OTA...
+I (52519) esp_https_ota: Writing to <ota_1> partition at offset 0x1a0000
+I (52519) sentry: [OTA] image: sentry_fw7 v2.3.0 (build Oct  6 2026 02:15:26)
+I (57769) sentry: [OTA]  10%
+I (62939) sentry: [OTA]  20%
+I (65879) sentry: [OTA]  30%
+I (69269) sentry: [OTA]  40%
+I (72849) sentry: [OTA]  50%
+I (74439) sentry: [TELEMETRY #1] 11:04:49 up 00:01:14 heap 221KB rssi -41 temp 35.6C depth 41.7m hull 5.2bar batt 24.2V valve closed sonar - state NORMAL
+I (76869) sentry: [OTA]  60%
+I (82499) sentry: [OTA]  70%
+I (85109) sentry: [OTA]  80%
+I (88259) sentry: [OTA]  90%
+I (90919) sentry: [ACU] ambient noise 59 dB re 1uPa, sea state 2, water 8.1 C
+I (91379) sentry: [OTA] 100%
+I (91669) sentry: [OTA] success: v2.1.0 -> v2.3.0 in 39 s. Rebooting...
+
+Total download+write time: 39 s. No errors, no drops (this was the default GitHub server, not the local
+fault-injection server used for TC-OTA-15..20).
+
+=== Boot log after OTA (fw v2.3.0) ===
+rst:0x1 (POWERON) [RTS reset by the verification script, see note]
+I (305) app_init: Project name:     sentry_fw7
+I (313) app_init: App version:      2.3.0
+I (316) app_init: Compile time:     Oct  6 2026 02:15:26
+I (600) sentry:   SENTRY SWM-2  sonar watch module  fw v2.3.0
+I (600) sentry: [LINK] known network 'CMF'. Type 'reconnect' to connect
+I (600) sentry: [AUTH] profile 'qa_swm' registered
+I (610) sentry: last reset: power on
+I (640) sentry: [OTA] running v2.3.0 from ota_1
+I (640) sentry: ready. state 1 NORMAL (patrol). Type 'help'
+
+version: 2.3.0  (matches boot log and 'app_init' exactly - OTA-1 satisfied)
+
+=== AFTER snapshot (fw v2.3.0), OTA-10 comparison ===
+
+| Group (OTA-10)                         | Before (2.1.0)                          | After (2.3.0)                            | Verdict |
+|-----------------------------------------|------------------------------------------|-------------------------------------------|---------|
+| Wi-Fi network                           | connected to 'CMF'                       | 'known network CMF', reconnect succeeded  | PASS |
+| Profile + password                      | login qa_swm/Pass1234 works               | login qa_swm/Pass1234 works ('on watch')  | PASS |
+| Lamp color/brightness/mode              | (160,0,255) 37% breathe                   | (160,0,255) 37% breathe                   | PASS |
+| Lamp scene (scene 3)                    | scene 3 saved                             | scene 3 loaded: (160,0,255) 37% breathe   | PASS |
+| Relay auto mode                         | auto on                                   | auto on                                   | PASS |
+| Relay cycles counter                    | cycles 108                                | cycles 108 (unchanged by OTA itself)      | PASS |
+| Sensor calibration / alarm / filter     | offset +3.7 cm, filter off, alarm 77 cm   | offset +3.7 cm, filter off, alarm on (77) | PASS |
+| Health settings (interval)              | interval 45 s                             | interval 45 s                             | PASS |
+| Guard PIN / zone                        | N/A (Guard does not exist before 2.3.0)   | N/A for this transition                   | N/A  |
+
+Confirmation commands used after OTA:
+  lamp status  -> off, color (160,0,255), brightness 37%, mode breathe, timer off
+  lamp scene load 3 -> scene 3 loaded: (160,0,255) 37% breathe
+  relay status -> closed, auto on, cycles 108
+  health       -> auto on, interval 45 s (now 45 s in NORMAL)
+  distance 1   -> [SONAR] PROXIMITY ALARM: contact at 16.0 cm (threshold 77 cm); [VALVE] OPEN (distance alarm)
+  distance stats -> measurements 1, errors 0 ... ; calibration +3.7 cm, filter off, alarm on
+
+Result: OTA-10 fully satisfied for this transition. No data-loss bug found on 2.1.0 -> 2.3.0
+(unlike BUG-006, which is about 'passwd' after a plain reboot without OTA, not about OTA persistence
+of the originally registered password - that part works correctly, as shown above).
+
+Side observation (not a bug, a 2.3.0 feature note): the single 'distance 1' measurement above
+automatically generated two CIC alerts ([CIC #1 WARNING] and [CIC #2 INFO]) without any 'alert'/'cic'
+command being used - Alert center (AL-1) is wired into the sonar subsystem from the first measurement.
+
+=== OTA-7 self-check: final state ===
+The live 'PENDING_VERIFY ... self-check passed, firmware marked VALID' console lines from the actual
+post-OTA boot were lost to the same console-encoding crash described below (the text was captured by
+the driver in memory but never written to a file before the crash). What IS confirmed independently:
+
+  version -> partition: ota_1 @ 0x1a0000, state: valid
+  ota     -> running: v2.3.0 in ota_1 (valid); previous: v2.1.0 in ota_0
+
+'state: valid' can only be reached after the self-check passes (PRD OTA-7: a freshly OTA'd partition
+starts PENDING_VERIFY and only becomes VALID once the app calls the IDF 'mark valid' API after its own
+checks). The device also did not roll back, which it would have done automatically had the self-check
+failed. Self-check pass is therefore confirmed by this partition state, even though the live transcript
+of the check itself is missing from this evidence file. A clean live capture of the same
+'PENDING_VERIFY -> self-check passed' sequence (console encoding issue fixed) is in
+logs/ota/ota_downgrade_and_back.log, taken during the downgrade/upgrade round done for TC-OTA-09/10/27/28.
+
+=== Note on tooling ===
+The automation script (framework/tools/ota_210_to_230.py) crashed printing the post-reboot boot log to
+the Windows console (cp1251 code page cannot encode the '°C' character in a temperature-sensor line).
+The OTA itself had already completed and the device had already rebooted into 2.3.0 before the crash;
+the AFTER snapshot above was captured in a follow-up connection (hence the second 'last reset: power on'
+boot log - that second reset is an RTS hardware reset issued by the verification script, not the OTA
+reboot in the previous section, whose own 'success: v2.1.0 -> v2.3.0' / 'Rebooting...' and self-check are
+visible in the raw run output). Fixed for future runs: script now writes UTF-8 regardless of console
+code page.

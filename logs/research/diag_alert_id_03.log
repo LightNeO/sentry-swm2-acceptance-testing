@@ -1,0 +1,16 @@
+BUG-008 repro #3: independent clean repro, single alert, ack by id fails
+Date: 2026-10-14, tool: ad-hoc diagnostic script against framework driver (fresh hard reset, logged in)
+
+> alert ack all
+  W853 no unacknowledged alerts
+> alert clear
+  I (14410) sentry: [CIC] cleared
+> alert test info
+  I (15520) sentry: [CIC #1 INFO] test: test alert
+> alert list
+  I (16690) sentry: [CIC] 1 alerts, 1 unacknowledged:
+  I (16690) sentry:   #1   12:07:41 INFO     * test    test alert
+> alert ack 1
+  E (17810) sentry: E851 no alert #1
+
+Result: third independent reproduction, same outcome. Reproducibility: 3/3.

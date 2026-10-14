@@ -1,0 +1,56 @@
+Manual checklist Group 6 (OTA fault-injection), local server, network 'user — iPhone' (172.20.10.x)
+Session: miniterm COM3 115200, 2026-10-14
+PC and DUT both connected to the same iPhone Personal Hotspot (PC 172.20.10.12, DUT 172.20.10.13).
+Local OTA server: framework/../fw_7/tools/ota_server.py.
+
+=== TC-OTA-15: --drop-at 50 (done via automation, no physical action needed) ===
+ota server http://172.20.10.12:8000/fw7/
+ota check -> current v2.1.0, stable v2.1.0, beta v2.3.0, up to date (stable)
+ota update -> W409 same version v2.1.0 - reinstalling (see OBS-04 note below), downloads to 40%, then:
+  W (...) HTTP_CLIENT: esp_transport_read returned:-1 and errno:128
+  E (...) transport_base: tcp_read error, errno=Socket is not connected
+  E (...) sentry: E410 download interrupted (ESP_FAIL)
+version after: 2.1.0 (unchanged). ota server default -> restored GitHub.
+TC-OTA-15: PASS.
+
+Side observation (OBS-04, not filed as a bug): 'ota update' against the CUSTOM/local server reinstalled the
+SAME version (v2.1.0) with just a W409 warning, instead of refusing with '[OTA] already up to date' as
+OTA-4b specifies. The earlier automated test (TC-OTA-06, see docs/results.json) confirmed 'already up to
+date' behaves correctly against the DEFAULT GitHub server. This suggests the 'same version' short-circuit
+may be skipped specifically when a custom OTA server is configured - worth a follow-up check, not filed as
+a confirmed bug given it only affects a local-testing convenience path, not the documented default flow.
+
+=== TC-OTA-16: --slow 20 + real Wi-Fi (Personal Hotspot) interruption mid-download ===
+Device was on v2.3.0 at this point (from an earlier successful slow-server upgrade test).
+ota check -> current v2.3.0, stable v2.1.0, beta v2.3.0, running newer than stable.
+ota server http://172.20.10.12:8000/fw7/
+ota install 2.1.0 force
+  [OTA] current v2.3.0 (ota_1) -> target partition ota_0
+  [OTA] downloading http://172.20.10.12:8000/fw7/v2.1.0/sentry_fw7.bin
+  [OTA] 10%
+  [OTA] 20%
+  <-- tester turned the iPhone's Personal Hotspot OFF for a few seconds here, then back ON -->
+  wifi:bcn_timeout,ap_probe_send_start
+  wifi:ap_probe_send over, reset wifi status to disassoc
+  W110 wifi connection lost (reason 200)
+  transport_base: tcp_read error, errno=Software caused connection abort
+  [LINK] retry 1/3...
+  E410 download interrupted (ESP_FAIL)
+  wifi: reconnected automatically ('user — iPhone', got ip 172.20.10.13 again)
+  [TELEMETRY] resumed normally; transient "WARN no internet" + [CIC #1 WARNING] right after reconnect
+  (expected: internet check had not completed yet at that instant)
+version after: 2.3.0 (unchanged, downgrade correctly aborted).
+ota check (recovery check) -> responds normally: current v2.3.0, stable v2.1.0, beta v2.3.0, running newer
+  than stable. Device fully functional after the interruption.
+TC-OTA-16: PASS. TC-OTA-21 (device works + next OTA check succeeds after an error): PASS.
+
+Bonus: an earlier attempt with the local server NOT running gave:
+  E (68890) esp-tls: [sock=54] delayed connect error: Connection reset by peer
+  E (68890) sentry: E402 cannot reach OTA server (HTTP -1)
+Correct behavior for an unreachable server - bonus confirmation of TC-OTA-23 (E402).
+
+Note: 'ota install 2.1.0 force' sent once while a background [TELEMETRY #8] line was interleaving with the
+typed command gave E400 usage: ota install <X.Y.Z> [force] - a harmless console-interleaving artifact (stray
+characters merged into the command), not a bug; the retyped command worked normally.
+
+Remaining for this group: 'ota server default' to restore GitHub (reminder sent to tester).

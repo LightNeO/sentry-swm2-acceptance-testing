@@ -1,0 +1,6 @@
+attempt 1: E (10709) sentry: E213 sudo: wrong password codes= ['E213']
+attempt 2: E (11869) sentry: E213 sudo: wrong password codes= ['E213']
+attempt 3: E (12979) sentry: E213 sudo: wrong password codes= ['E213']
+attempt 4: E (14079) sentry: E213 sudo: wrong password codes= ['E213']
+attempt 5: E (15189) sentry: E213 sudo: wrong password codes= ['E213']
+attempt 6: E (16299) sentry: E213 sudo: wrong password codes= ['E213']

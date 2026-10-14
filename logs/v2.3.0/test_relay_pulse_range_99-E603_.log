@@ -1,0 +1,11 @@
+# tests/functional/test_boundaries.py::test_relay_pulse_range[99-E603]
+# fw v2.3.0  2026-10-13 23:26:12
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.39s] RX:
+I (210125) sentry: [AUTH] operator qa_swm on watch, console 2
+I (210245) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.39s] TX: relay pulse 99
+[    1.38s] RX:
+I (210515) sentry: [VALVE] OPEN (pulse)
+I (210635) sentry: [VALVE] CLOSED (pulse end)

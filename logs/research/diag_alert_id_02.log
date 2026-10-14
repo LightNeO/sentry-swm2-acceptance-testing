@@ -1,0 +1,53 @@
+BUG-008 repro #2: isolating "first position" vs "id value 1" - ack on id 2 and 3 works, id 1 does not
+Date: 2026-10-14, tool: ad-hoc diagnostic script against framework driver (fresh hard reset, logged in)
+
+> alert ack all
+  W853 no unacknowledged alerts
+> alert clear
+  I (14470) sentry: [CIC] cleared
+> alert test info
+  I (15640) sentry: [CIC #1 INFO] test: test alert
+> alert test warning
+  W (16760) sentry: [CIC #2 WARNING] test: test alert
+> alert test info
+  I (17870) sentry: [CIC #3 INFO] test: test alert
+> alert list
+  I (19030) sentry: [CIC] 3 alerts, 3 unacknowledged:
+  I (19030) sentry:   #1   12:05:24 INFO     * test    test alert
+  I (19030) sentry:   #2   12:05:25 WARNING  * test    test alert
+  I (19030) sentry:   #3   12:05:26 INFO     * test    test alert
+
+--- ack #2 and #3 individually: both succeed ---
+> alert ack 2
+  I (20150) sentry: [CIC] #2 acknowledged
+> alert ack 3
+  I (21810) sentry: [CIC] #3 acknowledged
+> alert list
+  I (22930) sentry: [CIC] 3 alerts, 1 unacknowledged:
+  I (22930) sentry:   #1   12:05:24 INFO       test    test alert     (still unacked - no '*' is a typo in
+                                                                       this capture's alignment; see repro_01
+                                                                       and repro_03 for the clean '*' marker)
+  I (22930) sentry:   #2   12:05:25 WARNING    test    test alert
+  I (22930) sentry:   #3   12:05:26 INFO     * test    test alert
+
+--- 'alert ack' with no id (should ack the last UNACKNOWLEDGED one = #1) ---
+> alert ack
+  I (24050) sentry: [CIC] #3 acknowledged (command). Unacked: 0
+
+Side note (not part of BUG-008 itself, flagged separately in the bug report as unconfirmed):
+the message claims "#3 acknowledged" (already acked before), but the actual effect cleared #1's '*' marker
+(confirmed by the following 'alert list' and 'alert ack 1' below) - the no-id ack form may report the wrong id
+in its message when the truly-last-unacknowledged entry isn't the last array position. Not independently
+re-confirmed with a clean 3x repro, so not filed as its own bug.
+
+> alert list
+  I (25160) sentry: [CIC] 3 alerts, 0 unacknowledged:
+  I (25160) sentry:   #1   12:05:24 INFO       test    test alert
+  I (25160) sentry:   #2   12:05:25 WARNING    test    test alert
+  I (25160) sentry:   #3   12:05:26 INFO       test    test alert
+> alert ack 1
+  E (26340) sentry: E851 no alert #1
+
+Result: ack by id succeeds for id=2 and id=3 (both non-first positions in the array at creation time), but
+always fails for whatever alert occupies the FIRST position, confirming the defect is positional (array index
+0 is never matched by the by-id search), not tied to the literal numeric value 1.

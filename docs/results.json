@@ -1,0 +1,706 @@
+{
+  "TC-AC-01": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AC-02": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AC-03": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AC-04": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AC-05": {
+    "21": "PASS",
+    "evidence": "logs/research exploration: 'dev'/'dev heap' -> E004 без sudo, доступні після sudo (AC-1d)."
+  },
+  "TC-AC-06": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AC-07": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AC-08": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AC-09": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AL-01": {
+    "23": "PASS"
+  },
+  "TC-AL-03": {
+    "23": "PASS"
+  },
+  "TC-AL-04": {
+    "23": "PASS"
+  },
+  "TC-AL-05": {
+    "23": "FAIL",
+    "bugs": [
+      "BUG-008"
+    ]
+  },
+  "TC-AL-06": {
+    "23": "PASS"
+  },
+  "TC-AL-07": {
+    "23": "PASS"
+  },
+  "TC-AL-08": {
+    "23": "PASS"
+  },
+  "TC-AL-09": {
+    "23": "PASS"
+  },
+  "TC-AL-10": {
+    "23": "PASS"
+  },
+  "TC-AL-11": {
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partB_alert.log"
+  },
+  "TC-AU-02": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AU-07": {
+    "21": "PASS",
+    "evidence": "Профіль 'qa_swm' успішно логінився після reboot у кожній без винятку сесії проєкту (десятки разів, усі логи v2.1.0/v2.3.0) — профіль явно переживає reboot (AU-1e)."
+  },
+  "TC-AU-08": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AU-09": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AU-11": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AU-12": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AU-13": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AU-14": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AU-15": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AU-16": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AU-17": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AU-18": {
+    "21": "FAIL",
+    "23": "PASS",
+    "bugs": [
+      "BUG-006"
+    ]
+  },
+  "TC-AU-19": {
+    "21": "FAIL",
+    "23": "PASS",
+    "bugs": [
+      "BUG-006"
+    ]
+  },
+  "TC-AU-20": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AU-21": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-AU-22": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-BTN-01": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partD_regression.log"
+  },
+  "TC-BTN-02": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partD_regression.log"
+  },
+  "TC-BTN-03": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partD_regression.log"
+  },
+  "TC-BTN-04": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partA_guard_alert.log"
+  },
+  "TC-BTN-05": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partC_buttons.log"
+  },
+  "TC-BTN-06": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partC_buttons.log"
+  },
+  "TC-BTN-07": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group1_buttons.log"
+  },
+  "TC-BTN-08": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group1_buttons.log"
+  },
+  "TC-BTN-09": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group5_states.log"
+  },
+  "TC-DS-02": {
+    "21": "FAIL",
+    "23": "FAIL",
+    "bugs": [
+      "BUG-002"
+    ]
+  },
+  "TC-DS-04": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-DS-05a": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-DS-05b": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-DS-07": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-DS-08": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group4_sonar.log"
+  },
+  "TC-DS-09": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-DS-10": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partD_regression.log"
+  },
+  "TC-DS-12": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-DS-13": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-DS-14": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partD_regression.log"
+  },
+  "TC-DS-15": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group4_sonar.log"
+  },
+  "TC-DS-16": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group4_sonar.log"
+  },
+  "TC-DS-17": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partD_regression.log"
+  },
+  "TC-GD-01": {
+    "23": "PASS"
+  },
+  "TC-GD-02": {
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partA_guard_alert.log"
+  },
+  "TC-GD-03": {
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partA_guard_alert.log"
+  },
+  "TC-GD-04": {
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partA_guard_alert.log"
+  },
+  "TC-GD-05": {
+    "23": "PASS"
+  },
+  "TC-GD-06": {
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partA_guard_alert.log"
+  },
+  "TC-GD-07": {
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partA_guard_alert.log"
+  },
+  "TC-GD-09": {
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partA_guard_alert.log"
+  },
+  "TC-GD-10": {
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partA_guard_alert.log"
+  },
+  "TC-GD-13": {
+    "23": "PASS"
+  },
+  "TC-GD-14": {
+    "23": "PASS"
+  },
+  "TC-GD-15": {
+    "23": "PASS"
+  },
+  "TC-GD-16": {
+    "23": "PASS"
+  },
+  "TC-GD-17": {
+    "23": "PASS"
+  },
+  "TC-GD-18": {
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partA_guard_alert.log"
+  },
+  "TC-GD-20": {
+    "23": "PASS"
+  },
+  "TC-GD-21": {
+    "23": "PASS"
+  },
+  "TC-GD-22": {
+    "23": "PASS"
+  },
+  "TC-HL-01": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-HL-02": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-HL-03": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-HL-09": {
+    "21": "FAIL",
+    "23": "PASS",
+    "bugs": [
+      "BUG-001"
+    ]
+  },
+  "TC-LM-01": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group2_lamp.log"
+  },
+  "TC-LM-02": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-LM-03": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group2_lamp.log"
+  },
+  "TC-LM-04": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partD_regression.log"
+  },
+  "TC-LM-05": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-LM-08": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.1.0/manual/group2_lamp.log"
+  },
+  "TC-LM-10": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group2_lamp.log"
+  },
+  "TC-LM-11": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group2_lamp.log"
+  },
+  "TC-LM-12": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-LM-16": {
+    "21": "FAIL",
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/v2.3.0/manual/partD_regression.log"
+  },
+  "TC-LM-17": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-LM-18": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-LM-19": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-LM-21": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-LM-22": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group2_lamp.log"
+  },
+  "TC-NFR-03": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-OTA-01": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/ota/ota_2.1.0_to_2.3.0_beta.log, logs/ota/ota_downgrade_and_back.log"
+  },
+  "TC-OTA-04": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/ota/ota_2.1.0_to_2.3.0_beta.log, logs/ota/ota_downgrade_and_back.log"
+  },
+  "TC-OTA-06": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/ota/ota_2.1.0_to_2.3.0_beta.log, logs/ota/ota_downgrade_and_back.log"
+  },
+  "TC-OTA-07": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/ota/ota_2.1.0_to_2.3.0_beta.log, logs/ota/ota_downgrade_and_back.log"
+  },
+  "TC-OTA-08": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-OTA-09": {
+    "23": "PASS",
+    "evidence": "logs/ota/ota_2.1.0_to_2.3.0_beta.log, logs/ota/ota_downgrade_and_back.log"
+  },
+  "TC-OTA-10": {
+    "23": "PASS",
+    "evidence": "logs/ota/ota_2.1.0_to_2.3.0_beta.log, logs/ota/ota_downgrade_and_back.log"
+  },
+  "TC-OTA-12": {
+    "21": "PASS",
+    "evidence": "logs/ota/ota_broken_rollback.log"
+  },
+  "TC-OTA-14": {
+    "21": "PASS",
+    "evidence": "logs/ota/ota_broken_rollback.log"
+  },
+  "TC-OTA-15": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group6_ota.log"
+  },
+  "TC-OTA-16": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group6_ota.log"
+  },
+  "TC-OTA-21": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group6_ota.log",
+    "23": "PASS"
+  },
+  "TC-OTA-23": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group6_ota.log"
+  },
+  "TC-OTA-27": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/ota/ota_2.1.0_to_2.3.0_beta.log, logs/ota/ota_downgrade_and_back.log"
+  },
+  "TC-OTA-28": {
+    "23": "PASS",
+    "evidence": "logs/ota/ota_2.1.0_to_2.3.0_beta.log, logs/ota/ota_downgrade_and_back.log"
+  },
+  "TC-OTA-29": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-OTA-31": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-OTA-32": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/ota/ota_2.1.0_to_2.3.0_beta.log, logs/ota/ota_downgrade_and_back.log"
+  },
+  "TC-RES-01": {
+    "21": "PASS",
+    "evidence": "bugs/Improvements.md RES-1: знайдено приховану команду selftest."
+  },
+  "TC-RES-02": {
+    "21": "PASS",
+    "evidence": "bugs/Improvements.md RES-2, RES-4: знайдено secret sudo у boot-логу (base64) і пароль користувача відкритим текстом у dev dump."
+  },
+  "TC-RES-03": {
+    "21": "FAIL",
+    "evidence": "logs/research/sudo_brute_force_check.log; bugs/Improvements.md RES-5"
+  },
+  "TC-RL-01": {
+    "21": "PASS",
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "Перемонтовано за fw_7/WIRING.md (катод -> GPIO4, анод через резистор -> 3.3V); ретест: діод світиться при relay on, темний при relay off."
+  },
+  "TC-RL-02": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-RL-05": {
+    "21": "FAIL",
+    "23": "PASS",
+    "bugs": [
+      "BUG-005"
+    ]
+  },
+  "TC-RL-06": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-RL-07": {
+    "21": "FAIL",
+    "23": "FAIL",
+    "bugs": [
+      "BUG-003"
+    ]
+  },
+  "TC-RL-08": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group3_relay.log"
+  },
+  "TC-RL-11": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-RL-12": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.1.0/manual/group3_relay.log"
+  },
+  "TC-RL-13": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.1.0/manual/group3_relay.log"
+  },
+  "TC-RL-14": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-RL-15": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partD_regression.log"
+  },
+  "TC-ST-01": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-ST-02": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-ST-03": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partD_regression.log"
+  },
+  "TC-ST-04": {
+    "21": "PASS",
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partD_regression.log"
+  },
+  "TC-ST-05": {
+    "21": "FAIL",
+    "23": "PASS",
+    "bugs": [
+      "BUG-004"
+    ]
+  },
+  "TC-ST-06": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-ST-08": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-ST-09": {
+    "23": "PASS",
+    "evidence": "logs/v2.3.0/manual/partC_buttons.log"
+  },
+  "TC-ST-10": {
+    "21": "FAIL",
+    "23": "FAIL",
+    "bugs": [
+      "BUG-007"
+    ]
+  },
+  "TC-ST-11": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-ST-12": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-ST-13": {
+    "21": "PASS",
+    "evidence": "logs/v2.1.0/manual/group5_states.log"
+  },
+  "TC-ST-14": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-ST-15": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-ST-16": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-SYS-01": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-SYS-05": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-WF-01": {
+    "21": "PASS",
+    "evidence": "connect/reconnect успішно виконувались у кожній сесії проєкту (логи v2.1.0, v2.3.0, logs/ota/*) — підтверджує WF-1a/WF-1d."
+  },
+  "TC-WF-05": {
+    "21": "PASS",
+    "evidence": "Мережа зберігається в NVS і boot log кожного разу показує 'known network ... Type reconnect' після reboot (десятки прикладів у логах проєкту) — підтверджує WF-1e/WF-3d."
+  },
+  "TC-WF-09": {
+    "21": "BLOCKED",
+    "evidence": "docs/manual_checklist_2.1.0.md (пункт прибрано з ручного проходу за рішенням користувача; альтернативної мережі з потрібними параметрами під рукою не було)"
+  },
+  "TC-WF-15": {
+    "21": "PASS",
+    "23": "PASS"
+  },
+  "TC-WF-18": {
+    "21": "PASS",
+    "evidence": "logs/ota/ota_broken_rollback.log та logs/v2.1.0/manual/group6_ota.log: 'W110 wifi connection lost' + автоматичні 'retry 1/3'/'retry 2/3' з успішним відновленням зв'язку (WF-5)."
+  },
+  "TC-OTA-17": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/v2.3.0/manual/partE_ota_bad_images.log"
+  },
+  "TC-OTA-18": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/v2.3.0/manual/partE_ota_bad_images.log"
+  },
+  "TC-OTA-19": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/v2.3.0/manual/partE_ota_bad_images.log"
+  },
+  "TC-OTA-26": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/v2.3.0/manual/partE_ota_bad_images.log"
+  },
+  "TC-OTA-22": {
+    "23": "N/A",
+    "bugs": [],
+    "evidence": "logs/v2.3.0/manual/partE_ota_bad_images.log: консоль не приймає команд під час завантаження, тому E401 з консолі недосяжний; прийнято як очікувану поведінку."
+  },
+  "TC-OTA-24": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/v2.3.0/manual/partE_ota_bad_images.log: E415 version v9.9.9 not found on server."
+  },
+  "TC-OTA-20": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/v2.3.0/manual/partE_ota_bad_images.log: E407 wrong firmware 'fw_1' (expected 'sentry_fw7')."
+  },
+  "TC-OTA-25": {
+    "23": "PARTIAL",
+    "bugs": [],
+    "evidence": "logs/v2.3.0/manual/partE_ota_bad_images.log: (а) Wi-Fi вимкнено → E002 (AC-1b) — PASS; (б) Wi-Fi є, інтернету немає → E402 замість очікуваного E411, див. OBS-06 (не оформлено як баг)."
+  },
+  "TC-GD-11": {
+    "23": "FAIL",
+    "bugs": [
+      "BUG-010"
+    ],
+    "evidence": "bugs/BUG-010.md; logs/v2.3.0/repro_guard_counter_run1..3, test_two_wrong_pins_twice_in_a_row_do_not_raise_alarm.log"
+  },
+  "TC-GD-12": {
+    "23": "FAIL",
+    "bugs": [
+      "BUG-010"
+    ],
+    "evidence": "bugs/BUG-010.md; logs/v2.3.0/repro_guard_counter_run1..3, test_two_wrong_pins_twice_in_a_row_do_not_raise_alarm.log"
+  },
+  "TC-AU-03": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/v2.3.0/au1_register_bounds.log (framework/tools/register_bounds.py, чистий NVS перед кожним раундом): login 2 і 17 → E204, 3 і 16 → registered."
+  },
+  "TC-AU-04": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/v2.3.0/au1_register_bounds.log (framework/tools/register_bounds.py, чистий NVS перед кожним раундом): ab-c, abї, ab@c, ab.c → E204; 'ab c' дає E201 usage (пробіл розбиває аргументи), а не E204 — обмеження способу введення."
+  },
+  "TC-AU-05": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/v2.3.0/au1_register_bounds.log (framework/tools/register_bounds.py, чистий NVS перед кожним раундом): пароль 5 і 33 → E205, 6 і 32 → registered."
+  }
+}

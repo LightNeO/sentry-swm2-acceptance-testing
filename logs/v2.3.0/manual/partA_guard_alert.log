@@ -1,0 +1,82 @@
+Manual checklist Part A (Guard) + K4 ack, firmware v2.3.0
+Session: miniterm COM3 115200, 2026-10-14, network 'user — iPhone'
+
+TC-GD-02 (arm -> ARMED):
+  guard arm
+  [WATCH] arming: clear the zone (< 50 cm) within 10 s
+  arming in 10 s... ... arming in 1 s...
+  [WATCH] ARMED. Perimeter zone < 50 cm, sonar sweeping
+  Confirmed multiple times across the session (3 separate arm cycles).
+
+TC-GD-03 (INTRUSION <50cm):
+  [WATCH] INTRUSION: unknown contact at 7.8 cm. 15 s to 'guard disarm <pin>'
+  (repeated on a later cycle: "INTRUSION: unknown contact at 15.8 cm")
+
+TC-GD-04 (15s timeout -> ALARM):
+  [WATCH] disarm in 15 s or ALARM ... disarm in 1 s or ALARM
+  E (1547890) [WATCH] !!! GENERAL ALARM: no disarm after intrusion !!!
+  [CIC #5 CRITICAL] watch: GENERAL ALARM: no disarm after intrusion
+  [STATE] 1 NORMAL -> 3 VERBOSE (by critical alert)
+
+TC-GD-06 / TC-GD-10 (ALARM reminders every ~10s, disarm stops it):
+  [WATCH] ALARM active. 'guard disarm <pin>' repeated at ticks 1558110, 1568110(+10000), 1578210(+10100),
+    1588310(+10100), 1598410(+10100), 1608510(+10100), 1618610(+10100), 1628610(+10000) - consistently
+    ~10 s apart, matching "нагадування кожні 10 с".
+  guard disarm 1234 -> [WATCH] disarmed (was ALARM)   - ALARM correctly stopped.
+
+TC-GD-07 (K4 hold -> immediate PANIC, bypassing the 15s window):
+  INTRUSION started at tick 1687260; at tick 1693030-1694560 (only ~7.3 s later, well before the 15 s
+  deadline):
+  [V] button K4 down
+  [BTN] K4 long press
+  E (1694560) [WATCH] PANIC button (K4)
+  E (1694560) [WATCH] !!! GENERAL ALARM: PANIC button !!!
+  Confirms K4 long-press forces ALARM immediately, independent of the 15 s countdown.
+
+TC-GD-09 (3 failed measurements -> tamper ALARM), confirmed TWICE:
+  First: E702 out of range x3 -> [WATCH] !!! GENERAL ALARM: sensor tamper (no echo) !!!
+  Second (later cycle): E701 no echo x2, E702 out of range x1 -> same tamper ALARM triggered.
+  Error code mix (E701/E702) does not matter - any 3 consecutive failed measurements trigger tamper.
+
+TC-GD-18 (relay stays ON through logout while Guard ALARM is active - RL-7 exception):
+  Before logout, during active ALARM (triggered by the second tamper event):
+    relay status -> [VALVE] OPEN, auto on, cycles 223
+  logout
+    [AUTH] operator qa_swm relieved from watch
+    [STATE] 3 VERBOSE -> 1 NORMAL (by logout)
+    W (2059780) [WATCH] stays ALARM after logout
+    (no "[VALVE] CLOSED (logout)" line - unlike every other logout-with-relay-on case seen in earlier
+    testing, e.g. Group 3's TC-RL-15 on 2.1.0)
+  login qa_swm Pass1234
+  relay status -> [VALVE] OPEN, auto on, cycles 223   (unchanged - confirms no switch event happened)
+  guard disarm 1234 -> [WATCH] disarmed (was ALARM); [VALVE] CLOSED (guard disarm)
+    (relay closes as a result of disarming the alarm condition itself, not of logout)
+  TC-GD-18: PASS - RL-7's Guard-ALARM exception confirmed correctly implemented.
+
+TC-BTN-04 (2.3.0: K4 short press acknowledges the last CIC alert):
+  alert test info -> [CIC #14 INFO] test: test alert
+  [V] button K4 down
+  [BTN] K4 pressed
+  [CIC] #14 acknowledged (K4). Unacked: 13
+  PASS.
+
+Bonus (not a bug): 'guard disarm' without a PIN argument -> E800 usage: guard disarm <pin> (correct
+missing-argument handling).
+
+Guard log excerpt (confirms event history across the session):
+   1. 16:05:49  ALARM: no disarm after intrusion
+   2. 16:07:11  disarmed by qa_swm
+   3. 16:07:58  arming by qa_swm
+   4. 16:08:08  armed
+   5. 16:08:08  intrusion at 15.8 cm
+   6. 16:08:15  ALARM: PANIC button
+   7. 16:08:35  disarmed by qa_swm
+   8. 16:08:39  arming by qa_swm
+   9. 16:08:49  armed
+  10. 16:08:50  ALARM: sensor tamper (no echo)
+
+Pending: visual confirmation of LED color/pattern during ALARM (red/blue per GD-3/LM-8) - not observable
+from the text log, asked the tester to confirm separately.
+
+Resolved: tester confirmed visually - LED shows red/blue pattern during ALARM, matching GD-3/LM-8.
+Part A fully closed: 9/9 PASS, no bugs found.

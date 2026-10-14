@@ -1,0 +1,637 @@
+[    0.84s] RX:
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+0020 size=38158h (229720) map
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x14f0
+load:0x403c8700,len:0xda0
+load:0x403cb700,len:0x2fa0
+entry 0x403c8908
+I (24) boot: ESP-IDF v6.0.1 2nd stage bootloader
+I (25) boot: compile time Oct  6 2026 02:15:01
+I (25) boot: Multicore bootloader
+I (25) boot: chip revision: v0.2
+I (28) boot: efuse block revision: v1.4
+I (31) boot.esp32s3: Boot SPI Speed : 80MHz
+I (35) boot.esp32s3: SPI Mode       : DIO
+I (39) boot.esp32s3: SPI Flash Size : 4MB
+I (43) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (50) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (63) boot:  1 otadata          OTA data         01 00 0000f000 00002000
+I (69) boot:  2 ota_0            OTA app          00 10 00020000 00180000
+I (76) boot:  3 ota_1            OTA app          00 11 001a0000 00180000
+I (82) boot: End of partition table
+I (86) esp_image: segment 0: paddr=001a0020 vaddr=3c0a0020 size=38158h (229720) map
+I (134) esp_image: segment 1: paddr=001d8180 vaddr=3fc97200 size=05198h ( 20888) load
+I (139) esp_image: segment 2: paddr=001dd320 vaddr=40374000 size=02cf8h ( 11512) load
+I (141) esp_image: segment 3: paddr=001e0020 vaddr=42000020 size=9c08ch (639116) map
+I (260) esp_image: segment 4: paddr=0027c0b4 vaddr=40376cf8 size=10418h ( 66584) load
+I (275) esp_image: segment 5: paddr=0028c4d4 vaddr=50000000 size=00024h (    36) load
+I (284) boot: Loaded app from partition at offset 0x1a0000
+I (284) boot: Disabling RNG early entropy source...
+I (294) cpu_start: Multicore app
+I (302) cpu_start: GPIO 44 and 43 are used as console UART I/O pins
+I (303) cpu_start: Pro cpu start user code
+I (303) cpu_start: cpu freq: 160000000 Hz
+I (305) app_init: Application information:
+I (308) app_init: Project name:     sentry_fw7
+I (313) app_init: App version:      2.3.0
+I (316) app_init: Compile time:     Oct  6 2026 02:15:26
+I (321) app_init: ELF file SHA256:  ab377c338...
+I (326) app_init: ESP-IDF:          v6.0.1
+I (330) efuse_init: Min chip rev:     v0.0
+I (333) efuse_init: Max chip rev:     v0.99 
+I (337) efuse_init: Chip rev:         v0.2
+I (341) heap_init: Initializing. RAM available for dynamic allocation:
+I (348) heap_init: At 3FCA1360 len 000483B0 (288 KiB): RAM
+I (353) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (358) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (363) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM
+I (369) spi_flash: detected chip: boya
+I (372) spi_flash: flash io: dio
+W (375) spi_flash: Detected size(16384k) larger than the size in the binary image header(4096k). Using the size in the binary image header.
+I (388) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (393) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (400) main_task: Started on CPU0
+I (420) main_task: Calling app_main()
+I (430) temperature_sensor: Range [-10°C ~ 80°C], error < 1��C
+I (430) sentry: ==============================================
+I (430) sentry:   SENTRY SWM-2  sonar watch module  fw v2.3.0
+I (440) sentry:   bow sonar array / perimeter watch / CIC link
+I (440) sentry: ==============================================
+I (450) pp: pp rom version: e7ae62f
+I (450) net80211: net80211 rom version: e7ae62f
+I (470) wifi:wifi driver task: 3fca5d90, prio:23, stack:6656, core=0
+I (470) wifi:wifi firmware version: b37c951
+I (470) wifi:wifi certification version: v7.0
+I (470) wifi:config NVS flash: enabled
+I (470) wifi:config nano formatting: disabled
+I (480) wifi:Init data frame dynamic rx buffer num: 32
+I (480) wifi:Init static rx mgmt buffer num: 5
+I (480) wifi:Init management short buffer num: 32
+I (490) wifi:Init dynamic tx buffer num: 32
+I (490) wifi:Init static tx FG buffer num: 2
+I (500) wifi:Init static rx buffer size: 1600
+I (500) wifi:Init static rx buffer num: 10
+I (510) wifi:Init dynamic rx buffer num: 32
+I (510) wifi_init: rx ba win: 6
+I (510) wifi_init: accept mbox: 6
+I (510) wifi_init: tcpip mbox: 32
+I (520) wifi_init: udp mbox: 6
+I (520) wifi_init: tcp mbox: 6
+I (520) wifi_init: tcp tx win: 5760
+I (530) wifi_init: tcp rx win: 5760
+I (530) wifi_init: tcp mss: 1440
+I (530) wifi_init: WiFi IRAM OP enabled
+I (540) wifi_init: WiFi RX IRAM OP enabled
+I (540) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10
+W (550) phy_init: failed to load RF calibration data (0x1102), falling back to full calibration
+I (590) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(2)
+I (600) wifi:mode : sta (e0:72:a1:d4:1f:a4)
+I (600) wifi:enable tsf
+I (600) sentry: [LINK] no known network. Type 'connect'
+I (600) sentry: [AUTH] no profile. Use 'register <login> <password>'
+I (610) sentry: last reset: power on
+I (610) sentry: build tag: <base64-redacted>
+I (610) sentry: [HW] transducer array: 1 ch, 40 kHz, driver OK
+I (620) sentry: [HW] hull penetrator seal: OK, pressure sensor: OK
+W (630) sentry: [NAV] depth sensor offline (lab mode) - using simulator
+I (630) sentry: [NAV] carrier: SSK 'Skat', bow sonar bay #2, depth 41.8 m
+I (640) sentry: [OTA] running v2.3.0 from ota_1
+I (640) sentry: ready. state 1 NORMAL (patrol). Type 'help'
+I (650) main_task: Returned from app_main()
+[    0.84s] TX: connect
+[    3.66s] RX:
+I (940) sentry: [LINK] scanning...
+I (3440) sentry:   [ 1] <ssid>                                  -27 dBm
+I (3440) sentry:   [ 2] <ssid>                                  -48 dBm
+I (3440) sentry:   [ 3] <ssid>                                   -66 dBm
+I (3440) sentry:   [ 4] <ssid>                         -67 dBm
+I (3450) sentry:   [ 5] <ssid>                        -68 dBm
+I (3450) sentry:   [ 6] <ssid>                         -69 dBm
+I (3460) sentry:   [ 7] <ssid>                  -76 dBm
+I (3470) sentry:   [ 8] <ssid>                         -89 dBm
+SSID or number: 
+[    3.66s] TX: CMF
+[    3.92s] RX:
+Password: 
+[    3.92s] TX: ***
+[    9.53s] RX:
+********
+I (4120) sentry: [LINK] raising buoy antenna, connecting to 'CMF'...
+I (4730) wifi:new:<6,1>, old:<1,0>, ap:<255,255>, sta:<6,1>, prof:1, snd_ch_cfg:0x0
+I (4730) wifi:state: init -> auth (0xb0)
+I (5310) wifi:state: auth -> assoc (0x0)
+I (5330) wifi:state: assoc -> run (0x10)
+I (5360) wifi:connected with CMF, aid = 1, channel 6, 40U, bssid = 6a:ec:fa:fa:19:00
+I (5360) wifi:security: WPA3-SAE HUNT_AND_PECK, phy: bgn, rssi: -27, cipher(pairwise:0x3, group:0x3), pmf:1
+I (5370) wifi:pm start, type: 1
+
+I (5370) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (5380) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (5460) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (5460) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+I (6410) esp_netif_handlers: sta ip: 10.155.147.138, mask: 255.255.255.0, gw: 10.155.147.242
+I (6410) sentry: [LINK] got ip 10.155.147.138
+I (6410) sentry: [LINK] connected to 'CMF', rssi -28 dBm (excellent)
+I (6460) wifi:<ba-add>idx:0 (ifx:0, 6a:ec:fa:fa:19:00), tid:0, ssn:4, winSize:64
+I (6930) wifi:<ba-add>idx:1 (ifx:0, 6a:ec:fa:fa:19:00), tid:2, ssn:5, winSize:64
+I (7180) esp-x509-crt-bundle: Certificate validated
+I (8150) sentry: [LINK] fleet network reachable (internet OK)
+I (9360) sentry: [LINK] time: synced via NTP, 23:10:46
+I (9360) sentry: [LINK] network saved. Next time just type 'reconnect'
+[   17.55s] TX: register ab Pass1234
+[   17.81s] RX:
+E (17640) sentry: E204 login must be 3-16 chars: a-z A-Z 0-9 _
+[   17.81s] TX: register aaaaaaaaaaaaaaaaa Pass1234
+[   18.09s] RX:
+E (17920) sentry: E204 login must be 3-16 chars: a-z A-Z 0-9 _
+[   18.09s] TX: register ab-c Pass1234
+[   18.36s] RX:
+E (18190) sentry: E204 login must be 3-16 chars: a-z A-Z 0-9 _
+[   18.36s] TX: register ab c Pass1234
+[   18.62s] RX:
+E (18460) sentry: E201 usage: register <login> <password>
+[   18.62s] TX: register abї Pass1234
+[   18.91s] RX:
+register ab Pass1234
+W (18730) sentry: W006 non-latin characters ignored (use English layout)
+E (18730) sentry: E204 login must be 3-16 chars: a-z A-Z 0-9 _
+[   18.91s] TX: register ab@c Pass1234
+[   19.19s] RX:
+E (19010) sentry: E204 login must be 3-16 chars: a-z A-Z 0-9 _
+[   19.19s] TX: register ab.c Pass1234
+[   19.47s] RX:
+E (19290) sentry: E204 login must be 3-16 chars: a-z A-Z 0-9 _
+[   19.47s] TX: register debug Pass1234
+[   19.75s] RX:
+E (19570) sentry: E203 login 'debug' is reserved
+[   19.75s] TX: register valid_user ppppp
+[   20.03s] RX:
+E (19850) sentry: E205 password must be 6-32 chars
+[   20.03s] TX: register valid_user ppppppppppppppppppppppppppppppppp
+[   20.31s] RX:
+E (20130) sentry: E205 password must be 6-32 chars
+[   20.31s] TX: register abc abcdef
+[   20.59s] RX:
+I (20410) sentry: [AUTH] profile 'abc' registered. Now 'login abc <password>'
+[   20.59s] TX: login abc abcdef
+[   21.01s] RX:
+W (20640) sentry: [NAV] thermocline at 35 m - sonar range may drop
+I (20690) sentry: [AUTH] operator abc on watch, console 2
+I (20840) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+
+
+[    0.81s] RX:
+0020 size=38158h (229720) map
+I (134) esp_image: segment 1: p0020 size=38158h (229720) map
+I (134) esp_image: segment 1: paddr=001d8180 vaddr=3fc97200 size=0�ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x29 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x14f0
+load:0x403c8700,len:0xda0
+load:0x403cb700,len:0x2fa0
+entry 0x403c8908
+I (24) boot: ESP-IDF v6.0.1 2nd stage bootloader
+I (25) boot: compile time Oct  6 2026 02:15:01
+I (25) boot: Multicore bootloader
+I (25) boot: chip revision: v0.2
+I (28) boot: efuse block revision: v1.4
+I (31) boot.esp32s3: Boot SPI Speed : 80MHz
+I (35) boot.esp32s3: SPI Mode       : DIO
+I (39) boot.esp32s3: SPI Flash Size : 4MB
+I (43) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (50) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (63) boot:  1 otadata          OTA data         01 00 0000f000 00002000
+I (69) boot:  2 ota_0            OTA app          00 10 00020000 00180000
+I (76) boot:  3 ota_1            OTA app          00 11 001a0000 00180000
+I (82) boot: End of partition table
+I (86) esp_image: segment 0: paddr=001a0020 vaddr=3c0a0020 size=38158h (229720) map
+I (134) esp_image: segment 1: paddr=001d8180 vaddr=3fc97200 size=05198h ( 20888) load
+I (139) esp_image: segment 2: paddr=001dd320 vaddr=40374000 size=02cf8h ( 11512) load
+I (142) esp_image: segment 3: paddr=001e0020 vaddr=42000020 size=9c08ch (639116) map
+I (260) esp_image: segment 4: paddr=0027c0b4 vaddr=40376cf8 size=10418h ( 66584) load
+I (275) esp_image: segment 5: paddr=0028c4d4 vaddr=50000000 size=00024h (    36) load
+I (284) boot: Loaded app from partition at offset 0x1a0000
+I (284) boot: Disabling RNG early entropy source...
+I (294) cpu_start: Multicore app
+I (302) cpu_start: GPIO 44 and 43 are used as console UART I/O pins
+I (303) cpu_start: Pro cpu start user code
+I (303) cpu_start: cpu freq: 160000000 Hz
+I (305) app_init: Application information:
+I (309) app_init: Project name:     sentry_fw7
+I (313) app_init: App version:      2.3.0
+I (316) app_init: Compile time:     Oct  6 2026 02:15:26
+I (321) app_init: ELF file SHA256:  ab377c338...
+I (326) app_init: ESP-IDF:          v6.0.1
+I (330) efuse_init: Min chip rev:     v0.0
+I (333) efuse_init: Max chip rev:     v0.99 
+I (337) efuse_init: Chip rev:         v0.2
+I (341) heap_init: Initializing. RAM available for dynamic allocation:
+I (348) heap_init: At 3FCA1360 len 000483B0 (288 KiB): RAM
+I (353) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (358) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (363) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM
+I (369) spi_flash: detected chip: boya
+I (372) spi_flash: flash io: dio
+W (375) spi_flash: Detected size(16384k) larger than the size in the binary image header(4096k). Using the size in the binary image header.
+I (388) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (393) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (400) main_task: Started on CPU0
+I (420) main_task: Calling app_main()
+I (430) temperature_sensor: Range [-10°C ~ 80°C], error < 1��C
+I (430) sentry: ==============================================
+I (430) sentry:   SENTRY SWM-2  sonar watch module  fw v2.3.0
+I (440) sentry:   bow sonar array / perimeter watch / CIC link
+I (440) sentry: ==============================================
+I (450) pp: pp rom version: e7ae62f
+I (450) net80211: net80211 rom version: e7ae62f
+I (470) wifi:wifi driver task: 3fca5d90, prio:23, stack:6656, core=0
+I (470) wifi:wifi firmware version: b37c951
+I (470) wifi:wifi certification version: v7.0
+I (470) wifi:config NVS flash: enabled
+I (470) wifi:config nano formatting: disabled
+I (480) wifi:Init data frame dynamic rx buffer num: 32
+I (480) wifi:Init static rx mgmt buffer num: 5
+I (480) wifi:Init management short buffer num: 32
+I (490) wifi:Init dynamic tx buffer num: 32
+I (490) wifi:Init static tx FG buffer num: 2
+I (500) wifi:Init static rx buffer size: 1600
+I (500) wifi:Init static rx buffer num: 10
+I (510) wifi:Init dynamic rx buffer num: 32
+I (510) wifi_init: rx ba win: 6
+I (510) wifi_init: accept mbox: 6
+I (510) wifi_init: tcpip mbox: 32
+I (520) wifi_init: udp mbox: 6
+I (520) wifi_init: tcp mbox: 6
+I (520) wifi_init: tcp tx win: 5760
+I (530) wifi_init: tcp rx win: 5760
+I (530) wifi_init: tcp mss: 1440
+I (530) wifi_init: WiFi IRAM OP enabled
+I (540) wifi_init: WiFi RX IRAM OP enabled
+I (540) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10
+W (550) phy_init: failed to load RF calibration data (0x1102), falling back to full calibration
+I (590) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(2)
+I (600) wifi:mode : sta (e0:72:a1:d4:1f:a4)
+I (600) wifi:enable tsf
+I (600) sentry: [LINK] no known network. Type 'connect'
+I (600) sentry: [AUTH] no profile. Use 'register <login> <password>'
+I (600) sentry: last reset: power on
+I (610) sentry: build tag: <base64-redacted>
+I (610) sentry: [HW] transducer array: 1 ch, 40 kHz, driver OK
+I (620) sentry: [HW] hull penetrator seal: OK, pressure sensor: OK
+W (620) sentry: [NAV] depth sensor offline (lab mode) - using simulator
+I (630) sentry: [NAV] carrier: SSK 'Skat', bow sonar bay #2, depth 41.8 m
+I (640) sentry: [OTA] running v2.3.0 from ota_1
+I (640) sentry: ready. state 1 NORMAL (patrol). Type 'help'
+I (650) main_task: Returned from app_main()
+[    0.81s] TX: connect
+[    3.62s] RX:
+I (930) sentry: [LINK] scanning...
+I (3430) sentry:   [ 1] <ssid>                                  -27 dBm
+I (3430) sentry:   [ 2] <ssid>                        -63 dBm
+I (3430) sentry:   [ 3] <ssid>                         -67 dBm
+I (3430) sentry:   [ 4] <ssid>                         -71 dBm
+I (3440) sentry:   [ 5] <ssid>                         -80 dBm
+I (3440) sentry:   [ 6] AVIA LINK                         -88 dBm
+SSID or number: 
+[    3.62s] TX: CMF
+[    3.89s] RX:
+Password: 
+[    3.89s] TX: ***
+[    9.14s] RX:
+********
+I (4100) sentry: [LINK] raising buoy antenna, connecting to 'CMF'...
+I (4710) wifi:new:<6,1>, old:<1,0>, ap:<255,255>, sta:<6,1>, prof:1, snd_ch_cfg:0x0
+I (4710) wifi:state: init -> auth (0xb0)
+I (8970) wifi:state: auth -> init (0x200)
+I (8970) wifi:new:<6,0>, old:<6,1>, ap:<255,255>, sta:<6,1>, prof:1, snd_ch_cfg:0x0
+E (8980) sentry: E101 wrong password for 'CMF'
+[    9.14s] TX: <connect attempt 1/3 failed: ['E101']>
+[    9.14s] TX: connect
+[   11.97s] RX:
+I (9260) sentry: [LINK] scanning...
+I (11760) sentry:   [ 1] <ssid>                                  -27 dBm
+I (11760) sentry:   [ 2] <ssid>                                  -48 dBm
+I (11760) sentry:   [ 3] <ssid>                         -66 dBm
+I (11760) sentry:   [ 4] <ssid>                        -69 dBm
+I (11770) sentry:   [ 5] <ssid>                         -71 dBm
+I (11770) sentry:   [ 6] <ssid>                  -76 dBm
+I (11780) sentry:   [ 7] <ssid>                         -82 dBm
+I (11790) sentry:   [ 8] <ssid>                         -89 dBm
+I (11790) sentry:   [ 9] AVIA LINK                         -93 dBm
+SSID or number: 
+[   11.97s] TX: CMF
+[   12.23s] RX:
+Password: 
+[   12.23s] TX: ***
+[   20.47s] RX:
+********
+I (12450) sentry: [LINK] raising buoy antenna, connecting to 'CMF'...
+I (12450) wifi:new:<6,1>, old:<6,0>, ap:<255,255>, sta:<6,1>, prof:1, snd_ch_cfg:0x0
+I (12450) wifi:state: init -> auth (0xb0)
+I (13040) wifi:state: auth -> assoc (0x0)
+I (13060) wifi:state: assoc -> run (0x10)
+I (13080) wifi:connected with CMF, aid = 1, channel 6, 40U, bssid = 6a:ec:fa:fa:19:00
+I (13080) wifi:security: WPA3-SAE HUNT_AND_PECK, phy: bgn, rssi: -29, cipher(pairwise:0x3, group:0x3), pmf:1
+I (13090) wifi:pm start, type: 1
+
+I (13090) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (13100) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (13190) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (13190) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+I (14140) esp_netif_handlers: sta ip: 10.155.147.138, mask: 255.255.255.0, gw: 10.155.147.242
+I (14140) sentry: [LINK] got ip 10.155.147.138
+I (14140) sentry: [LINK] connected to 'CMF', rssi -28 dBm (excellent)
+I (14180) wifi:<ba-add>idx:0 (ifx:0, 6a:ec:fa:fa:19:00), tid:0, ssn:4, winSize:64
+I (14760) wifi:<ba-add>idx:1 (ifx:0, 6a:ec:fa:fa:19:00), tid:2, ssn:5, winSize:64
+I (15010) esp-x509-crt-bundle: Certificate validated
+I (15840) sentry: [LINK] fleet network reachable (internet OK)
+I (20290) sentry: [LINK] time: synced via NTP, 23:11:20
+I (20290) sentry: [LINK] network saved. Next time just type 'reconnect'
+[   28.48s] TX: register llllllllllllllll pppppppppppppppppppppppppppppppp
+[   28.77s] RX:
+I (28600) sentry: [AUTH] profile 'llllllllllllllll' registered. Now 'login llllllllllllllll <password>'
+[   28.77s] TX: login llllllllllllllll pppppppppppppppppppppppppppppppp
+[   29.03s] RX:
+I (28880) sentry: [AUTH] operator llllllllllllllll on watch, console 2
+
+
+[    0.83s] RX:
+I (134) e�ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x29 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x14f0
+load:0x403c8700,len:0xda0
+load:0x403cb700,len:0x2fa0
+entry 0x403c8908
+I (24) boot: ESP-IDF v6.0.1 2nd stage bootloader
+I (25) boot: compile time Oct  6 2026 02:15:01
+I (25) boot: Multicore bootloader
+I (25) boot: chip revision: v0.2
+I (28) boot: efuse block revision: v1.4
+I (31) boot.esp32s3: Boot SPI Speed : 80MHz
+I (35) boot.esp32s3: SPI Mode       : DIO
+I (39) boot.esp32s3: SPI Flash Size : 4MB
+I (43) boot: Enabling RNG early entropy source...
+I (47) boot: Partition Table:
+I (50) boot: ## Label            Usage          Type ST Offset   Length
+I (56) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (63) boot:  1 otadata          OTA data         01 00 0000f000 00002000
+I (69) boot:  2 ota_0            OTA app          00 10 00020000 00180000
+I (76) boot:  3 ota_1            OTA app          00 11 001a0000 00180000
+I (82) boot: End of partition table
+I (86) esp_image: segment 0: paddr=001a0020 vaddr=3c0a0020 size=38158h (229720) map
+I (134) esp_image: segment 1: paddr=001d8180 vaddr=3fc97200 size=05198h ( 20888) load
+I (139) esp_image: segment 2: paddr=001dd320 vaddr=40374000 size=02cf8h ( 11512) load
+I (142) esp_image: segment 3: paddr=001e0020 vaddr=42000020 size=9c08ch (639116) map
+I (260) esp_image: segment 4: paddr=0027c0b4 vaddr=40376cf8 size=10418h ( 66584) load
+I (275) esp_image: segment 5: paddr=0028c4d4 vaddr=50000000 size=00024h (    36) load
+I (284) boot: Loaded app from partition at offset 0x1a0000
+I (284) boot: Disabling RNG early entropy source...
+I (294) cpu_start: Multicore app
+I (302) cpu_start: GPIO 44 and 43 are used as console UART I/O pins
+I (303) cpu_start: Pro cpu start user code
+I (303) cpu_start: cpu freq: 160000000 Hz
+I (305) app_init: Application information:
+I (309) app_init: Project name:     sentry_fw7
+I (313) app_init: App version:      2.3.0
+I (316) app_init: Compile time:     Oct  6 2026 02:15:26
+I (321) app_init: ELF file SHA256:  ab377c338...
+I (326) app_init: ESP-IDF:          v6.0.1
+I (330) efuse_init: Min chip rev:     v0.0
+I (333) efuse_init: Max chip rev:     v0.99 
+I (337) efuse_init: Chip rev:         v0.2
+I (341) heap_init: Initializing. RAM available for dynamic allocation:
+I (348) heap_init: At 3FCA1360 len 000483B0 (288 KiB): RAM
+I (353) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (358) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (363) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM
+I (369) spi_flash: detected chip: boya
+I (372) spi_flash: flash io: dio
+W (375) spi_flash: Detected size(16384k) larger than the size in the binary image header(4096k). Using the size in the binary image header.
+I (388) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (393) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (400) main_task: Started on CPU0
+I (420) main_task: Calling app_main()
+I (430) temperature_sensor: Range [-10°C ~ 80°C], error < 1��C
+I (430) sentry: ==============================================
+I (430) sentry:   SENTRY SWM-2  sonar watch module  fw v2.3.0
+I (440) sentry:   bow sonar array / perimeter watch / CIC link
+I (440) sentry: ==============================================
+I (450) pp: pp rom version: e7ae62f
+I (450) net80211: net80211 rom version: e7ae62f
+I (470) wifi:wifi driver task: 3fca5d90, prio:23, stack:6656, core=0
+I (470) wifi:wifi firmware version: b37c951
+I (470) wifi:wifi certification version: v7.0
+I (470) wifi:config NVS flash: enabled
+I (470) wifi:config nano formatting: disabled
+I (480) wifi:Init data frame dynamic rx buffer num: 32
+I (480) wifi:Init static rx mgmt buffer num: 5
+I (480) wifi:Init management short buffer num: 32
+I (490) wifi:Init dynamic tx buffer num: 32
+I (490) wifi:Init static tx FG buffer num: 2
+I (500) wifi:Init static rx buffer size: 1600
+I (500) wifi:Init static rx buffer num: 10
+I (510) wifi:Init dynamic rx buffer num: 32
+I (510) wifi_init: rx ba win: 6
+I (510) wifi_init: accept mbox: 6
+I (510) wifi_init: tcpip mbox: 32
+I (520) wifi_init: udp mbox: 6
+I (520) wifi_init: tcp mbox: 6
+I (520) wifi_init: tcp tx win: 5760
+I (530) wifi_init: tcp rx win: 5760
+I (530) wifi_init: tcp mss: 1440
+I (530) wifi_init: WiFi IRAM OP enabled
+I (540) wifi_init: WiFi RX IRAM OP enabled
+I (540) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10
+W (550) phy_init: failed to load RF calibration data (0x1102), falling back to full calibration
+I (590) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(2)
+I (600) wifi:mode : sta (e0:72:a1:d4:1f:a4)
+I (600) wifi:enable tsf
+I (600) sentry: [LINK] no known network. Type 'connect'
+I (600) sentry: [AUTH] no profile. Use 'register <login> <password>'
+I (600) sentry: last reset: power on
+I (610) sentry: build tag: <base64-redacted>
+I (610) sentry: [HW] transducer array: 1 ch, 40 kHz, driver OK
+I (620) sentry: [HW] hull penetrator seal: OK, pressure sensor: OK
+W (620) sentry: [NAV] depth sensor offline (lab mode) - using simulator
+I (630) sentry: [NAV] carrier: SSK 'Skat', bow sonar bay #2, depth 41.8 m
+I (640) sentry: [OTA] running v2.3.0 from ota_1
+I (640) sentry: ready. state 1 NORMAL (patrol). Type 'help'
+I (650) main_task: Returned from app_main()
+[    0.83s] TX: connect
+[    3.62s] RX:
+I (930) sentry: [LINK] scanning...
+I (3430) sentry:   [ 1] <ssid>                                  -27 dBm
+I (3430) sentry:   [ 2] <ssid>                        -62 dBm
+I (3430) sentry:   [ 3] <ssid>                         -65 dBm
+I (3430) sentry:   [ 4] <ssid>                                   -67 dBm
+I (3440) sentry:   [ 5] <ssid>                         -71 dBm
+I (3440) sentry:   [ 6] <ssid>                  -76 dBm
+SSID or number: 
+[    3.62s] TX: CMF
+[    3.89s] RX:
+Password: 
+[    3.89s] TX: ***
+[    9.14s] RX:
+********
+I (4090) sentry: [LINK] raising buoy antenna, connecting to 'CMF'...
+I (4700) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (4700) wifi:state: init -> auth (0xb0)
+I (8960) wifi:state: auth -> init (0x200)
+I (8960) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+E (8960) sentry: E101 wrong password for 'CMF'
+[    9.14s] TX: <connect attempt 1/3 failed: ['E101']>
+[    9.14s] TX: connect
+[   11.95s] RX:
+I (9240) sentry: [LINK] scanning...
+I (11740) sentry:   [ 1] <ssid>                                  -24 dBm
+I (11740) sentry:   [ 2] <ssid>                                  -48 dBm
+I (11740) sentry:   [ 3] <ssid>                        -62 dBm
+I (11740) sentry:   [ 4] <ssid>                                   -68 dBm
+I (11750) sentry:   [ 5] <ssid>                         -71 dBm
+I (11750) sentry:   [ 6] <ssid>                  -72 dBm
+I (11760) sentry:   [ 7] <ssid>                         -79 dBm
+I (11770) sentry:   [ 8] <ssid>                         -89 dBm
+SSID or number: 
+[   11.95s] TX: CMF
+[   12.22s] RX:
+Password: 
+[   12.22s] TX: ***
+[   17.81s] RX:
+********
+I (12410) sentry: [LINK] raising buoy antenna, connecting to 'CMF'...
+I (12410) wifi:new:<6,1>, old:<6,0>, ap:<255,255>, sta:<6,1>, prof:1, snd_ch_cfg:0x0
+I (12410) wifi:state: init -> auth (0xb0)
+I (13000) wifi:state: auth -> assoc (0x0)
+I (13020) wifi:state: assoc -> run (0x10)
+I (13050) wifi:connected with CMF, aid = 1, channel 6, 40U, bssid = 6a:ec:fa:fa:19:00
+I (13050) wifi:security: WPA3-SAE HUNT_AND_PECK, phy: bgn, rssi: -25, cipher(pairwise:0x3, group:0x3), pmf:1
+I (13050) wifi:pm start, type: 1
+
+I (13060) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (13060) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (13080) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (13080) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+I (14100) esp_netif_handlers: sta ip: 10.155.147.138, mask: 255.255.255.0, gw: 10.155.147.242
+I (14100) sentry: [LINK] got ip 10.155.147.138
+I (14100) sentry: [LINK] connected to 'CMF', rssi -25 dBm (excellent)
+I (14120) wifi:<ba-add>idx:0 (ifx:0, 6a:ec:fa:fa:19:00), tid:0, ssn:4, winSize:64
+I (14480) wifi:<ba-add>idx:1 (ifx:0, 6a:ec:fa:fa:19:00), tid:2, ssn:5, winSize:64
+I (14730) esp-x509-crt-bundle: Certificate validated
+I (15790) sentry: [LINK] fleet network reachable (internet OK)
+I (17630) sentry: [LINK] time: synced via NTP, 23:11:49
+I (17630) sentry: [LINK] network saved. Next time just type 'reconnect'
+[   25.81s] TX: register qa_swm Pass1234
+[   26.06s] RX:
+I (25900) sentry: [AUTH] profile 'qa_swm' registered. Now 'login qa_swm <password>'

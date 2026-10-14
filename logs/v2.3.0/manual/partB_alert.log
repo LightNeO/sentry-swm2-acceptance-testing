@@ -1,0 +1,18 @@
+Manual checklist Part B (Alert center physical), firmware v2.3.0
+Session: miniterm COM3 115200, 2026-10-14
+
+TC-AL-11 (critical alert in NORMAL -> relay ON + state -> VERBOSE):
+
+state -> state: 1 NORMAL (confirmed starting state)
+alert test critical
+  E (2335130) sentry: [CIC #18 CRITICAL] test: test alert
+  I (2335130) sentry: [VALVE] OPEN (critical alert)
+  W (2335130) sentry: [STATE] 1 NORMAL -> 3 VERBOSE (by critical alert)
+  I (2335130) sentry: [STATE] VERBOSE (tactical): extended logs, telemetry every 10 s, LED heartbeat
+relay off (cleanup)
+  I (2364510) sentry: [VALVE] CLOSED (command)
+  I (2364510) sentry: [V] valve driver GPIO8=0, cycles 226
+
+TC-AL-11: PASS - relay opened and state transitioned to VERBOSE in the same response, exactly per AL-5.
+
+Part B fully closed: 2/2 PASS, no bugs found.

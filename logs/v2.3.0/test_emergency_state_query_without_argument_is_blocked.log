@@ -1,0 +1,21 @@
+# tests/functional/test_states.py::test_emergency_state_query_without_argument_is_blocked
+# fw v2.3.0  2026-10-13 23:38:53
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.36s] RX:
+I (16965) sentry: [AUTH] operator qa_swm on watch, console 2
+I (17045) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.36s] TX: state 3
+[    1.22s] RX:
+W (17315) sentry: [STATE] 1 NORMAL -> 3 VERBOSE (by command)
+I (17315) sentry: [STATE] VERBOSE (tactical): extended logs, telemetry every 10 s, LED heartbeat
+I (17315) sentry: [V] 'state' done in 3 ms
+[    1.22s] TX: state 4
+[    2.09s] RX:
+W (18185) sentry: [STATE] 3 VERBOSE -> 4 EMERGENCY (by command)
+E (18185) sentry: [EMERGENCY] EMERGENCY SURFACING. Module locked. Allowed: help, status, whoami, version, health now, alert list, reboot. Exit: reboot only
+E (18185) sentry: [CIC #1 CRITICAL] state: EMERGENCY mode entered (by command)
+[    2.09s] TX: state
+[    2.95s] RX:
+I (19055) sentry: state: 4 EMERGENCY
+I (19055) sentry:   1 normal (patrol) | 2 debug (maintenance) | 3 verbose (tactical) | 4 emergency (surfacing, only from 3)

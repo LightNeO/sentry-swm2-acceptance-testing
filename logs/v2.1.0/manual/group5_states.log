@@ -1,0 +1,56 @@
+Manual checklist Group 5 (states), firmware v2.1.0
+Session: miniterm COM3 115200, 2026-10-14
+
+TC-ST-03 (DEBUG, raw sensor data + LED blink codes):
+
+state 2
+W (1982079) sentry: [STATE] 1 NORMAL -> 2 DEBUG (by command)
+I (1982079) sentry: [STATE] DEBUG (maintenance): raw transducer data, LED blink codes, parser diagnostics
+
+distance
+I (1999129) sentry: [DBG] cmd 'distance' args '' need 2
+I (1999129) sentry: [DBG] transducer echo 915 us -> raw 15.78 cm (no filter, no calibration)
+I (1999129) sentry: [SONAR] ping: echo 15.8 cm
+E (1999129) sentry: [COLLISION] contact too close: 15.8 cm (< 20 cm)
+W (1999139) sentry: [SONAR] PROXIMITY ALARM: contact at 15.8 cm (threshold 30 cm)
+
+distance (closer, 6.72 cm) - no repeated COLLISION (DS-6a hysteresis: fires once per approach, re-arms
+only after retreating past 25 cm; consistent, not a bug).
+
+distance 1 1 (extra stray arg) - parsed as N=1, executed normally: "[SONAR] 1/1: 7.8 cm", "avg 7.8 cm (1/1 ok)".
+
+Discussion: the exact text of "[DBG] cmd 'distance' args '' need 2" is not specified anywhere in the PRD -
+PRD only promises "діагностика парсера ([DBG] ...)" with no defined format. Treated as an informational,
+undocumented internal diagnostic (likely the parser's minimum expected token count for this command's
+dispatch entry), not a deviation from any PRD requirement. Not filed as a bug; noted in bugs/Improvements.md
+for completeness.
+
+LED blink-code pattern: confirmed by the tester - blinks blue 3 times, then a pause, repeating consistently.
+This is visibly different from NORMAL state LED behavior, satisfying "LED показує blink-коди" (ST-1c).
+
+TC-ST-03: PASS (raw data confirmed, [DBG] diagnostics present, LED blink-code pattern confirmed).
+
+TC-ST-04 (VERBOSE: [V]-logs, 10 s telemetry, heartbeat LED, Did-you-mean):
+
+state 3 -> [STATE] 2 DEBUG -> 3 VERBOSE (by command); VERBOSE (tactical): extended logs, telemetry every 10 s, LED heartbeat
+lamp2 -> E001 unknown command 'lamp2'. Did you mean 'lamp'?   <- exact match to expected hint
+[TELEMETRY #77..#92] each followed by its own [V] telemetry: ... line; tick deltas between consecutive
+  reports: 10010, 10010, 10010, 10010, 10010, 10010, 10010, 10010, 10010, 10010, 10010, 10010, 10010, 10010 ms
+  - exactly 10.01 s apart throughout, matching the VERBOSE 10 s interval precisely.
+Heartbeat LED pattern: confirmed visually by the tester (steady pulsing, distinct from DEBUG's 3-blink pattern).
+TC-ST-04: PASS.
+
+TC-ST-13 / TC-BTN-09 (buttons blocked in EMERGENCY):
+
+state 4 (from VERBOSE) -> [STATE] 3 VERBOSE -> 4 EMERGENCY (by command); EMERGENCY SURFACING, module locked.
+  [NAV] EMERGENCY BLOW: depth steadily decreasing each telemetry tick (40.3 -> 33.6 m), matching PRD's
+  "у телеметрії глибина зменшується" note for EMERGENCY.
+K2 pressed -> E005 buttons blocked in EMERGENCY
+K1 pressed -> E005 buttons blocked in EMERGENCY
+K3 pressed -> E005 buttons blocked in EMERGENCY
+K4 pressed -> E005 buttons blocked in EMERGENCY
+reboot -> rebooting in 3...2...1... -> full boot, back to fw v2.1.0, state 1 NORMAL (exits EMERGENCY only via
+  reboot, as documented).
+TC-ST-13 / TC-BTN-09: PASS.
+
+Group 5 fully closed: all items PASS (TC-ST-07/TC-BTN-06 equivalent already covered in Group 1).

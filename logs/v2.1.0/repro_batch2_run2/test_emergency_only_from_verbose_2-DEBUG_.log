@@ -1,0 +1,19 @@
+# tests/functional/test_states.py::test_emergency_only_from_verbose[2-DEBUG]
+# fw v2.1.0  2026-10-11 18:58:53
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.39s] RX:
+I (19919) sentry: [AUTH] operator qa_swm on watch, console 2
+I (20049) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.41s] TX: state 2
+[    1.58s] RX:
+W (20329) sentry: [STATE] 1 NORMAL -> 2 DEBUG (by command)
+I (20329) sentry: [STATE] DEBUG (maintenance): raw transducer data, LED blink codes, parser diagnostics
+I (20329) sentry: [V] 'state' done in 3 ms
+I (20649) sentry: [NAV] depth 41.8 m, heading 274, speed 2.9 kn
+[    1.58s] TX: state 4
+[    2.58s] RX:
+I (21509) sentry: [DBG] cmd 'state' args '4' need 2
+W (21509) sentry: [STATE] 2 DEBUG -> 4 EMERGENCY (by command)
+E (21509) sentry: [EMERGENCY] EMERGENCY SURFACING. Module locked. Allowed: help, status, whoami, version, health now, reboot. Exit: reboot only
+W (21649) sentry: [NAV] EMERGENCY BLOW: depth 41.7 m, ascending

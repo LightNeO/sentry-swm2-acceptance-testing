@@ -1,0 +1,31 @@
+BUG-008 repro #1: alert ack <id> fails for the first alert in the list
+Date: 2026-10-14, tool: ad-hoc diagnostic script against framework driver (fresh hard reset, logged in)
+
+> alert ack all
+  W853 no unacknowledged alerts
+> alert clear
+  I (18460) sentry: [CIC] cleared
+> alert test info
+  I (19570) sentry: [CIC #1 INFO] test: test alert
+> alert list
+  I (20680) sentry: [CIC] 1 alerts, 1 unacknowledged:
+  I (20680) sentry:   #1   --:--:-- INFO     * test    test alert
+> alert test warning
+  W (21800) sentry: [CIC #2 WARNING] test: test alert
+> alert test info
+  I (22920) sentry: [CIC #3 INFO] test: test alert
+> alert list
+  I (24560) sentry: [CIC] 3 alerts, 3 unacknowledged:
+  I (24560) sentry:   #1   --:--:-- INFO     * test    test alert
+  I (24560) sentry:   #2   --:--:-- WARNING  * test    test alert
+  I (24560) sentry:   #3   --:--:-- INFO     * test    test alert
+> alert ack 1
+  E (25740) sentry: E851 no alert #1
+> alert list
+  I (27730) sentry: [CIC] 3 alerts, 3 unacknowledged:
+  I (27730) sentry:   #1   --:--:-- INFO     * test    test alert     <- still there, still unacked, still "doesn't exist" per ack
+  I (27730) sentry:   #2   --:--:-- WARNING  * test    test alert
+  I (27730) sentry:   #3   --:--:-- INFO     * test    test alert
+
+Result: 'alert ack 1' refused to find alert #1, although 'alert list' printed on the same breath confirms it
+exists and is unacknowledged.

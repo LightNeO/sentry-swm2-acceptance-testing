@@ -1,0 +1,35 @@
+Manual checklist Part C (K4 and combos), firmware v2.3.0
+Session: miniterm COM3 115200, 2026-10-14
+
+TC-BTN-04 extra confirmations (K4 presses with an alert already pending acknowledge it safely):
+  K4 pressed -> [CIC] #18 acknowledged (K4). Unacked: 16
+  K4 pressed -> [CIC] #17 acknowledged (K4). Unacked: 15
+  (accidental single presses during combo testing; no crash, no unexpected side effect - consistent with
+  documented K4 behavior)
+
+Bonus: a second K4 long-press (PANIC) while ALARM was already active did NOT create a duplicate alarm/alert
+  event (no new CIC entry, no re-trigger message) - idempotent, safe behavior, not a bug.
+
+TC-BTN-05 (K3+K4 held 2s -> VERBOSE):
+  I (2481410) sentry: [BTN] K3+K4 held 2 s -> state 3
+  W (2481410) sentry: [STATE] 1 NORMAL -> 3 VERBOSE (by buttons)
+  PASS.
+
+TC-BTN-06 (K4+K1 held 2s from VERBOSE -> EMERGENCY):
+  I (2548810) sentry: [BTN] K4+K1 held 2 s -> state 4
+  W (2548810) sentry: [STATE] 3 VERBOSE -> 4 EMERGENCY (by buttons)
+  E (2548810) sentry: [EMERGENCY] EMERGENCY SURFACING. Module locked.
+    Allowed: help, status, whoami, version, health now, alert list, reboot. Exit: reboot only
+    <- 'alert list' is now in the allowed list (new in 2.3.0, matches ST-3a)
+  E (2548820) sentry: [CIC #21 CRITICAL] state: EMERGENCY mode entered (by buttons)
+    <- entering EMERGENCY itself now generates its own CIC alert (new in 2.3.0, not present on 2.1.0)
+  PASS.
+
+Part C closed: PASS, two nice 2.3.0-specific confirmations (alert list allowed in EMERGENCY; EMERGENCY entry
+itself is logged as a CIC alert).
+
+TC-ST-09 (alert list works in EMERGENCY, 2.3.0):
+  alert list
+  I (132415) sentry: [CIC] 1 alerts, 1 unacknowledged:
+  I (132415) sentry:   #1   --:--:-- CRITICAL * state   EMERGENCY mode entered (by buttons)
+  Executed normally while in EMERGENCY (no E005). PASS.

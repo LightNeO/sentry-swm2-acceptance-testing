@@ -1,0 +1,221 @@
+# tests/functional/test_guard.py::test_wrong_pin_counter_starts_from_zero_after_correct_pin_and_new_arm
+# fw v2.3.0  2026-10-14 22:57:35
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.42s] RX:
+I (13280) sentry: [AUTH] operator qa_swm on watch, console 2
+I (13440) sentry: [TELEMETRY] auto report every 10 s ('health off' to stop)
+[    0.42s] TX: guard disarm 1234
+[    1.41s] RX:
+W (13710) sentry: W802 guard is not armed
+[    1.41s] TX: guard status
+[    2.27s] RX:
+I (14690) sentry: [WATCH] disarmed, zone 10 cm, last distance -1.0 cm
+[    2.27s] TX: guard pin 1234 1234
+[    3.19s] RX:
+I (15540) sentry: [WATCH] PIN changed
+[    3.19s] TX: guard zone 50
+[    4.05s] RX:
+I (16470) sentry: [WATCH] zone < 50 cm
+[    4.05s] TX: alert ack all
+[    5.02s] RX:
+W (17330) sentry: W853 no unacknowledged alerts
+[    5.02s] TX: alert clear
+[    5.94s] RX:
+I (18300) sentry: [CIC] cleared
+[    5.94s] TX: reboot
+[    9.89s] RX:
+reboot
+I (19210) sentry: rebooting in 3...
+I (20210) sentry: rebooting in 2...
+I (20640) sentry: [NAV] depth 42.0 m, heading 274, speed 3.3 kn
+I (21210) sentry: rebooting in 1...
+I (22210) wifi:state: run -> init (0x0)
+I (22210) wifi:pm stop, total sleep time: 11718883 us / 13927675 us
+
+I (22210) wifi:<ba-del>idx:0, tid:0
+I (22210) wifi:<ba-del>idx:1, tid:2
+I (22220) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (22230) wifi:flush txq
+I (22230) wifi:stop sw txq
+I (22230) wifi:lmac stop hw txq
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x42020a24
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x14f0
+load:0x403c8700,len:0xda0
+load:0x403cb700,len:0x2fa0
+entry 0x403c8908
+I (29) boot: ESP-IDF v6.0.1 2nd stage bootloader
+I (29) boot: compile time Oct  6 2026 02:15:01
+I (29) boot: Multicore bootloader
+I (29) boot: chip revision: v0.2
+I (32) boot: efuse block revision: v1.4
+I (36) boot.esp32s3: Boot SPI Speed : 80MHz
+I (40) boot.esp32s3: SPI Mode       : DIO
+I (43) boot.esp32s3: SPI Flash Size : 4MB
+I (47) boot: Enabling RNG early entropy source...
+I (52) boot: Partition Table:
+I (54) boot: ## Label            Usage          Type ST Offset   Length
+I (60) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (67) boot:  1 otadata          OTA data         01 00 0000f000 00002000
+I (73) boot:  2 ota_0            OTA app          00 10 00020000 00180000
+I (80) boot:  3 ota_1            OTA app          00 11 001a0000 00180000
+I (87) boot: End of partition table
+I (90) esp_image: segment 0: paddr=001a0020 vaddr=3c0a0020 size=38158h (229720) map
+I (139) esp_image: segment 1: paddr=001d8180 vaddr=3fc97200 size=05198h ( 20888) load
+I (143) esp_image: segment 2: paddr=001dd320 vaddr=40374000 size=02cf8h ( 11512) load
+I (146) esp_image: segment 3: paddr=001e0020 vaddr=42000020 size=9c08ch (639116) map
+I (265) esp_image: segment 4: paddr=0027c0b4 vaddr=40376cf8 size=10418h ( 66584) load
+I (280) esp_image: segment 5: paddr=0028c4d4 vaddr=50000000 size=00024h (    36) load
+I (289) boot: Loaded app from partition at offset 0x1a0000
+I (289) boot: Disabling RNG early entropy source...
+I (299) cpu_start: Multicore app
+I (307) cpu_start: GPIO 44 and 43 are used as console UART I/O pins
+I (308) cpu_start: Pro cpu start user code
+I (308) cpu_start: cpu freq: 160000000 Hz
+I (310) app_init: Application information:
+I (314) app_init: Project name:     sentry_fw7
+I (318) app_init: App version:      2.3.0
+I (322) app_init: Compile time:     Oct  6 2026 02:15:26
+I (327) app_init: ELF file SHA256:  ab377c338...
+I (331) app_init: ESP-IDF:          v6.0.1
+I (335) efuse_init: Min chip rev:     v0.0
+I (339) efuse_init: Max chip rev:     v0.99 
+I (343) efuse_init: Chip rev:         v0.2
+I (346) heap_init: Initializing. RAM available for dynamic allocation:
+I (353) heap_init: At 3FCA1360 len 000483B0 (288 KiB): RAM
+I (358) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (363) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (368) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM
+I (374) spi_flash: detected chip: boya
+I (377) spi_flash: flash io: dio
+W (380) spi_flash: Detected size(16384k) larger than the size in the binary image header(4096k). Using the size in the binary image header.
+I (393) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (399) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (406) main_task: Started on CPU0
+I (426) main_task: Calling app_main()
+I (446) temperature_sensor: Range [-10°C ~ 80°C], error < 1��C
+I (446) sentry: ==============================================
+I (446) sentry:   SENTRY SWM-2  sonar watch module  fw v2.3.0
+I (446) sentry:   bow sonar array / perimeter watch / CIC link
+I (456) sentry: ==============================================
+I (466) pp: pp rom version: e7ae62f
+I (466) net80211: net80211 rom version: e7ae62f
+I (476) wifi:wifi driver task: 3fced754, prio:23, stack:6656, core=0
+I (476) wifi:wifi firmware version: b37c951
+I (476) wifi:wifi certification version: v7.0
+I (486) wifi:config NVS flash: enabled
+I (486) wifi:config nano formatting: disabled
+I (486) wifi:Init data frame dynamic rx buffer num: 32
+I (496) wifi:Init static rx mgmt buffer num: 5
+I (496) wifi:Init management short buffer num: 32
+I (506) wifi:Init dynamic tx buffer num: 32
+I (506) wifi:Init static tx FG buffer num: 2
+I (516) wifi:Init static rx buffer size: 1600
+I (516) wifi:Init static rx buffer num: 10
+I (516) wifi:Init dynamic rx buffer num: 32
+I (526) wifi_init: rx ba win: 6
+I (526) wifi_init: accept mbox: 6
+I (526) wifi_init: tcpip mbox: 32
+I (536) wifi_init: udp mbox: 6
+I (536) wifi_init: tcp mbox: 6
+I (536) wifi_init: tcp tx win: 5760
+I (546) wifi_init: tcp rx win: 5760
+I (546) wifi_init: tcp mss: 1440
+I (546) wifi_init: WiFi IRAM OP enabled
+I (556) wifi_init: WiFi RX IRAM OP enabled
+I (556) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10
+I (596) wifi:mode : sta (e0:72:a1:d4:1f:a4)
+I (596) wifi:enable tsf
+I (606) sentry: [LINK] known network 'CMF'. Type 'reconnect' to connect
+I (606) sentry: [AUTH] profile 'qa_swm' registered
+I (606) sentry: last reset: software reboot
+I (606) sentry: build tag: <base64-redacted>
+I (616) sentry: [HW] transducer array: 1 ch, 40 kHz, driver OK
+I (616) sentry: [HW] hull penetrator seal: OK, pressure sensor: OK
+W (626) sentry: [NAV] depth sensor offline (lab mode) - using simulator
+I (636) sentry: [NAV] carrier: SSK 'Skat', bow sonar bay #2, depth 41.8 m
+I (636) sentry: [OTA] running v2.3.0 from ota_1
+I (646) sentry: ready. state 1 NORMAL (patrol). Type 'help'
+I (646) main_task: Returned from app_main()
+[   10.39s] TX: reconnect
+[   13.09s] RX:
+I (1536) sentry: [LINK] raising buoy antenna, connecting to 'CMF'...
+I (2146) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (2146) wifi:state: init -> auth (0xb0)
+I (2726) wifi:state: auth -> assoc (0x0)
+I (2746) wifi:state: assoc -> run (0x10)
+I (2766) wifi:connected with CMF, aid = 1, channel 6, BW20, bssid = 6a:ec:fa:fa:19:00
+I (2766) wifi:security: WPA3-SAE HUNT_AND_PECK, phy: bgn, rssi: -26, cipher(pairwise:0x3, group:0x3), pmf:1
+I (2776) wifi:pm start, type: 1
+
+I (2776) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (2786) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (2786) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (2796) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+I (3826) esp_netif_handlers: sta ip: 10.155.147.138, mask: 255.255.255.0, gw: 10.155.147.242
+I (3826) sentry: [LINK] got ip 10.155.147.138
+I (3826) sentry: [LINK] connected to 'CMF', rssi -27 dBm (excellent)
+I (3846) wifi:<ba-add>idx:0 (ifx:0, 6a:ec:fa:fa:19:00), tid:0, ssn:4, winSize:64
+[   16.22s] TX: login qa_swm Pass1234
+[   16.48s] RX:
+I (7266) sentry: [AUTH] operator qa_swm on watch, console 2
+[   16.48s] TX: guard zone 10
+[   17.36s] RX:
+I (7446) sentry: [TELEMETRY] auto report every 10 s ('health off' to stop)
+I (7546) sentry: [WATCH] zone < 10 cm
+[   17.36s] TX: distance
+[   19.11s] RX:
+I (8456) sentry: [SONAR] ping: echo 11.1 cm
+E (8456) sentry: [COLLISION] contact too close: 11.1 cm (< 20 cm)
+W (8456) sentry: [CIC #1 WARNING] sonar: collision risk: contact at 11.1 cm
+W (8456) sentry: [SONAR] PROXIMITY ALARM: contact at 11.1 cm (threshold 30 cm)
+I (8466) sentry: [CIC #2 INFO] sonar: proximity threshold 30 cm crossed: 11.1 cm
+I (8476) sentry: [VALVE] OPEN (distance alarm)
+[   19.11s] TX: guard arm
+[   20.86s] RX:
+I (10196) sentry: [WATCH] arming: clear the zone (< 10 cm) within 10 s
+I (10246) sentry: [WATCH] arming in 10 s...
+[   31.86s] TX: guard status
+[   32.70s] RX:
+I (22896) sentry: [WATCH] ARMED, zone 10 cm, last distance 11.1 cm
+[   32.70s] TX: guard disarm 0000
+[   33.56s] RX:
+E (23746) sentry: E803 wrong PIN. Attempts: 1/3
+[   33.56s] TX: guard disarm 0000
+[   34.41s] RX:
+E (24606) sentry: E803 wrong PIN. Attempts: 2/3
+[   34.41s] TX: guard disarm 1234
+[   35.27s] RX:
+I (25456) sentry: [WATCH] disarmed (was ARMED)
+[   35.27s] TX: guard zone 10
+[   36.11s] RX:
+I (26306) sentry: [WATCH] zone < 10 cm
+[   36.11s] TX: distance
+[   38.28s] RX:
+I (27196) sentry: [SONAR] ping: echo 11.1 cm
+I (27646) sentry: [TELEMETRY #2] 22:57:19 up 00:00:27 heap 250KB rssi -26 temp 30.6C depth 41.8m hull 5.2bar batt 24.2V valve open sonar 11.1cm watch disarmed alerts 3 state NORMAL
+[   38.28s] TX: guard arm
+[   40.02s] RX:
+I (29376) sentry: [WATCH] arming: clear the zone (< 10 cm) within 10 s
+I (29396) sentry: [WATCH] arming in 10 s...
+[   51.02s] TX: guard status
+[   51.86s] RX:
+I (42056) sentry: [WATCH] ARMED, zone 10 cm, last distance 11.1 cm
+[   51.86s] TX: guard disarm 0000
+[   53.45s] RX:
+E (42906) sentry: E803 wrong PIN. Attempts: 3/3
+E (42906) sentry: [WATCH] !!! GENERAL ALARM: 3 wrong PIN attempts !!! Disarm: 'guard disarm <pin>'
+E (42906) sentry: [CIC #5 CRITICAL] watch: GENERAL ALARM: 3 wrong PIN attempts
+W (42906) sentry: [STATE] 1 NORMAL -> 3 VERBOSE (by critical alert)
+I (42916) sentry: [STATE] VERBOSE (tactical): extended logs, telemetry every 10 s, LED heartbeat
+I (42926) sentry: [V] 'guard' done in 24 ms
+I (43646) sentry: [ACU] ambient noise 73 dB re 1uPa, sea state 2, water 8.1 C
+[   53.62s] TX: guard disarm 1234
+[   54.55s] RX:
+I (44666) sentry: [WATCH] disarmed (was ALARM)
+I (44666) sentry: [V] 'guard' done in 0 ms

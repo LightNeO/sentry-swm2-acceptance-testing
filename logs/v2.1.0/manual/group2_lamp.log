@@ -1,0 +1,38 @@
+Manual checklist Group 2 (Smart Lamp), firmware v2.1.0
+Session: miniterm COM3 115200, 2026-10-14
+Full raw console capture provided by the tester.
+
+Key excerpts:
+
+- lamp on / off / toggle / toggle: each correctly flips on<->off, [BEACON] on/off (command) messages match
+  lamp status (checked twice: off then on, both matched).
+- lamp color white/red/green/blue/yellow/purple/cyan/orange: all 8 named colors set the correct RGB tuple,
+  visually confirmed by the tester (white 255,255,255; red 255,0,0; green 0,255,0; blue 0,0,255;
+  yellow 255,180,0; purple 160,0,255; cyan 0,255,255; orange 255,80,0).
+- lamp brightness 0 / 100: both accepted (0% and 100%), visible difference confirmed.
+- lamp brightness 101 / -1: both correctly rejected with E504 brightness must be 0-100.
+- lamp brightness 43 / 42 / 20: all mid-range values accepted normally.
+- lamp mode solid / blink / breathe / rainbow: all 4 accepted and visually distinct; invalid mode 'blick'
+  (typo, intentional negative test) correctly rejected: E505 unknown mode 'blick'. Modes: solid blink breathe rainbow.
+- lamp brightness 20 then 100 while mode=blink: both accepted, brightness visibly differs in blink mode too
+  (LM-4: brightness works in all modes) - confirmed.
+- lamp timer 10 (lamp on at the time):
+    lamp timer 10
+    I (459164) sentry: [BEACON] auto-off in 10 ms          <- see BUG-009: unit text says 'ms'
+    I (469184) sentry: [BEACON] off (timer expired)
+  Tick delta: 469184 - 459164 = 10020 ms ~= 10.02 s -> the ACTUAL delay was 10 seconds as commanded; only the
+  printed unit ('ms' instead of 's') is wrong. Filed as BUG-009.
+- reboot: lamp was ON (blink, 42%, orange) immediately before reboot.
+- (capture cut off mid-reconnect/login after reboot; lamp status after reboot not yet captured - see
+  follow-up needed for TC-LM-03 completion.)
+
+Pending for this group:
+  - TC-LM-03: confirm 'lamp status' is OFF immediately after the post-reboot login (capture was cut off).
+  - TC-LM-22: LED priority comparison (lamp off -> LED shows system state; lamp on -> LED follows lamp) not
+    yet explicitly observed/reported.
+
+Follow-up (confirmed by tester):
+  TC-LM-03: 'lamp status' right after post-reboot login showed OFF, as expected.
+  TC-LM-22: LED priority confirmed - LED shows system state while lamp is off, and follows the lamp once
+  'lamp on' is issued.
+Both pending items closed. Group 2 fully PASS except BUG-009 (TC-LM-16).

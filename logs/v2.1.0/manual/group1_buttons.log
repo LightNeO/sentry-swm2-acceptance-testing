@@ -1,0 +1,30 @@
+Manual checklist Group 1 (buttons K1-K4), firmware v2.1.0
+Session: miniterm COM3 115200, 2026-10-14
+Full raw console capture provided by the tester, boot -> login -> button exercises -> logout -> re-login -> state combos.
+
+Key excerpts (full capture kept as pasted by the tester in chat, summarized here for the report):
+
+- Boot: fw v2.1.0, ready. state 1 NORMAL.
+- K1 pressed (no login): E003 lamp: login required.
+- login qa_swm Pass1234 -> on watch.
+- K1 pressed (toggle): [BEACON] on (K1) breathe, 42%, color (0,255,0) / off (K1) - repeated cleanly, alternating on/off each press, including a rapid-press burst (~200-450 ms apart) with no double-firing.
+- K1 long press x7: color cycled red -> green -> blue -> yellow -> purple -> cyan -> orange -> white -> red (full 8-color cycle confirmed).
+- K2 pressed (toggle): [VALVE] OPEN (K2) / CLOSED (K2); rapid presses correctly hit E602 'relay switching too fast (max 2 per second)' (RL-1b, bonus confirmation).
+- K2 long press x2: [VALVE] OPEN (K2 pulse) -> CLOSED (pulse end) after ~1020 ms (352049 -> 353069 ticks), matches the 1 s pulse spec.
+- K3 pressed: active pinging for 30 s every 500 ms; collision events fired correctly at <20 cm during the run.
+- K3 pressed again mid-run: pinging stopped (K3) - early stop confirmed.
+- K4 pressed / K4 long press: both -> E099 K4: perimeter watch is planned in v2.3.0 (expected, not a bug on 2.1.0).
+- logout -> K1/K2/K3/K4 each -> E003 <subsystem>: login required (confirms BTN-6 for all four buttons, including K4 which would otherwise be E099 - E003 takes precedence when logged out).
+- Re-login.
+- K1+K2 held 2 s -> W303 already in 1 NORMAL (device was already NORMAL).
+- K2+K3 held 2 s -> [STATE] 1 NORMAL -> 2 DEBUG (by buttons).
+- K3+K4 held 2 s -> [STATE] 2 DEBUG -> 3 VERBOSE (by buttons).
+- K1+K2 held 2 s -> [STATE] 3 VERBOSE -> 1 NORMAL (by buttons).
+- K4+K1 held 2 s (from 1 NORMAL) -> E302 EMERGENCY can be entered only from 3 VERBOSE (now 1 NORMAL). State unchanged.
+
+Pending: the same K4+K1 check from 2 DEBUG (TC-BTN-06 requires both NORMAL and DEBUG as starting states) was not yet exercised in this capture.
+
+Follow-up: K4+K1 held 2 s from 2 DEBUG:
+  I (1024919) sentry: [BTN] K4+K1 held 2 s -> state 4
+  E (1024919) sentry: E302 EMERGENCY can be entered only from 3 VERBOSE (now 2 DEBUG)
+TC-BTN-06 fully confirmed (both NORMAL and DEBUG starting states correctly refused with E302).

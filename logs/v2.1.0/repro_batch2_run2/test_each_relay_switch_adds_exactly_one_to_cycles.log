@@ -1,0 +1,22 @@
+# tests/functional/test_relay_health.py::test_each_relay_switch_adds_exactly_one_to_cycles
+# fw v2.1.0  2026-10-11 19:00:07
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.39s] RX:
+I (12343) sentry: [AUTH] operator qa_swm on watch, console 2
+I (12453) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.39s] TX: relay status
+[    1.25s] RX:
+I (12723) sentry: [VALVE] closed, auto off, cycles 56
+[    1.25s] TX: relay on
+[    2.09s] RX:
+I (13583) sentry: [VALVE] OPEN (command)
+[    2.09s] TX: relay status
+[    2.95s] RX:
+I (14443) sentry: [VALVE] OPEN, auto off, cycles 58
+[    4.06s] TX: relay off
+[    4.92s] RX:
+I (16403) sentry: [VALVE] CLOSED (command)
+[    4.92s] TX: relay status
+[    5.77s] RX:
+I (17253) sentry: [VALVE] closed, auto off, cycles 60

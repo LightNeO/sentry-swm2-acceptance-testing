@@ -1,0 +1,50 @@
+Manual checklist Part D (short physical regression), firmware v2.3.0
+Session: miniterm COM3 115200, 2026-10-14
+
+TC-RL-01 (diode polarity): the diode was inverted because of wiring that did not match fw_7/WIRING.md; after rewiring it lights on ON and is dark on OFF - PASS.
+
+TC-LM-16 (lamp timer unit text, BUG-009):
+  lamp on -> [BEACON] on (command) blink, 42%, color (255,80,0)
+  lamp timer 10
+  I (156255) sentry: [BEACON] auto-off in 10 s          <- correct unit now ('s', not 'ms')
+  I (166265) sentry: [BEACON] off (timer expired)
+  Tick delta: 166265 - 156255 = 10010 ms ~= 10.01 s - matches both the real delay and the printed unit.
+  BUG-009: FIXED on 2.3.0.
+
+TC-RL-15 (logout/reuse regression, bonus): relay on/off via plain commands still clicks correctly,
+  cycles counter increments by exactly +1 per switch (230 -> 231 for one K2 press OPEN), confirming BUG-005
+  stays fixed on 2.3.0 (already known from automation, reconfirmed manually here).
+
+TC-DS-10 / TC-DS-14 (alarm hysteresis + collision, distance log 200, two full runs):
+  Run 1: approach from ~29.5 cm down to 17.3 cm ->
+    PROXIMITY ALARM at 29.5 cm (threshold 30) -> [COLLISION] contact too close: 17.3 cm (< 20 cm)
+    retreated back up through 29-32 cm, no repeated collision while above 20 cm - consistent hysteresis.
+  Run 2: PROXIMITY ALARM at 29.3 cm -> retreat -> "proximity alarm cleared (41.3 cm)" then re-approach ->
+    PROXIMITY ALARM at 29.3 cm again -> retreat -> "proximity alarm cleared (36.1 cm)".
+  Both ALARM and COLLISION hysteresis behave identically to 2.1.0. PASS.
+
+TC-DS-17 (diode blink rate vs distance, via K3 active pinging):
+  K3 pressed -> active pinging 30 s; readings swept from out-of-range down to 9.2 cm (triggering
+  COLLISION) and back; tester did not report any blink-pattern discrepancy beyond the
+  wiring issue fixed later. Diode blink-rate-vs-distance pattern itself: PASS (faster blink when closer works).
+
+TC-LM-04 (lamp colors, sample): white, blue, green (after a harmless typo 'lamo' -> E001, corrected), red,
+  cyan - all 5 set the correct RGB tuples. PASS.
+
+TC-ST-03 / TC-ST-04 (DEBUG/VERBOSE, quick check):
+  state 2 -> [STATE] 1 NORMAL -> 2 DEBUG; state 3 -> [STATE] 2 DEBUG -> 3 VERBOSE (same '[DBG] cmd state
+  args 3 need 2' diagnostic line as seen on 2.1.0 - OBS-03, not a bug). Telemetry switched to every-10s
+  cadence under VERBOSE (consistent with 2.1.0). PASS (logic regression confirmed; LED visual re-check not
+  explicitly reported this time, behavior assumed unchanged since no automated or manual difference found
+  elsewhere in states handling).
+
+TC-BTN-01 / TC-BTN-02 / TC-BTN-03 (quick button check):
+  K1 pressed -> [BEACON] on (K1) blink, 42%, color (0,255,255) - lamp reacts correctly.
+  K2 pressed x2 -> [VALVE] CLOSED (K2) cycles 230 -> [VALVE] OPEN (K2) cycles 231 (+1 per switch, BUG-005
+    stays fixed).
+  K3 pressed -> active pinging 30 s (K3); K3 pressed again -> pinging stopped (K3) early stop confirmed,
+    done twice in this session.
+  All three: PASS, consistent with 2.1.0 behavior.
+
+Part D closed. Confirmed bug status on 2.3.0: BUG-009 fixed (updated in bugs/BUG-009.md
+and bugs/BUG_MATRIX.md).

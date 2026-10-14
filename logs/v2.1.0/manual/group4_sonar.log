@@ -1,0 +1,49 @@
+Manual checklist Group 4 (HC-SR04 sonar), firmware v2.1.0
+Session: miniterm COM3 115200, 2026-10-14
+Full raw console capture provided by the tester (two sessions).
+
+Confirmed PASS:
+- distance calibrate 20 (object at a taped/measured 20 cm): [SONAR] calibrating: put object at 20.0 cm...
+  calibrated: measured 10.9 cm, offset +9.1 cm. Subsequent 'distance' pings on the same stationary object
+  read 20.0 cm (10.9 raw + 9.1 offset), confirming the calibration offset is applied correctly (TC-DS-08).
+- distance alarm 30 + distance log 200 while approaching/retreating:
+    ping 31.5->25.8 cm -> PROXIMITY ALARM: contact at 25.8 cm (threshold 30 cm)
+    ping ... ->43.8 cm -> proximity alarm cleared (43.8 cm)
+  Cleared well beyond the 35 cm hysteresis boundary, consistent with DS-4's 5 cm hysteresis (TC-DS-10).
+- distance log 200, two full approach/retreat cycles below 20 cm:
+    ping 19.3 cm -> [COLLISION] contact too close: 19.3 cm (< 20 cm)         (1st collision)
+    readings stay close (19-25 cm) for a while, no repeated COLLISION spam
+    ping 35.1 cm -> proximity alarm cleared (35.1 cm)                       (retreated well past 25 cm)
+    ping ... 41.9/41.1 cm (far)
+    ping 25.2 cm -> PROXIMITY ALARM again
+    ping 15.5 cm -> [COLLISION] contact too close: 15.5 cm (< 20 cm)         (2nd collision, only after
+                                                                              retreating past 25 cm in between)
+  Confirms DS-6a: COLLISION fires once per approach, re-arms only after retreating beyond the 25 cm hysteresis
+  (TC-DS-14).
+- distance log 200 + relay on, approach 40ish -> 20ish cm: diode blink rate change reported by tester as
+  expected, visually confirmed (TC-DS-17).
+
+Corrected understanding (E701 vs E702 physical mapping - see chat discussion):
+  'distance' pointed at open space (nothing within ~40 cm reflects a usable echo in this room):
+    E (753499) sentry: E701 sonar: no echo (check transducer wiring TRIG 5 / ECHO 18)
+  'distance' with the sensor physically covered/blocked at point-blank range:
+    E (730209) sentry: E702 sonar: out of range (2-400 cm) - open water?
+  Both match PRD DS-6b (E701 = no echo / timeout, E702 = out of range) once the physical action is matched
+  correctly to each code. TC-DS-15 (E701) and TC-DS-16 (E702) both PASS; the original checklist wording had
+  the two physical actions swapped (documentation error, not a device defect) - corrected in
+  docs/test_cases.md and docs/manual_checklist_2.1.0.md.
+
+New finding (separate from the above, needs confirmation):
+  distance calibrate reset
+  E (153759) sentry: E706 usage: distance calibrate <ref 5-300 cm>
+  PRD DS-3 and the device's own 'help' text ("distance calibrate <cm> - calibrate by reference object
+  ('reset')") both say 'reset' is a valid sub-command, but the device rejects it, demanding a numeric
+  5-300 reference instead. Asked the tester to retry once to rule out a one-off typo before filing.
+
+Resolved: tester re-tested with the correct command 'distance reset' (not 'distance calibrate reset'):
+  distance reset
+  I (1363409) sentry: [SONAR] calibration reset
+Works fine. Not a device bug - the help text's "calibrate by reference object ('reset')" phrasing is
+ambiguous (reads as if 'reset' is an argument to 'calibrate', but it is a separate top-level command).
+Filed as a minor documentation-clarity note in bugs/Improvements.md, not a functional bug. test_cases.md and
+requirements.md (DS-3) corrected to reference 'distance reset'.

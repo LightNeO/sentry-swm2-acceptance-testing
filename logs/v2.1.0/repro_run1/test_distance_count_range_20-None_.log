@@ -1,0 +1,10 @@
+# tests/functional/test_boundaries.py::test_distance_count_range[20-None]
+# fw v2.1.0  2026-10-11 18:30:27
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.11s] RX:
+I (13809) sentry: [AUTH] operator qa_swm on watch, console 2
+[    0.11s] TX: distance 20
+[    1.72s] RX:
+I (13849) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+E (13919) sentry: E704 count must be 1-20
