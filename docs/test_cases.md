@@ -113,7 +113,7 @@
 | TC-OTA-13 | OTA-8b | `ota rollback` без іншого розділу / після broken | `E416` / `E417` / успішний rollback — залежно від стану | 21 | A |
 | TC-OTA-14 | OTA-8b | `ota rollback` коли попередня валідна | Завантаження прошивки з іншого розділу | 21 | A |
 | TC-OTA-15 | OTA-9 | `--drop-at 50`; `ota update` | `E410`, пристрій на поточній версії, працює | 21 | A+M |
-| TC-OTA-16 | OTA-9 | `--slow 20`; під час завантаження керовано вимкнути AP `SENTRY-HIL` | `W110` + `E410/E411` або інша контрольована помилка, пристрій працює | 21 | A+M |
+| TC-OTA-16 | OTA-9 | `--slow 20`; під час завантаження керовано вимкнути AP `SENTRY-HIL` | Auto: AP fault/recovery; manual/partial: slow OTA orchestration до додавання server fixture; `W110` + `E410/E411` або інша контрольована помилка | 21 | A+M |
 | TC-OTA-17 | OTA-9,OTA-11 | `ota url .../test/garbage.bin` | `E406` | 21 | A |
 | TC-OTA-18 | OTA-9,OTA-11 | `ota url .../test/truncated.bin` | Контрольована помилка (E406/E410/E412), пристрій на поточній версії | 21 | A |
 | TC-OTA-19 | OTA-9,OTA-11 | `ota url .../test/corrupted.bin` | `E412` | 21 | A |
@@ -122,7 +122,7 @@
 | TC-OTA-22 | OTA-9 | Запустити `ota update`, одразу ще раз `ota update` | `E401` | 21 | A |
 | TC-OTA-23 | OTA-9 | Сервер недоступний (`ota server http://192.0.2.1:8000/fw7/`) → `ota check` | `E402` | 21 | A |
 | TC-OTA-24 | OTA-9 | `--beta 9.9.9` → `ota check` / `ota update beta` | `E403` або `E415` | 21 | A |
-| TC-OTA-25 | OTA-9,AC-1b | Wi-Fi вимкнено → `ota check` (а) — `E002`; Wi-Fi є, але без інтернету (WAN відключено) → `ota check` (б) | (а) `E002 Wi-Fi required`; (б) `E411` | 21 | A+M |
+| TC-OTA-25 | OTA-9,AC-1b | Managed AP down → `ota check` (а); AP up, upstream/WAN down → `ota check` (б) | Auto (а): `E002 Wi-Fi required`; partial (б): фактичний `E402/E411` фіксується до уточнення контракту | 21 | A+M |
 | TC-OTA-26 | OTA-9 | Старт завантаження не вдається (недоступний шлях) | `E405` | 21 | A |
 | TC-OTA-27 | OTA-10 | **Збереження після OTA.** Перед `ota update beta` виставити: Wi-Fi мережа, профіль+новий пароль, лампа (колір/яскравість/режим), сцена 1–3, `relay` cycles, relay auto, `distance calibrate/alarm/filter off`, `health interval 77`, (Guard PIN/зона — після 2.3.0). Виконати OTA 2.1.0→2.3.0 | Усі значення збережені; для кожної групи — окремий assert | 21 | A |
 | TC-OTA-28 | OTA-10 | Те саме при даунгрейді з force (2.3.0→2.1.0) і rollback (broken) | Значення збережені; Guard PIN/зона після повернення на 2.1.0 → знову 2.3.0 | 23 | A |

@@ -44,6 +44,16 @@ def test_ap_loss_emits_wifi_loss_and_recovers(dut, managed_ap):
 
 
 @pytest.mark.tc("TC-OTA-25")
+def test_ap_loss_makes_ota_check_require_wifi(dut, managed_ap):
+    managed_ap.ap_down()
+    try:
+        result = dut.exchange("ota check", idle=1.0)
+        assert result.has_code("E002"), result
+    finally:
+        managed_ap.ap_up()
+
+
+@pytest.mark.tc("TC-OTA-25")
 def test_upstream_loss_keeps_test_ap_up(dut, managed_ap):
     managed_ap.upstream_down()
     try:

@@ -67,8 +67,8 @@ PIN за замовчуванням `1234`, зона за замовчуванн
 | 6 | TC-OTA-22 | Під час завантаження (`--slow 20`) ввести ще одну `ota`-команду | `E401` | N/A — консоль не приймає ввід, поки йде завантаження, E401 з консолі недосяжний; прийнято як очікувану поведінку |
 | 7 | TC-OTA-24 | Сервер з `--beta 9.9.9`: `ota check`, `ota update beta` | `E403` або `E415` | PASS (`E415 version v9.9.9 not found on server`) |
 | 8 | TC-OTA-20 | `ota url http://<IP>:8000/other/fw_1.bin` (прошивка іншого проєкту) | `E407` | PASS (`E407 wrong firmware 'fw_1' (expected 'sentry_fw7')`) |
-| 9 | TC-OTA-25 (а) | Вимкнути Wi-Fi повністю, `ota check` | `E002` (AC-1b) | PASS (`E002 Wi-Fi required`) |
-| 10 | TC-OTA-25 (б) | Wi-Fi є, інтернет відключено (WAN), `ota check` | `E411` | **Відрізняється:** `E402 cannot reach OTA server (stable.txt)`, див. OBS-06 в `bugs/Improvements.md` |
+| 9 | TC-OTA-25 (а) | Managed Wi-Fi controller вимикає AP `SENTRY-HIL`, `ota check` | `E002` автоматично перевіряється в managed Wi-Fi stage | AUTO (managed Wi-Fi) |
+| 10 | TC-OTA-25 (б) | AP залишається активним, upstream/WAN відключається через managed Wi-Fi controller, `ota check` | `E411` у вимозі; фактично `E402`, див. OBS-06; кейс лишається partial | AUTO+MANUAL |
 
 ## Підсумок
 

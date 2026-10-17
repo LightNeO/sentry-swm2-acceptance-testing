@@ -80,7 +80,7 @@
 | # | TC | Дія | Очікується | P/F |
 |---|---|---|---|---|
 | 36 | TC-OTA-15 | Локальний сервер `--drop-at 50`, `ota update` | `E410 download interrupted`, прошивка не змінюється | PASS |
-| 37 | TC-OTA-16 | Локальний сервер `--slow 20`, `ota install <ver> force`; на 10–20% вимкнути **Personal Hotspot** на кілька секунд, увімкнути назад | `W110 wifi connection lost`, автоспроба перепідключення, `E410 download interrupted`, пристрій лишається на поточній версії, працює далі | PASS |
+| 37 | TC-OTA-16 | Локальний сервер `--slow 20`, `ota install <ver> force`; AP `SENTRY-HIL` вимкнути через managed Wi-Fi controller на 10–20%, потім увімкнути | AP fault/recovery — автоматично; slow OTA orchestration і фізичні наслідки — manual до додавання server fixture; `W110`, `E410/E411`, пристрій працює далі | AUTO+MANUAL |
 | 38 | TC-OTA-21 | Після обох помилок вище: `ota check` | Відповідає нормально, канали показує | PASS |
 | | | `ota server default` в кінці | | PASS |
 

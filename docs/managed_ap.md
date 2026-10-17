@@ -93,7 +93,10 @@ python -m pytest tests/wifi -m managed_wifi --run-managed-wifi --keep-logs
 Зараз stage містить два контрольовані сценарії:
 
 - `TC-WF-18`: вимкнення AP, очікування `W110`, повернення AP і reconnect;
-- `TC-OTA-25`: відключення upstream при залишеному AP, перевірка, що Wi-Fi link DUT не зник, а OTA повертає фактичний `E402` або `E411`.
+- `TC-OTA-25(a)`: AP down, `ota check` повертає `E002`;
+- `TC-OTA-25(b)`: відключення upstream при залишеному AP, перевірка, що Wi-Fi link DUT не зник, а OTA повертає фактичний `E402` або `E411`.
+
+`TC-OTA-16` поки що частковий: controller уже замінює ручне вимкнення hotspot, але запуск slow OTA і синхронізація моменту fault із прогресом завантаження ще потребують окремої server fixture.
 
 ## Різні fault-класи
 
