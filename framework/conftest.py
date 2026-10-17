@@ -7,6 +7,7 @@ Unit tests don't touch any of this.
 from __future__ import annotations
 
 import json
+import hashlib
 import os
 import re
 import time
@@ -220,6 +221,8 @@ def _write_transcript(request: pytest.FixtureRequest, device: SwmDevice) -> None
     version = getattr(device, "fw_version", "unknown")
     folder = LOG_DIR / f"v{version}"
     folder.mkdir(parents=True, exist_ok=True)
-    name = re.sub(r"[^\w.-]+", "_", request.node.nodeid.split("::", 1)[-1])
+    raw_name = re.sub(r"[^\w.-]+", "_", request.node.nodeid.split("::", 1)[-1])
+    digest = hashlib.sha1(raw_name.encode(), usedforsecurity=False).hexdigest()[:10]
+    name = f"{raw_name[:100].rstrip('_')}_{digest}"
     header = f"# {request.node.nodeid}\n# fw v{version}  {time.strftime('%Y-%m-%d %H:%M:%S')}\n\n"
     (folder / f"{name}.log").write_text(header + device.transcript.render(), encoding="utf-8")
