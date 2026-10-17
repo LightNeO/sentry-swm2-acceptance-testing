@@ -1,7 +1,7 @@
-"""Stage 2: physical K1-K4 stimulus with UART observation.
+"""Physical K1-K4 stimulus with UART observation.
 
-These tests are intentionally separate from the normal UART suite. They require
-both DUT and the Arduino controller and are never included in a default run.
+These tests are separate from the normal UART suite. They require both DUT and
+the Arduino controller and need --run-hil to execute.
 """
 
 from __future__ import annotations
@@ -141,7 +141,7 @@ def test_k4_k1_combo_enters_emergency_from_verbose(dut, stimulator):
 
 @pytest.mark.hil_tc("HIL-BTN-09")
 @pytest.mark.only_2_1_0
-def test_all_buttons_are_blocked_in_emergency(dut, stimulator):
+def test_k1_k2_k3_are_blocked_in_emergency(dut, stimulator):
     dut.exchange("state 3")
     stimulator.combo(("K4", "K1"), 2200)
     _event(dut, r"\[EMERGENCY\] EMERGENCY SURFACING")

@@ -1,10 +1,10 @@
-# Arduino Nano K1-K4 Stimulator
+# Arduino Nano: стимулятор кнопок K1–K4
 
-This board replaces a human pressing the SENTRY SWM-2 buttons. It is a hardware-in-the-loop (HIL) stimulus source, not a replacement for the ESP32 UART driver.
+Ця плата замінює ручне натискання кнопок SENTRY SWM-2. Це фізичне джерело стимулів для HIL, а не заміна UART-драйвера ESP32.
 
-## Electrical safety
+## Безпека підключення
 
-The ESP32-S3 button inputs are 3.3 V GPIOs with internal pull-ups. The Nano is a 5 V board, so its pins must **not** be driven HIGH into GPIO38-41. With the current 1 kOhm series resistors, this project uses a software open-drain interface: pressed is `OUTPUT/LOW`, released is `INPUT` (high impedance). An optocoupler or NPN/open-collector stage is still the preferred final hardware solution.
+Входи кнопок ESP32-S3 — це GPIO 3.3 V із внутрішньою підтяжкою. Nano працює з 5 V, тому його піни не можна переводити в `HIGH` і подавати цей рівень на GPIO38–41. Зараз використовуються послідовні резистори 1 кОм і програмний open-drain: натиснуто — `OUTPUT/LOW`, відпущено — `INPUT` (high impedance). Для фінального стенду краще використати оптопари або NPN/open-collector каскади.
 
 | Nano output | Channel | ESP32 side |
 |---|---|---|
@@ -13,11 +13,11 @@ The ESP32-S3 button inputs are 3.3 V GPIOs with internal pull-ups. The Nano is a
 | A4 | K3 | GPIO39 through 1 kOhm |
 | A5 | K4 | GPIO38 through 1 kOhm |
 
-Keep the ESP32 3.3 V and Nano 5 V supplies separate when using optocouplers. Connect grounds only if the chosen transistor board explicitly requires a common ground. Add a physical emergency stop and verify continuity with both boards unpowered.
+При використанні оптопар живлення ESP32 3.3 V і Nano 5 V залишаються окремими. Спільний GND потрібен для поточної транзисторної схеми. Перед подачею живлення перевірити continuity на вимкнених платах. Для стенду бажано мати окрему фізичну кнопку аварійної зупинки.
 
-## Firmware
+## Прошивка
 
-The sketch uses 115200 baud and accepts newline-terminated commands:
+Прошивка працює на 115200 baud і приймає команди, завершені переводом рядка:
 
 ```text
 PING
@@ -28,7 +28,7 @@ HOLD K3+K4 2000
 STOP
 ```
 
-Each action holds the selected channels simultaneously, releases them to high impedance, and returns an `OK ...` acknowledgement. Durations are limited to 1-10000 ms to avoid an accidental permanent press.
+Кожна команда одночасно утримує вибрані канали, потім переводить їх у high impedance і повертає підтвердження `OK ...`. Тривалість обмежена 1–10000 мс, щоб випадково не залишити кнопку натиснутою.
 
 Build/upload with PlatformIO:
 
@@ -37,22 +37,22 @@ cd hardware/button_stimulator
 pio run --target upload --upload-port /dev/ttyUSB0
 ```
 
-Replace `/dev/ttyUSB0` with the actual Nano port. The command above intentionally has no hidden ESP32 assumptions; test the Nano with `STATUS` before connecting the DUT.
-For Nano clones with the old bootloader, use the `nanoatmega328old` environment:
+Заміни `/dev/ttyUSB0` на фактичний порт Nano. Перед підключенням DUT перевір Nano командою `STATUS`.
+Для Nano-клонів зі старим bootloader використовується середовище `nanoatmega328old`:
 
 ```bash
 pio run -e nanoatmega328old --target upload --upload-port /dev/ttyUSB0
 ```
 
-This particular CH340 Nano reported the `ATmega328P` signature but required the newer avrdude package. Its working upload environment is `nanoatmega328avrdude8`:
+Цей Nano з CH340 повернув signature `ATmega328P`, але для upload йому знадобився новий пакет avrdude. Робоче середовище — `nanoatmega328avrdude8`:
 
 ```bash
 pio run -e nanoatmega328avrdude8 --target upload --upload-port /dev/ttyUSB0
 ```
 
-## Pytest HIL tests
+## HIL-тести
 
-Set the Nano port and run only the new tests:
+Вкажи порт Nano і запусти окрему HIL-стадію:
 
 ```bash
 export BUTTON_STIM_PORT=/dev/ttyUSB0
@@ -60,4 +60,4 @@ cd framework
 python -m pytest tests/hil -m hil_stage --run-hil
 ```
 
-The existing UART DUT port remains configured by `SWM_PORT` or the existing VID discovery. The test logs therefore contain both the ESP32 response and deterministic stimulus timing.
+Порт ESP32 задається через `SWM_PORT` або знаходиться наявним VID-механізмом. У логах зберігаються відповіді ESP32 і результати детермінованих натискань.

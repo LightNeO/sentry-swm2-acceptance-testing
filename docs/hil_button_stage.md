@@ -103,15 +103,15 @@ python -m pytest tests/hil/test_button_stage.py -m hil_stage --run-hil -k k3_k4
 
 | Існуючий кейс | Поточний статус | HIL-покриття |
 |---|---|---|
-| `TC-BTN-01` | автоматизується | K1 press і UART beacon event; колір LED не доводиться |
+| `TC-BTN-01` | частково автоматизується | K1 press і UART beacon event; колір LED не доводиться |
 | `TC-BTN-02` | автоматизується частково | K2 press і valve event; фізичне реле/діод потребують GPIO-аналізатора |
 | `TC-BTN-03` | автоматизується частково | K3 start/stop і UART sonar; відстань і фізичні collision потребують distance stimulator |
-| `TC-BTN-04` | автоматизується | 2.1.0 `E099`, 2.3.0 K4 ack/PANIC; PANIC потребує Guard/sonar передумови |
+| `TC-BTN-04` | частково автоматизується | 2.1.0 `E099`, 2.3.0 K4 ack; PANIC потребує Guard/sonar передумови |
 | `TC-BTN-05` | автоматизується | K1+K2, K2+K3, K3+K4, K4+K1 з перевіркою стану |
 | `TC-BTN-06` | автоматизується | K4+K1 з NORMAL і DEBUG дає `E302`; з VERBOSE має входити в EMERGENCY |
 | `TC-BTN-07` | автоматизується | кнопки без login дають `E003`; реалізовано як `HIL-BTN-07` |
 | `TC-BTN-08` | частково автоматизується | точні press/hold/debounce boundary; поріг 1.5 с треба підтвердити на DUT перед жорстким assert |
-| `TC-BTN-09` | автоматизується | K1-K3 в EMERGENCY дають `E005`; K4 має окрему Guard/Alert поведінку |
+| `TC-BTN-09` | автоматизується для 2.1.0 | K1–K3 в EMERGENCY дають `E005`; K4 має окрему Guard/Alert поведінку |
 | `TC-GD-02/03/04/06/09` | не лише кнопковий stage | UART timing можна автоматизувати, але потрібен distance stimulator |
 | `TC-GD-07` | частково автоматизується | K4 hold точний, але INTRUSION/ARMED потребують sonar stimulus |
 | `TC-GD-11/12` | окремий regression gate | Guard PIN counter; повинен відтворювати/підтверджувати `BUG-010` |
@@ -136,7 +136,7 @@ python -m pytest tests/hil/test_button_stage.py -m hil_stage --run-hil -k k3_k4
 | `HIL-BTN-10` | K4+K1 2 с з VERBOSE -> EMERGENCY |
 | `HIL-GD-07` | Guard ARMED через UART/sonar precondition, K4 hold -> PANIC/ALARM; object placement remains physical precondition |
 
-Це intentionally окремі IDs, а не записи в основній `docs/results.json`: генератор трасабіліті знає про 222 початкові кейси, а HIL evidence має власну стадію і не повинен створювати «осиротілі» TC.
+Ці ID навмисно окремі й не записуються в основний `docs/results.json`. Генератор трасабіліті працює з 222 початковими кейсами, а HIL має власні докази виконання і не повинен створювати «осиротілі» TC.
 
 ## Межі та наступні кроки
 
