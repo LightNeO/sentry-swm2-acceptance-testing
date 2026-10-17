@@ -7,14 +7,23 @@ import pytest
 from drivers.managed_ap import ManagedAp
 
 
-@pytest.fixture
-def managed_ap() -> ManagedAp:
+@pytest.fixture(autouse=True)
+def wifi_baseline(device_session, settings) -> ManagedAp:
     controller = ManagedAp()
     controller.ensure_baseline()
+    if not device_session.link_up():
+        device_session.ensure_wifi("known network", settings["ssid"], settings["wifi_password"])
     try:
         yield controller
     finally:
         controller.cleanup()
+        if not device_session.link_up():
+            device_session.ensure_wifi("known network", settings["ssid"], settings["wifi_password"])
+
+
+@pytest.fixture
+def managed_ap(wifi_baseline: ManagedAp) -> ManagedAp:
+    return wifi_baseline
 
 
 def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:

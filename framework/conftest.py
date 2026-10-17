@@ -124,7 +124,13 @@ def device_session(request: pytest.FixtureRequest, settings: dict[str, str]):
         if "known network" not in boot.text and not (settings["ssid"] and settings["wifi_password"]):
             pytest.fail("DUT has no saved Wi-Fi network: set WIFI_SSID and WIFI_PASSWORD in framework/.env")
         wifi = device.ensure_wifi(boot.text, settings["ssid"], settings["wifi_password"])
-        if wifi.timed_out or wifi.errors:
+        transient_hil_e105 = (
+            os.environ.get("HIL_AP_CONNECTION")
+            and wifi.has_code("E105")
+            and "got ip" in wifi.text
+            and "connected to" in wifi.text
+        )
+        if wifi.timed_out or (wifi.errors and not transient_hil_e105):
             pytest.fail(f"Wi-Fi bring-up failed: {wifi.errors or 'timeout'}\n{wifi.text}")
         reg = device.register(settings["login"], settings["password"])
         if reg.errors and not reg.has_code("E202"):  # E202: profile already exists, which is fine

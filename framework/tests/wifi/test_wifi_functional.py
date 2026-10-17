@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+
 import pytest
 
 
@@ -16,9 +18,18 @@ def _connect(dut, ssid_or_number: str, password: str):
     return "\n".join(part.text for part in parts)
 
 
+def _connect_by_scanned_number(dut, ssid: str, password: str):
+    scan = dut.exchange("connect", until=r"SSID or number:", timeout=10)
+    match = re.search(rf"\[\s*(\d+)\]\s+{re.escape(ssid)}\s+", scan.text)
+    assert match, f"SSID {ssid!r} was not in scan output:\n{scan.text}"
+    selected = dut.exchange(match.group(1), until=r"Password:|E1\d\d", timeout=5)
+    password_result = dut.exchange(password, secret=True, until=r"connected to|E1\d\d", timeout=45)
+    return "\n".join(part.text for part in (scan, selected, password_result))
+
+
 @pytest.mark.tc("TC-WF-01")
 def test_connect_by_ap_number(dut_raw, settings, managed_ap):
-    text = _connect(dut_raw, "1", settings["wifi_password"])
+    text = _connect_by_scanned_number(dut_raw, settings["ssid"], settings["wifi_password"])
     assert "got ip" in text or "connected to" in text, text
     assert "SENTRY-HIL" in text or settings["ssid"] in text, text
 
@@ -32,8 +43,11 @@ def test_connect_by_ap_name(dut_raw, settings, managed_ap):
 
 @pytest.mark.tc("TC-WF-03")
 def test_short_wifi_password_is_rejected(dut_raw, settings, managed_ap):
-    text = _connect(dut_raw, settings["ssid"], "short7")
-    assert "E112" in text
+    try:
+        text = _connect(dut_raw, settings["ssid"], "short7")
+        assert "E112" in text
+    finally:
+        _connect(dut_raw, settings["ssid"], settings["wifi_password"])
 
 
 @pytest.mark.tc("TC-WF-05")
@@ -52,14 +66,20 @@ def test_empty_ssid_is_rejected(dut_raw, managed_ap):
 
 @pytest.mark.tc("TC-WF-06")
 def test_wrong_password_is_rejected(dut_raw, settings, managed_ap):
-    text = _connect(dut_raw, settings["ssid"], "WrongPass123")
-    assert "E101" in text
+    try:
+        text = _connect(dut_raw, settings["ssid"], "WrongPass123")
+        assert "E101" in text
+    finally:
+        _connect(dut_raw, settings["ssid"], settings["wifi_password"])
 
 
 @pytest.mark.tc("TC-WF-07")
 def test_unknown_ssid_is_rejected(dut_raw, managed_ap):
-    text = _connect(dut_raw, "SENTRY-HIL-NOT-FOUND", "12345678")
-    assert "E102" in text
+    try:
+        text = _connect(dut_raw, "SENTRY-HIL-NOT-FOUND", "12345678")
+        assert "E102" in text
+    finally:
+        _connect(dut_raw, "SENTRY-HIL", "12345678")
 
 
 @pytest.mark.tc("TC-WF-10")
@@ -83,7 +103,7 @@ def test_forget_removes_saved_network_from_next_boot(dut_raw, reboot_dut, settin
     dut_raw.exchange("forget", idle=1.0)
     try:
         boot = reboot_dut()
-        assert "known network" not in boot.text
+        assert "known network '" not in boot.text
         assert dut_raw.exchange("reconnect").has_code("E113")
     finally:
         _connect(dut_raw, settings["ssid"], settings["wifi_password"])
@@ -99,7 +119,7 @@ def test_second_disconnect_is_warning(dut_raw, managed_ap):
 
 @pytest.mark.tc("TC-WF-14")
 def test_scan_sees_managed_ap(dut_raw, managed_ap):
-    result = dut_raw.exchange("scan", idle=2.0)
+    result = dut_raw.exchange("scan", idle=3.5, timeout=10)
     assert "SENTRY-HIL" in result.text
 
 

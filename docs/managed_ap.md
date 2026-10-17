@@ -95,8 +95,8 @@ python -m pytest tests/wifi -m managed_wifi --run-managed-wifi --keep-logs
 - `TC-WF-01`–`TC-WF-07`: connect за номером/назвою, password/SSID негативні сценарії і saved network;
 - `TC-WF-10`–`TC-WF-17`: reconnect, forget, disconnect, scan, `net`, ping і time;
 - `TC-WF-18`: вимкнення AP, очікування `W110`, повернення AP і reconnect;
-- `TC-OTA-25(a)`: AP down, `ota check` повертає `E002`;
-- `TC-OTA-25(b)`: відключення upstream при залишеному AP, перевірка, що Wi-Fi link DUT не зник, а OTA повертає фактичний `E402` або `E411`.
+- `TC-OTA-25(a)`: AP down, `ota check` фактично повертає `E411`; стара вимога очікує `E002`;
+- `TC-OTA-25(b)`: відключення upstream при залишеному AP, перевірка, що Wi-Fi link DUT не зник, а OTA фіксує фактичний `E002/E402/E411`.
 - `TC-OTA-23`, `TC-OTA-26`, `TC-OTA-31`: недоступний OTA server/path і custom server profile.
 
 `TC-OTA-16` поки що частковий: controller уже замінює ручне вимкнення hotspot, але запуск slow OTA і синхронізація моменту fault із прогресом завантаження ще потребують окремої server fixture.
