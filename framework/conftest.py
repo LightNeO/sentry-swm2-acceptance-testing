@@ -44,6 +44,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     parser.addoption("--keep-logs", action="store_true", help="write a transcript for every test, not only failed ones")
     parser.addoption("--record", action="store_true", help="record PASS/FAIL per TC into docs/results.json (for traceability)")
     parser.addoption("--run-hil", action="store_true", help="run the physical Arduino/DUT HIL stage")
+    parser.addoption("--run-managed-wifi", action="store_true", help="run the destructive NetworkManager Wi-Fi stage")
 
 
 def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
@@ -54,6 +55,8 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
     for item in items:
         if item.get_closest_marker("hil_stage"):
             item.add_marker(skip_hil)
+        if item.get_closest_marker("managed_wifi") and not config.getoption("--run-managed-wifi"):
+            item.add_marker(pytest.mark.skip(reason="managed Wi-Fi stage requires --run-managed-wifi"))
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)

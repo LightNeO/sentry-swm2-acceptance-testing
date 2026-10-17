@@ -118,7 +118,7 @@ python -m pytest tests/hil/test_button_stage.py -m hil_stage --run-hil -k k3_k4
 | `TC-LM-04/10/22` | manual | потрібна камера/фотодатчик для RGB та патернів |
 | `TC-RL-01/08/15`, `TC-AL-11` | частково | UART + Arduino; фізичний GPIO8/діод потребують logic analyzer |
 | `TC-DS-08/10/14/15/16/17` | manual/окремий HIL | потрібен керований стимулятор HC-SR04 |
-| `TC-WF-18`, `TC-OTA-16/25` | manual/окремий HIL | потрібне керування AP/WAN, Arduino не допомагає |
+| `TC-WF-18`, `TC-OTA-16/25` | окрема managed Wi-Fi stage | керування AP/WAN описане в `docs/managed_ap.md`, Arduino для цих кейсів не потрібен |
 
 Статус `автоматизується` означає, що stimulus і DUT assertion можуть бути машинними. Він не означає, що LED, звук реле або геометрія відстані перевірені.
 

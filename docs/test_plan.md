@@ -39,8 +39,8 @@
 | Сигнальний вогонь | вбудований RGB LED | 48 |
 | Панель оператора | кнопки K1–K4 | 41, 40, 39, 38 |
 | Консоль | USB-UART FTDI FT232R (VID:PID 0403:6001), 115200 8N1 | 43/44 |
-| Мережа | Wi-Fi 2.4 GHz з інтернетом | — |
-| Хост | Windows 11 Pro, Python 3.12.4, pyserial 3.5, pytest 9.1.1, esptool 5.3.1 | — |
+| Мережа | USB dongle `wlp0s21f0u2` → `NeO`; вбудований `wlp1s0` → AP `SENTRY-HIL`, 2.4 GHz | — |
+| Хост | Linux, Python, pyserial, pytest, esptool, NetworkManager, dnsmasq | — |
 
 Порт не жорстко прописується: драйвер шукає його за VID/PID (`ESP32_VID=0403`).
 
@@ -54,6 +54,7 @@
 | Збереження (persistence) | Reboot / OTA | pytest, маркер `persistence` |
 | Регресія | Повторний прогін усього на 2.3.0 | той самий набір, `--fw 2.3.0` |
 | OTA | Успіх, rollback, помилки | pytest + локальний `ota_server.py`, маркер `ota` |
+| Managed Wi-Fi | AP down, upstream/WAN down, recovery | `framework/drivers/managed_ap.py`, маркер `managed_wifi`, прапорець `--run-managed-wifi` |
 | Фізичні (ручні) | LED, діод, реле, кнопки, HC-SR04 | чек-лист, evidence — фото/відео |
 | Exploratory / security | Приховані команди, секрети | ручний + `strings` по бінарнику |
 
@@ -64,6 +65,7 @@
 3. Кожен баг відтворюється ≥3 рази, до звіту додається лог.
 4. Перед кожним тестом відомий початковий стан (reboot → logout → NORMAL), інакше результати не порівнюються.
 5. Пароль Wi-Fi у логах замінюється на `***` автоматично (драйвер).
+6. AP loss і upstream loss перевіряються окремо: вимкнення `SENTRY-HIL` не можна трактувати як WAN loss.
 
 ## 4. Ризики і пріоритети
 
@@ -83,7 +85,7 @@
 
 ## 5. Критерії входу / виходу
 
-**Вхід:** плата прошита `v2.1.0` після `erase-flash`; boot log містить `fw v2.1.0` і `ready. state 1 NORMAL`; Wi-Fi доступний; всі кнопки/датчик/реле/діод підключені та перевірені.
+**Вхід:** плата прошита `v2.1.0` після `erase-flash`; boot log містить `fw v2.1.0` і `ready. state 1 NORMAL`; AP `SENTRY-HIL` активний; upstream `NeO` підключений через USB dongle; всі кнопки/датчик/реле/діод підключені та перевірені.
 
 **Вихід:**
 - усі P1-кейси виконані на обох версіях;
@@ -111,6 +113,7 @@ Severity: Blocker / Critical / Major / Minor / Trivial. Priority: P1–P3 (за 
 | Пароль | `Pass1234` (6–32) |
 | Новий пароль для `passwd` | `NewPass99` |
 | Wi-Fi SSID / пароль | з `.env`, у логах → `***` |
+| HIL AP | `SENTRY-HIL`, керується NetworkManager; upstream — окремий профіль `NeO` |
 | PIN Guard | 1234 (за замовч.), тестовий 4321 |
 
 Тестові кроки відтворюють межі: див. колонку «Межі» в `requirements.md`.
