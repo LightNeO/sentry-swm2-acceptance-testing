@@ -2,31 +2,11 @@
 
 from __future__ import annotations
 
-import os
 import time
 
 import pytest
 
-from drivers.managed_ap import ManagedAp
-
-
-pytestmark = [
-    pytest.mark.managed_wifi,
-    pytest.mark.skipif(
-        not os.environ.get("HIL_AP_CONNECTION"),
-        reason="set HIL_AP_CONNECTION to run the destructive managed Wi-Fi stage",
-    ),
-]
-
-
-@pytest.fixture
-def managed_ap():
-    controller = ManagedAp()
-    controller.ensure_baseline()
-    try:
-        yield controller
-    finally:
-        controller.cleanup()
+pytestmark = pytest.mark.managed_wifi
 
 
 @pytest.mark.tc("TC-WF-18")

@@ -107,7 +107,7 @@ export HIL_AP_CONNECTION=SENTRY-HIL
 python -m pytest tests/wifi -m managed_wifi --run-managed-wifi --keep-logs
 ```
 
-`TC-WF-18` перевіряє AP loss і recovery. `TC-OTA-25` перевіряє, що при upstream loss AP та Wi-Fi link DUT залишаються активними. Перевірки unsupported security, DHCP/no-DHCP, слабкого сигналу та NTP fault не входять до поточного scope.
+`TC-WF-01`–`TC-WF-07` і `TC-WF-10`–`TC-WF-17` перевіряють connect/reconnect lifecycle через `SENTRY-HIL`. `TC-WF-18` перевіряє AP loss і recovery. `TC-OTA-23/25/26/31` перевіряють network faults та OTA server profile. `TC-OTA-16` поки partial: AP fault автоматизований, slow OTA fixture ще не доданий. Перевірки unsupported security, DHCP/no-DHCP, слабкого сигналу та NTP fault не входять до поточного scope.
 
 ### Що тепер автоматизовано
 
