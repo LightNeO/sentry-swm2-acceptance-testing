@@ -43,6 +43,17 @@ _load_env()
 def pytest_addoption(parser: pytest.Parser) -> None:
     parser.addoption("--keep-logs", action="store_true", help="write a transcript for every test, not only failed ones")
     parser.addoption("--record", action="store_true", help="record PASS/FAIL per TC into docs/results.json (for traceability)")
+    parser.addoption("--run-hil", action="store_true", help="run the physical Arduino/DUT HIL stage")
+
+
+def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
+    """Keep physical HIL tests out of normal and CI-free pytest runs."""
+    if config.getoption("--run-hil"):
+        return
+    skip_hil = pytest.mark.skip(reason="physical HIL stage requires --run-hil")
+    for item in items:
+        if item.get_closest_marker("hil_stage"):
+            item.add_marker(skip_hil)
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)

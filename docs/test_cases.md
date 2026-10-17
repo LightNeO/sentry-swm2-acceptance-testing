@@ -231,7 +231,7 @@
 | TC-GD-04 | GD-2a | INTRUSION; нічого не робити 15 с | Перехід в `ALARM` | 23 | A+M |
 | TC-GD-05 | GD-2b | **Межі zone**: 9, 10, 200, 201 | 9, 201 → `E808`; нова зона діє | 23 | A |
 | TC-GD-06 | GD-3 | `guard panic` | ALARM: alert CRITICAL, реле ON, LED червоний/синій, нагадування кожні 10 с | 23 | A+M |
-| TC-GD-07 | GD-3 | Утримати K4 1.5 с | PANIC → ALARM | 23 | M |
+| TC-GD-07 | GD-3 | Утримати K4 1.5 с | UART: PANIC → ALARM; manual: підтвердити фізичний Guard/LED стан | 23 | A+M |
 | TC-GD-08 | GD-3 | 3 неправильні PIN | `E803 Attempts: 1/3`, `2/3`, на 3-й — ALARM | 23 | A |
 | TC-GD-09 | GD-3 | 3 виміри без ехо (закрити датчик) | ALARM (tamper) | 23 | A+M |
 | TC-GD-10 | GD-4a | ALARM → `guard disarm 1234` | ALARM зупинено, зняття з охорони | 23 | A |
@@ -262,7 +262,7 @@
 | TC-AL-08 | AL-4a | Є непідтверджений → `alert clear` | `E855` | 23 | A |
 | TC-AL-09 | AL-4a | Усі підтверджені → `alert clear` | Список порожній | 23 | A |
 | TC-AL-10 | AL-4b | `alert test foo`, `alert test` | `E854` | 23 | A |
-| TC-AL-11 | AL-5 | У NORMAL: `alert test critical` | Реле ON, стан → VERBOSE | 23 | A+M |
+| TC-AL-11 | AL-5 | У NORMAL: `alert test critical` | Auto: Alert/state/relay логіка; manual: фізичне клацання реле та LED | 23 | A+M |
 | TC-AL-12 | AL-5 | У DEBUG: `alert test critical` | Реле ON, стан → VERBOSE | 23 | A |
 | TC-AL-13 | AL-5 | У EMERGENCY: `alert test critical` | Не змінює стан EMERGENCY (виняток) | 23 | A |
 | TC-AL-14 | ST-3a | У EMERGENCY: `alert list` | Працює | 23 | A |
@@ -271,15 +271,15 @@
 
 | TC | Req | Назва і кроки | Очікуваний результат | Ver | Тип |
 |---|---|---|---|---|---|
-| TC-BTN-01 | BTN-1 | K1 press ×2; K1 hold 1.5 с ×3 | Лампа on/off; наступний колір | 21 | M |
-| TC-BTN-02 | BTN-2 | K2 press ×2; K2 hold 1.5 с | Реле on/off; імпульс 1 с | 21 | M |
-| TC-BTN-03 | BTN-3 | K3 press; чекати; ще K3 | Виміри 30 с кожні 500 мс; повторне — стоп | 21 | M |
-| TC-BTN-04 | BTN-4 | K4 press (alert є / нема); K4 hold 1.5 с | 2.1.0 → `E099`; 2.3.0 → ack / PANIC | 21 | M |
-| TC-BTN-05 | BTN-5 | K1+K2, K2+K3, K3+K4, K4+K1 утримати 2 с | Стани 1, 2, 3, 4(з 3) | 21 | M |
-| TC-BTN-06 | BTN-5 | K4+K1 з 1, 2 | `E302` | 21 | M |
-| TC-BTN-07 | BTN-6 | Без login натиснути K1–K3 | `E003` | 21 | M |
-| TC-BTN-08 | BTN-1 | Короткі натискання (<1.5 с) vs утримання; дребезг (швидкі 5 натискань) | Коректна класифікація; без подвійних спрацювань | 21 | M |
-| TC-BTN-09 | ST-3e | Кнопки в EMERGENCY | `E005 buttons blocked in EMERGENCY` | 21 | M |
+| TC-BTN-01 | BTN-1 | K1 press ×2; K1 hold 1.5 с ×3 | Auto: UART lamp events/колір; manual: фактичний RGB LED | 21 | A+M |
+| TC-BTN-02 | BTN-2 | K2 press ×2; K2 hold 1.5 с | Auto: UART valve/pulse; manual: фізичне реле та діод | 21 | A+M |
+| TC-BTN-03 | BTN-3 | K3 press; чекати; ще K3 | Auto: start/stop та UART timing; manual: відстань/collision без sonar stimulator | 21 | A+M |
+| TC-BTN-04 | BTN-4 | K4 press (alert є / нема); K4 hold 1.5 с | Auto: 2.1.0 `E099`, 2.3.0 ack; manual/partial: PANIC потребує Guard/sonar setup | 21 | A+M |
+| TC-BTN-05 | BTN-5 | K1+K2, K2+K3, K3+K4, K4+K1 утримати 2 с | Автоматично: стани 1, 2, 3, 4(з 3) | 21 | A |
+| TC-BTN-06 | BTN-5 | K4+K1 з 1, 2 | Автоматично: `E302`, state не змінюється | 21 | A |
+| TC-BTN-07 | BTN-6 | Без login натиснути K1–K4 | Автоматично: `E003` для кожної кнопки | 21 | A |
+| TC-BTN-08 | BTN-1 | Короткі натискання (<1.5 с) vs утримання; дребезг (швидкі 5 натискань) | Auto: timing/classification; manual: справжній electrical bounce ще не імітується | 21 | A+M |
+| TC-BTN-09 | ST-3e | Кнопки в EMERGENCY | Автоматично для 2.1.0: `E005 buttons blocked in EMERGENCY` | 21 | A |
 
 ## 12. Система і NFR
 

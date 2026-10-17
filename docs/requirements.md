@@ -31,7 +31,7 @@
 | ST-3b | Інша команда в EMERGENCY → E005/E001 і температура драйвера росте | 21 | P2 | A | |
 | ST-3c | При 95 °C — аварійний reboot | 21 | P2 | A | довго, емпірично |
 | ST-3d | Вихід з EMERGENCY лише reboot (`E304`) | 21 | P1 | A | |
-| ST-3e | Кнопки в EMERGENCY → `E005 buttons blocked in EMERGENCY` | 21 | P2 | M | |
+| ST-3e | Кнопки в EMERGENCY → `E005 buttons blocked in EMERGENCY` | 21 | P2 | A | |
 | ST-4a | Повторний перехід у поточний стан → `W303` | 21 | P3 | A | |
 | ST-4b | `logout` повертає DEBUG/VERBOSE у NORMAL | 21 | P2 | A | |
 | ST-4c | Після reboot завжди NORMAL | 21 | P1 | A | |
@@ -184,12 +184,12 @@
 
 | ID | Вимога | Ver | P | Тип |
 |---|---|---|---|---|
-| BTN-1 | K1: press — лампа on/off, hold 1.5 с — наступний колір | 21 | P2 | M |
-| BTN-2 | K2: press — реле on/off, hold 1.5 с — імпульс 1 с | 21 | P2 | M |
-| BTN-3 | K3: press — виміри 30 с кожні 500 мс; ще раз — стоп | 21 | P2 | M |
-| BTN-4 | K4: press — ack alert, hold 1.5 с — PANIC (у 2.1.0 → `E099`) | 23 | P2 | M |
-| BTN-5 | Комбінації hold 2 с: K1+K2 → 1, K2+K3 → 2, K3+K4 → 3, K4+K1 → 4 (лише з 3, ST-2) | 21/23 | P2 | M |
-| BTN-6 | Кнопка без login → `E003` | 21 | P2 | M |
+| BTN-1 | K1: press — лампа on/off, hold 1.5 с — наступний колір | 21 | P2 | A+M |
+| BTN-2 | K2: press — реле on/off, hold 1.5 с — імпульс 1 с | 21 | P2 | A+M |
+| BTN-3 | K3: press — виміри 30 с кожні 500 мс; ще раз — стоп | 21 | P2 | A+M |
+| BTN-4 | K4: press — ack alert, hold 1.5 с — PANIC (у 2.1.0 → `E099`) | 23 | P2 | A+M |
+| BTN-5 | Комбінації hold 2 с: K1+K2 → 1, K2+K3 → 2, K3+K4 → 3, K4+K1 → 4 (лише з 3, ST-2) | 21/23 | P2 | A |
+| BTN-6 | Кнопка без login → `E003` | 21 | P2 | A |
 
 ## 12. Система
 

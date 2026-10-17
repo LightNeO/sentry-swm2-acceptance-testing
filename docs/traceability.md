@@ -29,7 +29,7 @@
 | ST-3b | 21 | P2 | A | TC-ST-10 | FAIL | FAIL | BUG-007 |
 | ST-3c | 21 | P2 | A | TC-ST-11 | PASS | PASS | — |
 | ST-3d | 21 | P1 | A | TC-ST-12 | PASS | PASS | — |
-| ST-3e | 21 | P2 | M | TC-ST-13, TC-BTN-09 | PASS | — | — |
+| ST-3e | 21 | P2 | A | TC-ST-13, TC-BTN-09 | PASS | — | — |
 | ST-4a | 21 | P3 | A | TC-ST-14 | PASS | PASS | — |
 | ST-4b | 21 | P2 | A | TC-ST-15 | PASS | PASS | — |
 | ST-4c | 21 | P1 | A | TC-ST-16 | PASS | PASS | — |
@@ -132,12 +132,12 @@
 | AL-4a | 23 | P2 | A | TC-AL-08, TC-AL-09 | — | PASS | — |
 | AL-4b | 23 | P2 | A | TC-AL-10 | — | PASS | — |
 | AL-5 | 23 | P1 | A+M | TC-AL-11, TC-AL-12, TC-AL-13 | — | PARTIAL | — |
-| BTN-1 | 21 | P2 | M | TC-BTN-01, TC-BTN-08 | PASS | PARTIAL | — |
-| BTN-2 | 21 | P2 | M | TC-BTN-02 | PASS | PASS | — |
-| BTN-3 | 21 | P2 | M | TC-BTN-03 | PASS | PASS | — |
-| BTN-4 | 23 | P2 | M | TC-BTN-04 | PASS | PASS | — |
-| BTN-5 | 21/23 | P2 | M | TC-BTN-05, TC-BTN-06 | PASS | PASS | — |
-| BTN-6 | 21 | P2 | M | TC-BTN-07 | PASS | — | — |
+| BTN-1 | 21 | P2 | A+M | TC-BTN-01, TC-BTN-08 | PASS | PARTIAL | — |
+| BTN-2 | 21 | P2 | A+M | TC-BTN-02 | PASS | PASS | — |
+| BTN-3 | 21 | P2 | A+M | TC-BTN-03 | PASS | PASS | — |
+| BTN-4 | 23 | P2 | A+M | TC-BTN-04 | PASS | PASS | — |
+| BTN-5 | 21/23 | P2 | A | TC-BTN-05, TC-BTN-06 | PASS | PASS | — |
+| BTN-6 | 21 | P2 | A | TC-BTN-07 | PASS | — | — |
 | SYS-1 | 21 | P3 | A | TC-SYS-01 | PASS | PASS | — |
 | SYS-2 | 21 | P2 | A | TC-SYS-02 | — | — | — |
 | SYS-3 | 21 | P3 | A | TC-SYS-03 | — | — | — |

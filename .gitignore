@@ -4,3 +4,5 @@ __pycache__/
 .venv/
 fw_7/tools/server_files/
 .env
+.pio/
+logs/auto/

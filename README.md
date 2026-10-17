@@ -32,6 +32,10 @@
 
 Python, pytest, pyserial, esptool. Власний UART-драйвер з парсером протоколу і фейковим транспортом для тестування самого фреймворку без заліза. Локальний HTTP-сервер для емуляції збоїв OTA. Mermaid-діаграма теоретичного HIL-стенда з логічним аналізатором і стимуляторами — `docs/hil_stand.md`.
 
+## Апаратна автоматизація кнопок
+
+У цій копії додано HIL-стимулятор на Arduino Nano для K1–K4. Nano отримує команди через USB serial, а оптопари або open-collector-каскади імітують замикання кнопок на GND без подачі 5 V на GPIO ESP32. Прошивка та схема — `hardware/button_stimulator/`, Python-драйвер і окрема HIL-стадія — `framework/drivers/button_stimulator.py`, `framework/tests/hil/` та `docs/hil_button_stage.md`.
+
 ## Де що шукати (розділи звіту за HW-17)
 
 | Розділ | Де |
