@@ -7,6 +7,7 @@ Unit tests don't touch any of this.
 from __future__ import annotations
 
 import json
+import hashlib
 import os
 import re
 import time
@@ -43,6 +44,20 @@ _load_env()
 def pytest_addoption(parser: pytest.Parser) -> None:
     parser.addoption("--keep-logs", action="store_true", help="write a transcript for every test, not only failed ones")
     parser.addoption("--record", action="store_true", help="record PASS/FAIL per TC into docs/results.json (for traceability)")
+    parser.addoption("--run-hil", action="store_true", help="run the physical Arduino/DUT HIL stage")
+    parser.addoption("--run-managed-wifi", action="store_true", help="run the destructive NetworkManager Wi-Fi stage")
+
+
+def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
+    """Keep physical HIL tests out of normal and CI-free pytest runs."""
+    if config.getoption("--run-hil"):
+        return
+    skip_hil = pytest.mark.skip(reason="physical HIL stage requires --run-hil")
+    for item in items:
+        if item.get_closest_marker("hil_stage"):
+            item.add_marker(skip_hil)
+        if item.get_closest_marker("managed_wifi") and not config.getoption("--run-managed-wifi"):
+            item.add_marker(pytest.mark.skip(reason="managed Wi-Fi stage requires --run-managed-wifi"))
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
@@ -110,7 +125,13 @@ def device_session(request: pytest.FixtureRequest, settings: dict[str, str]):
         if "known network" not in boot.text and not (settings["ssid"] and settings["wifi_password"]):
             pytest.fail("DUT has no saved Wi-Fi network: set WIFI_SSID and WIFI_PASSWORD in framework/.env")
         wifi = device.ensure_wifi(boot.text, settings["ssid"], settings["wifi_password"])
-        if wifi.timed_out or wifi.errors:
+        transient_hil_e105 = (
+            os.environ.get("HIL_AP_CONNECTION")
+            and wifi.has_code("E105")
+            and "got ip" in wifi.text
+            and "connected to" in wifi.text
+        )
+        if wifi.timed_out or (wifi.errors and not transient_hil_e105):
             pytest.fail(f"Wi-Fi bring-up failed: {wifi.errors or 'timeout'}\n{wifi.text}")
         reg = device.register(settings["login"], settings["password"])
         if reg.errors and not reg.has_code("E202"):  # E202: profile already exists, which is fine
@@ -200,6 +221,8 @@ def _write_transcript(request: pytest.FixtureRequest, device: SwmDevice) -> None
     version = getattr(device, "fw_version", "unknown")
     folder = LOG_DIR / f"v{version}"
     folder.mkdir(parents=True, exist_ok=True)
-    name = re.sub(r"[^\w.-]+", "_", request.node.nodeid.split("::", 1)[-1])
+    raw_name = re.sub(r"[^\w.-]+", "_", request.node.nodeid.split("::", 1)[-1])
+    digest = hashlib.sha1(raw_name.encode(), usedforsecurity=False).hexdigest()[:10]
+    name = f"{raw_name[:100].rstrip('_')}_{digest}"
     header = f"# {request.node.nodeid}\n# fw v{version}  {time.strftime('%Y-%m-%d %H:%M:%S')}\n\n"
     (folder / f"{name}.log").write_text(header + device.transcript.render(), encoding="utf-8")
