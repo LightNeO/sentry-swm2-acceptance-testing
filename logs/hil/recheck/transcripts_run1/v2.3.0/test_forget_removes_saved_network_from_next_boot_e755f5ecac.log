@@ -1,22 +1,22 @@
 # tests/wifi/test_wifi_functional.py::test_forget_removes_saved_network_from_next_boot
-# fw v2.3.0  2026-10-19 13:58:12
+# fw v2.3.0  2026-10-19 14:19:52
 
 [    0.00s] TX: forget
 [    1.13s] RX:
-I (67800) sentry: [LINK] known network forgotten
+I (78820) sentry: [LINK] known network forgotten
 [    1.13s] TX: reboot
-[    5.07s] RX:
+[    5.10s] RX:
 reboot
-I (68920) sentry: rebooting in 3...
-I (69920) sentry: rebooting in 2...
-I (70920) sentry: rebooting in 1...
-I (71920) wifi:state: run -> init (0x0)
-I (71920) wifi:pm stop, total sleep time: 33476331 us / 38527771 us
+I (79940) sentry: rebooting in 3...
+I (80940) sentry: rebooting in 2...
+I (81940) sentry: rebooting in 1...
+I (82940) wifi:state: run -> init (0x0)
+I (82940) wifi:pm stop, total sleep time: 47555117 us / 55812677 us
 
-I (71920) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
-I (71920) wifi:flush txq
-I (71920) wifi:stop sw txq
-I (71930) wifi:lmac stop hw txq
+I (82940) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (82980) wifi:flush txq
+I (82980) wifi:stop sw txq
+I (82980) wifi:lmac stop hw txq
 ESP-ROM:esp32s3-20210327
 Build:Mar 27 2021
 rst:0xc (RTC_SW_CPU_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
@@ -76,7 +76,7 @@ I (392) sleep_gpio: Configure to isolate all GPIO pins in sleep state
 I (398) sleep_gpio: Enable automatic switching of GPIO sleep configuration
 I (405) main_task: Started on CPU0
 I (425) main_task: Calling app_main()
-I (445) temperature_sensor: Range [-10°C ~ 80°C], error < 1��C
+I (445) temperature_sensor: Range [-10°C ~ 80°C], error < 1°C
 I (445) sentry: ==============================================
 I (445) sentry:   SENTRY SWM-2  sonar watch module  fw v2.3.0
 I (445) sentry:   bow sonar array / perimeter watch / CIC link
@@ -109,51 +109,58 @@ I (545) wifi_init: WiFi RX IRAM OP enabled
 I (555) phy_init: phy_version 711,97bcf0a2,Aug 25 2025,19:04:10
 I (595) wifi:mode : sta (e0:72:a1:d4:1f:a4)
 I (595) wifi:enable tsf
-I (595) sentry: [LINK] no known network. Type 'connect'
+I (605) sentry: [LINK] no known network. Type 'connect'
 I (605) sentry: [AUTH] profile 'qa_swm' registered
 I (605) sentry: last reset: software reboot
 I (605) sentry: build tag: c3VkbyBzM250cnktcjAwdA==
-I (605) sentry: [HW] transducer array: 1 ch, 40 kHz, driver OK
+I (615) sentry: [HW] transducer array: 1 ch, 40 kHz, driver OK
 I (615) sentry: [HW] hull penetrator seal: OK, pressure sensor: OK
 W (625) sentry: [NAV] depth sensor offline (lab mode) - using simulator
 I (625) sentry: [NAV] carrier: SSK 'Skat', bow sonar bay #2, depth 41.8 m
 I (635) sentry: [OTA] running v2.3.0 from ota_1
-I (635) sentry: ready. state 1 NORMAL (patrol). Type 'help'
+I (645) sentry: ready. state 1 NORMAL (patrol). Type 'help'
 I (645) main_task: Returned from app_main()
-[    5.58s] TX: reconnect
-[    6.40s] RX:
+[    5.60s] TX: reconnect
+[    6.42s] RX:
 E (1425) sentry: E113 no known network. Use 'connect' first
-[    6.40s] TX: connect
-[    9.20s] RX:
+[    6.42s] TX: connect
+[    9.27s] RX:
 I (2245) sentry: [LINK] scanning...
-I (4745) sentry:   [ 1] SENTRY-HIL                        -22 dBm
-I (4745) sentry:   [ 2] <ssid>                                -56 dBm
-I (4745) sentry:   [ 3] <ssid>                      -61 dBm
-I (4745) sentry:   [ 4] <ssid>                      -69 dBm
-I (4755) sentry:   [ 5] <ssid>               -71 dBm
-I (4755) sentry:   [ 6] <ssid>                     -71 dBm
-I (4765) sentry:   [ 7] <ssid>                       -79 dBm
-I (4775) sentry:   [ 8] <ssid>                     -81 dBm
+I (4745) sentry:   [ 1] SENTRY-HIL                        -28 dBm
+I (4745) sentry:   [ 2] <ssid>                               -54 dBm
+I (4745) sentry:   [ 3] <ssid>                                -62 dBm
+I (4745) sentry:   [ 4] <ssid>                      -63 dBm
+I (4755) sentry:   [ 5] <ssid>               -63 dBm
+I (4755) sentry:   [ 6] <ssid>                      -66 dBm
+I (4765) sentry:   [ 7] <ssid>                     -67 dBm
+I (4775) sentry:   [ 8] <ssid>                     -74 dBm
+I (4775) sentry:   [ 9] <ssid>                      -84 dBm
+I (4785) sentry:   [10] <ssid>                       -85 dBm
+I (4785) sentry:   [11] <ssid>                      -90 dBm
+I (4795) sentry:   [12] <ssid>                      -90 dBm
+I (4795) sentry:   [13] <ssid>                      -91 dBm
+I (4805) sentry:   [14] <ssid>                      -91 dBm
+I (4815) sentry:   [15] <ssid>                             -93 dBm
 SSID or number: 
-[    9.20s] TX: SENTRY-HIL
-[    9.47s] RX:
+[    9.27s] TX: SENTRY-HIL
+[    9.53s] RX:
 Password: 
-[    9.47s] TX: ***
-[   11.63s] RX:
+[    9.53s] TX: ***
+[   11.70s] RX:
 ********
-I (5415) sentry: [LINK] raising buoy antenna, connecting to 'SENTRY-HIL'...
-I (6105) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
-I (6115) wifi:state: init -> auth (0xb0)
-I (6115) wifi:state: auth -> assoc (0x0)
-I (6125) wifi:state: assoc -> run (0x10)
-I (6135) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
-I (6135) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -23, cipher(pairwise:0x3, group:0x3), pmf:0
-I (6145) wifi:pm start, type: 1
+I (5455) sentry: [LINK] raising buoy antenna, connecting to 'SENTRY-HIL'...
+I (6145) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (6155) wifi:state: init -> auth (0xb0)
+I (6155) wifi:state: auth -> assoc (0x0)
+I (6155) wifi:state: assoc -> run (0x10)
+I (6175) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
+I (6175) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -28, cipher(pairwise:0x3, group:0x3), pmf:0
+I (6175) wifi:pm start, type: 1
 
-I (6145) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
-I (6155) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
-I (6215) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
-I (6215) wifi:AP's beacon interval = 102400 us, DTIM period = 2
-I (7205) esp_netif_handlers: sta ip: 10.42.0.143, mask: 255.255.255.0, gw: 10.42.0.1
-I (7205) sentry: [LINK] got ip 10.42.0.143
-I (7205) sentry: [LINK] connected to 'SENTRY-HIL', rssi -22 dBm (excellent)
+I (6185) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (6195) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (6205) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (6205) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+I (7245) esp_netif_handlers: sta ip: 10.42.0.143, mask: 255.255.255.0, gw: 10.42.0.1
+I (7245) sentry: [LINK] got ip 10.42.0.143
+I (7245) sentry: [LINK] connected to 'SENTRY-HIL', rssi -28 dBm (excellent)

@@ -1,5 +1,5 @@
-date: 2026-10-19T13:56:51+03:00
-commit: 8dbd7ab026ee7dac361b128b060dbdfde1f19526
+date: 2026-10-19T14:18:20+03:00
+commit: 3d580916f29537b53ed67af7cf5315843acf39aa
 python: Python 3.14.7
 --- nmcli device status
 DEVICE          TYPE      STATE                   CONNECTION 

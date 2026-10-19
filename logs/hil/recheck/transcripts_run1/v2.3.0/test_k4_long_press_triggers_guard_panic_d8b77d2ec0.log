@@ -1,30 +1,28 @@
 # tests/hil/test_button_stage.py::test_k4_long_press_triggers_guard_panic
-# fw v2.3.0  2026-10-19 13:59:13
+# fw v2.3.0  2026-10-19 14:20:55
 
 [    0.00s] TX: login qa_swm Pass1234
-[    0.39s] RX:
-I (8120) sentry: [AUTH] operator qa_swm on watch, console 2
-I (8240) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
-[    0.39s] TX: guard disarm 1234
-[    1.30s] RX:
-W (8500) sentry: W802 guard is not armed
-[    1.30s] TX: guard zone 50
-[    2.13s] RX:
-I (9430) sentry: [WATCH] zone < 50 cm
-[    2.13s] TX: alert ack all
-[    3.04s] RX:
-W (10240) sentry: W853 no unacknowledged alerts
-[    3.04s] TX: alert clear
-[    3.96s] RX:
-I (11160) sentry: [CIC] cleared
-[    5.97s] TX: guard zone 10
-[    6.79s] RX:
-I (14090) sentry: [WATCH] zone < 10 cm
-[    6.79s] TX: distance
-[    8.48s] RX:
-I (14960) sentry: [SONAR] ping: echo 8.4 cm
-E (14960) sentry: [COLLISION] contact too close: 8.4 cm (< 20 cm)
-W (14960) sentry: [CIC #1 WARNING] sonar: collision risk: contact at 8.4 cm
-[    8.49s] TX: guard disarm 1234
-[    9.41s] RX:
-W (16610) sentry: W802 guard is not armed
+[    0.41s] RX:
+I (11100) sentry: [AUTH] operator qa_swm on watch, console 2
+I (11240) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.41s] TX: guard disarm 1234
+[    1.32s] RX:
+W (11500) sentry: W802 guard is not armed
+[    1.32s] TX: guard zone 50
+[    2.15s] RX:
+I (12430) sentry: [WATCH] zone < 50 cm
+[    2.15s] TX: alert ack all
+[    3.07s] RX:
+W (13250) sentry: W853 no unacknowledged alerts
+[    3.07s] TX: alert clear
+[    3.99s] RX:
+I (14170) sentry: [CIC] cleared
+[    5.99s] TX: guard zone 10
+[    6.82s] RX:
+I (17100) sentry: [WATCH] zone < 10 cm
+[    6.82s] TX: distance
+[    8.50s] RX:
+E (17970) sentry: E702 sonar: out of range (2-400 cm) - open water?
+[    8.51s] TX: guard disarm 1234
+[    9.43s] RX:
+W (19610) sentry: W802 guard is not armed

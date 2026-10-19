@@ -1,30 +1,30 @@
 # tests/wifi/test_ota_network.py::test_custom_ota_server_is_saved_by_device
-# fw v2.3.0  2026-10-19 13:57:55
+# fw v2.3.0  2026-10-19 14:19:35
 
 [    0.00s] TX: login qa_swm Pass1234
-[    0.31s] RX:
-I (59400) sentry: [AUTH] operator qa_swm on watch, console 2
-I (59440) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
-[    0.31s] TX: status
-[    1.07s] RX:
-I (59700) sentry: === SWM-2 status ===
-I (59700) sentry:   fw:       v2.3.0 (ota_1)
-I (59700) sentry:   state:    1 NORMAL
-I (59700) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -22 dBm (excellent), ch 6
-I (59700) sentry:   internet: NO
-I (59710) sentry:   user:     qa_swm (user)
-I (59710) sentry:   time:     --:--:--, uptime 0h 00m 59s
-I (59720) sentry:   valve:    closed
-I (59720) sentry:   watch:    disarmed, CIC alerts unacked: 0
-I (59720) sentry:   sonar:    no contact
-I (59730) sentry:   carrier:  depth 41.7 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
-I (59740) sentry:   heap:     252 KB free
-[    1.07s] TX: ota server http://10.42.0.1:8000/fw7/
-[    1.89s] RX:
-I (60470) sentry: [OTA] server: http://10.42.0.1:8000/fw7/ (custom)
-[    1.89s] TX: ota server
-[    2.71s] RX:
-I (61290) sentry: [OTA] server: http://10.42.0.1:8000/fw7/ (custom)
-[    2.71s] TX: ota server default
-[    3.55s] RX:
-I (62120) sentry: [OTA] server: https://raw.githubusercontent.com/BohdanHorbanych/esp32-ota-files/main/fw7/ (default)
+[    0.29s] RX:
+I (70430) sentry: [AUTH] operator qa_swm on watch, console 2
+I (70450) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.29s] TX: status
+[    1.05s] RX:
+I (70710) sentry: === SWM-2 status ===
+I (70710) sentry:   fw:       v2.3.0 (ota_1)
+I (70710) sentry:   state:    1 NORMAL
+I (70710) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -28 dBm (excellent), ch 6
+I (70710) sentry:   internet: OK
+I (70720) sentry:   user:     qa_swm (user)
+I (70720) sentry:   time:     14:19:32, uptime 0h 01m 10s
+I (70730) sentry:   valve:    closed
+I (70730) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (70740) sentry:   sonar:    no contact
+I (70740) sentry:   carrier:  depth 41.9 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
+I (70750) sentry:   heap:     251 KB free
+[    1.05s] TX: ota server http://10.42.0.1:8000/fw7/
+[    1.87s] RX:
+I (71480) sentry: [OTA] server: http://10.42.0.1:8000/fw7/ (custom)
+[    1.87s] TX: ota server
+[    2.69s] RX:
+I (72300) sentry: [OTA] server: http://10.42.0.1:8000/fw7/ (custom)
+[    2.69s] TX: ota server default
+[    3.52s] RX:
+I (73130) sentry: [OTA] server: https://raw.githubusercontent.com/BohdanHorbanych/esp32-ota-files/main/fw7/ (default)
