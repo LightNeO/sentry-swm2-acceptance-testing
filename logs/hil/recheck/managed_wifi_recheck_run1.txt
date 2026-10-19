@@ -12,4 +12,4 @@ tests/wifi/test_ota_network.py::test_unreachable_ota_server_returns_e402 PASSED 
 tests/wifi/test_ota_network.py::test_custom_ota_server_is_saved_by_device PASSED [ 80%]
 tests/wifi/test_wifi_functional.py::test_forget_removes_saved_network_from_next_boot PASSED [100%]
 
-================= 5 passed, 15 deselected in 131.96s (0:02:11) =================
+================= 5 passed, 15 deselected in 113.02s (0:01:53) =================
