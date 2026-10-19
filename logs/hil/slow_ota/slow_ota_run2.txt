@@ -8,4 +8,4 @@ collecting ... collected 1 item
 
 tests/wifi/test_slow_ota.py::test_ap_loss_during_slow_ota_download_is_survived PASSED [100%]
 
-============================== 1 passed in 45.90s ==============================
+============================== 1 passed in 44.37s ==============================
