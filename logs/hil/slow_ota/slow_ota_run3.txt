@@ -1,0 +1,18 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-9.1.1, pluggy-1.7.0 -- /home/light/.venvs/platformio/bin/python
+cachedir: .pytest_cache
+rootdir: /home/light/Projects/sentry-swm2-acceptance-testing-k1-k4/framework
+configfile: pytest.ini
+plugins: anyio-4.15.1
+collecting ... collected 1 item
+
+tests/wifi/test_slow_ota.py::test_ap_loss_during_slow_ota_download_is_survived FAILED [100%]
+
+=================================== FAILURES ===================================
+______________ test_ap_loss_during_slow_ota_download_is_survived _______________
+tests/wifi/test_slow_ota.py:68: in test_ap_loss_during_slow_ota_download_is_survived
+    assert wait_internet(dut), "no internet after the access point returned"
+E   AssertionError: no internet after the access point returned
+E   assert False
+E    +  where False = wait_internet(<drivers.device_driver.SwmDevice object at 0x7f13f63cacf0>)
+========================= 1 failed in 79.74s (0:01:19) =========================

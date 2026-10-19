@@ -1,0 +1,10 @@
+date: 2026-10-19T15:34:27+03:00
+commit: 95a4060a167bba0f4808da750e2c5c8e1d2dbef9
+python: Python 3.14.7
+ota port: 53317  ap address: 10.42.0.1
+--- nmcli device status
+DEVICE          TYPE      STATE                   CONNECTION 
+wlp1s0          wifi      connected               SENTRY-HIL 
+wlp0s21f0u2     wifi      connected               <upstream>        
+lo              loopback  connected (externally)  lo         
+p2p-dev-wlp1s0  wifi-p2p  disconnected            --         

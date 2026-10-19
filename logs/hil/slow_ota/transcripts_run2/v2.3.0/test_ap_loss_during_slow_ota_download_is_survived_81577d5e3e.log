@@ -1,0 +1,145 @@
+# tests/wifi/test_slow_ota.py::test_ap_loss_during_slow_ota_download_is_survived
+# fw v2.3.0  2026-10-19 15:36:04
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.39s] RX:
+I (17720) sentry: [AUTH] operator qa_swm on watch, console 2
+I (17840) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.80s] TX: status
+[    1.56s] RX:
+I (18510) sentry: === SWM-2 status ===
+I (18510) sentry:   fw:       v2.3.0 (ota_1)
+I (18510) sentry:   state:    1 NORMAL
+I (18510) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -26 dBm (excellent), ch 6
+I (18510) sentry:   internet: OK
+I (18520) sentry:   user:     qa_swm (user)
+I (18520) sentry:   time:     15:35:41, uptime 0h 00m 18s
+I (18530) sentry:   valve:    closed
+I (18530) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (18540) sentry:   sonar:    no contact
+I (18540) sentry:   carrier:  depth 41.8 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
+I (18550) sentry:   heap:     251 KB free
+[    1.56s] TX: version
+[    2.49s] RX:
+I (19280) sentry: SENTRY SWM-2 sonar watch module, fw v2.3.0 (build Oct  6 2026 02:15:26)
+I (19280) sentry:   partition: ota_1 @ 0x1a0000, state: valid
+[    2.49s] TX: ota url http://10.42.0.1:53317/fw7/v2.3.0/sentry_fw7.bin
+[    2.80s] RX:
+I (20210) sentry: [OTA] current v2.3.0 (ota_1) -> target partition ota_0
+I (20210) sentry: [OTA] downloading http://10.42.0.1:53317/fw7/v2.3.0/sentry_fw7.bin
+I (20230) esp_https_ota: Starting OTA...
+I (20230) esp_https_ota: Writing to <ota_0> partition at offset 0x20000
+I (20240) sentry: [OTA] image: sentry_fw7 v2.3.0 (build Oct  6 2026 02:15:26)
+W (20240) sentry: W409 same version v2.3.0 - reinstalling
+[    7.70s] RX:
+I (20650) sentry: [NAV] depth 41.8 m, heading 272, speed 2.8 kn
+I (25160) sentry: [OTA]  10%
+[    8.14s] RX:
+I (25430) wifi:state: run -> init (0x3c0)
+I (25430) wifi:pm stop, total sleep time: 15185627 us / 22360184 us
+
+I (25440) wifi:<ba-del>idx:0, tid:0
+I (25440) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+W (25450) sentry: W110 wifi connection lost (reason 3)
+I (25450) sentry: [LINK] retry 1/3...
+E (25470) transport_base: tcp_read error, errno=Software caused connection abort
+W (25470) HTTP_CLIENT: esp_transport_read returned:-2 and errno:113 
+E (25470) HTTP_CLIENT: transport_read: error - 57347 | ERROR
+E (25480) transport_base: tcp_read error, errno=Socket is not connected
+W (25480) HTTP_CLIENT: esp_transport_read returned:-2 and errno:128 
+E (25490) HTTP_CLIENT: transport_read: error - 57347 | ERROR
+E (25490) esp_https_ota: data read -1, errno 128
+E (25500) sentry: E410 download interrupted (ESP_FAIL)
+[    8.59s] TX: status
+[    9.35s] RX:
+I (26310) sentry: === SWM-2 status ===
+I (26310) sentry:   fw:       v2.3.0 (ota_1)
+I (26310) sentry:   state:    1 NORMAL
+I (26310) sentry:   link:     buoy link down (known: SENTRY-HIL)
+I (26310) sentry:   user:     qa_swm (user)
+I (26320) sentry:   time:     15:35:48, uptime 0h 00m 25s
+I (26320) sentry:   valve:    closed
+I (26320) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (26330) sentry:   sonar:    no contact
+I (26330) sentry:   carrier:  depth 41.8 m, hull 5.2 bar, water 8.2 C, battery 24.20 V (sim)
+I (26340) sentry:   heap:     251 KB free
+[    9.35s] TX: reconnect
+[   10.92s] RX:
+I (27170) sentry: [LINK] raising buoy antenna, connecting to 'SENTRY-HIL'...
+I (27170) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (27170) wifi:state: init -> auth (0xb0)
+I (27180) wifi:state: auth -> assoc (0x0)
+I (27180) wifi:state: assoc -> run (0x10)
+I (27200) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
+I (27200) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -26, cipher(pairwise:0x3, group:0x3), pmf:0
+I (27210) wifi:pm start, type: 1
+
+I (27210) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (27220) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (27230) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (27230) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+I (28280) esp_netif_handlers: sta ip: 10.42.0.143, mask: 255.255.255.0, gw: 10.42.0.1
+I (28280) sentry: [LINK] got ip 10.42.0.143
+I (28280) sentry: [LINK] connected to 'SENTRY-HIL', rssi -26 dBm (excellent)
+I (28370) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[   12.92s] TX: status
+[   15.92s] RX:
+
+[   15.92s] TX: reconnect
+[   17.92s] RX:
+W (35230) sentry: W106 [LINK] time: NTP sync failed, timestamps disabled
+status
+I (35230) sentry: === SWM-2 status ===
+I (35230) sentry:   fw:       v2.3.0 (ota_1)
+I (35230) sentry:   state:    1 NORMAL
+I (35230) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -26 dBm (excellent), ch 6
+I (35240) sentry:   internet: OK
+I (35240) sentry:   user:     qa_swm (user)
+I (35250) sentry:   time:     15:35:57, uptime 0h 00m 34s
+I (35250) sentry:   valve:    closed
+I (35260) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (35260) sentry:   sonar:    no contact
+I (35270) sentry:   carrier:  depth 41.8 m, hull 5.2 bar, water 8.2 C, battery 24.20 V (sim)
+I (35270) sentry:   heap:     251 KB free
+reconnect
+W (35380) sentry: W114 already connected
+[   19.92s] TX: status
+[   20.69s] RX:
+I (37640) sentry: === SWM-2 status ===
+I (37640) sentry:   fw:       v2.3.0 (ota_1)
+I (37640) sentry:   state:    1 NORMAL
+I (37640) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -26 dBm (excellent), ch 6
+I (37640) sentry:   internet: OK
+I (37650) sentry:   user:     qa_swm (user)
+I (37650) sentry:   time:     15:36:00, uptime 0h 00m 37s
+I (37660) sentry:   valve:    closed
+I (37660) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (37670) sentry:   sonar:    no contact
+I (37670) sentry:   carrier:  depth 41.8 m, hull 5.2 bar, water 8.2 C, battery 24.20 V (sim)
+I (37680) sentry:   heap:     251 KB free
+[   20.69s] TX: version
+[   21.62s] RX:
+I (38410) sentry: SENTRY SWM-2 sonar watch module, fw v2.3.0 (build Oct  6 2026 02:15:26)
+I (38410) sentry:   partition: ota_1 @ 0x1a0000, state: valid
+[   21.62s] TX: status
+[   22.59s] RX:
+I (39340) sentry: === SWM-2 status ===
+I (39340) sentry:   fw:       v2.3.0 (ota_1)
+I (39340) sentry:   state:    1 NORMAL
+I (39340) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -27 dBm (excellent), ch 6
+I (39340) sentry:   internet: OK
+I (39350) sentry:   user:     qa_swm (user)
+I (39350) sentry:   time:     15:36:01, uptime 0h 00m 38s
+I (39360) sentry:   valve:    closed
+I (39360) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (39370) sentry:   sonar:    no contact
+I (39370) sentry:   carrier:  depth 41.8 m, hull 5.2 bar, water 8.2 C, battery 24.20 V (sim)
+I (39380) sentry:   heap:     251 KB free
+[   22.59s] TX: ota check
+[   24.86s] RX:
+I (40700) esp-x509-crt-bundle: Certificate validated
+I (41700) esp-x509-crt-bundle: Certificate validated
+I (42300) sentry: [OTA] current: v2.3.0
+I (42300) sentry: [OTA] stable:  v2.1.0
+I (42300) sentry: [OTA] beta:    v2.3.0
+I (42300) sentry: [OTA] running newer than stable
