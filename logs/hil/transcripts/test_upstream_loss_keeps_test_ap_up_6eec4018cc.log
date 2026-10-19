@@ -1,0 +1,57 @@
+# tests/wifi/test_managed_ap_stage.py::test_upstream_loss_keeps_test_ap_up
+# fw v2.3.0  2026-10-19 18:59:05
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.36s] RX:
+I (103740) sentry: [AUTH] operator qa_swm on watch, console 2
+I (103790) sentry: [ACU] ambient noise 68 dB re 1uPa, sea state 2, water 8.0 C
+I (103840) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.37s] TX: status
+[    1.13s] RX:
+I (104100) sentry: === SWM-2 status ===
+I (104100) sentry:   fw:       v2.3.0 (ota_1)
+I (104100) sentry:   state:    1 NORMAL
+I (104100) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -26 dBm (excellent), ch 6
+I (104100) sentry:   internet: OK
+I (104110) sentry:   user:     qa_swm (user)
+I (104110) sentry:   time:     18:58:51, uptime 0h 01m 43s
+I (104120) sentry:   valve:    closed
+I (104120) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (104130) sentry:   sonar:    no contact
+I (104130) sentry:   carrier:  depth 42.5 m, hull 5.2 bar, water 8.0 C, battery 24.20 V (sim)
+I (104140) sentry:   heap:     251 KB free
+[    1.40s] TX: status
+[    2.17s] RX:
+I (105140) sentry: === SWM-2 status ===
+I (105140) sentry:   fw:       v2.3.0 (ota_1)
+I (105140) sentry:   state:    1 NORMAL
+I (105140) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -26 dBm (excellent), ch 6
+I (105140) sentry:   internet: OK
+I (105150) sentry:   user:     qa_swm (user)
+I (105150) sentry:   time:     18:58:52, uptime 0h 01m 44s
+I (105160) sentry:   valve:    closed
+I (105160) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (105170) sentry:   sonar:    no contact
+I (105170) sentry:   carrier:  depth 42.5 m, hull 5.2 bar, water 8.0 C, battery 24.20 V (sim)
+I (105180) sentry:   heap:     251 KB free
+[    2.17s] TX: ota check
+[   12.46s] RX:
+E (115920) esp-tls: [sock=54] select() timeout
+E (115920) esp-tls: Failed to open new connection
+E (115920) transport_base: Failed to open a new connection
+E (115920) HTTP_CLIENT: Connection failed, sock < 0
+E (115920) sentry: E402 cannot reach OTA server (stable.txt)
+[   13.92s] TX: status
+[   14.69s] RX:
+I (117660) sentry: === SWM-2 status ===
+I (117660) sentry:   fw:       v2.3.0 (ota_1)
+I (117660) sentry:   state:    1 NORMAL
+I (117660) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -26 dBm (excellent), ch 6
+I (117660) sentry:   internet: OK
+I (117670) sentry:   user:     qa_swm (user)
+I (117670) sentry:   time:     18:59:05, uptime 0h 01m 57s
+I (117680) sentry:   valve:    closed
+I (117680) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (117690) sentry:   sonar:    no contact
+I (117690) sentry:   carrier:  depth 42.5 m, hull 5.2 bar, water 8.0 C, battery 24.20 V (sim)
+I (117700) sentry:   heap:     251 KB free

@@ -1,7 +1,7 @@
 ============================= test session starts ==============================
-platform linux -- Python 3.14.7, pytest-9.1.1, pluggy-1.7.0 -- /home/light/.venvs/platformio/bin/python
+platform linux -- Python 3.14.7, pytest-9.1.1, pluggy-1.7.0 -- ~/.venvs/platformio/bin/python
 cachedir: .pytest_cache
-rootdir: /home/light/Projects/sentry-swm2-acceptance-testing-k1-k4/framework
+rootdir: ~/Projects/sentry-swm2-acceptance-testing-k1-k4/framework
 configfile: pytest.ini
 plugins: anyio-4.15.1
 collecting ... collected 15 items
@@ -23,5 +23,5 @@ tests/hil/test_button_stage.py::test_k4_k1_combo_enters_emergency_from_verbose P
 tests/hil/test_button_stage.py::test_k1_k2_k3_are_blocked_in_emergency SKIPPED [100%]
 
 =========================== short test summary info ============================
-SKIPPED [1] tests/hil/test_button_stage.py:142: applies to firmware 2.1.0 only
-================== 14 passed, 1 skipped in 143.68s (0:02:23) ===================
+SKIPPED [1] tests/hil/test_button_stage.py:152: applies to firmware 2.1.0 only
+================== 14 passed, 1 skipped in 147.46s (0:02:27) ===================

@@ -1,0 +1,31 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-9.1.1, pluggy-1.7.0 -- ~/.venvs/platformio/bin/python
+cachedir: .pytest_cache
+rootdir: ~/Projects/sentry-swm2-acceptance-testing-k1-k4/framework
+configfile: pytest.ini
+plugins: anyio-4.15.1
+collecting ... collected 21 items
+
+tests/wifi/test_managed_ap_stage.py::test_ap_loss_emits_wifi_loss_and_recovers PASSED [  4%]
+tests/wifi/test_managed_ap_stage.py::test_ap_loss_makes_ota_check_require_wifi PASSED [  9%]
+tests/wifi/test_managed_ap_stage.py::test_upstream_loss_keeps_test_ap_up PASSED [ 14%]
+tests/wifi/test_ota_network.py::test_unreachable_ota_server_returns_e402 PASSED [ 19%]
+tests/wifi/test_ota_network.py::test_unreachable_ota_path_returns_e405 PASSED [ 23%]
+tests/wifi/test_ota_network.py::test_custom_ota_server_is_saved_by_device PASSED [ 28%]
+tests/wifi/test_slow_ota.py::test_ap_loss_during_slow_ota_download_is_survived PASSED [ 33%]
+tests/wifi/test_wifi_functional.py::test_connect_by_ap_number PASSED     [ 38%]
+tests/wifi/test_wifi_functional.py::test_connect_by_ap_name PASSED       [ 42%]
+tests/wifi/test_wifi_functional.py::test_short_wifi_password_is_rejected PASSED [ 47%]
+tests/wifi/test_wifi_functional.py::test_saved_network_is_reported_after_reboot PASSED [ 52%]
+tests/wifi/test_wifi_functional.py::test_empty_ssid_is_rejected PASSED   [ 57%]
+tests/wifi/test_wifi_functional.py::test_wrong_password_is_rejected PASSED [ 61%]
+tests/wifi/test_wifi_functional.py::test_unknown_ssid_is_rejected PASSED [ 66%]
+tests/wifi/test_wifi_functional.py::test_reconnect_without_saved_network_gives_e113 PASSED [ 71%]
+tests/wifi/test_wifi_functional.py::test_reconnect_after_disconnect_restores_link PASSED [ 76%]
+tests/wifi/test_wifi_functional.py::test_forget_removes_saved_network_from_next_boot PASSED [ 80%]
+tests/wifi/test_wifi_functional.py::test_second_disconnect_is_warning PASSED [ 85%]
+tests/wifi/test_wifi_functional.py::test_scan_sees_managed_ap PASSED     [ 90%]
+tests/wifi/test_wifi_functional.py::test_ping_reaches_upstream PASSED    [ 95%]
+tests/wifi/test_wifi_functional.py::test_time_is_available_after_managed_ap_connect PASSED [100%]
+
+======================== 21 passed in 672.13s (0:11:12) ========================
