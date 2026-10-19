@@ -18,6 +18,7 @@ import pytest
 from drivers.device_driver import SwmDevice, has_saved_network
 from drivers.redaction import Redactor
 from drivers.transport import SerialTransport, find_port
+from tests.helpers import wait_internet
 
 FRAMEWORK_DIR = Path(__file__).resolve().parent
 ROOT = FRAMEWORK_DIR.parent
@@ -115,18 +116,6 @@ def settings() -> dict[str, str]:
 INTERNET_WAIT_S = 40.0
 
 
-def _wait_internet(device: SwmDevice, timeout: float = INTERNET_WAIT_S) -> bool:
-    """Poll ``status`` until the DUT itself reports 'internet: OK'."""
-    deadline = time.monotonic() + timeout
-    while True:
-        m = device.exchange("status", idle=0.8).search(r"internet:\s+(\w+)")
-        if m and m.group(1).upper() == "OK":
-            return True
-        if time.monotonic() >= deadline:
-            return False
-        time.sleep(3)
-
-
 @pytest.fixture(scope="session")
 def device_session(request: pytest.FixtureRequest, settings: dict[str, str]):
     """Open the DUT once per run, bring it to: Wi-Fi up, profile registered, logged out."""
@@ -142,7 +131,7 @@ def device_session(request: pytest.FixtureRequest, settings: dict[str, str]):
         wifi = device.ensure_wifi(boot.text, settings["ssid"], settings["wifi_password"])
         if set(wifi.errors) == {"E105"} and "connected to" in wifi.text:
             # E105 right after 'connected' is the internet check not finished yet: wait for it instead of ignoring it.
-            if not _wait_internet(device):
+            if not wait_internet(device, INTERNET_WAIT_S):
                 pytest.fail(f"Wi-Fi is up but there is no internet for {INTERNET_WAIT_S:.0f} s (E105)\n{wifi.text}")
         elif wifi.timed_out or wifi.errors:
             pytest.fail(f"Wi-Fi bring-up failed: {wifi.errors or 'timeout'}\n{wifi.text}")

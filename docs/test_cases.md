@@ -113,7 +113,7 @@
 | TC-OTA-13 | OTA-8b | `ota rollback` без іншого розділу / після broken | `E416` / `E417` / успішний rollback — залежно від стану | 21 | A |
 | TC-OTA-14 | OTA-8b | `ota rollback` коли попередня валідна | Завантаження прошивки з іншого розділу | 21 | A |
 | TC-OTA-15 | OTA-9 | `--drop-at 50`; `ota update` | `E410`, пристрій на поточній версії, працює | 21 | A+M |
-| TC-OTA-16 | OTA-9 | `--slow 20`; під час завантаження керовано вимкнути AP `SENTRY-HIL` | Auto: AP fault/recovery; manual/partial: slow OTA orchestration до додавання server fixture; `W110` + `E410/E411` або інша контрольована помилка | 21 | A+M |
+| TC-OTA-16 | OTA-9 | `--slow 20`; під час завантаження керовано вимкнути AP `SENTRY-HIL` | Auto (`test_slow_ota.py`): `W110`, `retry 1/3`, `E410/E411`; версія й слот не змінились; після відновлення AP `ota check` працює | 21 | A+M |
 | TC-OTA-17 | OTA-9,OTA-11 | `ota url .../test/garbage.bin` | `E406` | 21 | A |
 | TC-OTA-18 | OTA-9,OTA-11 | `ota url .../test/truncated.bin` | Контрольована помилка (E406/E410/E412), пристрій на поточній версії | 21 | A |
 | TC-OTA-19 | OTA-9,OTA-11 | `ota url .../test/corrupted.bin` | `E412` | 21 | A |

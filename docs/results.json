@@ -640,7 +640,7 @@
   },
   "TC-WF-18": {
     "21": "PASS",
-    "evidence": "logs/ota/ota_broken_rollback.log та logs/v2.1.0/manual/group6_ota.log: 'W110 wifi connection lost' + автоматичні 'retry 1/3'/'retry 2/3' з успішним відновленням зв'язку (WF-5). | logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3.",
+    "evidence": "logs/ota/ota_broken_rollback.log та logs/v2.1.0/manual/group6_ota.log: 'W110 wifi connection lost' + автоматичні 'retry 1/3'/'retry 2/3' з успішним відновленням зв'язку (WF-5). | logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3. | logs/hil/recheck_strict/strict_run1-3.txt (посилені перевірки: E101 не вважається успіхом, `connected to` обов'язковий): PASS 3/3.",
     "23": "PASS",
     "bugs": []
   },
@@ -682,7 +682,7 @@
   "TC-OTA-25": {
     "23": "PASS",
     "bugs": [],
-    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt (прогін після виправлення baseline): (а) AP down → E002 після W110, PASS 3/3; (б) upstream down → E411 (internet: NO, run 1) або E402 (internet: OK, run 2-3), не E002; див. OBS-06."
+    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt (прогін після виправлення baseline): (а) AP down → E002 після W110, PASS 3/3; (б) upstream down → E411 (internet: NO, run 1) або E402 (internet: OK, run 2-3), не E002; див. OBS-06. | logs/hil/recheck_strict/strict_run1-3.txt (посилені перевірки: E101 не вважається успіхом, `connected to` обов'язковий): PASS 3/3."
   },
   "TC-GD-11": {
     "23": "FAIL",
@@ -746,7 +746,7 @@
   "TC-WF-11": {
     "23": "PASS",
     "bugs": [],
-    "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3."
+    "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3. | logs/hil/recheck_strict/strict_run1-3.txt (посилені перевірки: E101 не вважається успіхом, `connected to` обов'язковий): PASS 3/3."
   },
   "TC-WF-13": {
     "23": "PASS",
@@ -771,6 +771,6 @@
   "TC-WF-12": {
     "23": "PASS",
     "bugs": [],
-    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt: PASS 3/3 після виправлення тесту (перший прогін: FAIL 3/3 через reboot_dut)."
+    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt: PASS 3/3 після виправлення тесту (перший прогін: FAIL 3/3 через reboot_dut). | logs/hil/recheck_strict/strict_run1-3.txt (посилені перевірки: E101 не вважається успіхом, `connected to` обов'язковий): PASS 3/3."
   }
 }

@@ -36,6 +36,7 @@ python -m pytest tests/wifi -m managed_wifi --run-managed-wifi  # керован
 python tools/sanitize_logs.py ../logs/hil      # сховати імена чужих мереж перед комітом
 # з кореня репозиторію: bash run_hil_evidence.sh (повний прогін x3), bash run_hil_recheck.sh (лише виправлені тести)
 # bash run_hil_recheck_strict.sh (TC-WF-11/12/18, TC-OTA-25 після посилення перевірок; потрібна HIL_UPSTREAM_CONNECTION)
+# bash run_hil_slow_ota.sh (TC-OTA-16: обрив AP посеред повільного OTA; сервер піднімається тестом, HIL_UPSTREAM_CONNECTION обов'язкова)
 ```
 
 Порт шукається за USB VID/PID (`SWM_VID`).

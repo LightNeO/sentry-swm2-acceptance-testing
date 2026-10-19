@@ -60,6 +60,18 @@ def reconnect_with_retries(dut, attempts: int = 3, pause: float = 2.0):
     return reply
 
 
+def wait_internet(dut, timeout: float = 40.0) -> bool:
+    """Poll ``status`` until the DUT itself reports 'internet: OK' (its own check lags a few seconds behind the link)."""
+    deadline = time.monotonic() + timeout
+    while True:
+        m = dut.exchange("status", idle=0.8).search(r"internet:\s+(\w+)")
+        if m and m.group(1).upper() == "OK":
+            return True
+        if time.monotonic() >= deadline:
+            return False
+        time.sleep(3)
+
+
 def wait_link(dut, timeout: float = 45.0) -> bool:
     """Wait until the DUT has its Wi-Fi link, nudging it with 'reconnect' (the first attempt may give E101, OBS-01)."""
     deadline = time.monotonic() + timeout
