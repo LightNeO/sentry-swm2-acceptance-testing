@@ -1,70 +1,56 @@
 # tests/wifi/test_managed_ap_stage.py::test_upstream_loss_keeps_test_ap_up
-# fw v2.3.0  2026-10-19 13:38:25
+# fw v2.3.0  2026-10-19 14:00:07
 
 [    0.00s] TX: login qa_swm Pass1234
-[    0.41s] RX:
-I (48900) sentry: [AUTH] operator qa_swm on watch, console 2
-I (49040) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
-[    0.41s] TX: status
-[    1.17s] RX:
-I (49300) sentry: === SWM-2 status ===
-I (49300) sentry:   fw:       v2.3.0 (ota_1)
-I (49300) sentry:   state:    1 NORMAL
-I (49300) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -24 dBm (excellent), ch 6
-I (49300) sentry:   internet: OK
-I (49310) sentry:   user:     qa_swm (user)
-I (49310) sentry:   time:     13:38:17, uptime 0h 00m 48s
-I (49320) sentry:   valve:    closed
-I (49320) sentry:   watch:    disarmed, CIC alerts unacked: 0
-I (49330) sentry:   sonar:    no contact
-I (49330) sentry:   carrier:  depth 41.6 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
-I (49340) sentry:   heap:     251 KB free
-[    6.41s] TX: status
-[    7.30s] RX:
-I (55300) sentry: === SWM-2 status ===
-I (55300) sentry:   fw:       v2.3.0 (ota_1)
-I (55300) sentry:   state:    1 NORMAL
-I (55300) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -23 dBm (excellent), ch 6
-I (55300) sentry:   internet: OK
-I (55310) sentry:   user:     qa_swm (user)
-I (55310) sentry:   time:     13:38:23, uptime 0h 00m 54s
-I (55320) sentry:   valve:    closed
-I (55320) sentry:   watch:    disarmed, CIC alerts unacked: 0
-I (55330) sentry:   sonar:    no contact
-I (55330) sentry:   carrier:  depth 41.6 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
-I (55340) sentry:   heap:     251 KB free
-I (55370) wifi:state: run -> init (0x7c0)
-I (55370) wifi:pm stop, total sleep time: 20678467 us / 25822417 us
-
-I (55370) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
-W (55380) sentry: W110 wifi connection lost (reason 7)
-I (55380) sentry: [LINK] retry 1/3...
-I (55390) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
-I (55390) wifi:state: init -> auth (0xb0)
-I (55400) wifi:state: auth -> assoc (0x0)
-I (55400) wifi:state: assoc -> run (0x10)
-I (55420) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
-I (55420) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -23, cipher(pairwise:0x3, group:0x3), pmf:0
-I (55430) wifi:pm start, type: 1
-
-I (55430) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
-I (55440) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
-I (55470) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
-I (55470) wifi:AP's beacon interval = 102400 us, DTIM period = 2
-[    7.30s] TX: ota check
-[    7.57s] RX:
-E (56200) sentry: E002 Wi-Fi required. Use 'reconnect' or 'connect'
-[    8.17s] TX: status
-[    8.94s] RX:
-I (57070) sentry: === SWM-2 status ===
-I (57070) sentry:   fw:       v2.3.0 (ota_1)
-I (57070) sentry:   state:    1 NORMAL
-I (57070) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -23 dBm (excellent), ch 6
-I (57070) sentry:   internet: NO
-I (57080) sentry:   user:     qa_swm (user)
-I (57080) sentry:   time:     13:38:24, uptime 0h 00m 56s
-I (57090) sentry:   valve:    closed
-I (57090) sentry:   watch:    disarmed, CIC alerts unacked: 0
-I (57100) sentry:   sonar:    no contact
-I (57100) sentry:   carrier:  depth 41.6 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
-I (57110) sentry:   heap:     251 KB free
+[    0.34s] RX:
+I (36370) sentry: [AUTH] operator qa_swm on watch, console 2
+I (36440) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.34s] TX: status
+[    1.10s] RX:
+I (36700) sentry: === SWM-2 status ===
+I (36700) sentry:   fw:       v2.3.0 (ota_1)
+I (36700) sentry:   state:    1 NORMAL
+I (36700) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -21 dBm (excellent), ch 6
+I (36700) sentry:   internet: OK
+I (36710) sentry:   user:     qa_swm (user)
+I (36710) sentry:   time:     13:59:54, uptime 0h 00m 36s
+I (36720) sentry:   valve:    closed
+I (36720) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (36730) sentry:   sonar:    no contact
+I (36730) sentry:   carrier:  depth 41.8 m, hull 5.2 bar, water 8.0 C, battery 24.20 V (sim)
+I (36740) sentry:   heap:     251 KB free
+[    1.36s] TX: status
+[    2.13s] RX:
+I (37730) sentry: === SWM-2 status ===
+I (37730) sentry:   fw:       v2.3.0 (ota_1)
+I (37730) sentry:   state:    1 NORMAL
+I (37730) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -22 dBm (excellent), ch 6
+I (37730) sentry:   internet: OK
+I (37740) sentry:   user:     qa_swm (user)
+I (37740) sentry:   time:     13:59:55, uptime 0h 00m 37s
+I (37750) sentry:   valve:    closed
+I (37750) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (37760) sentry:   sonar:    no contact
+I (37760) sentry:   carrier:  depth 41.8 m, hull 5.2 bar, water 8.0 C, battery 24.20 V (sim)
+I (37770) sentry:   heap:     251 KB free
+[    2.13s] TX: ota check
+[   12.42s] RX:
+E (48510) esp-tls: [sock=54] select() timeout
+E (48510) esp-tls: Failed to open new connection
+E (48510) transport_base: Failed to open a new connection
+E (48510) HTTP_CLIENT: Connection failed, sock < 0
+E (48510) sentry: E402 cannot reach OTA server (stable.txt)
+[   12.96s] TX: status
+[   13.72s] RX:
+I (49320) sentry: === SWM-2 status ===
+I (49320) sentry:   fw:       v2.3.0 (ota_1)
+I (49320) sentry:   state:    1 NORMAL
+I (49320) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -21 dBm (excellent), ch 6
+I (49320) sentry:   internet: OK
+I (49330) sentry:   user:     qa_swm (user)
+I (49330) sentry:   time:     14:00:07, uptime 0h 00m 48s
+I (49340) sentry:   valve:    closed
+I (49340) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (49350) sentry:   sonar:    no contact
+I (49350) sentry:   carrier:  depth 41.8 m, hull 5.2 bar, water 8.0 C, battery 24.20 V (sim)
+I (49360) sentry:   heap:     251 KB free

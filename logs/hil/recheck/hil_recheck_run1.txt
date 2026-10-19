@@ -9,5 +9,5 @@ collecting ... collected 15 items / 14 deselected / 1 selected
 tests/hil/test_button_stage.py::test_k4_long_press_triggers_guard_panic SKIPPED [100%]
 
 =========================== short test summary info ============================
-SKIPPED [1] tests/hil/test_button_stage.py:102: precondition: an object 15-200 cm in front of HC-SR04 is needed (sonar reading: 8.2 cm); with the zone at 10 cm anything closer is INTRUSION
-====================== 1 skipped, 14 deselected in 23.16s ======================
+SKIPPED [1] tests/hil/test_button_stage.py:102: precondition: an object 15-200 cm in front of HC-SR04 is needed (sonar reading: 8.4 cm); with the zone at 10 cm anything closer is INTRUSION
+====================== 1 skipped, 14 deselected in 20.01s ======================

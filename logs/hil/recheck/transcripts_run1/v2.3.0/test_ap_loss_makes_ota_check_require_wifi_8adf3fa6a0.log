@@ -1,89 +1,68 @@
 # tests/wifi/test_managed_ap_stage.py::test_ap_loss_makes_ota_check_require_wifi
-# fw v2.3.0  2026-10-19 13:35:09
+# fw v2.3.0  2026-10-19 13:57:30
 
 [    0.00s] TX: login qa_swm Pass1234
-[    0.34s] RX:
-I (16780) sentry: [AUTH] operator qa_swm on watch, console 2
-I (16850) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
-[    9.11s] RX:
-I (20650) sentry: [NAV] depth 42.0 m, heading 275, speed 2.8 kn
-I (23090) wifi:bcn_timeout,ap_probe_send_start
-I (25590) wifi:ap_probe_send over, reset wifi status to disassoc
-I (25590) wifi:state: run -> init (0xc800)
-I (25590) wifi:pm stop, total sleep time: 11208786 us / 22499577 us
+[    0.37s] RX:
+I (15140) sentry: [AUTH] operator qa_swm on watch, console 2
+I (15240) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    9.12s] RX:
+W (20640) sentry: [NAV] thermocline at 35 m - sonar range may drop
+I (21460) wifi:bcn_timeout,ap_probe_send_start
+I (23960) wifi:ap_probe_send over, reset wifi status to disassoc
+I (23970) wifi:state: run -> init (0xc800)
+I (23970) wifi:pm stop, total sleep time: 9711600 us / 20873947 us
 
-I (25600) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
-W (25610) sentry: W110 wifi connection lost (reason 200)
-I (25610) sentry: [LINK] retry 1/3...
-[    9.11s] TX: ota check
-[   16.80s] RX:
-E (25880) sentry: E002 Wi-Fi required. Use 'reconnect' or 'connect'
-I (28020) sentry: [LINK] retry 2/3...
-I (30440) sentry: [LINK] retry 3/3...
-[   17.42s] TX: status
-[   18.17s] RX:
-I (34190) sentry: === SWM-2 status ===
-I (34190) sentry:   fw:       v2.3.0 (ota_1)
-I (34190) sentry:   state:    1 NORMAL
-I (34190) sentry:   link:     buoy link down (known: SENTRY-HIL)
-I (34190) sentry:   user:     qa_swm (user)
-I (34190) sentry:   time:     --:--:--, uptime 0h 00m 33s
-I (34200) sentry:   valve:    closed
-I (34200) sentry:   watch:    disarmed, CIC alerts unacked: 0
-I (34210) sentry:   sonar:    no contact
-I (34210) sentry:   carrier:  depth 42.0 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
-I (34220) sentry:   heap:     252 KB free
-[   18.17s] TX: reconnect
-[   19.74s] RX:
-I (35050) sentry: [LINK] raising buoy antenna, connecting to 'SENTRY-HIL'...
-I (35050) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
-I (35050) wifi:state: init -> auth (0xb0)
-I (35070) wifi:state: auth -> assoc (0x0)
-I (35090) wifi:state: assoc -> run (0x10)
-I (35120) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
-I (35120) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -23, cipher(pairwise:0x3, group:0x3), pmf:0
-I (35130) wifi:pm start, type: 1
+I (23970) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+W (23980) sentry: W110 wifi connection lost (reason 200)
+I (23980) sentry: [LINK] retry 1/3...
+[    9.12s] TX: ota check
+[   16.81s] RX:
+E (24260) sentry: E002 Wi-Fi required. Use 'reconnect' or 'connect'
+I (26400) sentry: [LINK] retry 2/3...
+I (28810) sentry: [LINK] retry 3/3...
+[   17.31s] TX: status
+[   18.07s] RX:
+I (32450) sentry: === SWM-2 status ===
+I (32450) sentry:   fw:       v2.3.0 (ota_1)
+I (32450) sentry:   state:    1 NORMAL
+I (32450) sentry:   link:     buoy link down (known: SENTRY-HIL)
+I (32450) sentry:   user:     qa_swm (user)
+I (32450) sentry:   time:     --:--:--, uptime 0h 00m 32s
+I (32460) sentry:   valve:    closed
+I (32460) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (32470) sentry:   sonar:    no contact
+I (32470) sentry:   carrier:  depth 41.7 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
+I (32480) sentry:   heap:     252 KB free
+[   18.07s] TX: reconnect
+[   19.59s] RX:
+I (33310) sentry: [LINK] raising buoy antenna, connecting to 'SENTRY-HIL'...
+I (33330) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (33340) wifi:state: init -> auth (0xb0)
+I (33340) wifi:state: auth -> assoc (0x0)
+I (33340) wifi:state: assoc -> run (0x10)
+I (33380) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
+I (33380) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -22, cipher(pairwise:0x3, group:0x3), pmf:0
+I (33390) wifi:pm start, type: 1
 
-I (35130) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
-I (35140) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
-I (35150) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
-I (35150) wifi:AP's beacon interval = 102400 us, DTIM period = 2
-I (36220) esp_netif_handlers: sta ip: 10.42.0.143, mask: 255.255.255.0, gw: 10.42.0.1
-I (36220) sentry: [LINK] got ip 10.42.0.143
-I (36220) sentry: [LINK] connected to 'SENTRY-HIL', rssi -24 dBm (excellent)
-I (36250) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
-[   21.74s] TX: status
-[   24.74s] RX:
-
-[   24.74s] TX: reconnect
-[   26.85s] RX:
-E (43220) sentry: E105 connected, but no internet (DNS failed)
-status
-I (43220) sentry: === SWM-2 status ===
-I (43220) sentry:   fw:       v2.3.0 (ota_1)
-I (43220) sentry:   state:    1 NORMAL
-I (43220) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -23 dBm (excellent), ch 6
-I (43230) sentry:   internet: NO
-I (43230) sentry:   user:     qa_swm (user)
-I (43240) sentry:   time:     --:--:--, uptime 0h 00m 42s
-I (43240) sentry:   valve:    closed
-I (43250) sentry:   watch:    disarmed, CIC alerts unacked: 0
-I (43250) sentry:   sonar:    no contact
-I (43250) sentry:   carrier:  depth 42.0 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
-I (43260) sentry:   heap:     252 KB free
-reconnect
-W (43370) sentry: W114 already connected
-[   28.85s] TX: status
-[   29.62s] RX:
-I (45630) sentry: === SWM-2 status ===
-I (45630) sentry:   fw:       v2.3.0 (ota_1)
-I (45630) sentry:   state:    1 NORMAL
-I (45630) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -23 dBm (excellent), ch 6
-I (45630) sentry:   internet: NO
-I (45640) sentry:   user:     qa_swm (user)
-I (45640) sentry:   time:     --:--:--, uptime 0h 00m 45s
-I (45650) sentry:   valve:    closed
-I (45650) sentry:   watch:    disarmed, CIC alerts unacked: 0
-I (45650) sentry:   sonar:    no contact
-I (45660) sentry:   carrier:  depth 42.0 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
-I (45670) sentry:   heap:     252 KB free
+I (33390) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (33400) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (33410) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (33410) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+I (34450) esp_netif_handlers: sta ip: 10.42.0.143, mask: 255.255.255.0, gw: 10.42.0.1
+I (34450) sentry: [LINK] got ip 10.42.0.143
+I (34450) sentry: [LINK] connected to 'SENTRY-HIL', rssi -22 dBm (excellent)
+E (34460) sentry: E105 connected, but no internet (DNS failed)
+[   21.59s] TX: status
+[   22.36s] RX:
+I (36730) sentry: === SWM-2 status ===
+I (36730) sentry:   fw:       v2.3.0 (ota_1)
+I (36730) sentry:   state:    1 NORMAL
+I (36730) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -21 dBm (excellent), ch 6
+I (36730) sentry:   internet: NO
+I (36740) sentry:   user:     qa_swm (user)
+I (36740) sentry:   time:     --:--:--, uptime 0h 00m 36s
+I (36750) sentry:   valve:    closed
+I (36750) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (36750) sentry:   sonar:    no contact
+I (36760) sentry:   carrier:  depth 41.7 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
+I (36770) sentry:   heap:     252 KB free
