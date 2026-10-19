@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pytest
 
-from drivers.device_driver import SwmDevice
+from drivers.device_driver import SwmDevice, has_saved_network
 from drivers.redaction import Redactor
 from drivers.transport import SerialTransport, find_port
 
@@ -122,7 +122,7 @@ def device_session(request: pytest.FixtureRequest, settings: dict[str, str]):
         boot = device.hard_reset()
         version = device.version()
         request.config._swm_fwkey = "".join(version.split(".")[:2])  # "2.1.0" -> "21"
-        if "known network" not in boot.text and not (settings["ssid"] and settings["wifi_password"]):
+        if not has_saved_network(boot.text) and not (settings["ssid"] and settings["wifi_password"]):
             pytest.fail("DUT has no saved Wi-Fi network: set WIFI_SSID and WIFI_PASSWORD in framework/.env")
         wifi = device.ensure_wifi(boot.text, settings["ssid"], settings["wifi_password"])
         transient_hil_e105 = (

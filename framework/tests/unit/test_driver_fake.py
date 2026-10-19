@@ -120,6 +120,26 @@ def test_ensure_wifi_retries_reconnect_after_e101_and_logs_the_retry():
     assert "retry 2/3" in dev.transcript.render()  # the retry stays visible in the evidence
 
 
+def test_blank_board_boot_text_is_not_a_saved_network():
+    from drivers.device_driver import has_saved_network
+
+    assert not has_saved_network("I (600) sentry: [LINK] no known network. Type 'connect'")
+    assert has_saved_network("I (600) sentry: [LINK] known network 'CMF'. Type 'reconnect' to connect")
+
+
+def test_ensure_wifi_uses_connect_when_boot_says_no_known_network():
+    script = {
+        "connect": "I (1) sentry: [LINK] scanning...\n  [ 1] CMF  -28 dBm\nEnter SSID or number:\n",
+        "CMF": "Password:\n",
+        WIFI_PASSWORD: "I (2) sentry: [LINK] connected to 'CMF', rssi -28 dBm\nnetwork saved\n",
+    }
+    dev, t = make(script)
+    r = dev.ensure_wifi("I (600) sentry: [LINK] no known network. Type 'connect'", "CMF", WIFI_PASSWORD, settle=0.05)
+    assert "reconnect" not in t.sent
+    assert t.sent[0] == "connect"
+    assert r.has("network saved") or r.has("connected to")
+
+
 def test_ensure_wifi_gives_up_after_attempts_and_reports_e101():
     dev, t = make({"reconnect": "E (1) sentry: E101 wrong password for 'CMF'\n"})
     r = dev.ensure_wifi("known network 'CMF'", "CMF", WIFI_PASSWORD, attempts=3, settle=0.05)

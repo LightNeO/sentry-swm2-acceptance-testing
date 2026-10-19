@@ -13,6 +13,14 @@ from drivers.transport import Transport
 
 CRLF = "\r\n"
 
+# Boot says "known network 'X'" when a network is saved and "no known network" when it is not;
+# the second also contains the first as a substring, so exclude it explicitly.
+_SAVED_NETWORK_RE = re.compile(r"(?<!no )known network")
+
+
+def has_saved_network(boot_text: str) -> bool:
+    return bool(_SAVED_NETWORK_RE.search(boot_text))
+
 
 class Transcript:
     """Log of everything sent to/received from the DUT - this is the test evidence."""
@@ -171,7 +179,7 @@ class SwmDevice:
         OBS-01 (bugs/Improvements.md): after a hard reset, first ``reconnect`` often returns E101 even with
         the right password, retry succeeds. Only retry on E101, and log the retry so it's visible in evidence.
         """
-        if "known network" not in boot_text:
+        if not has_saved_network(boot_text):
             return self.connect_wifi(ssid, password)
         r = self.exchange("reconnect", until=r"connected to|E1\d\d", timeout=30)
         for attempt in range(2, attempts + 1):
