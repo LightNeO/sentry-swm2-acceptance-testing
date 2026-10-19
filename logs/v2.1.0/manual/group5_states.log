@@ -25,7 +25,7 @@ undocumented internal diagnostic (likely the parser's minimum expected token cou
 dispatch entry), not a deviation from any PRD requirement. Not filed as a bug; noted in bugs/Improvements.md
 for completeness.
 
-LED blink-code pattern: confirmed by the tester - blinks blue 3 times, then a pause, repeating consistently.
+LED blink-code pattern: confirmed - blinks blue 3 times, then a pause, repeating consistently.
 This is visibly different from NORMAL state LED behavior, satisfying "LED показує blink-коди" (ST-1c).
 
 TC-ST-03: PASS (raw data confirmed, [DBG] diagnostics present, LED blink-code pattern confirmed).
@@ -37,7 +37,7 @@ lamp2 -> E001 unknown command 'lamp2'. Did you mean 'lamp'?   <- exact match to 
 [TELEMETRY #77..#92] each followed by its own [V] telemetry: ... line; tick deltas between consecutive
   reports: 10010, 10010, 10010, 10010, 10010, 10010, 10010, 10010, 10010, 10010, 10010, 10010, 10010, 10010 ms
   - exactly 10.01 s apart throughout, matching the VERBOSE 10 s interval precisely.
-Heartbeat LED pattern: confirmed visually by the tester (steady pulsing, distinct from DEBUG's 3-blink pattern).
+Heartbeat LED pattern: confirmed visually (steady pulsing, distinct from DEBUG's 3-blink pattern).
 TC-ST-04: PASS.
 
 TC-ST-13 / TC-BTN-09 (buttons blocked in EMERGENCY):

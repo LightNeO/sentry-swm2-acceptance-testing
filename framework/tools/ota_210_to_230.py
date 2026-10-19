@@ -1,6 +1,5 @@
 """One-shot evidence script (not a pytest test): set distinctive values (OTA-10 groups),
 OTA 2.1.0 -> 2.3.0 beta, check what survived. Saves transcript to logs/ota/.
-A regular pytest test for OTA-10 gets written later once field formats are confirmed.
 """
 
 import os

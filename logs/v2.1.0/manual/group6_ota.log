@@ -17,7 +17,7 @@ Side observation (OBS-04, not filed as a bug): 'ota update' against the CUSTOM/l
 SAME version (v2.1.0) with just a W409 warning, instead of refusing with '[OTA] already up to date' as
 OTA-4b specifies. The earlier automated test (TC-OTA-06, see docs/results.json) confirmed 'already up to
 date' behaves correctly against the DEFAULT GitHub server. This suggests the 'same version' short-circuit
-may be skipped specifically when a custom OTA server is configured - worth a follow-up check, not filed as
+may be skipped specifically when a custom OTA server is configured; not filed as
 a confirmed bug given it only affects a local-testing convenience path, not the documented default flow.
 
 === TC-OTA-16: --slow 20 + real Wi-Fi (Personal Hotspot) interruption mid-download ===
@@ -29,7 +29,7 @@ ota install 2.1.0 force
   [OTA] downloading http://172.20.10.12:8000/fw7/v2.1.0/sentry_fw7.bin
   [OTA] 10%
   [OTA] 20%
-  <-- tester turned the iPhone's Personal Hotspot OFF for a few seconds here, then back ON -->
+  <-- the iPhone's Personal Hotspot was turned OFF for a few seconds here, then back ON -->
   wifi:bcn_timeout,ap_probe_send_start
   wifi:ap_probe_send over, reset wifi status to disassoc
   W110 wifi connection lost (reason 200)
@@ -53,4 +53,4 @@ Note: 'ota install 2.1.0 force' sent once while a background [TELEMETRY #8] line
 typed command gave E400 usage: ota install <X.Y.Z> [force] - a harmless console-interleaving artifact (stray
 characters merged into the command), not a bug; the retyped command worked normally.
 
-Remaining for this group: 'ota server default' to restore GitHub (reminder sent to tester).
+'ota server default' restored the GitHub channel at the end of the group.

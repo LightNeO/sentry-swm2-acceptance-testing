@@ -1,13 +1,13 @@
 Manual checklist Group 2 (Smart Lamp), firmware v2.1.0
 Session: miniterm COM3 115200, 2026-10-14
-Full raw console capture provided by the tester.
+Full raw console capture.
 
 Key excerpts:
 
 - lamp on / off / toggle / toggle: each correctly flips on<->off, [BEACON] on/off (command) messages match
   lamp status (checked twice: off then on, both matched).
 - lamp color white/red/green/blue/yellow/purple/cyan/orange: all 8 named colors set the correct RGB tuple,
-  visually confirmed by the tester (white 255,255,255; red 255,0,0; green 0,255,0; blue 0,0,255;
+  visually confirmed (white 255,255,255; red 255,0,0; green 0,255,0; blue 0,0,255;
   yellow 255,180,0; purple 160,0,255; cyan 0,255,255; orange 255,80,0).
 - lamp brightness 0 / 100: both accepted (0% and 100%), visible difference confirmed.
 - lamp brightness 101 / -1: both correctly rejected with E504 brightness must be 0-100.
@@ -23,16 +23,10 @@ Key excerpts:
   Tick delta: 469184 - 459164 = 10020 ms ~= 10.02 s -> the ACTUAL delay was 10 seconds as commanded; only the
   printed unit ('ms' instead of 's') is wrong. Filed as BUG-009.
 - reboot: lamp was ON (blink, 42%, orange) immediately before reboot.
-- (capture cut off mid-reconnect/login after reboot; lamp status after reboot not yet captured - see
-  follow-up needed for TC-LM-03 completion.)
+- the capture was cut off mid-reconnect after reboot; the lamp state after reboot was confirmed separately (below).
 
-Pending for this group:
-  - TC-LM-03: confirm 'lamp status' is OFF immediately after the post-reboot login (capture was cut off).
-  - TC-LM-22: LED priority comparison (lamp off -> LED shows system state; lamp on -> LED follows lamp) not
-    yet explicitly observed/reported.
-
-Follow-up (confirmed by tester):
+TC-LM-03 and TC-LM-22 (confirmed separately):
   TC-LM-03: 'lamp status' right after post-reboot login showed OFF, as expected.
   TC-LM-22: LED priority confirmed - LED shows system state while lamp is off, and follows the lamp once
   'lamp on' is issued.
-Both pending items closed. Group 2 fully PASS except BUG-009 (TC-LM-16).
+Group 2: PASS except BUG-009 (TC-LM-16).

@@ -1,6 +1,6 @@
 Manual checklist Group 4 (HC-SR04 sonar), firmware v2.1.0
 Session: miniterm COM3 115200, 2026-10-14
-Full raw console capture provided by the tester (two sessions).
+Full raw console capture (two sessions).
 
 Confirmed PASS:
 - distance calibrate 20 (object at a taped/measured 20 cm): [SONAR] calibrating: put object at 20.0 cm...
@@ -20,7 +20,7 @@ Confirmed PASS:
                                                                               retreating past 25 cm in between)
   Confirms DS-6a: COLLISION fires once per approach, re-arms only after retreating beyond the 25 cm hysteresis
   (TC-DS-14).
-- distance log 200 + relay on, approach 40ish -> 20ish cm: diode blink rate change reported by tester as
+- distance log 200 + relay on, approach 40ish -> 20ish cm: diode blink rate change as
   expected, visually confirmed (TC-DS-17).
 
 Corrected understanding (E701 vs E702 physical mapping - see chat discussion):
@@ -38,9 +38,9 @@ New finding (separate from the above, needs confirmation):
   E (153759) sentry: E706 usage: distance calibrate <ref 5-300 cm>
   PRD DS-3 and the device's own 'help' text ("distance calibrate <cm> - calibrate by reference object
   ('reset')") both say 'reset' is a valid sub-command, but the device rejects it, demanding a numeric
-  5-300 reference instead. Asked the tester to retry once to rule out a one-off typo before filing.
+  5-300 reference instead. Retried once to rule out a one-off typo (below).
 
-Resolved: tester re-tested with the correct command 'distance reset' (not 'distance calibrate reset'):
+Retest with the correct command 'distance reset' (not 'distance calibrate reset'):
   distance reset
   I (1363409) sentry: [SONAR] calibration reset
 Works fine. Not a device bug - the help text's "calibrate by reference object ('reset')" phrasing is

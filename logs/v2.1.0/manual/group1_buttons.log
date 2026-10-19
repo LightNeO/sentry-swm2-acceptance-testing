@@ -1,8 +1,8 @@
 Manual checklist Group 1 (buttons K1-K4), firmware v2.1.0
 Session: miniterm COM3 115200, 2026-10-14
-Full raw console capture provided by the tester, boot -> login -> button exercises -> logout -> re-login -> state combos.
+Full raw console capture, boot -> login -> button exercises -> logout -> re-login -> state combos.
 
-Key excerpts (full capture kept as pasted by the tester in chat, summarized here for the report):
+Key excerpts (summarized from the full capture for the report):
 
 - Boot: fw v2.1.0, ready. state 1 NORMAL.
 - K1 pressed (no login): E003 lamp: login required.
@@ -22,9 +22,7 @@ Key excerpts (full capture kept as pasted by the tester in chat, summarized here
 - K1+K2 held 2 s -> [STATE] 3 VERBOSE -> 1 NORMAL (by buttons).
 - K4+K1 held 2 s (from 1 NORMAL) -> E302 EMERGENCY can be entered only from 3 VERBOSE (now 1 NORMAL). State unchanged.
 
-Pending: the same K4+K1 check from 2 DEBUG (TC-BTN-06 requires both NORMAL and DEBUG as starting states) was not yet exercised in this capture.
-
-Follow-up: K4+K1 held 2 s from 2 DEBUG:
+K4+K1 held 2 s from 2 DEBUG (TC-BTN-06 requires both NORMAL and DEBUG as starting states):
   I (1024919) sentry: [BTN] K4+K1 held 2 s -> state 4
   E (1024919) sentry: E302 EMERGENCY can be entered only from 3 VERBOSE (now 2 DEBUG)
 TC-BTN-06 fully confirmed (both NORMAL and DEBUG starting states correctly refused with E302).

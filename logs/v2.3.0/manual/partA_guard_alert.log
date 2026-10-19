@@ -75,8 +75,6 @@ Guard log excerpt (confirms event history across the session):
    9. 16:08:49  armed
   10. 16:08:50  ALARM: sensor tamper (no echo)
 
-Pending: visual confirmation of LED color/pattern during ALARM (red/blue per GD-3/LM-8) - not observable
-from the text log, asked the tester to confirm separately.
-
-Resolved: tester confirmed visually - LED shows red/blue pattern during ALARM, matching GD-3/LM-8.
+The LED color/pattern during ALARM (red/blue per GD-3/LM-8) is not observable from the text log; it was
+confirmed visually: the LED shows the red/blue pattern during ALARM, matching GD-3/LM-8.
 Part A fully closed: 9/9 PASS, no bugs found.

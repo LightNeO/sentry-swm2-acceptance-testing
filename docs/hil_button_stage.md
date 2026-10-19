@@ -108,7 +108,7 @@ python -m pytest tests/hil/test_button_stage.py -m hil_stage --run-hil -k k3_k4
 | `TC-BTN-05` | автоматизується | K1+K2, K2+K3, K3+K4, K4+K1 з перевіркою стану |
 | `TC-BTN-06` | автоматизується | K4+K1 з NORMAL і DEBUG дає `E302`; з VERBOSE має входити в EMERGENCY |
 | `TC-BTN-07` | автоматизується | кнопки без login дають `E003`; реалізовано як `HIL-BTN-07` |
-| `TC-BTN-08` | частково автоматизується | точні press/hold/debounce boundary; поріг 1.5 с треба підтвердити на DUT перед жорстким assert |
+| `TC-BTN-08` | частково автоматизується | точні press/hold/debounce boundary; поріг 1.5 с перевіряється із запасом (hold 1,7 с у HIL-BTN-02-PULSE), без асерта рівно на межі |
 | `TC-BTN-09` | автоматизується для 2.1.0 | K1–K3 в EMERGENCY дають `E005`; K4 має окрему Guard/Alert поведінку |
 | `TC-GD-02/03/04/06/09` | не лише кнопковий stage | UART timing можна автоматизувати, але потрібен distance stimulator |
 | `TC-GD-07` | частково автоматизується | K4 hold точний, але INTRUSION/ARMED потребують sonar stimulus |
@@ -136,7 +136,7 @@ python -m pytest tests/hil/test_button_stage.py -m hil_stage --run-hil -k k3_k4
 
 Ці ID навмисно окремі й не записуються в основний `docs/results.json`. Генератор трасабіліті працює з 220 кейсами, а HIL має власні докази виконання і не повинен створювати «осиротілі» TC.
 
-## Межі та наступні кроки
+## Межі покриття
 
 Поточний набір не приховує відомі дефекти:
 
@@ -146,7 +146,7 @@ python -m pytest tests/hil/test_button_stage.py -m hil_stage --run-hil -k k3_k4
 - `BUG-007` — `state` відповідає в EMERGENCY поза allowlist;
 - `BUG-008` — перший Alert не підтверджується через `alert ack <id>`.
 
-Наступний технічний крок після кнопкової стадії — додати timestamp/event ID у протокол Arduino, щоб у доказах корелювати момент фізичного stimulus із UART-подією. Потім додавати logic analyzer для GPIO4/GPIO8 і окремий distance stimulus, не називаючи неповне UART-покриття повною фізичною автоматизацією.
+Неповне UART-покриття не називається повною фізичною автоматизацією: LED, діод, реле та відстань лишаються `A+M` (теоретичне продовження стенда з логічним аналізатором, камерою та стимулятором відстані — у [`hil_stand.md`](hil_stand.md)).
 
 ## Результати прогонів
 

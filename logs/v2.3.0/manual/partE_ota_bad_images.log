@@ -54,7 +54,7 @@ DUT on v2.3.0, server `ota_server.py --slow 20` (download ~20 s on this network)
 > ota url http://192.168.50.28:8000/fw7/v2.3.0/sentry_fw7.bin
 [OTA] downloading ...   W409 same version v2.3.0 - reinstalling
 [OTA] 10% ... 100%
-Console did not accept any input while the download was running (tester typed the second command, nothing
+Console did not accept any input while the download was running (a second command was typed, nothing
 was processed until the end). After the download:
 [OTA] success: v2.3.0 -> v2.3.0 in 20 s. Rebooting...
 boot: Loaded app from partition at offset 0x1a0000 (ota_1)

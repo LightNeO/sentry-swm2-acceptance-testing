@@ -25,7 +25,7 @@ TC-DS-10 / TC-DS-14 (alarm hysteresis + collision, distance log 200, two full ru
 
 TC-DS-17 (diode blink rate vs distance, via K3 active pinging):
   K3 pressed -> active pinging 30 s; readings swept from out-of-range down to 9.2 cm (triggering
-  COLLISION) and back; tester did not report any blink-pattern discrepancy beyond the
+  COLLISION) and back; no blink-pattern discrepancy was observed beyond the
   wiring issue fixed later. Diode blink-rate-vs-distance pattern itself: PASS (faster blink when closer works).
 
 TC-LM-04 (lamp colors, sample): white, blue, green (after a harmless typo 'lamo' -> E001, corrected), red,

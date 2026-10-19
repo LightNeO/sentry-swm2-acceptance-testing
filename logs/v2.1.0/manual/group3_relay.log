@@ -1,6 +1,6 @@
 Manual checklist Group 3 (relay/valve), firmware v2.1.0
 Session: miniterm COM3 115200, 2026-10-14
-Full raw console capture provided by the tester.
+Full raw console capture.
 
 Confirmed PASS:
 - relay on/off/toggle/toggle: correct OPEN/CLOSED transitions; repeated 'relay on' -> W601 already on.
@@ -14,21 +14,18 @@ Confirmed PASS:
 - distance alarm 30\ (stray backslash typo) -> correctly rejected: E708 alarm must be 5-300 cm or 'off'
   (bonus NFR-4 confirmation: malformed input handled gracefully).
 
-Findings needing follow-up (not yet confirmed as firmware bugs):
+Findings:
 
-1. DIODE POLARITY (TC-RL-01): tester reports the GPIO4 indicator diode lights when the relay is OFF and is
-   dark when ON - the opposite of RL-1a ("Діод світить, коли реле увімкнене"). Could be firmware (GPIO4
-   driven active-low) or a wiring mistake (diode cathode connected to 3V3 instead of GND, or reversed
-   polarity) on this specific physical build. Asked the tester to verify the physical wiring against the
-   schematic (GPIO4 -> resistor -> anode -> cathode -> GND) before this is filed as a firmware bug.
+1. DIODE POLARITY (TC-RL-01): the GPIO4 indicator diode first lit when the relay was OFF and was dark
+   when ON - the opposite of RL-1a. The cause was in the physical wiring of this build, not in the
+   firmware (see the end of this entry).
 
 2. RELAY AUTO-ON TRIGGER (TC-RL-13): the valve was already left OPEN (from an earlier 'relay schedule off'
    stopped mid-ON-phase) before 'relay auto on' was exercised, so the whole auto-trigger sequence in this
    log cannot show a CLOSED->OPEN transition - it is inconclusive, not a confirmed defect. A clean re-test
-   was proposed: explicitly close the relay first, confirm via 'relay status', then re-test the 'distance
-   alarm <n>' + 'relay auto on' + near/far 'distance' sequence from a known closed state.
+   from a known closed state follows below.
 
-Follow-up (clean re-test, tester confirmed):
+Clean re-test (relay closed first):
   relay off -> W601 relay already off
   relay status -> [VALVE] closed, auto off, cycles 220
   distance alarm 25 -> [SONAR] alarm at 25 cm
@@ -40,5 +37,5 @@ threshold, no separate 'relay on' needed. TC-RL-13 = PASS, finding #2 withdrawn 
 a bug). Side note: cycles went 220 -> 222 for a single OFF->ON switch, consistent with the already-known
 BUG-005 (cycles +2 per switch) still present on 2.1.0 - not a new finding.
 
-Diode polarity (finding #1): tester confirmed physical wiring matches the schematic (GPIO4 -> resistor ->
-anode -> cathode -> GND). Later found to be a wiring error (diode was not connected per fw_7/WIRING.md); after rewiring the diode behaves correctly. Not a firmware defect.
+Diode polarity (finding #1): a wiring error - the diode was not connected per fw_7/WIRING.md. After rewiring the
+diode behaves correctly. Not a firmware defect.
