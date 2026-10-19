@@ -1,0 +1,14 @@
+# tests/hil/test_button_stage.py::test_k3_starts_and_stops_active_pinging
+# fw v2.3.0  2026-10-19 12:30:32
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.29s] RX:
+I (34220) sentry: [AUTH] operator qa_swm on watch, console 2
+I (34240) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    2.69s] RX:
+I (36580) sentry: [BTN] K3 pressed
+I (36580) sentry: [SONAR] active pinging for 30 s, every 500 ms (K3)
+E (36640) sentry: E702 sonar: out of range (2-400 cm) - open water?
+[    3.02s] RX:
+I (36970) sentry: [BTN] K3 pressed
+I (36970) sentry: [SONAR] pinging stopped (K3)

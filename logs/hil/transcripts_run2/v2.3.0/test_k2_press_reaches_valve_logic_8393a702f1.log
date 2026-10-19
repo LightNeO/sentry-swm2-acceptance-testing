@@ -1,0 +1,11 @@
+# tests/hil/test_button_stage.py::test_k2_press_reaches_valve_logic
+# fw v2.3.0  2026-10-19 12:11:38
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.28s] RX:
+I (20230) sentry: [AUTH] operator qa_swm on watch, console 2
+I (20240) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    2.61s] RX:
+W (20640) sentry: [ACU] own-ship noise: pump #2 cavitation suspected
+I (22570) sentry: [BTN] K2 pressed
+I (22570) sentry: [VALVE] OPEN (K2)

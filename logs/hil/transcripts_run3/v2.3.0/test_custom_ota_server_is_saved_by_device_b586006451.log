@@ -1,0 +1,37 @@
+# tests/wifi/test_ota_network.py::test_custom_ota_server_is_saved_by_device
+# fw v2.3.0  2026-10-19 12:35:19
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.26s] RX:
+I (177840) sentry: [AUTH] operator qa_swm on watch, console 2
+[    0.27s] TX: ota server http://10.42.0.1:8000/fw7/
+[    1.10s] RX:
+I (178040) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+I (178120) sentry: [OTA] server: http://10.42.0.1:8000/fw7/ (custom)
+[    1.10s] TX: ota server
+[    2.01s] RX:
+I (178920) wifi:state: run -> init (0x7c0)
+I (178920) wifi:pm stop, total sleep time: 16261951 us / 20664603 us
+
+I (178920) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+W (178930) sentry: W110 wifi connection lost (reason 7)
+I (178930) sentry: [LINK] retry 1/3...
+E (178940) sentry: E002 Wi-Fi required. Use 'reconnect' or 'connect'
+I (178940) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (178950) wifi:state: init -> auth (0xb0)
+I (178950) wifi:state: auth -> assoc (0x0)
+I (178960) wifi:state: assoc -> run (0x10)
+I (178990) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
+I (178990) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -26, cipher(pairwise:0x3, group:0x3), pmf:0
+I (178990) wifi:pm start, type: 1
+
+I (179000) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (179000) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (179010) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (179020) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+[    2.02s] TX: ota server default
+[    3.22s] RX:
+E (179850) sentry: E002 Wi-Fi required. Use 'reconnect' or 'connect'
+I (180090) esp_netif_handlers: sta ip: 10.42.0.143, mask: 255.255.255.0, gw: 10.42.0.1
+I (180090) sentry: [LINK] got ip 10.42.0.143
+I (180240) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)

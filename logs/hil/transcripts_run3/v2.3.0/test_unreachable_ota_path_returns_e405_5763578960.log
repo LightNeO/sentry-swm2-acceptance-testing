@@ -1,0 +1,14 @@
+# tests/wifi/test_ota_network.py::test_unreachable_ota_path_returns_e405
+# fw v2.3.0  2026-10-19 12:35:08
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.42s] RX:
+I (168290) sentry: [AUTH] operator qa_swm on watch, console 2
+I (168440) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.43s] TX: ota url http://10.42.0.1:53317/not-found.bin
+[    1.27s] RX:
+I (168720) sentry: [OTA] current v2.3.0 (ota_1) -> target partition ota_0
+I (168720) sentry: [OTA] downloading http://10.42.0.1:53317/not-found.bin
+E (168730) esp_https_ota: File not found(404)
+E (168730) esp_https_ota: Failed to establish HTTP connection
+E (168740) sentry: E405 cannot start download (ESP_FAIL)

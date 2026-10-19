@@ -1,0 +1,12 @@
+# tests/hil/test_button_stage.py::test_k4_acknowledges_newest_alert
+# fw v2.3.0  2026-10-19 11:55:30
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.27s] RX:
+I (42450) sentry: [AUTH] operator qa_swm on watch, console 2
+[    2.27s] TX: alert test info
+[    3.09s] RX:
+I (44720) sentry: [CIC #1 INFO] test: test alert
+[    3.43s] RX:
+I (45610) sentry: [BTN] K4 pressed
+I (45610) sentry: [CIC] #1 acknowledged (K4). Unacked: 0

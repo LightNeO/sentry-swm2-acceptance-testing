@@ -1,0 +1,40 @@
+# tests/wifi/test_ota_network.py::test_unreachable_ota_server_returns_e402
+# fw v2.3.0  2026-10-19 12:34:50
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.41s] RX:
+I (148500) sentry: [AUTH] operator qa_swm on watch, console 2
+I (148640) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.41s] TX: ota server http://10.42.0.1:53317/fw7/
+[    1.23s] RX:
+I (148910) sentry: [OTA] server: http://10.42.0.1:53317/fw7/ (custom)
+[    1.23s] TX: ota check
+[    2.19s] RX:
+I (149730) wifi:state: run -> init (0x7c0)
+I (149730) wifi:pm stop, total sleep time: 10514606 us / 13289292 us
+
+I (149730) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+W (149740) sentry: W110 wifi connection lost (reason 7)
+I (149740) sentry: [LINK] retry 1/3...
+E (149750) esp-tls: [sock=54] delayed connect error: Software caused connection abort
+I (149750) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (149760) wifi:state: init -> auth (0xb0)
+E (149770) transport_base: Failed to open a new connection: 32772
+E (149770) HTTP_CLIENT: Connection failed, sock < 0
+I (149770) wifi:state: auth -> assoc (0x0)
+E (149780) sentry: E402 cannot reach OTA server (stable.txt)
+I (149780) wifi:state: assoc -> run (0x10)
+I (149800) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
+I (149800) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -26, cipher(pairwise:0x3, group:0x3), pmf:0
+I (149810) wifi:pm start, type: 1
+
+I (149810) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (149820) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (149860) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (149860) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+[    2.19s] TX: ota server default
+[    3.36s] RX:
+E (150690) sentry: E002 Wi-Fi required. Use 'reconnect' or 'connect'
+I (150870) esp_netif_handlers: sta ip: 10.42.0.143, mask: 255.255.255.0, gw: 10.42.0.1
+I (150870) sentry: [LINK] got ip 10.42.0.143
+I (151040) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)

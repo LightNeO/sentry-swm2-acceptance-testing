@@ -1,0 +1,6 @@
+# tests/hil/test_button_stage.py::test_buttons_require_login[K3]
+# fw v2.3.0  2026-10-19 12:31:30
+
+[    2.35s] RX:
+I (95050) sentry: [BTN] K3 pressed
+E (95050) sentry: E003 sonar: login required

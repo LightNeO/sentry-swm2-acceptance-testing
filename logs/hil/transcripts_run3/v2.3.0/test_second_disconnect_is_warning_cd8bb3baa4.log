@@ -1,0 +1,14 @@
+# tests/wifi/test_wifi_functional.py::test_second_disconnect_is_warning
+# fw v2.3.0  2026-10-19 12:43:48
+
+[    0.00s] TX: disconnect
+[    1.14s] RX:
+I (29195) wifi:state: run -> init (0x0)
+I (29195) wifi:pm stop, total sleep time: 8334227 us / 10928094 us
+
+I (29195) wifi:<ba-del>idx:0, tid:0
+I (29195) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (29205) sentry: [LINK] disconnected
+[    1.14s] TX: disconnect
+[    1.96s] RX:
+W (30335) sentry: W115 not connected

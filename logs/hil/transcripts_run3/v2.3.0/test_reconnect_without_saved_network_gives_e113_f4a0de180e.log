@@ -1,0 +1,50 @@
+# tests/wifi/test_wifi_functional.py::test_reconnect_without_saved_network_gives_e113
+# fw v2.3.0  2026-10-19 12:41:15
+
+[    0.00s] TX: forget
+[    1.13s] RX:
+I (156245) sentry: [LINK] known network forgotten
+[    1.13s] TX: reconnect
+[    1.95s] RX:
+E (157365) sentry: E113 no known network. Use 'connect' first
+[    1.95s] TX: connect
+[    5.17s] RX:
+I (158185) sentry: [LINK] scanning...
+I (161085) sentry:   [ 1] SENTRY-HIL                        -28 dBm
+I (161085) sentry:   [ 2] NeO                               -47 dBm
+I (161085) sentry:   [ 3] TP-Link_2888                      -56 dBm
+I (161085) sentry:   [ 4] AV                                -65 dBm
+I (161095) sentry:   [ 5] TP-LINK_E6F2                      -70 dBm
+I (161095) sentry:   [ 6] AP_2947486690                     -72 dBm
+I (161105) sentry:   [ 7] F100011002624340102               -74 dBm
+I (161115) sentry:   [ 8] HUAWEI-AN85                       -79 dBm
+I (161115) sentry:   [ 9] TP-Link_3E3A                      -86 dBm
+I (161125) sentry:   [10] AVIA LINK                         -88 dBm
+I (161125) sentry:   [11] HUAWEI-70                         -90 dBm
+SSID or number: 
+[    5.18s] TX: SENTRY-HIL
+[    5.43s] RX:
+Password: 
+[    5.43s] TX: ***
+[    6.93s] RX:
+********
+I (161665) wifi:state: run -> init (0x0)
+I (161665) wifi:pm stop, total sleep time: 4123711 us / 8086547 us
+
+I (161665) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (161765) sentry: [LINK] raising buoy antenna, connecting to 'SENTRY-HIL'...
+I (161765) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (161765) wifi:state: init -> auth (0xb0)
+I (161775) wifi:state: auth -> assoc (0x0)
+I (161795) wifi:state: assoc -> run (0x10)
+I (161805) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
+I (161805) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -28, cipher(pairwise:0x3, group:0x3), pmf:0
+I (161815) wifi:pm start, type: 1
+
+I (161815) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (161825) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (161835) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (161835) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+I (162885) esp_netif_handlers: sta ip: 10.42.0.143, mask: 255.255.255.0, gw: 10.42.0.1
+I (162885) sentry: [LINK] got ip 10.42.0.143
+I (162885) sentry: [LINK] connected to 'SENTRY-HIL', rssi -28 dBm (excellent)

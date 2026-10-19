@@ -1,0 +1,46 @@
+# tests/wifi/test_managed_ap_stage.py::test_ap_loss_makes_ota_check_require_wifi
+# fw v2.3.0  2026-10-19 12:15:17
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.27s] RX:
+I (81860) sentry: [AUTH] operator qa_swm on watch, console 2
+[    3.53s] TX: ota check
+[   13.53s] RX:
+I (88100) wifi:bcn_timeout,ap_probe_send_start
+I (90600) wifi:ap_probe_send over, reset wifi status to disassoc
+I (90600) wifi:state: run -> init (0xc800)
+I (90600) wifi:pm stop, total sleep time: 8206321 us / 18664610 us
+
+I (90610) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+W (90620) sentry: W110 wifi connection lost (reason 200)
+I (90620) sentry: [LINK] retry 1/3...
+E (90630) esp-tls: [sock=54] delayed connect error: Software caused connection abort
+E (90630) esp-tls: Failed to open new connection
+E (90640) transport_base: Failed to open a new connection
+E (90640) HTTP_CLIENT: Connection failed, sock < 0
+E (90650) sentry: E402 cannot reach OTA server (stable.txt)
+I (93040) sentry: [LINK] retry 2/3...
+W (94880) sentry: [PWR] battery bus ripple 140 mV (limit 250 mV)
+[   14.03s] TX: reconnect
+[   15.65s] RX:
+I (95890) wifi:state: run -> init (0x0)
+I (95890) wifi:pm stop, total sleep time: 225443 us / 368997 us
+
+I (95890) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (95990) sentry: [LINK] raising buoy antenna, connecting to 'SENTRY-HIL'...
+I (95990) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (95990) wifi:state: init -> auth (0xb0)
+I (96000) wifi:state: auth -> assoc (0x0)
+I (96000) wifi:state: assoc -> run (0x10)
+I (96020) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
+I (96020) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -27, cipher(pairwise:0x3, group:0x3), pmf:0
+I (96020) wifi:pm start, type: 1
+
+I (96030) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (96030) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (96150) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (96160) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+I (97090) esp_netif_handlers: sta ip: 10.42.0.143, mask: 255.255.255.0, gw: 10.42.0.1
+I (97090) sentry: [LINK] got ip 10.42.0.143
+I (97090) sentry: [LINK] connected to 'SENTRY-HIL', rssi -27 dBm (excellent)
+I (97240) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)

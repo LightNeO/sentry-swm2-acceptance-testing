@@ -1,0 +1,65 @@
+# tests/wifi/test_wifi_functional.py::test_unknown_ssid_is_rejected
+# fw v2.3.0  2026-10-19 12:05:31
+
+[    0.00s] TX: connect
+[    3.21s] RX:
+I (14415) sentry: [LINK] scanning...
+I (17315) sentry:   [ 1] SENTRY-HIL                        -28 dBm
+I (17315) sentry:   [ 2] NeO                               -49 dBm
+I (17315) sentry:   [ 3] TP-Link_2888                      -61 dBm
+I (17315) sentry:   [ 4] AV                                -65 dBm
+I (17325) sentry:   [ 5] AP_2947486690                     -66 dBm
+I (17325) sentry:   [ 6] TP-LINK_E6F2                      -69 dBm
+I (17335) sentry:   [ 7] F100011002624340102               -71 dBm
+I (17345) sentry:   [ 8] Tapo_Cam_BA35                     -75 dBm
+SSID or number: 
+[    3.21s] TX: SENTRY-HIL-NOT-FOUND
+[    3.47s] RX:
+Password: 
+[    3.47s] TX: ***
+[   13.49s] RX:
+********
+I (17885) wifi:state: run -> init (0x0)
+I (17885) wifi:pm stop, total sleep time: 9400850 us / 15588460 us
+
+I (17885) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (17985) sentry: [LINK] raising buoy antenna, connecting to 'SENTRY-HIL-NOT-FOUND'...
+I (20395) sentry: [LINK] retry 1/3...
+I (20645) sentry: [NAV] depth 41.9 m, heading 276, speed 3.1 kn
+I (22805) sentry: [LINK] retry 2/3...
+I (25215) sentry: [LINK] retry 3/3...
+E (27635) sentry: E102 network 'SENTRY-HIL-NOT-FOUND' not found
+[   13.49s] TX: connect
+[   16.30s] RX:
+I (27905) sentry: [LINK] scanning...
+I (30405) sentry:   [ 1] SENTRY-HIL                        -28 dBm
+I (30405) sentry:   [ 2] NeO                               -53 dBm
+I (30405) sentry:   [ 3] TP-Link_2888                      -62 dBm
+I (30405) sentry:   [ 4] AV                                -62 dBm
+I (30415) sentry:   [ 5] AP_2947486690                     -64 dBm
+I (30415) sentry:   [ 6] TP-LINK_E6F2                      -69 dBm
+I (30425) sentry:   [ 7] F100011002624340102               -70 dBm
+I (30435) sentry:   [ 8] Tapo_Cam_BA35                     -77 dBm
+SSID or number: 
+[   16.30s] TX: SENTRY-HIL
+[   16.56s] RX:
+Password: 
+[   16.56s] TX: ***
+[   18.11s] RX:
+********
+I (31075) sentry: [LINK] raising buoy antenna, connecting to 'SENTRY-HIL'...
+I (31075) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (31075) wifi:state: init -> auth (0xb0)
+I (31085) wifi:state: auth -> assoc (0x0)
+I (31085) wifi:state: assoc -> run (0x10)
+I (31135) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
+I (31135) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -30, cipher(pairwise:0x3, group:0x3), pmf:0
+I (31135) wifi:pm start, type: 1
+
+I (31145) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (31145) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (31235) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (31235) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+I (32245) esp_netif_handlers: sta ip: 10.42.0.143, mask: 255.255.255.0, gw: 10.42.0.1
+I (32245) sentry: [LINK] got ip 10.42.0.143
+I (32245) sentry: [LINK] connected to 'SENTRY-HIL', rssi -28 dBm (excellent)

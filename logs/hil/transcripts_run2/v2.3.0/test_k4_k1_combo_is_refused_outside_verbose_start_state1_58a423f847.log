@@ -1,0 +1,17 @@
+# tests/hil/test_button_stage.py::test_k4_k1_combo_is_refused_outside_verbose[start_state1]
+# fw v2.3.0  2026-10-19 12:13:19
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.26s] RX:
+I (118280) sentry: [AUTH] operator qa_swm on watch, console 2
+[    2.27s] TX: state 2
+[    3.26s] RX:
+W (120550) sentry: [STATE] 1 NORMAL -> 2 DEBUG (by command)
+I (120550) sentry: [STATE] DEBUG (maintenance): raw transducer data, LED blink codes, parser diagnostics
+I (120550) sentry: [V] 'state' done in 3 ms
+I (120720) sentry: [PWR] battery bus 24.19 V, load 1.6 A
+[    5.63s] RX:
+I (121440) sentry: [V] button K1 down
+I (121440) sentry: [V] button K4 down
+I (123450) sentry: [BTN] K4+K1 held 2 s -> state 4
+E (123450) sentry: E302 EMERGENCY can be entered only from 3 VERBOSE (now 2 DEBUG)

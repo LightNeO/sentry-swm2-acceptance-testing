@@ -1,0 +1,19 @@
+# tests/wifi/test_ota_network.py::test_unreachable_ota_server_returns_e402
+# fw v2.3.0  2026-10-19 12:16:40
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.38s] RX:
+I (177330) sentry: [AUTH] operator qa_swm on watch, console 2
+I (177440) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.38s] TX: ota server http://10.42.0.1:53317/fw7/
+[    1.20s] RX:
+I (177710) sentry: [OTA] server: http://10.42.0.1:53317/fw7/ (custom)
+[    1.20s] TX: ota check
+[    2.04s] RX:
+E (178530) esp-tls: [sock=54] delayed connect error: Connection reset by peer
+E (178530) transport_base: Failed to open a new connection: 32772
+E (178530) HTTP_CLIENT: Connection failed, sock < 0
+E (178540) sentry: E402 cannot reach OTA server (stable.txt)
+[    2.04s] TX: ota server default
+[    2.87s] RX:
+I (179380) sentry: [OTA] server: https://raw.githubusercontent.com/BohdanHorbanych/esp32-ota-files/main/fw7/ (default)

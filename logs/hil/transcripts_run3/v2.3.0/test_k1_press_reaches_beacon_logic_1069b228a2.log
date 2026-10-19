@@ -1,0 +1,10 @@
+# tests/hil/test_button_stage.py::test_k1_press_reaches_beacon_logic
+# fw v2.3.0  2026-10-19 12:30:12
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.41s] RX:
+I (14300) sentry: [AUTH] operator qa_swm on watch, console 2
+I (14440) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    2.75s] RX:
+I (16780) sentry: [BTN] K1 pressed
+I (16780) sentry: [BEACON] on (K1) breathe, 100%, color (255,255,255)

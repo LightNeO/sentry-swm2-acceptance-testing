@@ -1,0 +1,21 @@
+# tests/hil/test_button_stage.py::test_k4_k1_combo_enters_emergency_from_verbose
+# fw v2.3.0  2026-10-19 11:56:58
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.41s] RX:
+I (128090) sentry: [AUTH] operator qa_swm on watch, console 2
+I (128240) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    2.42s] TX: state 3
+[    3.44s] RX:
+W (130510) sentry: [STATE] 1 NORMAL -> 3 VERBOSE (by command)
+I (130510) sentry: [STATE] VERBOSE (tactical): extended logs, telemetry every 10 s, LED heartbeat
+I (130510) sentry: [V] 'state' done in 3 ms
+I (130710) sentry: [PWR] battery bus 24.19 V, load 1.7 A
+[    5.88s] RX:
+I (131430) sentry: [V] button K1 down
+I (131430) sentry: [V] button K4 down
+I (133440) sentry: [BTN] K4+K1 held 2 s -> state 4
+W (133440) sentry: [STATE] 3 VERBOSE -> 4 EMERGENCY (by buttons)
+E (133440) sentry: [EMERGENCY] EMERGENCY SURFACING. Module locked. Allowed: help, status, whoami, version, health now, alert list, reboot. Exit: reboot only
+E (133450) sentry: [CIC #4 CRITICAL] state: EMERGENCY mode entered (by buttons)
+W (133710) sentry: [NAV] EMERGENCY BLOW: depth 41.2 m, ascending

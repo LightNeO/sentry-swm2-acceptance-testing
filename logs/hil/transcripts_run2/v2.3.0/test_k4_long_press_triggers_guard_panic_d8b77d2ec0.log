@@ -1,0 +1,64 @@
+# tests/hil/test_button_stage.py::test_k4_long_press_triggers_guard_panic
+# fw v2.3.0  2026-10-19 12:12:30
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.27s] RX:
+I (47050) sentry: [AUTH] operator qa_swm on watch, console 2
+[    0.27s] TX: guard disarm 1234
+[    1.18s] RX:
+I (47240) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+W (47310) sentry: W802 guard is not armed
+[    1.18s] TX: guard zone 50
+[    2.01s] RX:
+I (48240) sentry: [WATCH] zone < 50 cm
+[    2.01s] TX: alert ack all
+[    2.93s] RX:
+W (49060) sentry: W853 no unacknowledged alerts
+[    2.93s] TX: alert clear
+[    3.84s] RX:
+I (49970) sentry: [CIC] cleared
+[    5.84s] TX: guard zone 10
+[    6.67s] RX:
+I (52900) sentry: [WATCH] zone < 10 cm
+[    6.67s] TX: distance
+[    8.36s] RX:
+I (53770) sentry: [SONAR] ping: echo 12.9 cm
+E (53770) sentry: [COLLISION] contact too close: 12.9 cm (< 20 cm)
+W (53770) sentry: [CIC #2 WARNING] sonar: collision risk: contact at 12.9 cm
+[    8.36s] TX: guard arm
+[   10.11s] RX:
+I (55450) sentry: [WATCH] arming: clear the zone (< 10 cm) within 10 s
+I (55540) sentry: [WATCH] arming in 10 s...
+[   21.11s] TX: guard status
+[   23.00s] RX:
+I (68160) sentry: [WATCH] ARMED, zone 10 cm, last distance 40.7 cm
+E (68750) sentry: [COLLISION] contact too close: 19.9 cm (< 20 cm)
+W (68750) sentry: [CIC #5 WARNING] sonar: collision risk: contact at 19.9 cm
+E (69230) sentry: E701 sonar: no echo (check transducer wiring TRIG 5 / ECHO 18)
+[   25.37s] RX:
+E (70000) sentry: [COLLISION] contact too close: 13.2 cm (< 20 cm)
+W (70000) sentry: [CIC #6 WARNING] sonar: collision risk: contact at 13.2 cm
+I (71470) sentry: [BTN] K4 long press
+E (71470) sentry: [WATCH] PANIC button (K4)
+E (71470) sentry: [WATCH] !!! GENERAL ALARM: PANIC button !!! Disarm: 'guard disarm <pin>'
+E (71470) sentry: [CIC #7 CRITICAL] watch: GENERAL ALARM: PANIC button
+I (71480) sentry: [VALVE] OPEN (critical alert)
+W (71480) sentry: [STATE] 1 NORMAL -> 3 VERBOSE (by critical alert)
+I (71490) sentry: [STATE] VERBOSE (tactical): extended logs, telemetry every 10 s, LED heartbeat
+I (71580) sentry: [V] 40 kHz burst x5, median of 5: 44.2..46.5, offset -16.5
+I (71580) sentry: [V] guard: 27.7 cm (zone 10)
+I (71680) sentry: [NAV] depth 41.9 m, heading 277, speed 3.0 kn
+[   25.37s] TX: guard status
+[   26.19s] RX:
+I (72420) sentry: [WATCH] ALARM, zone 10 cm, last distance 27.7 cm
+I (72420) sentry: [V] 'guard' done in 0 ms
+[   26.19s] TX: guard disarm 1234
+[   27.03s] RX:
+I (73240) sentry: [WATCH] disarmed (was ALARM)
+I (73250) sentry: [VALVE] CLOSED (guard disarm)
+I (73250) sentry: [V] valve driver GPIO8=0, cycles 102
+I (73250) sentry: [V] 'guard' done in 11 ms
+[   27.04s] TX: guard disarm 1234
+[   27.96s] RX:
+W (74090) sentry: W802 guard is not armed
+I (74090) sentry: [V] 'guard' done in 0 ms

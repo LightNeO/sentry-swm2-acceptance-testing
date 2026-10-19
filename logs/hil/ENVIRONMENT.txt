@@ -1,0 +1,11 @@
+date: 2026-10-19T11:54:42+03:00
+commit: 3a92552be3e3a51dc22fb86498e2528de83749ff
+python: Python 3.14.7
+pytest: pytest 9.1.1
+SWM_PORT=/dev/ttyUSB1 BUTTON_STIM_PORT=/dev/ttyUSB0 HIL_AP_CONNECTION=SENTRY-HIL
+--- nmcli device status
+DEVICE          TYPE      STATE                   CONNECTION 
+wlp1s0          wifi      connected               SENTRY-HIL 
+wlp0s21f0u2     wifi      connected               NeO        
+lo              loopback  connected (externally)  lo         
+p2p-dev-wlp1s0  wifi-p2p  disconnected            --         

@@ -1,0 +1,6 @@
+# tests/hil/test_button_stage.py::test_buttons_require_login[K4]
+# fw v2.3.0  2026-10-19 12:31:35
+
+[    2.35s] RX:
+I (100570) sentry: [BTN] K4 pressed
+E (100570) sentry: E003 guard: login required

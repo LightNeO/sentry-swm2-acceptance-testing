@@ -1,0 +1,12 @@
+# tests/hil/test_button_stage.py::test_k2_hold_runs_one_second_pulse
+# fw v2.3.0  2026-10-19 12:11:46
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.29s] RX:
+I (26020) sentry: [AUTH] operator qa_swm on watch, console 2
+I (26040) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    4.16s] RX:
+I (29740) sentry: [BTN] K2 long press
+I (29740) sentry: [VALVE] OPEN (K2 pulse)
+[    5.01s] RX:
+I (30770) sentry: [VALVE] CLOSED (pulse end)

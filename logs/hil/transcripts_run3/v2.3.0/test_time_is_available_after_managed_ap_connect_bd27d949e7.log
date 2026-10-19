@@ -1,0 +1,10 @@
+# tests/wifi/test_wifi_functional.py::test_time_is_available_after_managed_ap_connect
+# fw v2.3.0  2026-10-19 12:45:55
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.31s] RX:
+I (157005) sentry: [AUTH] operator qa_swm on watch, console 2
+I (157045) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.31s] TX: time
+[    1.12s] RX:
+I (157305) sentry: [LINK] time: 2026-10-19 12:45:55 (Kyiv)

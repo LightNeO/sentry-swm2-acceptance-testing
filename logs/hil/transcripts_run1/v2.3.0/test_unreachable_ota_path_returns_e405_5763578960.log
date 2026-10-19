@@ -1,0 +1,36 @@
+# tests/wifi/test_ota_network.py::test_unreachable_ota_path_returns_e405
+# fw v2.3.0  2026-10-19 12:00:32
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.40s] RX:
+I (197910) sentry: [AUTH] operator qa_swm on watch, console 2
+I (198040) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.44s] TX: ota url http://10.42.0.1:53317/not-found.bin
+[    1.66s] RX:
+I (198350) sentry: [OTA] current v2.3.0 (ota_1) -> target partition ota_0
+I (198350) sentry: [OTA] downloading http://10.42.0.1:53317/not-found.bin
+I (198350) wifi:state: run -> init (0x7c0)
+I (198350) wifi:pm stop, total sleep time: 9071014 us / 12648077 us
+
+I (198360) wifi:<ba-del>idx:0, tid:0
+I (198360) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+W (198370) sentry: W110 wifi connection lost (reason 7)
+I (198370) sentry: [LINK] retry 1/3...
+E (198380) esp-tls: [sock=54] delayed connect error: Software caused connection abort
+I (198380) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (198390) wifi:state: init -> auth (0xb0)
+E (198400) transport_base: Failed to open a new connection: 32772
+E (198400) HTTP_CLIENT: Connection failed, sock < 0
+E (198410) esp_https_ota: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT
+I (198410) wifi:state: auth -> assoc (0x0)
+E (198420) esp_https_ota: Failed to establish HTTP connection
+E (198420) sentry: E405 cannot start download (ESP_ERR_HTTP_CONNECT)
+I (198430) wifi:state: assoc -> run (0x10)
+I (198450) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
+I (198450) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -27, cipher(pairwise:0x3, group:0x3), pmf:0
+I (198460) wifi:pm start, type: 1
+
+I (198460) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (198470) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (198740) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (198740) wifi:AP's beacon interval = 102400 us, DTIM period = 2

@@ -1,0 +1,13 @@
+# tests/hil/test_button_stage.py::test_k4_k1_combo_is_refused_outside_verbose[start_state0]
+# fw v2.3.0  2026-10-19 12:13:10
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.35s] RX:
+I (109560) sentry: [AUTH] operator qa_swm on watch, console 2
+I (109640) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    2.35s] TX: state 1
+[    3.17s] RX:
+W (111910) sentry: W303 already in 1 NORMAL
+[    5.54s] RX:
+I (114660) sentry: [BTN] K4+K1 held 2 s -> state 4
+E (114660) sentry: E302 EMERGENCY can be entered only from 3 VERBOSE (now 1 NORMAL)

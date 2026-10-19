@@ -1,0 +1,55 @@
+# tests/hil/test_button_stage.py::test_k4_long_press_triggers_guard_panic
+# fw v2.3.0  2026-10-19 11:56:00
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.27s] RX:
+I (49050) sentry: [AUTH] operator qa_swm on watch, console 2
+[    0.27s] TX: guard disarm 1234
+[    1.18s] RX:
+I (49240) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+W (49310) sentry: W802 guard is not armed
+[    1.18s] TX: guard zone 50
+[    2.01s] RX:
+I (50240) sentry: [WATCH] zone < 50 cm
+[    2.01s] TX: alert ack all
+[    2.93s] RX:
+W (51060) sentry: W853 no unacknowledged alerts
+[    2.93s] TX: alert clear
+[    3.85s] RX:
+I (51980) sentry: [CIC] cleared
+[    5.86s] TX: guard zone 10
+[    6.68s] RX:
+I (54910) sentry: [WATCH] zone < 10 cm
+[    6.68s] TX: distance
+[    8.41s] RX:
+I (55830) sentry: [SONAR] ping: echo 29.3 cm
+[    8.41s] TX: guard arm
+[   10.21s] RX:
+I (57550) sentry: [WATCH] arming: clear the zone (< 10 cm) within 10 s
+I (57640) sentry: [WATCH] arming in 10 s...
+[   21.21s] TX: guard status
+[   22.03s] RX:
+I (70260) sentry: [WATCH] ARMED, zone 10 cm, last distance 36.8 cm
+[   24.40s] RX:
+I (72490) sentry: [BTN] K4 long press
+E (72490) sentry: [WATCH] PANIC button (K4)
+E (72490) sentry: [WATCH] !!! GENERAL ALARM: PANIC button !!! Disarm: 'guard disarm <pin>'
+E (72490) sentry: [CIC #3 CRITICAL] watch: GENERAL ALARM: PANIC button
+I (72500) sentry: [VALVE] OPEN (critical alert)
+W (72500) sentry: [STATE] 1 NORMAL -> 3 VERBOSE (by critical alert)
+I (72510) sentry: [STATE] VERBOSE (tactical): extended logs, telemetry every 10 s, LED heartbeat
+I (72640) sentry: [ACU] ambient noise 68 dB re 1uPa, sea state 2, water 8.1 C
+[   24.40s] TX: guard status
+[   25.22s] RX:
+I (73450) sentry: [WATCH] ALARM, zone 10 cm, last distance 37.1 cm
+I (73450) sentry: [V] 'guard' done in 0 ms
+[   25.22s] TX: guard disarm 1234
+[   26.06s] RX:
+I (74270) sentry: [WATCH] disarmed (was ALARM)
+I (74280) sentry: [VALVE] CLOSED (guard disarm)
+I (74280) sentry: [V] valve driver GPIO8=0, cycles 96
+I (74280) sentry: [V] 'guard' done in 11 ms
+[   26.07s] TX: guard disarm 1234
+[   26.99s] RX:
+W (75120) sentry: W802 guard is not armed
+I (75120) sentry: [V] 'guard' done in 0 ms
