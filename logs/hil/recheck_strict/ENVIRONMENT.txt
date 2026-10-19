@@ -1,0 +1,9 @@
+date: 2026-10-19T15:01:45+03:00
+commit: 84224a9a51f4786165172407b2248062f5e31002
+python: Python 3.14.7
+--- nmcli device status
+DEVICE          TYPE      STATE                   CONNECTION 
+wlp1s0          wifi      connected               SENTRY-HIL 
+wlp0s21f0u2     wifi      connected               <upstream>        
+lo              loopback  connected (externally)  lo         
+p2p-dev-wlp1s0  wifi-p2p  disconnected            --         

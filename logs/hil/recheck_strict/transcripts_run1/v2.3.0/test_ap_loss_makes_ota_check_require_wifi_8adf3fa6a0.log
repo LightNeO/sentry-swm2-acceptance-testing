@@ -1,0 +1,88 @@
+# tests/wifi/test_managed_ap_stage.py::test_ap_loss_makes_ota_check_require_wifi
+# fw v2.3.0  2026-10-19 15:03:24
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.27s] RX:
+I (67480) sentry: [AUTH] operator qa_swm on watch, console 2
+[    8.92s] RX:
+I (67640) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+I (73600) wifi:bcn_timeout,ap_probe_send_start
+I (76100) wifi:ap_probe_send over, reset wifi status to disassoc
+I (76100) wifi:state: run -> init (0xc800)
+I (76100) wifi:pm stop, total sleep time: 39962545 us / 56084711 us
+
+I (76110) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+W (76120) sentry: W110 wifi connection lost (reason 200)
+I (76120) sentry: [LINK] retry 1/3...
+[    8.92s] TX: ota check
+[   16.61s] RX:
+E (76400) sentry: E002 Wi-Fi required. Use 'reconnect' or 'connect'
+I (78540) sentry: [LINK] retry 2/3...
+I (80950) sentry: [LINK] retry 3/3...
+[   17.07s] TX: status
+[   17.83s] RX:
+I (84550) sentry: === SWM-2 status ===
+I (84550) sentry:   fw:       v2.3.0 (ota_1)
+I (84550) sentry:   state:    1 NORMAL
+I (84550) sentry:   link:     buoy link down (known: SENTRY-HIL)
+I (84550) sentry:   user:     qa_swm (user)
+I (84560) sentry:   time:     15:03:11, uptime 0h 01m 24s
+I (84560) sentry:   valve:    closed
+I (84560) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (84570) sentry:   sonar:    no contact
+I (84570) sentry:   carrier:  depth 41.9 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
+I (84580) sentry:   heap:     251 KB free
+[   17.83s] TX: reconnect
+[   19.43s] RX:
+I (85410) sentry: [LINK] raising buoy antenna, connecting to 'SENTRY-HIL'...
+I (85410) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (85410) wifi:state: init -> auth (0xb0)
+I (85420) wifi:state: auth -> assoc (0x0)
+I (85420) wifi:state: assoc -> run (0x10)
+I (85440) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
+I (85440) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -24, cipher(pairwise:0x3, group:0x3), pmf:0
+I (85450) wifi:pm start, type: 1
+
+I (85450) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (85460) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (85550) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (85550) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+I (86530) esp_netif_handlers: sta ip: 10.42.0.143, mask: 255.255.255.0, gw: 10.42.0.1
+I (86530) sentry: [LINK] got ip 10.42.0.143
+I (86530) sentry: [LINK] connected to 'SENTRY-HIL', rssi -25 dBm (excellent)
+I (86640) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[   21.43s] TX: status
+[   24.43s] RX:
+
+[   24.43s] TX: reconnect
+[   26.99s] RX:
+W (94060) sentry: W106 [LINK] time: NTP sync failed, timestamps disabled
+status
+I (94060) sentry: === SWM-2 status ===
+I (94060) sentry:   fw:       v2.3.0 (ota_1)
+I (94060) sentry:   state:    1 NORMAL
+I (94060) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -24 dBm (excellent), ch 6
+I (94070) sentry:   internet: OK
+I (94070) sentry:   user:     qa_swm (user)
+I (94080) sentry:   time:     15:03:21, uptime 0h 01m 33s
+I (94080) sentry:   valve:    closed
+I (94090) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (94090) sentry:   sonar:    no contact
+I (94100) sentry:   carrier:  depth 41.9 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
+I (94100) sentry:   heap:     251 KB free
+reconnect
+W (94210) sentry: W114 already connected
+[   28.99s] TX: status
+[   29.76s] RX:
+I (96470) sentry: === SWM-2 status ===
+I (96470) sentry:   fw:       v2.3.0 (ota_1)
+I (96470) sentry:   state:    1 NORMAL
+I (96470) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -25 dBm (excellent), ch 6
+I (96470) sentry:   internet: OK
+I (96480) sentry:   user:     qa_swm (user)
+I (96480) sentry:   time:     15:03:23, uptime 0h 01m 36s
+I (96490) sentry:   valve:    closed
+I (96490) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (96500) sentry:   sonar:    no contact
+I (96500) sentry:   carrier:  depth 41.9 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
+I (96510) sentry:   heap:     251 KB free
