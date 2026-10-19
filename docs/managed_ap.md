@@ -115,7 +115,7 @@ DUT втрачає association. Це сценарій `TC-WF-18` і Wi-Fi interr
 
 ### WAN down
 
-Спостереження зі стенду (логи `logs/hil/`): коли `<upstream>` вимикається, NetworkManager перезапускає shared-режим, і ESP32 на кілька секунд втрачає AP (`W110 ... reason 7`) та перепідключається. Тобто WAN down не завжди ізольований від AP blip, тест чекає, поки зв'язок стабілізується.
+Спостереження зі стенду: коли `<upstream>` вимикається, NetworkManager інколи перезапускає shared-режим, і ESP32 на кілька секунд втрачає AP (`W110 ... reason 7`) та перепідключається. Тобто WAN down не завжди ізольований від AP blip; тест чекає, поки зв'язок стабілізується (`wait_link`, повтор `ota check`).
 
 ```bash
 nmcli connection down <upstream>

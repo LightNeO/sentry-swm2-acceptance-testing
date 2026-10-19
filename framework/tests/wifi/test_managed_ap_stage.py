@@ -45,7 +45,7 @@ def test_upstream_loss_keeps_test_ap_up(dut, managed_ap):
     upstream goes down, so the DUT may log W110 and re-associate. Wait for the link to settle first, then
     'ota check' has to report the server/internet as unreachable, not E002 (the Wi-Fi link is up). Which code depends
     on the firmware's own internet flag (`status`: internet): E411 'no internet' when it is already NO, E402 'cannot
-    reach OTA server' when it still believes the internet is OK and the attempt times out (logs/hil/SUMMARY.md)."""
+    reach OTA server' when it still believes the internet is OK and the attempt times out (logs/hil/README.md)."""
     wait_link(dut)
     managed_ap.upstream_down()
     try:

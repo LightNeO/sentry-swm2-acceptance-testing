@@ -216,7 +216,7 @@ Arduino не доводить сам по собі, що реле фізично
 | Висновок | [`docs/verdict.md`](docs/verdict.md) |
 | Вимоги, тест-план, тест-кейси, трасабіліті | [`docs/requirements.md`](docs/requirements.md), [`docs/test_plan.md`](docs/test_plan.md), [`docs/test_cases.md`](docs/test_cases.md), [`docs/traceability.md`](docs/traceability.md) |
 | HIL-стенд: теорія і реалізація | [`docs/hil_stand.md`](docs/hil_stand.md), [`docs/hil_button_stage.md`](docs/hil_button_stage.md), [`docs/managed_ap.md`](docs/managed_ap.md) |
-| Логи (OTA, відтворення багів, HIL-прогони) | [`logs/`](logs/), підсумок стендових прогонів — [`logs/hil/SUMMARY.md`](logs/hil/SUMMARY.md) |
+| Логи (OTA, відтворення багів, HIL-прогони) | [`logs/`](logs/), результати фінального прогону HIL-стенда — [`logs/hil/README.md`](logs/hil/README.md) |
 
 ## Структура репозиторію
 

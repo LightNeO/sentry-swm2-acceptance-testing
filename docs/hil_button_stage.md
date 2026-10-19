@@ -150,4 +150,4 @@ python -m pytest tests/hil/test_button_stage.py -m hil_stage --run-hil -k k3_k4
 
 ## Результати прогонів
 
-Підсумок усіх запусків HIL-стадії та керованого Wi-Fi на Linux-стенді: [`logs/hil/SUMMARY.md`](../logs/hil/SUMMARY.md). Станом на останній прогін усі 14 тестів кнопок і HIL-GD-07 проходять на 2.3.0; `HIL-BTN-09` вимагає прошивки 2.1.0.
+Фінальний прогін на Linux-стенді: 14 тестів кнопок (разом з HIL-GD-07) проходять на 2.3.0, `HIL-BTN-09` пропускається, бо вимагає прошивки 2.1.0. Опис прогону і таблиця результатів: [`logs/hil/README.md`](../logs/hil/README.md).
