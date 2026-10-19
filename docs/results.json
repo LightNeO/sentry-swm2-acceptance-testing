@@ -453,7 +453,7 @@
   },
   "TC-OTA-23": {
     "21": "PASS",
-    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt: PASS 3/3 після додавання очікування зв'язку; перший прогін 2/3 (ERROR на логіні через каскад).",
+    "evidence": "logs/hil/SUMMARY.md (проміжні повторні прогони, сирі файли прибрано): PASS 3/3 після додавання очікування зв'язку; перший прогін 2/3 (ERROR на логіні через каскад).",
     "23": "PASS",
     "bugs": []
   },
@@ -474,7 +474,7 @@
     "21": "PASS",
     "23": "PASS",
     "bugs": [],
-    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt (прогін після виправлення baseline): PASS 3/3."
+    "evidence": "logs/hil/SUMMARY.md (проміжні повторні прогони, сирі файли прибрано) (прогін після виправлення baseline): PASS 3/3."
   },
   "TC-OTA-32": {
     "21": "PASS",
@@ -684,7 +684,7 @@
   "TC-OTA-25": {
     "23": "PASS",
     "bugs": [],
-    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt (прогін після виправлення baseline): (а) AP down → E002 після W110, PASS 3/3; (б) upstream down → E411 (internet: NO, run 1) або E402 (internet: OK, run 2-3), не E002; див. OBS-06. | logs/hil/recheck_strict/strict_run1-3.txt (посилені перевірки: E101 не вважається успіхом, `connected to` обов'язковий): PASS 3/3."
+    "evidence": "logs/hil/SUMMARY.md (проміжні повторні прогони, сирі файли прибрано) (прогін після виправлення baseline): (а) AP down → E002 після W110, PASS 3/3; (б) upstream down → E411 (internet: NO, run 1) або E402 (internet: OK, run 2-3), не E002; див. OBS-06. | logs/hil/recheck_strict/strict_run1-3.txt (посилені перевірки: E101 не вважається успіхом, `connected to` обов'язковий): PASS 3/3."
   },
   "TC-GD-11": {
     "23": "FAIL",
@@ -773,6 +773,6 @@
   "TC-WF-12": {
     "23": "PASS",
     "bugs": [],
-    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt: PASS 3/3 після виправлення тесту (перший прогін: FAIL 3/3 через reboot_dut). | logs/hil/recheck_strict/strict_run1-3.txt (посилені перевірки: E101 не вважається успіхом, `connected to` обов'язковий): PASS 3/3."
+    "evidence": "logs/hil/SUMMARY.md (проміжні повторні прогони, сирі файли прибрано): PASS 3/3 після виправлення тесту (перший прогін: FAIL 3/3 через reboot_dut). | logs/hil/recheck_strict/strict_run1-3.txt (посилені перевірки: E101 не вважається успіхом, `connected to` обов'язковий): PASS 3/3."
   }
 }

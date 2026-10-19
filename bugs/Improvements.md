@@ -165,7 +165,7 @@ attempt 6: E213 sudo: wrong password
 
 **Повторно (керований AP, `logs/hil/`):** при вимкненні AP `ota check` дає `E402` (поки прошивка ще не помітила втрату зв'язку, до `W110`) або `E002` (після `W110`). Для upstream down — `E402`. `E411` знову не з'явився; попередні твердження в документах, що AP down дає `E411`, були помилковими й виправлені.
 
-**Остаточно (керований AP, `logs/hil/recheck/`, 3 прогони TC-OTA-25 (б)):** `E411` таки з'явився:
+**Остаточно (керований AP, `logs/hil/SUMMARY.md`, 3 прогони TC-OTA-25 (б)):** `E411` таки з'явився:
 `E411 no internet - OTA server unreachable`. Правило, яке збігається у всіх трьох прогонах:
 
 | `status`: internet | `ota check` | час відповіді |
@@ -175,5 +175,5 @@ attempt 6: E213 sudo: wrong password
 
 Тому попередні висновки «`E411` не з'являється ніколи» були хибними: у ручному тесті (iPhone без даних) прапорець ще
 був `OK`, і ми бачили `E402`. Рекомендація залишається до PRD: описати обидва коди й умову. Логи:
-`logs/v2.3.0/manual/partE_ota_bad_images.log`, `logs/hil/recheck/`.
+`logs/v2.3.0/manual/partE_ota_bad_images.log`, `logs/hil/SUMMARY.md`.
 

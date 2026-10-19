@@ -54,7 +54,7 @@ command -v dnsmasq
 
 Код контролера: `framework/drivers/managed_ap.py`.
 
-AP (`SENTRY-HIL`, `wlp1s0`) і інтерфейс upstream (`wlp0s21f0u2`) мають значення за замовчуванням. **Ім'я профілю upstream значення за замовчуванням не має** і обов'язково задається змінною `HIL_UPSTREAM_CONNECTION` (інакше `ManagedAp` і скрипти `run_hil_*.sh` зупиняються з поясненням). Решту можна змінити змінними середовища:
+AP (`SENTRY-HIL`, `wlp1s0`) і інтерфейс upstream (`wlp0s21f0u2`) мають значення за замовчуванням. **Ім'я профілю upstream значення за замовчуванням не має** і обов'язково задається змінною `HIL_UPSTREAM_CONNECTION` (інакше `ManagedAp` зупиняється з поясненням). Решту можна змінити змінними середовища:
 
 ```bash
 export HIL_AP_CONNECTION=SENTRY-HIL
@@ -102,7 +102,7 @@ python -m pytest tests/wifi -m managed_wifi --run-managed-wifi --keep-logs
 - `TC-OTA-25(b)`: upstream down при залишеному AP; після того як DUT відновив зв'язок, `ota check` дає `E411` (прошивка вже знає, що `internet: NO`) або `E402` (ще вважає інтернет робочим і чекає тайм-аут), але не `E002` (OBS-06).
 - `TC-OTA-23`, `TC-OTA-26`, `TC-OTA-31`: недоступний OTA server/path і custom server profile.
 
-`TC-OTA-16` автоматизований у `tests/wifi/test_slow_ota.py`: фікстура `slow_ota_server` запускає `fw_7/tools/ota_server.py --slow 20` підпроцесом на ноутбуці стенда (порт `HIL_OTA_PORT`, за замовчуванням 53317 — його пропускає брандмауер; адреса AP `HIL_AP_ADDRESS`, за замовчуванням 10.42.0.1). Плата завантажує образ тієї ж версії, на якій працює (без пониження), AP вимикається після рядка `[OTA] 10%`. Очікування: `W110`, `retry 1/3`, `E410`/`E411`, версія й слот не змінились, `ota check` після відновлення працює. Файли образів не в git: `python fw_7/tools/ota_server.py --download`. Запуск: `run_hil_slow_ota.sh`.
+`TC-OTA-16` автоматизований у `tests/wifi/test_slow_ota.py`: фікстура `slow_ota_server` запускає `fw_7/tools/ota_server.py --slow 20` підпроцесом на ноутбуці стенда (порт `HIL_OTA_PORT`, за замовчуванням 53317 — його пропускає брандмауер; адреса AP `HIL_AP_ADDRESS`, за замовчуванням 10.42.0.1). Плата завантажує образ тієї ж версії, на якій працює (без пониження), AP вимикається після рядка `[OTA] 10%`. Очікування: `W110`, `retry 1/3`, `E410`/`E411`, версія й слот не змінились, `ota check` після відновлення працює. Файли образів не в git: `python fw_7/tools/ota_server.py --download`. Запуск: `python -m pytest tests/wifi/test_slow_ota.py -m managed_wifi --run-managed-wifi` (потрібні `HIL_UPSTREAM_CONNECTION`, `SWM_PORT`).
 
 ## Різні fault-класи
 
