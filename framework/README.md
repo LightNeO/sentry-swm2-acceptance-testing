@@ -7,16 +7,23 @@
 ```
 framework/
 ├── drivers/
-│   ├── protocol.py       # парсер виводу пристрою (без I/O)
-│   ├── redaction.py      # маскування паролів -> ***
-│   ├── transport.py      # SerialTransport (реальний UART) + FakeTransport (для unit-тестів)
-│   └── device_driver.py  # SwmDevice: команди, промпти, перезавантаження, Wi-Fi, login
+│   ├── protocol.py            # парсер виводу пристрою (без I/O)
+│   ├── redaction.py           # маскування паролів -> ***
+│   ├── transport.py           # SerialTransport (реальний UART) + FakeTransport (для unit-тестів)
+│   ├── device_driver.py       # SwmDevice: команди, промпти, перезавантаження, Wi-Fi, login
+│   ├── button_stimulator.py   # керування Arduino Nano: press/hold/комбінації K1-K4
+│   ├── managed_ap.py          # керований AP/upstream через NetworkManager
+│   └── ota_server_process.py  # локальний OTA-сервер як підпроцес (повільний OTA)
 ├── tests/
-│   ├── unit/             # перевірка самого фреймворку, без залізa
-│   ├── smoke/            # пристрій живий і ідентифікований
-│   └── functional/       # межі діапазонів та інше за PRD
-├── conftest.py           # fixtures, логи-докази, запис результатів
-├── pytest.ini            # маркери
+│   ├── unit/                  # перевірка самого фреймворку, без заліза
+│   ├── smoke/                 # пристрій живий і ідентифікований
+│   ├── functional/            # межі діапазонів та інше за PRD
+│   ├── hil/                   # Arduino-кнопки (потрібен --run-hil)
+│   ├── wifi/                  # керований Wi-Fi і OTA fault-injection (потрібен --run-managed-wifi)
+│   └── helpers.py             # спільні функції тестів
+├── tools/                     # одноразові скрипти доказів і генератор трасабіліті
+├── conftest.py                # fixtures, логи-докази, запис результатів
+├── pytest.ini                 # маркери
 └── requirements.txt
 ```
 
@@ -43,4 +50,4 @@ python -m pytest tests/wifi -m managed_wifi --run-managed-wifi  # керован
 
 ## Обмеження
 
-Фізичні перевірки (LED, діод, реле, кнопки, HC-SR04) виконуються вручну за `docs/test_cases.md` (тип `M`).
+Кнопки K1–K4 і мережеві відмови подає HIL-стенд (Arduino Nano, керований AP). Решта фізичних перевірок (RGB LED, діод, клацання реле, реальна відстань для HC-SR04) виконується вручну за `docs/test_cases.md` (тип `M` або `A+M`).

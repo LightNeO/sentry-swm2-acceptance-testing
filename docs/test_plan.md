@@ -7,7 +7,7 @@
 | Мета | Вирішити, чи можна 2.3.0 перевести з beta у stable (GO / NO-GO / CONDITIONAL) |
 | База тестування | Тільки `fw_7/PRD.md` (див. `docs/requirements.md`) |
 | Автор | Антон Єрьомін |
-| Статус | Ready to Test |
+| Статус | Виконано (вердикт: `docs/verdict.md`) |
 
 ## 1. Scope
 
@@ -38,11 +38,12 @@
 | Індикатор клапана | LED + резистор 220 Ω | 4 |
 | Сигнальний вогонь | вбудований RGB LED | 48 |
 | Панель оператора | кнопки K1–K4 | 41, 40, 39, 38 |
+| Стимулятор кнопок (етап 2) | Arduino Nano: A2–A5 через 1 кОм на GPIO41/40/39/38, прошивка в `hardware/button_stimulator/` | A2–A5 (Nano) |
 | Консоль | USB-UART FTDI FT232R (VID:PID 0403:6001), 115200 8N1 | 43/44 |
 | Мережа | USB dongle `wlp0s21f0u2` → `<upstream>`; вбудований `wlp1s0` → AP `SENTRY-HIL`, 2.4 GHz | — |
-| Хост | Linux, Python, pyserial, pytest, esptool, NetworkManager, dnsmasq | — |
+| Хост | Етап 1 (ручні перевірки, UART-автотести): Windows 11, Python 3.12, pyserial, pytest, esptool. Етапи 2–3 (HIL-кнопки, керований Wi-Fi): Linux, Python, pyserial, pytest, esptool, PlatformIO, NetworkManager, dnsmasq | — |
 
-Порт не жорстко прописується: драйвер шукає його за VID/PID (`ESP32_VID=0403`).
+Порт не жорстко прописується: драйвер шукає його за VID/PID (`SWM_VID=0403`) або бере з `SWM_PORT`.
 
 ## 3. Підхід і рівні тестування
 
@@ -52,10 +53,11 @@
 | Функціональний | Кожна вимога, позитив + негатив | pytest, маркер `functional` |
 | Межовий (BVA) | Мін-1, мін, макс, макс+1 | параметризований pytest |
 | Збереження (persistence) | Reboot / OTA | pytest, маркер `persistence` |
-| Регресія | Повторний прогін усього на 2.3.0 | той самий набір, `--fw 2.3.0` |
+| Регресія | Повторний прогін усього на 2.3.0 | той самий набір (версія визначається з самого пристрою) |
 | OTA | Успіх, rollback, помилки | pytest + локальний `ota_server.py`, маркер `ota` |
 | Managed Wi-Fi | AP down, upstream/WAN down, recovery | `framework/drivers/managed_ap.py`, маркер `managed_wifi`, прапорець `--run-managed-wifi` |
-| Фізичні (ручні) | LED, діод, реле, кнопки, HC-SR04 | чек-лист, evidence — фото/відео |
+| HIL: кнопки | K1–K4 фізично, з точною тривалістю press/hold/комбінацій | Arduino Nano, маркер `hil_stage`, прапорець `--run-hil` |
+| Фізичні (ручні) | LED, діод, реле, HC-SR04 (кнопки автоматизовані через HIL) | чек-лист, evidence — логи, за потреби фото/відео |
 | Exploratory / security | Приховані команди, секрети | ручний + `strings` по бінарнику |
 
 ### Принципи
@@ -125,11 +127,13 @@ Severity: Blocker / Critical / Major / Minor / Trivial. Priority: P1–P3 (за 
 | `esptool` | Прошивка/стирання |
 | `pyserial` + `framework/drivers` | UART-транспорт і парсер протоколу |
 | `pytest` | Автотести, маркери, параметризація |
-| `tools/ota_server.py` | Локальний OTA-сервер: `--drop-at`, `--slow`, `garbage/truncated/corrupted.bin` |
+| `fw_7/tools/ota_server.py` | Локальний OTA-сервер: `--drop-at`, `--slow`, `garbage/truncated/corrupted.bin`; для повільного OTA тест запускає його сам |
+| Arduino Nano + PlatformIO | Стимулятор кнопок K1–K4 |
+| NetworkManager, `nmcli`, dnsmasq | Керований AP/upstream для Wi-Fi і OTA fault-injection |
 | `strings`, hex-перегляд | Дослідницьке тестування бінарника |
 | Телефон | Фото/відео фізичної поведінки |
 
-Артефакти: `docs/` (документи), `bugs/` (баг-репорти), `logs/` (докази), `framework/` (автотести), `presentation/`.
+Артефакти: `docs/` (документи), `bugs/` (баг-репорти), `logs/` (докази), `framework/` (автотести), `hardware/` (прошивка стимулятора кнопок), `README.md` (презентація проєкту).
 
 ## 9. Розклад
 
@@ -139,6 +143,6 @@ Severity: Blocker / Critical / Major / Minor / Trivial. Priority: P1–P3 (за 
 | 2 | Тестування 2.1.0 |
 | 3 | OTA 2.1.0 → 2.3.0, перевірка збереження |
 | 4 | Тестування 2.3.0 + регресія + OTA-сценарії |
-| 5 | Дослідницьке тестування, HIL-стенд (теорія) |
+| 5 | Дослідницьке тестування; HIL-стенд: теоретичний опис і реалізація стимулятора кнопок та керованого Wi-Fi |
 | 6 | Баг-репорти, матриця, вердикт, презентація |
 | 7 | Фінальна збірка і публікація репозиторію |

@@ -24,7 +24,7 @@
 | ST-1b | 21 | P1 | A | TC-ST-01, TC-ST-02 | PASS | PASS | — |
 | ST-1c | 21 | P2 | A+M | TC-ST-03 | PASS | PASS | — |
 | ST-1d | 21 | P2 | A+M | TC-ST-04 | PASS | PASS | — |
-| ST-2 | 21 | P1 | A+M | TC-ST-05, TC-ST-06, TC-ST-07 | FAIL | PARTIAL | BUG-004 |
+| ST-2 | 21 | P1 | A | TC-ST-05, TC-ST-06, TC-ST-07 | FAIL | PARTIAL | BUG-004 |
 | ST-3a | 21 | P1 | A | TC-ST-08, TC-ST-09, TC-AL-14 | PARTIAL | PARTIAL | — |
 | ST-3b | 21 | P2 | A | TC-ST-10 | FAIL | FAIL | BUG-007 |
 | ST-3c | 21 | P2 | A | TC-ST-11 | PASS | PASS | — |
@@ -33,7 +33,7 @@
 | ST-4a | 21 | P3 | A | TC-ST-14 | PASS | PASS | — |
 | ST-4b | 21 | P2 | A | TC-ST-15 | PASS | PASS | — |
 | ST-4c | 21 | P1 | A | TC-ST-16 | PASS | PASS | — |
-| WF-1a | 21 | P1 | A+M | TC-WF-01, TC-WF-02 | PARTIAL | PASS | — |
+| WF-1a | 21 | P1 | A | TC-WF-01, TC-WF-02 | PARTIAL | PASS | — |
 | WF-1b | 21 | P2 | A | TC-WF-03 | — | PASS | — |
 | WF-1c | 21 | P2 | A | TC-WF-04 | — | PASS | — |
 | WF-1d | 21 | P1 | A | TC-WF-01 | PASS | PASS | — |
@@ -75,7 +75,7 @@
 | OTA-7 | 21 | P1 | A | TC-OTA-04 | PASS | PASS | — |
 | OTA-8a | 21 | P1 | A | TC-OTA-12 | PASS | — | — |
 | OTA-8b | 21 | P1 | A | TC-OTA-13, TC-OTA-14 | PARTIAL | — | — |
-| OTA-9 | 21 | P1 | A+M | TC-OTA-15, TC-OTA-16, TC-OTA-17, TC-OTA-18, TC-OTA-19, TC-OTA-20, TC-OTA-21, TC-OTA-22, TC-OTA-23, TC-OTA-24, TC-OTA-25, TC-OTA-26 | PARTIAL | PARTIAL | — |
+| OTA-9 | 21 | P1 | A | TC-OTA-15, TC-OTA-16, TC-OTA-17, TC-OTA-18, TC-OTA-19, TC-OTA-20, TC-OTA-21, TC-OTA-22, TC-OTA-23, TC-OTA-24, TC-OTA-25, TC-OTA-26 | PARTIAL | PARTIAL | — |
 | OTA-10 | 21 | P1 | A | TC-OTA-27, TC-OTA-28, TC-GD-19 | PARTIAL | PARTIAL | — |
 | OTA-11 | 21 | P2 | A | TC-OTA-17, TC-OTA-18, TC-OTA-19, TC-OTA-29, TC-OTA-30 | PARTIAL | PARTIAL | — |
 | OTA-12 | 21 | P2 | A | TC-OTA-31 | PASS | PASS | — |

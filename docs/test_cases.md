@@ -35,7 +35,7 @@
 | TC-ST-04 | ST-1d | `state 3`; чекати 10–12 с; ввести `foo` | `[V]` логи, health кожні ~10 с, LED heartbeat (очима), `Did you mean '<cmd>'?` | 21 | A+M |
 | TC-ST-05 | ST-2 | З кожного стану 1,2,4 виконати `state 4` | `E302 EMERGENCY can be entered only from 3 VERBOSE (now N NAME)`, стан не змінився | 21 | A |
 | TC-ST-06 | ST-2 | `state 3` → `state 4` | Перехід у EMERGENCY, глибина в телеметрії зменшується | 21 | A |
-| TC-ST-07 | ST-2 | Те саме через кнопки: K4+K1 з 1, 2, 3 | З 1,2 → `E302`; з 3 → EMERGENCY | 21 | M |
+| TC-ST-07 | ST-2 | Те саме через кнопки: K4+K1 з 1, 2, 3 | З 1,2 → `E302`; з 3 → EMERGENCY | 21 | A |
 | TC-ST-08 | ST-3a | У EMERGENCY: `help`, `status`, `whoami`, `version`, `health now`, `reboot` | Усі працюють | 21 | A |
 | TC-ST-09 | ST-3a | У EMERGENCY (2.3.0): `alert list` | Працює | 23 | A |
 | TC-ST-10 | ST-3b | У EMERGENCY: `lamp on`, `relay on`, `distance`, `state 1`, `logout` | Кожна → E005/E001; температура драйвера в наступному health росте | 21 | A |
@@ -113,7 +113,7 @@
 | TC-OTA-13 | OTA-8b | `ota rollback` без іншого розділу / після broken | `E416` / `E417` / успішний rollback — залежно від стану | 21 | A |
 | TC-OTA-14 | OTA-8b | `ota rollback` коли попередня валідна | Завантаження прошивки з іншого розділу | 21 | A |
 | TC-OTA-15 | OTA-9 | `--drop-at 50`; `ota update` | `E410`, пристрій на поточній версії, працює | 21 | A+M |
-| TC-OTA-16 | OTA-9 | `--slow 20`; під час завантаження керовано вимкнути AP `SENTRY-HIL` | Auto (`test_slow_ota.py`): `W110`, `retry 1/3`, `E410/E411`; версія й слот не змінились; після відновлення AP `ota check` працює | 21 | A+M |
+| TC-OTA-16 | OTA-9 | `--slow 20`; під час завантаження керовано вимкнути AP `SENTRY-HIL` | Auto (`test_slow_ota.py`): `W110`, `retry 1/3`, `E410/E411`; версія й слот не змінились; після відновлення AP `ota check` працює | 21 | A |
 | TC-OTA-17 | OTA-9,OTA-11 | `ota url .../test/garbage.bin` | `E406` | 21 | A |
 | TC-OTA-18 | OTA-9,OTA-11 | `ota url .../test/truncated.bin` | Контрольована помилка (E406/E410/E412), пристрій на поточній версії | 21 | A |
 | TC-OTA-19 | OTA-9,OTA-11 | `ota url .../test/corrupted.bin` | `E412` | 21 | A |

@@ -30,8 +30,6 @@ ESP32 GPIO41/40/39/38 (K1/K2/K3/K4)
 SwmDevice + transcript + pytest asserts
 ```
 
-Поточна робоча плата має `ATmega328P` signature `1E 95 0F`, CH340 і порт `/dev/ttyUSB0`. ESP32 підключається через FTDI, у поточному стенді зазвичай `/dev/ttyUSB1`. Не покладатися на номер порту в CI: використовувати `/dev/serial/by-id` або змінні середовища.
-
 ## Електричний контракт
 
 | Arduino | DUT | Функція |
@@ -142,7 +140,7 @@ python -m pytest tests/hil/test_button_stage.py -m hil_stage --run-hil -k k3_k4
 
 Поточний набір не приховує відомі дефекти:
 
-- `BUG-010` — NO-GO: лічильник неправильних Guard PIN не скидається після правильного PIN і нового `guard arm`; потрібен окремий HIL regression test після додавання distance stimulus;
+- `BUG-010` — NO-GO: лічильник неправильних Guard PIN не скидається після правильного PIN і нового `guard arm`;
 - `BUG-002` — `distance 20` все ще FAIL;
 - `BUG-003` — `relay pulse 99` все ще проходить;
 - `BUG-007` — `state` відповідає в EMERGENCY поза allowlist;

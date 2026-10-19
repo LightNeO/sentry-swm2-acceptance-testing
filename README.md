@@ -214,14 +214,17 @@ Arduino не доводить сам по собі, що реле фізично
 | Матриця багів | [`bugs/BUG_MATRIX.md`](bugs/BUG_MATRIX.md) |
 | Знахідки безпеки | [`bugs/Improvements.md`](bugs/Improvements.md) |
 | Висновок | [`docs/verdict.md`](docs/verdict.md) |
-| Логи (OTA, відтворення багів) | [`logs/`](logs/) |
+| Вимоги, тест-план, тест-кейси, трасабіліті | [`docs/requirements.md`](docs/requirements.md), [`docs/test_plan.md`](docs/test_plan.md), [`docs/test_cases.md`](docs/test_cases.md), [`docs/traceability.md`](docs/traceability.md) |
+| HIL-стенд: теорія і реалізація | [`docs/hil_stand.md`](docs/hil_stand.md), [`docs/hil_button_stage.md`](docs/hil_button_stage.md), [`docs/managed_ap.md`](docs/managed_ap.md) |
+| Логи (OTA, відтворення багів, HIL-прогони) | [`logs/`](logs/), підсумок стендових прогонів — [`logs/hil/SUMMARY.md`](logs/hil/SUMMARY.md) |
 
 ## Структура репозиторію
 
 ```
 docs/            тест-план, вимоги, тест-кейси, трасабіліті, чек-листи, HIL-стенд, вердикт
 bugs/            баг-репорти, матриця багів, знахідки безпеки
-framework/       pytest-фреймворк автотестів (драйвер, тести, інструменти)
+framework/       pytest-фреймворк автотестів (драйвери, тести, інструменти)
+hardware/        прошивка Arduino Nano — стимулятор кнопок K1–K4
 logs/            докази: логи ручного тестування, OTA, дослідницького тестування
 fw_7/            матеріали (PRD, прошивка, завдання, схема підключення)
 ```

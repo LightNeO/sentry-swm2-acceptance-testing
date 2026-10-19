@@ -5,7 +5,7 @@
 
 ## Топологія
 
-У v3 ноутбук використовує два Wi-Fi адаптери:
+У поточній збірці використовується ноутбук з двома Wi-Fi адаптерами:
 
 ```text
 USB dongle wlp0s21f0u2 -> <upstream> -> upstream/internet
@@ -44,7 +44,7 @@ wlp1s0      -> connected -> SENTRY-HIL
 wlp1s0      -> type AP -> channel 6
 ```
 
-Перед використанням перевірити, що встановлено `dnsmasq`:
+Для тестування повинен бути встановлений пакет `dnsmasq`:
 
 ```bash
 command -v dnsmasq
@@ -82,7 +82,6 @@ WIFI_PASSWORD=<AP_PASSWORD>
 SWM_PORT=/dev/ttyUSB1
 ```
 
-Перед запуском переконатися, що ESP32 вже підключена до `SENTRY-HIL`. USB-донгл ноутбука при цьому продовжує працювати як upstream через `<upstream>`.
 
 ```bash
 export BUTTON_STIM_PORT=/dev/ttyUSB0
@@ -104,7 +103,7 @@ python -m pytest tests/wifi -m managed_wifi --run-managed-wifi --keep-logs
 
 `TC-OTA-16` автоматизований у `tests/wifi/test_slow_ota.py`: фікстура `slow_ota_server` запускає `fw_7/tools/ota_server.py --slow 20` підпроцесом на ноутбуці стенда (порт `HIL_OTA_PORT`, за замовчуванням 53317 — його пропускає брандмауер; адреса AP `HIL_AP_ADDRESS`, за замовчуванням 10.42.0.1). Плата завантажує образ тієї ж версії, на якій працює (без пониження), AP вимикається після рядка `[OTA] 10%`. Очікування: `W110`, `retry 1/3`, `E410`/`E411`, версія й слот не змінились, `ota check` після відновлення працює. Файли образів не в git: `python fw_7/tools/ota_server.py --download`. Запуск: `python -m pytest tests/wifi/test_slow_ota.py -m managed_wifi --run-managed-wifi` (потрібні `HIL_UPSTREAM_CONNECTION`, `SWM_PORT`).
 
-## Різні fault-класи
+## Різні fault-варіації
 
 ### AP down
 
@@ -130,7 +129,7 @@ nmcli connection up <upstream> ifname wlp0s21f0u2
 
 ### No DHCP і weak RSSI
 
-Ці fault-класи не входять у поточний scope v3. Вони не повинні імітуватися вимкненням AP, бо це інший тип відмови.
+Ці fault-класи не входять у поточний scope.
 
 ## Cleanup
 
@@ -142,11 +141,3 @@ SENTRY-HIL on wlp1s0
 dnsmasq available
 ```
 
-Якщо тест упав посередині, перевірити:
-
-```bash
-nmcli connection up <upstream> ifname wlp0s21f0u2
-nmcli connection up SENTRY-HIL ifname wlp1s0
-```
-
-Не використовувати глобальні `nft flush ruleset`, `nmcli radio wifi off` або вимкнення всіх Wi-Fi адаптерів у звичайному тесті: це може зламати upstream і сам стенд одночасно.
