@@ -1,6 +1,6 @@
 # HIL-стенд: фінальний прогін
 
-Результати остаточної збірки стенда на прошивці **2.3.0** (дата прогону: 2026-10-19). Це один чистий прогін усіх стендових тестів на коміті `bf75125`.
+Результати остаточної збірки стенда на прошивці **2.3.0** (дата прогону: 2026-10-19). Це один чистий прогін усіх стендових тестів.
 Опис архітектури: [`docs/hil_stand.md`](../../docs/hil_stand.md); кнопки: [`docs/hil_button_stage.md`](../../docs/hil_button_stage.md); керований Wi-Fi: [`docs/managed_ap.md`](../../docs/managed_ap.md).
 
 ## Стенд
@@ -58,7 +58,7 @@ python -m pytest tests/wifi -m managed_wifi --run-managed-wifi --keep-logs -v -r
 | TC-OTA-23, 26, 31 | недоступний сервер `E402`, хибний шлях `E405`, збереження кастомного сервера | PASS ×3 |
 | TC-OTA-16 | обрив AP на 10% повільного завантаження | PASS |
 
-### Ключові спостереження з транскриптів (`transcripts/`)
+### Спостереження з транскриптів (`transcripts/`)
 
 - **Повільний OTA** (`..._slow_ota_download_is_survived`): `[OTA] 10%` → вимкнення AP → `W110 wifi connection lost (reason 200)` → `[LINK] retry 1/3` → `E410 download interrupted`.
   Версія `v2.3.0` і слот `ota_1 @ 0x1a0000, state: valid` після відновлення такі самі; `ota check` працює, `internet: OK`.

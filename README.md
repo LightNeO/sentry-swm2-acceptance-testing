@@ -103,7 +103,7 @@ Python, pytest, pyserial, esptool. Власний UART-драйвер з пар�
 - **Керований Wi-Fi.** Ноутбук з двома Wi-Fi адаптерами роздає AP `SENTRY-HIL` і підключений до upstream; NetworkManager дозволяє окремо вимикати AP або upstream, а для повільного OTA тест сам піднімає локальний OTA-сервер. Опис: [`docs/managed_ap.md`](docs/managed_ap.md), код: `framework/drivers/managed_ap.py`, тести: `framework/tests/wifi/`.
 - **Що лишається ручним.** RGB LED, діод, клацання реле і реальна відстань для HC-SR04 (типи `A+M` і `M` у `docs/test_cases.md`). Повний теоретичний стенд, який це закриває: [`docs/hil_stand.md`](docs/hil_stand.md).
 
-### Запуск стендових стадій
+### Запуск стендових стадій(приклад)
 
 ```bash
 export BUTTON_STIM_PORT=/dev/ttyUSB0 SWM_PORT=/dev/ttyUSB1
@@ -120,7 +120,7 @@ python -m pytest tests/wifi -m managed_wifi --run-managed-wifi --keep-logs
 | Розділ | Де |
 |---|---|
 | Чек-листи по версіях | [`docs/manual_checklist_2.1.0.md`](docs/manual_checklist_2.1.0.md), [`docs/manual_checklist_2.3.0.md`](docs/manual_checklist_2.3.0.md), автотести — [`docs/traceability.md`](docs/traceability.md) |
-| Баг-репорти | [`bugs/BUG-001.md` … `BUG-010.md`](bugs/) |
+| Баг-репорти | [`bugs/BUG-001.md` … `BUG-010.md`](bugs/), [`bugs/Improvements.md`](bugs/Improvements.md) |
 | Матриця багів | [`bugs/BUG_MATRIX.md`](bugs/BUG_MATRIX.md) |
 | Знахідки безпеки | [`bugs/Improvements.md`](bugs/Improvements.md) |
 | Висновок | [`docs/verdict.md`](docs/verdict.md) |
