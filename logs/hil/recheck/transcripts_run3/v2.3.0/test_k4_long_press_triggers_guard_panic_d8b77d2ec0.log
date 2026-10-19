@@ -1,0 +1,30 @@
+# tests/hil/test_button_stage.py::test_k4_long_press_triggers_guard_panic
+# fw v2.3.0  2026-10-19 13:44:14
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.31s] RX:
+I (11200) sentry: [AUTH] operator qa_swm on watch, console 2
+I (11240) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.31s] TX: guard disarm 1234
+[    1.22s] RX:
+W (11500) sentry: W802 guard is not armed
+[    1.22s] TX: guard zone 50
+[    2.05s] RX:
+I (12430) sentry: [WATCH] zone < 50 cm
+[    2.05s] TX: alert ack all
+[    2.97s] RX:
+W (13250) sentry: W853 no unacknowledged alerts
+[    2.97s] TX: alert clear
+[    3.89s] RX:
+I (14170) sentry: [CIC] cleared
+[    5.89s] TX: guard zone 10
+[    6.72s] RX:
+I (17100) sentry: [WATCH] zone < 10 cm
+[    6.72s] TX: distance
+[    8.41s] RX:
+I (17970) sentry: [SONAR] ping: echo 9.1 cm
+E (17970) sentry: [COLLISION] contact too close: 9.1 cm (< 20 cm)
+W (17970) sentry: [CIC #1 WARNING] sonar: collision risk: contact at 9.1 cm
+[    8.42s] TX: guard disarm 1234
+[    9.34s] RX:
+W (19620) sentry: W802 guard is not armed

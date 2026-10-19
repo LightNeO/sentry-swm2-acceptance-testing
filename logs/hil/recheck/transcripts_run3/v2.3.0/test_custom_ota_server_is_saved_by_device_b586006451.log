@@ -1,0 +1,51 @@
+# tests/wifi/test_ota_network.py::test_custom_ota_server_is_saved_by_device
+# fw v2.3.0  2026-10-19 13:42:50
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.39s] RX:
+I (136520) sentry: [AUTH] operator qa_swm on watch, console 2
+I (136640) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.39s] TX: status
+[    1.71s] RX:
+I (136900) sentry: === SWM-2 status ===
+I (136900) sentry:   fw:       v2.3.0 (ota_1)
+I (136900) sentry:   state:    1 NORMAL
+I (136900) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -22 dBm (excellent), ch 6
+I (136900) sentry:   internet: NO
+I (136910) sentry:   user:     qa_swm (user)
+I (136910) sentry:   time:     13:42:46, uptime 0h 02m 16s
+I (136920) sentry:   valve:    closed
+I (136920) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (136930) sentry:   sonar:    no contact
+I (136930) sentry:   carrier:  depth 41.6 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
+I (136940) sentry:   heap:     251 KB free
+I (137280) wifi:state: run -> init (0x7c0)
+I (137280) wifi:pm stop, total sleep time: 43265189 us / 51963030 us
+
+I (137280) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+W (137280) sentry: W110 wifi connection lost (reason 7)
+I (137290) sentry: [LINK] retry 1/3...
+I (137300) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (137300) wifi:state: init -> auth (0xb0)
+I (137300) wifi:state: auth -> assoc (0x0)
+I (137320) wifi:state: assoc -> run (0x10)
+I (137390) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
+I (137390) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -22, cipher(pairwise:0x3, group:0x3), pmf:0
+I (137390) wifi:pm start, type: 1
+
+I (137400) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (137400) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (137500) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (137500) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+[    1.71s] TX: ota server http://10.42.0.1:8000/fw7/
+[    2.94s] RX:
+E (138230) sentry: E002 Wi-Fi required. Use 'reconnect' or 'connect'
+I (138460) esp_netif_handlers: sta ip: 10.42.0.143, mask: 255.255.255.0, gw: 10.42.0.1
+I (138460) sentry: [LINK] got ip 10.42.0.143
+I (138640) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    2.94s] TX: ota server
+[    3.77s] RX:
+I (139460) sentry: [OTA] server: https://raw.githubusercontent.com/BohdanHorbanych/esp32-ota-files/main/fw7/ (default)
+[    3.77s] TX: ota server default
+[    4.58s] RX:
+I (140280) sentry: [OTA] server: https://raw.githubusercontent.com/BohdanHorbanych/esp32-ota-files/main/fw7/ (default)

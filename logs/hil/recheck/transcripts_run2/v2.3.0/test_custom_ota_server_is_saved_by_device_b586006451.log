@@ -1,0 +1,31 @@
+# tests/wifi/test_ota_network.py::test_custom_ota_server_is_saved_by_device
+# fw v2.3.0  2026-10-19 13:38:59
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.37s] RX:
+I (87940) sentry: [AUTH] operator qa_swm on watch, console 2
+I (88040) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.37s] TX: status
+[    1.13s] RX:
+I (88300) sentry: === SWM-2 status ===
+I (88300) sentry:   fw:       v2.3.0 (ota_1)
+I (88300) sentry:   state:    1 NORMAL
+I (88300) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -22 dBm (excellent), ch 6
+I (88300) sentry:   internet: NO
+I (88310) sentry:   user:     qa_swm (user)
+I (88310) sentry:   time:     13:38:56, uptime 0h 01m 27s
+I (88320) sentry:   valve:    closed
+I (88320) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (88330) sentry:   sonar:    no contact
+I (88330) sentry:   carrier:  depth 41.6 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
+I (88340) sentry:   heap:     251 KB free
+[    1.13s] TX: ota server http://10.42.0.1:8000/fw7/
+[    1.95s] RX:
+I (89070) sentry: [OTA] server: http://10.42.0.1:8000/fw7/ (custom)
+[    1.95s] TX: ota server
+[    2.77s] RX:
+I (89830) sentry: [ACU] ambient noise 62 dB re 1uPa, sea state 2, water 8.1 C
+I (89890) sentry: [OTA] server: http://10.42.0.1:8000/fw7/ (custom)
+[    2.77s] TX: ota server default
+[    3.60s] RX:
+I (90720) sentry: [OTA] server: https://raw.githubusercontent.com/BohdanHorbanych/esp32-ota-files/main/fw7/ (default)

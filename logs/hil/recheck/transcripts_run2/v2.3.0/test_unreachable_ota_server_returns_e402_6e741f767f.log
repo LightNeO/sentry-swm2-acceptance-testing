@@ -1,0 +1,72 @@
+# tests/wifi/test_ota_network.py::test_unreachable_ota_server_returns_e402
+# fw v2.3.0  2026-10-19 13:38:47
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.39s] RX:
+I (74120) sentry: [AUTH] operator qa_swm on watch, console 2
+I (74240) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.39s] TX: status
+[    1.15s] RX:
+I (74500) sentry: === SWM-2 status ===
+I (74500) sentry:   fw:       v2.3.0 (ota_1)
+I (74500) sentry:   state:    1 NORMAL
+I (74500) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -22 dBm (excellent), ch 6
+I (74500) sentry:   internet: OK
+I (74510) sentry:   user:     qa_swm (user)
+I (74510) sentry:   time:     13:38:42, uptime 0h 01m 14s
+I (74520) sentry:   valve:    closed
+I (74520) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (74530) sentry:   sonar:    no contact
+I (74530) sentry:   carrier:  depth 41.6 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
+I (74540) sentry:   heap:     251 KB free
+[    1.15s] TX: ota server http://10.42.0.1:53317/fw7/
+[    1.97s] RX:
+I (75270) sentry: [OTA] server: http://10.42.0.1:53317/fw7/ (custom)
+[    1.97s] TX: ota check
+[    3.00s] RX:
+I (76090) wifi:state: run -> init (0x7c0)
+I (76090) wifi:pm stop, total sleep time: 11303007 us / 14214455 us
+
+I (76100) wifi:<ba-del>idx:0, tid:0
+I (76100) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+W (76110) sentry: W110 wifi connection lost (reason 7)
+I (76110) sentry: [LINK] retry 1/3...
+E (76110) esp-tls: [sock=54] delayed connect error: Software caused connection abort
+E (76120) transport_base: Failed to open a new connection: 32772
+E (76130) HTTP_CLIENT: Connection failed, sock < 0
+E (76130) sentry: E402 cannot reach OTA server (stable.txt)
+I (76160) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (76160) wifi:state: init -> auth (0xb0)
+I (76160) wifi:state: auth -> assoc (0x0)
+I (76170) wifi:state: assoc -> run (0x10)
+I (76190) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
+I (76190) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -23, cipher(pairwise:0x3, group:0x3), pmf:0
+I (76200) wifi:pm start, type: 1
+
+I (76200) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (76210) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (76290) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
+I (76290) wifi:AP's beacon interval = 102400 us, DTIM period = 2
+[    3.00s] TX: ota server default
+[    4.14s] RX:
+E (77120) sentry: E002 Wi-Fi required. Use 'reconnect' or 'connect'
+I (77260) esp_netif_handlers: sta ip: 10.42.0.143, mask: 255.255.255.0, gw: 10.42.0.1
+I (77260) sentry: [LINK] got ip 10.42.0.143
+I (77440) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    4.14s] TX: status
+[    4.91s] RX:
+I (78260) sentry: === SWM-2 status ===
+I (78260) sentry:   fw:       v2.3.0 (ota_1)
+I (78260) sentry:   state:    1 NORMAL
+I (78260) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -21 dBm (excellent), ch 6
+I (78260) sentry:   internet: NO
+I (78270) sentry:   user:     qa_swm (user)
+I (78270) sentry:   time:     13:38:46, uptime 0h 01m 17s
+I (78280) sentry:   valve:    closed
+I (78280) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (78290) sentry:   sonar:    no contact
+I (78290) sentry:   carrier:  depth 41.6 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
+I (78300) sentry:   heap:     251 KB free
+[    4.91s] TX: ota server default
+[    5.74s] RX:
+I (79040) sentry: [OTA] server: https://raw.githubusercontent.com/BohdanHorbanych/esp32-ota-files/main/fw7/ (default)

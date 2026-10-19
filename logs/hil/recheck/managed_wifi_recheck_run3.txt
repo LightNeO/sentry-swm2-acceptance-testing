@@ -1,0 +1,23 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-9.1.1, pluggy-1.7.0 -- /home/light/.venvs/platformio/bin/python
+cachedir: .pytest_cache
+rootdir: /home/light/Projects/sentry-swm2-acceptance-testing-k1-k4/framework
+configfile: pytest.ini
+plugins: anyio-4.15.1
+collecting ... collected 20 items / 15 deselected / 5 selected
+
+tests/wifi/test_managed_ap_stage.py::test_ap_loss_makes_ota_check_require_wifi PASSED [ 20%]
+tests/wifi/test_managed_ap_stage.py::test_upstream_loss_keeps_test_ap_up PASSED [ 40%]
+tests/wifi/test_ota_network.py::test_unreachable_ota_server_returns_e402 PASSED [ 60%]
+tests/wifi/test_ota_network.py::test_custom_ota_server_is_saved_by_device FAILED [ 80%]
+tests/wifi/test_wifi_functional.py::test_forget_removes_saved_network_from_next_boot PASSED [100%]
+
+=================================== FAILURES ===================================
+__________________ test_custom_ota_server_is_saved_by_device ___________________
+tests/wifi/test_ota_network.py:72: in test_custom_ota_server_is_saved_by_device
+    assert "10.42.0.1:8000" in status.text
+E   AssertionError: assert '10.42.0.1:8000' in 'I (139460) sentry: [OTA] server: https://raw.githubusercontent.com/BohdanHorbanych/esp32-ota-files/main/fw7/ (default)\n'
+E    +  where 'I (139460) sentry: [OTA] server: https://raw.githubusercontent.com/BohdanHorbanych/esp32-ota-files/main/fw7/ (default)\n' = Response(command='ota server', text='I (139460) sentry: [OTA] server: https://raw.githubusercontent.com/BohdanHorbanych/esp32-ota-files/main/fw7/ (default)\n', timed_out=False, elapsed=0.8249495209984161, lines=[LogLine(raw='I (139460) sentry: [OTA] server: https://raw.githubusercontent.com/BohdanHorbanych/esp32-ota-files/main/fw7/ (default)', level='I', tick=139460, tag='sentry', msg='[OTA] server: https://raw.githubusercontent.com/BohdanHorbanych/esp32-ota-files/main/fw7/ (default)', codes=())]).text
+=========================== short test summary info ============================
+FAILED tests/wifi/test_ota_network.py::test_custom_ota_server_is_saved_by_device
+============ 1 failed, 4 passed, 15 deselected in 203.99s (0:03:23) ============

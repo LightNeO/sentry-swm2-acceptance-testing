@@ -1,0 +1,33 @@
+# tests/wifi/test_ota_network.py::test_unreachable_ota_server_returns_e402
+# fw v2.3.0  2026-10-19 13:35:46
+
+[    0.00s] TX: login qa_swm Pass1234
+[    0.35s] RX:
+I (79370) sentry: [AUTH] operator qa_swm on watch, console 2
+I (79450) sentry: [TELEMETRY] auto report every 30 s ('health off' to stop)
+[    0.35s] TX: status
+[    1.11s] RX:
+I (79710) sentry: === SWM-2 status ===
+I (79710) sentry:   fw:       v2.3.0 (ota_1)
+I (79710) sentry:   state:    1 NORMAL
+I (79710) sentry:   link:     buoy link 'SENTRY-HIL', ip 10.42.0.143, rssi -23 dBm (excellent), ch 6
+I (79710) sentry:   internet: NO
+I (79720) sentry:   user:     qa_swm (user)
+I (79720) sentry:   time:     --:--:--, uptime 0h 01m 19s
+I (79730) sentry:   valve:    closed
+I (79730) sentry:   watch:    disarmed, CIC alerts unacked: 0
+I (79730) sentry:   sonar:    no contact
+I (79740) sentry:   carrier:  depth 42.0 m, hull 5.2 bar, water 8.1 C, battery 24.20 V (sim)
+I (79750) sentry:   heap:     252 KB free
+[    1.11s] TX: ota server http://10.42.0.1:53317/fw7/
+[    1.94s] RX:
+I (80490) sentry: [OTA] server: http://10.42.0.1:53317/fw7/ (custom)
+[    1.94s] TX: ota check
+[    2.78s] RX:
+E (81310) esp-tls: [sock=54] delayed connect error: Connection reset by peer
+E (81310) transport_base: Failed to open a new connection: 32772
+E (81310) HTTP_CLIENT: Connection failed, sock < 0
+E (81320) sentry: E402 cannot reach OTA server (stable.txt)
+[    2.78s] TX: ota server default
+[    3.61s] RX:
+I (82160) sentry: [OTA] server: https://raw.githubusercontent.com/BohdanHorbanych/esp32-ota-files/main/fw7/ (default)
