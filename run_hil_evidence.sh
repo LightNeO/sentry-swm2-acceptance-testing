@@ -5,14 +5,14 @@
 #   bash run_hil_evidence.sh [runs]                              # default 3 runs
 # It does not edit code or docs and does not use --record (docs/results.json stays untouched).
 # Prerequisites: DUT on fw 2.3.0 with profile qa_swm registered, dnsmasq and the NetworkManager profiles
-# SENTRY-HIL / NeO present, an object 15-200 cm in front of HC-SR04 (for HIL-GD-07).
+# SENTRY-HIL and the upstream profile present, an object 15-200 cm in front of HC-SR04 (for HIL-GD-07).
 set -u
 
 RUNS="${1:-3}"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OUT="$ROOT/logs/hil"
 export HIL_AP_CONNECTION="${HIL_AP_CONNECTION:-SENTRY-HIL}"
-UPSTREAM_CON="${HIL_UPSTREAM_CONNECTION:-NeO}"
+UPSTREAM_CON="${HIL_UPSTREAM_CONNECTION:?set HIL_UPSTREAM_CONNECTION (name of the upstream NetworkManager profile)}"
 UPSTREAM_IF="${HIL_UPSTREAM_INTERFACE:-wlp0s21f0u2}"
 AP_IF="${HIL_AP_INTERFACE:-wlp1s0}"
 

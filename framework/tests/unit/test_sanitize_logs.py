@@ -15,17 +15,17 @@ def test_scan_lines_keep_only_the_test_ap():
     text = (
         "I (3440) sentry:   [ 1] SENTRY-HIL                        -27 dBm\n"
         "I (3440) sentry:   [ 2] TP-LINK_E6F2                      -69 dBm\n"
-        "I (3440) sentry:   [ 3] NeO                               -48 dBm\n"
+        "I (3440) sentry:   [ 3] HomeNet                               -48 dBm\n"
     )
-    out = sanitize_text(text, ["NeO"])
+    out = sanitize_text(text, ["HomeNet"])
     assert "SENTRY-HIL" in out
     assert "TP-LINK_E6F2" not in out
-    assert "NeO" not in out
+    assert "HomeNet" not in out
     assert out.count("<ssid>") == 2 or out.count("<upstream>") == 1
 
 
 def test_upstream_name_is_masked_everywhere_and_the_call_is_idempotent():
-    text = "wlp0s21f0u2     wifi      connected               NeO\n"
-    once = sanitize_text(text, ["NeO"])
-    assert "NeO" not in once
-    assert sanitize_text(once, ["NeO"]) == once
+    text = "wlp0s21f0u2     wifi      connected               HomeNet\n"
+    once = sanitize_text(text, ["HomeNet"])
+    assert "HomeNet" not in once
+    assert sanitize_text(once, ["HomeNet"]) == once

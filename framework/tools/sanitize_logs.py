@@ -4,7 +4,7 @@ The Wi-Fi scan in the DUT console lists every access point in range, and the sta
 shows up in nmcli output and boot logs. This keeps only the test AP name (SENTRY-HIL) and replaces the rest.
 
   python tools/sanitize_logs.py ../logs/hil                  # in place
-  python tools/sanitize_logs.py ../logs/hil --mask NeO --mask OtherName
+  python tools/sanitize_logs.py ../logs/hil --mask <upstream profile> --mask <other name>
 
 Safe to run more than once. Passwords are not handled here: the driver already masks them while recording.
 """
@@ -42,8 +42,8 @@ def main() -> int:
     args = parser.parse_args()
 
     masks = list(args.mask)
-    upstream = os.environ.get("HIL_UPSTREAM_CONNECTION", "NeO")
-    if upstream not in masks:
+    upstream = os.environ.get("HIL_UPSTREAM_CONNECTION", "")
+    if upstream and upstream not in masks:
         masks.append(upstream)
 
     changed = 0

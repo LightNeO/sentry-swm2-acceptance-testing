@@ -11,7 +11,7 @@ RUNS="${1:-3}"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OUT="$ROOT/logs/hil/recheck"
 export HIL_AP_CONNECTION="${HIL_AP_CONNECTION:-SENTRY-HIL}"
-UPSTREAM_CON="${HIL_UPSTREAM_CONNECTION:-NeO}"
+UPSTREAM_CON="${HIL_UPSTREAM_CONNECTION:?set HIL_UPSTREAM_CONNECTION (name of the upstream NetworkManager profile)}"
 UPSTREAM_IF="${HIL_UPSTREAM_INTERFACE:-wlp0s21f0u2}"
 AP_IF="${HIL_AP_INTERFACE:-wlp1s0}"
 

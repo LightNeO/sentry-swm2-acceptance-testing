@@ -54,7 +54,7 @@ command -v dnsmasq
 
 Код контролера: `framework/drivers/managed_ap.py`.
 
-За замовчуванням він використовує профілі та інтерфейси вище. Їх можна змінити змінними середовища:
+AP (`SENTRY-HIL`, `wlp1s0`) і інтерфейс upstream (`wlp0s21f0u2`) мають значення за замовчуванням. **Ім'я профілю upstream значення за замовчуванням не має** і обов'язково задається змінною `HIL_UPSTREAM_CONNECTION` (інакше `ManagedAp` і скрипти `run_hil_*.sh` зупиняються з поясненням). Решту можна змінити змінними середовища:
 
 ```bash
 export HIL_AP_CONNECTION=SENTRY-HIL

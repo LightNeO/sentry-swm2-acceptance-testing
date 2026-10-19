@@ -43,7 +43,9 @@ class ManagedAp:
         self.runner = runner or CommandRunner()
         self.ap_connection = ap_connection or os.environ.get("HIL_AP_CONNECTION", "SENTRY-HIL")
         self.ap_interface = ap_interface or os.environ.get("HIL_AP_INTERFACE", "wlp1s0")
-        self.upstream_connection = upstream_connection or os.environ.get("HIL_UPSTREAM_CONNECTION", "NeO")
+        self.upstream_connection = upstream_connection or os.environ.get("HIL_UPSTREAM_CONNECTION", "")
+        if not self.upstream_connection:
+            raise ValueError("set HIL_UPSTREAM_CONNECTION to the NetworkManager profile of the stand's upstream network")
         self.upstream_interface = upstream_interface or os.environ.get("HIL_UPSTREAM_INTERFACE", "wlp0s21f0u2")
 
     def snapshot(self) -> NetworkSnapshot:
