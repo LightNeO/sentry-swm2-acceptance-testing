@@ -32,10 +32,10 @@ E (82065) sentry: E113 no known network. Use 'connect' first
 [    5.18s] RX:
 I (82885) sentry: [LINK] scanning...
 I (85785) sentry:   [ 1] SENTRY-HIL                        -29 dBm
-I (85785) sentry:   [ 2] NeO                               -47 dBm
-I (85785) sentry:   [ 3] AV                                -63 dBm
-I (85785) sentry:   [ 4] AP_2947486690                     -66 dBm
-I (85795) sentry:   [ 5] F100011002624340102               -73 dBm
+I (85785) sentry:   [ 2] <ssid>                               -47 dBm
+I (85785) sentry:   [ 3] <ssid>                                -63 dBm
+I (85785) sentry:   [ 4] <ssid>                     -66 dBm
+I (85795) sentry:   [ 5] <ssid>               -73 dBm
 SSID or number: 
 [    5.18s] TX: SENTRY-HIL
 [    5.44s] RX:

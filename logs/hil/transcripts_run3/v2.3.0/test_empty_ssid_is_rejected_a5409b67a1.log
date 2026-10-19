@@ -13,28 +13,28 @@ I (19865) sentry: [LINK] retry 1/3...
 I (19865) sentry:   [ 1] SENTRY-HIL                        -29 dBm
 I (19875) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
 I (19875) wifi:state: init -> auth (0xb0)
-I (19885) sentry:   [ 2] NeO                               -46 dBm
+I (19885) sentry:   [ 2] <ssid>                               -46 dBm
 I (19885) wifi:state: auth -> assoc (0x0)
-I (19895) sentry:   [ 3] TP-Link_2888                      -56 dBm
+I (19895) sentry:   [ 3] <ssid>                      -56 dBm
 I (19895) wifi:state: assoc -> run (0x10)
-I (19905) sentry:   [ 4] AV                                -63 dBm
-I (19905) sentry:   [ 5] AP_2947486690                     -66 dBm
-I (19915) sentry:   [ 6] TP-LINK_E6F2                      -69 dBm
-I (19915) sentry:   [ 7] F100011002624340102               -74 dBm
+I (19905) sentry:   [ 4] <ssid>                                -63 dBm
+I (19905) sentry:   [ 5] <ssid>                     -66 dBm
+I (19915) sentry:   [ 6] <ssid>                      -69 dBm
+I (19915) sentry:   [ 7] <ssid>               -74 dBm
 I (19925) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
 I (19935) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -30, cipher(pairwise:0x3, group:0x3), pmf:0
 I (19945) wifi:pm start, type: 1
 
 I (19945) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
 I (19955) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
-I (19965) sentry:   [ 8] lang.co.family                    -77 dBm
-I (19965) sentry:   [ 9] Tapo_Cam_BA35                     -80 dBm
-I (19975) sentry:   [10] HUAWEI-AN85                       -82 dBm
-I (19975) sentry:   [11] TP-Link_3E3A                      -86 dBm
-I (19985) sentry:   [12] AVIA LINK                         -87 dBm
-I (19995) sentry:   [13] 70mai_d01_1A53                    -89 dBm
-I (19995) sentry:   [14] Slava_Ukraine                     -89 dBm
-I (20005) sentry:   [15] HUAWEI-70                         -90 dBm
+I (19965) sentry:   [ 8] <ssid>                    -77 dBm
+I (19965) sentry:   [ 9] <ssid>                     -80 dBm
+I (19975) sentry:   [10] <ssid>                       -82 dBm
+I (19975) sentry:   [11] <ssid>                      -86 dBm
+I (19985) sentry:   [12] <ssid>                         -87 dBm
+I (19995) sentry:   [13] <ssid>                    -89 dBm
+I (19995) sentry:   [14] <ssid>                     -89 dBm
+I (20005) sentry:   [15] <ssid>                         -90 dBm
 SSID or number: I (20055) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us
 I (20055) wifi:AP's beacon interval = 102400 us, DTIM period = 2
 [    3.38s] TX: 

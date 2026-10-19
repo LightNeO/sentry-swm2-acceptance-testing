@@ -31,6 +31,10 @@ python -m pytest --record                    # + записати результ
 python -m pytest --keep-logs                 # + транскрипт для кожного тесту
 python ../framework/tools/gen_traceability.py # перегенерувати docs/traceability.md
 python tools/register_bounds.py                # AU-1b/1c: межі register на чистому NVS (стирає лише NVS, потрібен DUT)
+python -m pytest tests/hil -m hil_stage --run-hil              # Arduino-стимулятор кнопок (BUTTON_STIM_PORT, SWM_PORT)
+python -m pytest tests/wifi -m managed_wifi --run-managed-wifi  # керований AP/WAN (HIL_AP_CONNECTION=SENTRY-HIL, Linux + NetworkManager)
+python tools/sanitize_logs.py ../logs/hil      # сховати імена чужих мереж перед комітом
+# з кореня репозиторію: bash run_hil_evidence.sh (повний прогін x3), bash run_hil_recheck.sh (лише виправлені тести)
 ```
 
 Порт шукається за USB VID/PID (`SWM_VID`).

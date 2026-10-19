@@ -7,7 +7,7 @@
 
 - Вимог: **139**; з тест-кейсами: **139**; без кейсів: **0**
 - Тест-кейсів: **220**; «осиротілих» посилань на неіснуючі вимоги: **0**
-- Виконано кейсів (є результат): **160** з 220
+- Виконано кейсів (є результат): **171** з 220
 
 ## Матриця
 
@@ -33,21 +33,21 @@
 | ST-4a | 21 | P3 | A | TC-ST-14 | PASS | PASS | — |
 | ST-4b | 21 | P2 | A | TC-ST-15 | PASS | PASS | — |
 | ST-4c | 21 | P1 | A | TC-ST-16 | PASS | PASS | — |
-| WF-1a | 21 | P1 | A+M | TC-WF-01, TC-WF-02 | PARTIAL | — | — |
-| WF-1b | 21 | P2 | A | TC-WF-03 | — | — | — |
-| WF-1c | 21 | P2 | A | TC-WF-04 | — | — | — |
-| WF-1d | 21 | P1 | A | TC-WF-01 | PASS | — | — |
-| WF-1e | 21 | P1 | A | TC-WF-05 | PASS | — | — |
-| WF-2 | 21 | P2 | A (частково) | TC-WF-06, TC-WF-07 | — | — | — |
-| WF-3a | 21 | P2 | A | TC-WF-10, TC-WF-11 | — | — | — |
+| WF-1a | 21 | P1 | A+M | TC-WF-01, TC-WF-02 | PARTIAL | PASS | — |
+| WF-1b | 21 | P2 | A | TC-WF-03 | — | PASS | — |
+| WF-1c | 21 | P2 | A | TC-WF-04 | — | PASS | — |
+| WF-1d | 21 | P1 | A | TC-WF-01 | PASS | PASS | — |
+| WF-1e | 21 | P1 | A | TC-WF-05 | PASS | PASS | — |
+| WF-2 | 21 | P2 | A (частково) | TC-WF-06, TC-WF-07 | — | PASS | — |
+| WF-3a | 21 | P2 | A | TC-WF-10, TC-WF-11 | — | PASS | — |
 | WF-3b | 21 | P2 | A | TC-WF-12 | — | — | — |
-| WF-3c | 21 | P2 | A | TC-WF-13 | — | — | — |
-| WF-3d | 21 | P2 | A | TC-WF-05 | PASS | — | — |
-| WF-4a | 21 | P3 | A | TC-WF-14 | — | — | — |
+| WF-3c | 21 | P2 | A | TC-WF-13 | — | PASS | — |
+| WF-3d | 21 | P2 | A | TC-WF-05 | PASS | PASS | — |
+| WF-4a | 21 | P3 | A | TC-WF-14 | — | PASS | — |
 | WF-4b | 21 | P3 | A | TC-WF-15 | PASS | PASS | — |
-| WF-4c | 21 | P3 | A | TC-WF-16 | — | — | — |
-| WF-4d | 21 | P3 | A | TC-WF-17 | — | — | — |
-| WF-5 | 21 | P1 | A | TC-WF-18 | PASS | — | — |
+| WF-4c | 21 | P3 | A | TC-WF-16 | — | PASS | — |
+| WF-4d | 21 | P3 | A | TC-WF-17 | — | PASS | — |
+| WF-5 | 21 | P1 | A | TC-WF-18 | PASS | PASS | — |
 | AU-1a | 21 | P1 | A | TC-AU-01, TC-AU-02 | PARTIAL | PARTIAL | — |
 | AU-1b | 21 | P1 | A | TC-AU-03, TC-AU-04 | — | PASS | — |
 | AU-1c | 21 | P1 | A | TC-AU-05 | — | PASS | — |
@@ -78,7 +78,7 @@
 | OTA-9 | 21 | P1 | A+M | TC-OTA-15, TC-OTA-16, TC-OTA-17, TC-OTA-18, TC-OTA-19, TC-OTA-20, TC-OTA-21, TC-OTA-22, TC-OTA-23, TC-OTA-24, TC-OTA-25, TC-OTA-26 | PARTIAL | PARTIAL | — |
 | OTA-10 | 21 | P1 | A | TC-OTA-27, TC-OTA-28, TC-GD-19 | PARTIAL | PARTIAL | — |
 | OTA-11 | 21 | P2 | A | TC-OTA-17, TC-OTA-18, TC-OTA-19, TC-OTA-29, TC-OTA-30 | PARTIAL | PARTIAL | — |
-| OTA-12 | 21 | P2 | A | TC-OTA-31 | PASS | PASS | — |
+| OTA-12 | 21 | P2 | A | TC-OTA-31 | PASS | PARTIAL | — |
 | LM-1 | 21 | P2 | A+M | TC-LM-01, TC-LM-02, TC-LM-03 | PASS | PARTIAL | — |
 | LM-2a | 21 | P2 | A+M | TC-LM-04 | PASS | PASS | — |
 | LM-2b | 21 | P1 | A+M | TC-LM-05, TC-LM-06 | PARTIAL | PARTIAL | — |
@@ -137,7 +137,7 @@
 | BTN-3 | 21 | P2 | A+M | TC-BTN-03 | PASS | PASS | — |
 | BTN-4 | 23 | P2 | A+M | TC-BTN-04 | PASS | PASS | — |
 | BTN-5 | 21/23 | P2 | A | TC-BTN-05, TC-BTN-06 | PASS | PASS | — |
-| BTN-6 | 21 | P2 | A | TC-BTN-07 | PASS | — | — |
+| BTN-6 | 21 | P2 | A | TC-BTN-07 | PASS | PASS | — |
 | SYS-1 | 21 | P3 | A | TC-SYS-01 | PASS | PASS | — |
 | SYS-2 | 21 | P2 | A | TC-SYS-02 | — | — | — |
 | SYS-3 | 21 | P3 | A | TC-SYS-03 | — | — | — |

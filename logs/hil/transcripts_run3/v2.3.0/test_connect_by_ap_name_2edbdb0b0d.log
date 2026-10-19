@@ -7,18 +7,18 @@ I (251630) sentry: [LINK] scanning...
 I (251850) esp_netif_handlers: sta ip: 10.42.0.143, mask: 255.255.255.0, gw: 10.42.0.1
 I (251850) sentry: [LINK] got ip 10.42.0.143
 I (254530) sentry:   [ 1] SENTRY-HIL                        -29 dBm
-I (254530) sentry:   [ 2] NeO                               -53 dBm
-I (254530) sentry:   [ 3] TP-Link_2888                      -59 dBm
-I (254530) sentry:   [ 4] AV                                -63 dBm
-I (254540) sentry:   [ 5] AP_2947486690                     -63 dBm
-I (254540) sentry:   [ 6] F100011002624340102               -73 dBm
-I (254550) sentry:   [ 7] Tapo_Cam_BA35                     -78 dBm
-I (254560) sentry:   [ 8] TP-LINK_E6F2                      -78 dBm
-I (254560) sentry:   [ 9] HUAWEI-AN85                       -81 dBm
-I (254570) sentry:   [10] TP-Link_C0D6                      -81 dBm
-I (254570) sentry:   [11] lang.co.family                    -86 dBm
-I (254580) sentry:   [12] AVIA LINK                         -87 dBm
-I (254590) sentry:   [13] 70mai_d01_1A53                    -90 dBm
+I (254530) sentry:   [ 2] <ssid>                               -53 dBm
+I (254530) sentry:   [ 3] <ssid>                      -59 dBm
+I (254530) sentry:   [ 4] <ssid>                                -63 dBm
+I (254540) sentry:   [ 5] <ssid>                     -63 dBm
+I (254540) sentry:   [ 6] <ssid>               -73 dBm
+I (254550) sentry:   [ 7] <ssid>                     -78 dBm
+I (254560) sentry:   [ 8] <ssid>                      -78 dBm
+I (254560) sentry:   [ 9] <ssid>                       -81 dBm
+I (254570) sentry:   [10] <ssid>                      -81 dBm
+I (254570) sentry:   [11] <ssid>                    -86 dBm
+I (254580) sentry:   [12] <ssid>                         -87 dBm
+I (254590) sentry:   [13] <ssid>                    -90 dBm
 SSID or number: 
 [    3.24s] TX: SENTRY-HIL
 [    3.50s] RX:

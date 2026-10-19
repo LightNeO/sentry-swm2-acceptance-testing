@@ -41,16 +41,16 @@ E (119825) sentry: E102 network 'SENTRY-HIL-NOT-FOUND' not found
 [   16.36s] RX:
 I (120095) sentry: [LINK] scanning...
 I (122595) sentry:   [ 1] SENTRY-HIL                        -29 dBm
-I (122595) sentry:   [ 2] NeO                               -46 dBm
-I (122595) sentry:   [ 3] AV                                -62 dBm
-I (122595) sentry:   [ 4] AP_2947486690                     -63 dBm
-I (122605) sentry:   [ 5] TP-Link_2888                      -69 dBm
-I (122615) sentry:   [ 6] TP-LINK_E6F2                      -71 dBm
-I (122615) sentry:   [ 7] F100011002624340102               -73 dBm
-I (122625) sentry:   [ 8] lang.co.family                    -78 dBm
-I (122625) sentry:   [ 9] HUAWEI-AN85                       -80 dBm
-I (122635) sentry:   [10] Tapo_Cam_BA35                     -81 dBm
-I (122635) sentry:   [11] HUAWEI-70                         -86 dBm
+I (122595) sentry:   [ 2] <ssid>                               -46 dBm
+I (122595) sentry:   [ 3] <ssid>                                -62 dBm
+I (122595) sentry:   [ 4] <ssid>                     -63 dBm
+I (122605) sentry:   [ 5] <ssid>                      -69 dBm
+I (122615) sentry:   [ 6] <ssid>                      -71 dBm
+I (122615) sentry:   [ 7] <ssid>               -73 dBm
+I (122625) sentry:   [ 8] <ssid>                    -78 dBm
+I (122625) sentry:   [ 9] <ssid>                       -80 dBm
+I (122635) sentry:   [10] <ssid>                     -81 dBm
+I (122635) sentry:   [11] <ssid>                         -86 dBm
 SSID or number: 
 [   16.36s] TX: SENTRY-HIL
 [   16.61s] RX:

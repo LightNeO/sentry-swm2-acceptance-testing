@@ -5,12 +5,12 @@
 [    6.61s] RX:
 I (100645) sentry: [LINK] scanning...
 I (103545) sentry:   [ 1] SENTRY-HIL                        -25 dBm  ch  6  secured
-I (103545) sentry:   [ 2] NeO                               -50 dBm  ch 11  secured
-I (103545) sentry:   [ 3] TP-Link_2888                      -60 dBm  ch  3  secured
-I (103555) sentry:   [ 4] AV                                -63 dBm  ch 10  secured
-I (103555) sentry:   [ 5] AP_2947486690                     -64 dBm  ch 10  secured
-I (103565) sentry:   [ 6] F100011002624340102               -71 dBm  ch  6  secured
-I (103575) sentry:   [ 7] TP-LINK_E6F2                      -73 dBm  ch 11  secured
-I (103585) sentry:   [ 8] Tapo_Cam_BA35                     -77 dBm  ch  1  open
-I (103585) sentry:   [ 9] HUAWEI-AN85                       -80 dBm  ch  6  secured
-I (103595) sentry:   [10] lang.co.family                    -84 dBm  ch  7  secured
+I (103545) sentry:   [ 2] <ssid>                               -50 dBm  ch 11  secured
+I (103545) sentry:   [ 3] <ssid>                      -60 dBm  ch  3  secured
+I (103555) sentry:   [ 4] <ssid>                                -63 dBm  ch 10  secured
+I (103555) sentry:   [ 5] <ssid>                     -64 dBm  ch 10  secured
+I (103565) sentry:   [ 6] <ssid>               -71 dBm  ch  6  secured
+I (103575) sentry:   [ 7] <ssid>                      -73 dBm  ch 11  secured
+I (103585) sentry:   [ 8] <ssid>                     -77 dBm  ch  1  open
+I (103585) sentry:   [ 9] <ssid>                       -80 dBm  ch  6  secured
+I (103595) sentry:   [10] <ssid>                    -84 dBm  ch  7  secured

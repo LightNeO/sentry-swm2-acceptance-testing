@@ -5,13 +5,13 @@
 [    3.21s] RX:
 I (14415) sentry: [LINK] scanning...
 I (17315) sentry:   [ 1] SENTRY-HIL                        -28 dBm
-I (17315) sentry:   [ 2] NeO                               -49 dBm
-I (17315) sentry:   [ 3] TP-Link_2888                      -61 dBm
-I (17315) sentry:   [ 4] AV                                -65 dBm
-I (17325) sentry:   [ 5] AP_2947486690                     -66 dBm
-I (17325) sentry:   [ 6] TP-LINK_E6F2                      -69 dBm
-I (17335) sentry:   [ 7] F100011002624340102               -71 dBm
-I (17345) sentry:   [ 8] Tapo_Cam_BA35                     -75 dBm
+I (17315) sentry:   [ 2] <ssid>                               -49 dBm
+I (17315) sentry:   [ 3] <ssid>                      -61 dBm
+I (17315) sentry:   [ 4] <ssid>                                -65 dBm
+I (17325) sentry:   [ 5] <ssid>                     -66 dBm
+I (17325) sentry:   [ 6] <ssid>                      -69 dBm
+I (17335) sentry:   [ 7] <ssid>               -71 dBm
+I (17345) sentry:   [ 8] <ssid>                     -75 dBm
 SSID or number: 
 [    3.21s] TX: SENTRY-HIL-NOT-FOUND
 [    3.47s] RX:
@@ -33,13 +33,13 @@ E (27635) sentry: E102 network 'SENTRY-HIL-NOT-FOUND' not found
 [   16.30s] RX:
 I (27905) sentry: [LINK] scanning...
 I (30405) sentry:   [ 1] SENTRY-HIL                        -28 dBm
-I (30405) sentry:   [ 2] NeO                               -53 dBm
-I (30405) sentry:   [ 3] TP-Link_2888                      -62 dBm
-I (30405) sentry:   [ 4] AV                                -62 dBm
-I (30415) sentry:   [ 5] AP_2947486690                     -64 dBm
-I (30415) sentry:   [ 6] TP-LINK_E6F2                      -69 dBm
-I (30425) sentry:   [ 7] F100011002624340102               -70 dBm
-I (30435) sentry:   [ 8] Tapo_Cam_BA35                     -77 dBm
+I (30405) sentry:   [ 2] <ssid>                               -53 dBm
+I (30405) sentry:   [ 3] <ssid>                      -62 dBm
+I (30405) sentry:   [ 4] <ssid>                                -62 dBm
+I (30415) sentry:   [ 5] <ssid>                     -64 dBm
+I (30415) sentry:   [ 6] <ssid>                      -69 dBm
+I (30425) sentry:   [ 7] <ssid>               -70 dBm
+I (30435) sentry:   [ 8] <ssid>                     -77 dBm
 SSID or number: 
 [   16.30s] TX: SENTRY-HIL
 [   16.56s] RX:

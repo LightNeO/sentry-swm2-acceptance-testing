@@ -5,12 +5,12 @@
 [    3.20s] RX:
 I (283560) sentry: [LINK] scanning...
 I (286460) sentry:   [ 1] SENTRY-HIL                        -28 dBm
-I (286460) sentry:   [ 2] TP-Link_2888                      -67 dBm
-I (286460) sentry:   [ 3] AP_2947486690                     -68 dBm
-I (286460) sentry:   [ 4] F100011002624340102               -71 dBm
-I (286470) sentry:   [ 5] TP-LINK_E6F2                      -71 dBm
-I (286470) sentry:   [ 6] Tapo_Cam_BA35                     -85 dBm
-I (286480) sentry:   [ 7] TP-Link_C0D6                      -87 dBm
+I (286460) sentry:   [ 2] <ssid>                      -67 dBm
+I (286460) sentry:   [ 3] <ssid>                     -68 dBm
+I (286460) sentry:   [ 4] <ssid>               -71 dBm
+I (286470) sentry:   [ 5] <ssid>                      -71 dBm
+I (286470) sentry:   [ 6] <ssid>                     -85 dBm
+I (286480) sentry:   [ 7] <ssid>                      -87 dBm
 SSID or number: 
 [    3.20s] TX: SENTRY-HIL
 [    3.46s] RX:

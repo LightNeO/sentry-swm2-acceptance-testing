@@ -27,16 +27,16 @@ E (101435) sentry: E102 network 'SENTRY-HIL-NOT-FOUND' not found
 [   15.07s] RX:
 I (101705) sentry: [LINK] scanning...
 I (104205) sentry:   [ 1] SENTRY-HIL                        -27 dBm
-I (104205) sentry:   [ 2] NeO                               -48 dBm
-I (104205) sentry:   [ 3] TP-Link_2888                      -55 dBm
-I (104205) sentry:   [ 4] AP_2947486690                     -64 dBm
-I (104215) sentry:   [ 5] AV                                -70 dBm
-I (104215) sentry:   [ 6] TP-LINK_E6F2                      -70 dBm
-I (104225) sentry:   [ 7] F100011002624340102               -76 dBm
-I (104235) sentry:   [ 8] lang.co.family                    -76 dBm
-I (104235) sentry:   [ 9] Tapo_Cam_BA35                     -78 dBm
-I (104245) sentry:   [10] TP-Link_C0D6                      -87 dBm
-I (104245) sentry:   [11] TP-Link_3E3A                      -87 dBm
+I (104205) sentry:   [ 2] <ssid>                               -48 dBm
+I (104205) sentry:   [ 3] <ssid>                      -55 dBm
+I (104205) sentry:   [ 4] <ssid>                     -64 dBm
+I (104215) sentry:   [ 5] <ssid>                                -70 dBm
+I (104215) sentry:   [ 6] <ssid>                      -70 dBm
+I (104225) sentry:   [ 7] <ssid>               -76 dBm
+I (104235) sentry:   [ 8] <ssid>                    -76 dBm
+I (104235) sentry:   [ 9] <ssid>                     -78 dBm
+I (104245) sentry:   [10] <ssid>                      -87 dBm
+I (104245) sentry:   [11] <ssid>                      -87 dBm
 SSID or number: 
 [   15.07s] TX: SENTRY-HIL
 [   15.33s] RX:

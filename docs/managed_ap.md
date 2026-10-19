@@ -95,8 +95,8 @@ python -m pytest tests/wifi -m managed_wifi --run-managed-wifi --keep-logs
 - `TC-WF-01`–`TC-WF-07`: connect за номером/назвою, password/SSID негативні сценарії і saved network;
 - `TC-WF-10`–`TC-WF-17`: reconnect, forget, disconnect, scan, `net`, ping і time;
 - `TC-WF-18`: вимкнення AP, очікування `W110`, повернення AP і reconnect;
-- `TC-OTA-25(a)`: AP down, `ota check` фактично повертає `E411`; стара вимога очікує `E002`;
-- `TC-OTA-25(b)`: відключення upstream при залишеному AP, перевірка, що Wi-Fi link DUT не зник, а OTA фіксує фактичний `E002/E402/E411`.
+- `TC-OTA-25(a)`: AP down; після `W110` `ota check` має дати `E002` (до `W110` прошивка ще вважає, що зв'язок є, і відповідає `E402`);
+- `TC-OTA-25(b)`: upstream down при залишеному AP; після того як DUT відновив зв'язок, `ota check` має дати `E402`. `E411` у жодному прогоні не з'являвся (OBS-06).
 - `TC-OTA-23`, `TC-OTA-26`, `TC-OTA-31`: недоступний OTA server/path і custom server profile.
 
 `TC-OTA-16` поки що частковий: controller уже замінює ручне вимкнення hotspot, але запуск slow OTA і синхронізація моменту fault із прогресом завантаження ще потребують окремої server fixture.
@@ -112,6 +112,8 @@ nmcli connection down SENTRY-HIL
 DUT втрачає association. Це сценарій `TC-WF-18` і Wi-Fi interruption під час `TC-OTA-16`.
 
 ### WAN down
+
+Спостереження зі стенду (логи `logs/hil/`): коли `NeO` вимикається, NetworkManager перезапускає shared-режим, і ESP32 на кілька секунд втрачає AP (`W110 ... reason 7`) та перепідключається. Тобто WAN down не завжди ізольований від AP blip, тест чекає, поки зв'язок стабілізується.
 
 ```bash
 nmcli connection down NeO

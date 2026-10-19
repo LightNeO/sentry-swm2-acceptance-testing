@@ -162,16 +162,20 @@
   "TC-BTN-05": {
     "21": "PASS",
     "23": "PASS",
-    "evidence": "logs/v2.3.0/manual/partC_buttons.log"
+    "evidence": "logs/v2.3.0/manual/partC_buttons.log | logs/hil/hil_stage_run1.txt, run2, run3 (Arduino HIL, 2.3.0, PASS 3/3)",
+    "bugs": []
   },
   "TC-BTN-06": {
     "21": "PASS",
     "23": "PASS",
-    "evidence": "logs/v2.3.0/manual/partC_buttons.log"
+    "evidence": "logs/v2.3.0/manual/partC_buttons.log | logs/hil/hil_stage_run1.txt, run2, run3 (Arduino HIL, 2.3.0, PASS 3/3)",
+    "bugs": []
   },
   "TC-BTN-07": {
     "21": "PASS",
-    "evidence": "logs/v2.1.0/manual/group1_buttons.log"
+    "evidence": "logs/v2.1.0/manual/group1_buttons.log | logs/hil/hil_stage_run1.txt, run2, run3 (Arduino HIL, 2.3.0, PASS 3/3)",
+    "23": "PASS",
+    "bugs": []
   },
   "TC-BTN-08": {
     "21": "PASS",
@@ -447,7 +451,9 @@
   },
   "TC-OTA-23": {
     "21": "PASS",
-    "evidence": "logs/v2.1.0/manual/group6_ota.log"
+    "evidence": "logs/v2.1.0/manual/group6_ota.log | logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS у 2 із 3 прогонів, run 1: ERROR на логіні (каскад від попередніх падінь); тест доопрацьовано, потрібен повторний прогін (run_hil_recheck.sh).",
+    "23": "PARTIAL",
+    "bugs": []
   },
   "TC-OTA-27": {
     "21": "PASS",
@@ -464,7 +470,9 @@
   },
   "TC-OTA-31": {
     "21": "PASS",
-    "23": "PASS"
+    "23": "PARTIAL",
+    "bugs": [],
+    "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS у 2 із 3 прогонів, run 3: випадковий розрив Wi-Fi під час тесту; тест доопрацьовано, потрібен повторний прогін (run_hil_recheck.sh)."
   },
   "TC-OTA-32": {
     "21": "PASS",
@@ -616,11 +624,15 @@
   },
   "TC-WF-01": {
     "21": "PASS",
-    "evidence": "connect/reconnect успішно виконувались у кожній сесії проєкту (логи v2.1.0, v2.3.0, logs/ota/*) — підтверджує WF-1a/WF-1d."
+    "evidence": "connect/reconnect успішно виконувались у кожній сесії проєкту (логи v2.1.0, v2.3.0, logs/ota/*) — підтверджує WF-1a/WF-1d. | logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3.",
+    "23": "PASS",
+    "bugs": []
   },
   "TC-WF-05": {
     "21": "PASS",
-    "evidence": "Мережа зберігається в NVS і boot log кожного разу показує 'known network ... Type reconnect' після reboot (десятки прикладів у логах проєкту) — підтверджує WF-1e/WF-3d."
+    "evidence": "Мережа зберігається в NVS і boot log кожного разу показує 'known network ... Type reconnect' після reboot (десятки прикладів у логах проєкту) — підтверджує WF-1e/WF-3d. | logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3.",
+    "23": "PASS",
+    "bugs": []
   },
   "TC-WF-15": {
     "21": "PASS",
@@ -628,7 +640,9 @@
   },
   "TC-WF-18": {
     "21": "PASS",
-    "evidence": "logs/ota/ota_broken_rollback.log та logs/v2.1.0/manual/group6_ota.log: 'W110 wifi connection lost' + автоматичні 'retry 1/3'/'retry 2/3' з успішним відновленням зв'язку (WF-5)."
+    "evidence": "logs/ota/ota_broken_rollback.log та logs/v2.1.0/manual/group6_ota.log: 'W110 wifi connection lost' + автоматичні 'retry 1/3'/'retry 2/3' з успішним відновленням зв'язку (WF-5). | logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3.",
+    "23": "PASS",
+    "bugs": []
   },
   "TC-OTA-17": {
     "23": "PASS",
@@ -648,7 +662,7 @@
   "TC-OTA-26": {
     "23": "PASS",
     "bugs": [],
-    "evidence": "logs/v2.3.0/manual/partE_ota_bad_images.log"
+    "evidence": "logs/v2.3.0/manual/partE_ota_bad_images.log | logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3."
   },
   "TC-OTA-22": {
     "23": "N/A",
@@ -668,7 +682,7 @@
   "TC-OTA-25": {
     "23": "PARTIAL",
     "bugs": [],
-    "evidence": "logs/v2.3.0/manual/partE_ota_bad_images.log: (а) Wi-Fi вимкнено → E002 (AC-1b) — PASS; (б) Wi-Fi є, інтернету немає → E402 замість очікуваного E411, див. OBS-06 (не оформлено як баг)."
+    "evidence": "logs/hil/managed_wifi_run1-3.txt: (а) E402 до W110 і E002 після W110, (б) E402; E411 не спостерігався (OBS-06). Тести виправлено, потрібен повторний прогін."
   },
   "TC-GD-11": {
     "23": "FAIL",
@@ -698,5 +712,60 @@
     "23": "PASS",
     "bugs": [],
     "evidence": "logs/v2.3.0/au1_register_bounds.log (framework/tools/register_bounds.py, чистий NVS перед кожним раундом): пароль 5 і 33 → E205, 6 і 32 → registered."
+  },
+  "TC-WF-02": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3."
+  },
+  "TC-WF-03": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3."
+  },
+  "TC-WF-04": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3."
+  },
+  "TC-WF-06": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3."
+  },
+  "TC-WF-07": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3."
+  },
+  "TC-WF-10": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3."
+  },
+  "TC-WF-11": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3."
+  },
+  "TC-WF-13": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3."
+  },
+  "TC-WF-14": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3."
+  },
+  "TC-WF-16": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3."
+  },
+  "TC-WF-17": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3."
   }
 }

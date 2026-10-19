@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import time
 
 from drivers.protocol import Response
 
@@ -43,3 +44,14 @@ def lockout_seconds(resp: Response) -> int | None:
     """Remaining lockout from 'Try again in N s', if present."""
     m = resp.search(r"Try again in (\d+) s")
     return int(m.group(1)) if m else None
+
+
+def wait_link(dut, timeout: float = 45.0) -> bool:
+    """Wait until the DUT has its Wi-Fi link, nudging it with 'reconnect' (the first attempt may give E101, OBS-01)."""
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        if dut.link_up():
+            return True
+        dut.exchange("reconnect", until=r"connected to|W114|E1\d\d", timeout=20)
+        time.sleep(2)
+    return dut.link_up()

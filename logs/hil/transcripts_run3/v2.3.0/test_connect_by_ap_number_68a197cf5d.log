@@ -5,19 +5,19 @@
 [    3.24s] RX:
 I (197230) sentry: [LINK] scanning...
 I (200130) sentry:   [ 1] SENTRY-HIL                        -25 dBm
-I (200130) sentry:   [ 2] NeO                               -50 dBm
-I (200130) sentry:   [ 3] TP-Link_2888                      -62 dBm
-I (200130) sentry:   [ 4] AP_2947486690                     -62 dBm
-I (200140) sentry:   [ 5] AV                                -62 dBm
-I (200150) sentry:   [ 6] F100011002624340102               -72 dBm
-I (200150) sentry:   [ 7] TP-LINK_E6F2                      -73 dBm
-I (200160) sentry:   [ 8] Tapo_Cam_BA35                     -78 dBm
-I (200160) sentry:   [ 9] HUAWEI-AN85                       -79 dBm
-I (200170) sentry:   [10] TP-Link_C0D6                      -86 dBm
-I (200180) sentry:   [11] TP-Link_3E3A                      -88 dBm
-I (200180) sentry:   [12] @Ruijie-Box_iot                   -89 dBm
-I (200190) sentry:   [13] lang.co.family                    -91 dBm
-I (200190) sentry:   [14] @Ruijie-Box                       -94 dBm
+I (200130) sentry:   [ 2] <ssid>                               -50 dBm
+I (200130) sentry:   [ 3] <ssid>                      -62 dBm
+I (200130) sentry:   [ 4] <ssid>                     -62 dBm
+I (200140) sentry:   [ 5] <ssid>                                -62 dBm
+I (200150) sentry:   [ 6] <ssid>               -72 dBm
+I (200150) sentry:   [ 7] <ssid>                      -73 dBm
+I (200160) sentry:   [ 8] <ssid>                     -78 dBm
+I (200160) sentry:   [ 9] <ssid>                       -79 dBm
+I (200170) sentry:   [10] <ssid>                      -86 dBm
+I (200180) sentry:   [11] <ssid>                      -88 dBm
+I (200180) sentry:   [12] <ssid>                   -89 dBm
+I (200190) sentry:   [13] <ssid>                    -91 dBm
+I (200190) sentry:   [14] <ssid>                       -94 dBm
 SSID or number: 
 [    3.24s] TX: 1
 [    3.50s] RX:

@@ -99,10 +99,11 @@ def test_reconnect_after_disconnect_restores_link(dut_raw, settings, managed_ap)
 
 
 @pytest.mark.tc("TC-WF-12")
-def test_forget_removes_saved_network_from_next_boot(dut_raw, reboot_dut, settings, managed_ap):
+def test_forget_removes_saved_network_from_next_boot(dut_raw, settings, managed_ap):
     dut_raw.exchange("forget", idle=1.0)
     try:
-        boot = reboot_dut()
+        # Plain reboot: the reboot_dut fixture would bring Wi-Fi back and save the network again.
+        boot = dut_raw.reboot()
         assert "known network '" not in boot.text
         assert dut_raw.exchange("reconnect").has_code("E113")
     finally:

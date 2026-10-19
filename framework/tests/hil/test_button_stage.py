@@ -7,6 +7,7 @@ the Arduino controller and need --run-hil to execute.
 from __future__ import annotations
 
 import os
+import re
 import time
 
 import pytest
@@ -21,6 +22,9 @@ pytestmark = [
         reason="set BUTTON_STIM_PORT to run the physical button stage",
     ),
 ]
+
+
+MIN_OBJECT_CM = 15.0  # the stand object must be clearly outside the 10 cm guard zone (readings vary by a few cm)
 
 
 @pytest.fixture
@@ -92,7 +96,13 @@ def test_k4_acknowledges_newest_alert(dut, stimulator):
 def test_k4_long_press_triggers_guard_panic(guard_clean, stimulator):
     """Automates the K4 part; the physical object/sonar setup remains a HIL precondition."""
     guard_clean.exchange("guard zone 10")
-    guard_clean.exchange("distance", idle=1.5)
+    reading = guard_clean.exchange("distance", idle=1.5)
+    echo = re.search(r"echo ([\d.]+) cm", reading.text)
+    if not echo or float(echo.group(1)) < MIN_OBJECT_CM:
+        pytest.skip(
+            f"precondition: an object {MIN_OBJECT_CM:.0f}-200 cm in front of HC-SR04 is needed "
+            f"(sonar reading: {echo.group(1) + ' cm' if echo else 'no echo'}); with the zone at 10 cm anything closer is INTRUSION"
+        )
     armed = guard_clean.exchange("guard arm", idle=1.5)
     assert not armed.has_code("E805"), armed
     time.sleep(11)

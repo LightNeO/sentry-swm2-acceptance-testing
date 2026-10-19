@@ -11,17 +11,17 @@ E (184325) sentry: E113 no known network. Use 'connect' first
 [    5.18s] RX:
 I (185145) sentry: [LINK] scanning...
 I (188045) sentry:   [ 1] SENTRY-HIL                        -28 dBm
-I (188045) sentry:   [ 2] NeO                               -47 dBm
-I (188045) sentry:   [ 3] TP-Link_2888                      -62 dBm
-I (188045) sentry:   [ 4] AP_2947486690                     -62 dBm
-I (188055) sentry:   [ 5] AV                                -63 dBm
-I (188055) sentry:   [ 6] TP-LINK_E6F2                      -67 dBm
-I (188065) sentry:   [ 7] F100011002624340102               -73 dBm
-I (188075) sentry:   [ 8] Tapo_Cam_BA35                     -80 dBm
-I (188075) sentry:   [ 9] HUAWEI-AN85                       -83 dBm
-I (188085) sentry:   [10] lang.co.family                    -86 dBm
-I (188085) sentry:   [11] 70mai_d01_1A53                    -88 dBm
-I (188095) sentry:   [12] AVIA LINK                         -90 dBm
+I (188045) sentry:   [ 2] <ssid>                               -47 dBm
+I (188045) sentry:   [ 3] <ssid>                      -62 dBm
+I (188045) sentry:   [ 4] <ssid>                     -62 dBm
+I (188055) sentry:   [ 5] <ssid>                                -63 dBm
+I (188055) sentry:   [ 6] <ssid>                      -67 dBm
+I (188065) sentry:   [ 7] <ssid>               -73 dBm
+I (188075) sentry:   [ 8] <ssid>                     -80 dBm
+I (188075) sentry:   [ 9] <ssid>                       -83 dBm
+I (188085) sentry:   [10] <ssid>                    -86 dBm
+I (188085) sentry:   [11] <ssid>                    -88 dBm
+I (188095) sentry:   [12] <ssid>                         -90 dBm
 SSID or number: 
 [    5.18s] TX: SENTRY-HIL
 [    5.44s] RX:

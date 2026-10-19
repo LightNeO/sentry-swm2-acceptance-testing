@@ -5,28 +5,28 @@
 [    3.38s] RX:
 I (208380) sentry: [LINK] scanning...
 I (211280) sentry:   [ 1] SENTRY-HIL                        -29 dBm
-I (211280) sentry:   [ 2] NeO                               -48 dBm
-I (211280) sentry:   [ 3] AV                                -62 dBm
+I (211280) sentry:   [ 2] <ssid>                               -48 dBm
+I (211280) sentry:   [ 3] <ssid>                                -62 dBm
 I (211280) wifi:state: run -> init (0x7c0)
 I (211290) wifi:pm stop, total sleep time: 10521327 us / 15701905 us
 
 I (211290) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
-I (211300) sentry:   [ 4] AP_2947486690                     -65 dBm
+I (211300) sentry:   [ 4] <ssid>                     -65 dBm
 W (211300) sentry: W110 wifi connection lost (reason 7)
 I (211310) sentry: [LINK] retry 1/3...
-I (211320) sentry:   [ 5] TP-Link_2888                      -66 dBm
-I (211320) sentry:   [ 6] TP-LINK_E6F2                      -72 dBm
-I (211330) sentry:   [ 7] Tapo_Cam_BA35                     -75 dBm
-I (211330) sentry:   [ 8] F100011002624340102               -78 dBm
-I (211340) sentry:   [ 9] lang.co.family                    -78 dBm
-I (211340) sentry:   [10] HUAWEI-AN85                       -79 dBm
-I (211350) sentry:   [11] TP-Link_D05F                      -87 dBm
+I (211320) sentry:   [ 5] <ssid>                      -66 dBm
+I (211320) sentry:   [ 6] <ssid>                      -72 dBm
+I (211330) sentry:   [ 7] <ssid>                     -75 dBm
+I (211330) sentry:   [ 8] <ssid>               -78 dBm
+I (211340) sentry:   [ 9] <ssid>                    -78 dBm
+I (211340) sentry:   [10] <ssid>                       -79 dBm
+I (211350) sentry:   [11] <ssid>                      -87 dBm
 I (211360) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
 I (211360) wifi:state: init -> auth (0xb0)
-I (211370) sentry:   [12] TP-Link_3E3A                      -87 dBm
+I (211370) sentry:   [12] <ssid>                      -87 dBm
 I (211370) wifi:state: auth -> assoc (0x0)
-I (211380) sentry:   [13] HUAWEI-70                         -88 dBm
-I (211380) sentry:   [14] Slava_Ukraine                     -89 dBm
+I (211380) sentry:   [13] <ssid>                         -88 dBm
+I (211380) sentry:   [14] <ssid>                     -89 dBm
 I (211380) wifi:state: assoc -> run (0x10)
 SSID or number: I (211410) wifi:connected with SENTRY-HIL, aid = 1, channel 6, BW20, bssid = 28:c6:3f:d7:a9:24
 I (211410) wifi:security: WPA2-PSK-SHA256, phy: bgn, rssi: -27, cipher(pairwise:0x3, group:0x3), pmf:0

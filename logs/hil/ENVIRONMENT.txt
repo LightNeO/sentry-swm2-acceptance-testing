@@ -6,6 +6,6 @@ SWM_PORT=/dev/ttyUSB1 BUTTON_STIM_PORT=/dev/ttyUSB0 HIL_AP_CONNECTION=SENTRY-HIL
 --- nmcli device status
 DEVICE          TYPE      STATE                   CONNECTION 
 wlp1s0          wifi      connected               SENTRY-HIL 
-wlp0s21f0u2     wifi      connected               NeO        
+wlp0s21f0u2     wifi      connected               <upstream>        
 lo              loopback  connected (externally)  lo         
 p2p-dev-wlp1s0  wifi-p2p  disconnected            --         

@@ -5,6 +5,8 @@ from threading import Thread
 
 import pytest
 
+from tests.helpers import wait_link
+
 
 pytestmark = pytest.mark.managed_wifi
 
@@ -32,16 +34,26 @@ def missing_ota_server():
         server.server_close()
 
 
+def _restore_default_server(dut) -> None:
+    """'ota server default' needs Wi-Fi: if the link dropped meanwhile (seen on the stand), bring it back and retry,
+    so a custom server is never left saved on the board."""
+    for _ in range(3):
+        if not dut.exchange("ota server default").has_code("E002"):
+            return
+        wait_link(dut)
+
+
 @pytest.mark.tc("TC-OTA-23")
 def test_unreachable_ota_server_returns_e402(dut, managed_ap):
     # Port 53317 is allowed by the test-interface firewall, but no server is
     # started for this case, so the DUT gets a quick connection refusal.
+    wait_link(dut)
     dut.exchange("ota server http://10.42.0.1:53317/fw7/")
     try:
         result = dut.exchange("ota check", timeout=15)
         assert result.has_code("E402"), result
     finally:
-        dut.exchange("ota server default")
+        _restore_default_server(dut)
 
 
 @pytest.mark.tc("TC-OTA-26")
@@ -52,10 +64,11 @@ def test_unreachable_ota_path_returns_e405(dut, managed_ap, missing_ota_server):
 
 @pytest.mark.tc("TC-OTA-31")
 def test_custom_ota_server_is_saved_by_device(dut, managed_ap):
+    wait_link(dut)
     result = dut.exchange("ota server http://10.42.0.1:8000/fw7/")
     try:
         assert not result.has_code("E001"), result
         status = dut.exchange("ota server")
         assert "10.42.0.1:8000" in status.text
     finally:
-        dut.exchange("ota server default")
+        _restore_default_server(dut)

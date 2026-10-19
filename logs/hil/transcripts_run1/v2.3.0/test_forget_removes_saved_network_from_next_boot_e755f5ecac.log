@@ -145,15 +145,15 @@ I (645) main_task: Returned from app_main()
 [    8.42s] RX:
 I (1425) sentry: [LINK] scanning...
 I (3925) sentry:   [ 1] SENTRY-HIL                        -29 dBm
-I (3925) sentry:   [ 2] NeO                               -49 dBm
-I (3925) sentry:   [ 3] TP-Link_2888                      -59 dBm
-I (3925) sentry:   [ 4] AV                                -60 dBm
-I (3935) sentry:   [ 5] AP_2947486690                     -66 dBm
-I (3935) sentry:   [ 6] TP-LINK_E6F2                      -73 dBm
-I (3945) sentry:   [ 7] F100011002624340102               -74 dBm
-I (3955) sentry:   [ 8] Tapo_Cam_BA35                     -76 dBm
-I (3955) sentry:   [ 9] AVIA LINK                         -86 dBm
-I (3965) sentry:   [10] HUAWEI-70                         -88 dBm
+I (3925) sentry:   [ 2] <ssid>                               -49 dBm
+I (3925) sentry:   [ 3] <ssid>                      -59 dBm
+I (3925) sentry:   [ 4] <ssid>                                -60 dBm
+I (3935) sentry:   [ 5] <ssid>                     -66 dBm
+I (3935) sentry:   [ 6] <ssid>                      -73 dBm
+I (3945) sentry:   [ 7] <ssid>               -74 dBm
+I (3955) sentry:   [ 8] <ssid>                     -76 dBm
+I (3955) sentry:   [ 9] <ssid>                         -86 dBm
+I (3965) sentry:   [10] <ssid>                         -88 dBm
 SSID or number: 
 [    8.42s] TX: SENTRY-HIL
 [    8.68s] RX:
@@ -188,15 +188,15 @@ W (11785) sentry: W114 already connected
 [   20.00s] RX:
 I (12605) sentry: [LINK] scanning...
 I (15505) sentry:   [ 1] SENTRY-HIL                        -29 dBm
-I (15505) sentry:   [ 2] NeO                               -48 dBm
-I (15505) sentry:   [ 3] AV                                -60 dBm
-I (15505) sentry:   [ 4] AP_2947486690                     -64 dBm
-I (15515) sentry:   [ 5] TP-LINK_E6F2                      -69 dBm
-I (15515) sentry:   [ 6] F100011002624340102               -72 dBm
-I (15525) sentry:   [ 7] lang.co.family                    -76 dBm
-I (15535) sentry:   [ 8] HUAWEI-AN85                       -80 dBm
-I (15535) sentry:   [ 9] Tapo_Cam_BA35                     -81 dBm
-I (15545) sentry:   [10] TP-Link_3E3A                      -87 dBm
+I (15505) sentry:   [ 2] <ssid>                               -48 dBm
+I (15505) sentry:   [ 3] <ssid>                                -60 dBm
+I (15505) sentry:   [ 4] <ssid>                     -64 dBm
+I (15515) sentry:   [ 5] <ssid>                      -69 dBm
+I (15515) sentry:   [ 6] <ssid>               -72 dBm
+I (15525) sentry:   [ 7] <ssid>                    -76 dBm
+I (15535) sentry:   [ 8] <ssid>                       -80 dBm
+I (15535) sentry:   [ 9] <ssid>                     -81 dBm
+I (15545) sentry:   [10] <ssid>                      -87 dBm
 SSID or number: 
 [   20.00s] TX: SENTRY-HIL
 [   20.26s] RX:

@@ -5,18 +5,18 @@
 [    3.24s] RX:
 I (300750) sentry: [LINK] scanning...
 I (303650) sentry:   [ 1] SENTRY-HIL                        -28 dBm
-I (303650) sentry:   [ 2] NeO                               -47 dBm
-I (303650) sentry:   [ 3] AV                                -62 dBm
-I (303650) sentry:   [ 4] AP_2947486690                     -64 dBm
-I (303660) sentry:   [ 5] TP-Link_2888                      -66 dBm
-I (303660) sentry:   [ 6] TP-LINK_E6F2                      -70 dBm
-I (303670) sentry:   [ 7] lang.co.family                    -76 dBm
-I (303680) sentry:   [ 8] F100011002624340102               -77 dBm
-I (303680) sentry:   [ 9] HUAWEI-AN85                       -79 dBm
-I (303690) sentry:   [10] Tapo_Cam_BA35                     -79 dBm
-I (303690) sentry:   [11] TP-Link_C0D6                      -83 dBm
-I (303700) sentry:   [12] HUAWEI-70                         -88 dBm
-I (303710) sentry:   [13] AVIA LINK                         -90 dBm
+I (303650) sentry:   [ 2] <ssid>                               -47 dBm
+I (303650) sentry:   [ 3] <ssid>                                -62 dBm
+I (303650) sentry:   [ 4] <ssid>                     -64 dBm
+I (303660) sentry:   [ 5] <ssid>                      -66 dBm
+I (303660) sentry:   [ 6] <ssid>                      -70 dBm
+I (303670) sentry:   [ 7] <ssid>                    -76 dBm
+I (303680) sentry:   [ 8] <ssid>               -77 dBm
+I (303680) sentry:   [ 9] <ssid>                       -79 dBm
+I (303690) sentry:   [10] <ssid>                     -79 dBm
+I (303690) sentry:   [11] <ssid>                      -83 dBm
+I (303700) sentry:   [12] <ssid>                         -88 dBm
+I (303710) sentry:   [13] <ssid>                         -90 dBm
 SSID or number: 
 [    3.24s] TX: SENTRY-HIL
 [    3.50s] RX:

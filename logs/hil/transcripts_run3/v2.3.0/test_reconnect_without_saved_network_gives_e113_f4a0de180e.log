@@ -11,16 +11,16 @@ E (157365) sentry: E113 no known network. Use 'connect' first
 [    5.17s] RX:
 I (158185) sentry: [LINK] scanning...
 I (161085) sentry:   [ 1] SENTRY-HIL                        -28 dBm
-I (161085) sentry:   [ 2] NeO                               -47 dBm
-I (161085) sentry:   [ 3] TP-Link_2888                      -56 dBm
-I (161085) sentry:   [ 4] AV                                -65 dBm
-I (161095) sentry:   [ 5] TP-LINK_E6F2                      -70 dBm
-I (161095) sentry:   [ 6] AP_2947486690                     -72 dBm
-I (161105) sentry:   [ 7] F100011002624340102               -74 dBm
-I (161115) sentry:   [ 8] HUAWEI-AN85                       -79 dBm
-I (161115) sentry:   [ 9] TP-Link_3E3A                      -86 dBm
-I (161125) sentry:   [10] AVIA LINK                         -88 dBm
-I (161125) sentry:   [11] HUAWEI-70                         -90 dBm
+I (161085) sentry:   [ 2] <ssid>                               -47 dBm
+I (161085) sentry:   [ 3] <ssid>                      -56 dBm
+I (161085) sentry:   [ 4] <ssid>                                -65 dBm
+I (161095) sentry:   [ 5] <ssid>                      -70 dBm
+I (161095) sentry:   [ 6] <ssid>                     -72 dBm
+I (161105) sentry:   [ 7] <ssid>               -74 dBm
+I (161115) sentry:   [ 8] <ssid>                       -79 dBm
+I (161115) sentry:   [ 9] <ssid>                      -86 dBm
+I (161125) sentry:   [10] <ssid>                         -88 dBm
+I (161125) sentry:   [11] <ssid>                         -90 dBm
 SSID or number: 
 [    5.18s] TX: SENTRY-HIL
 [    5.43s] RX:

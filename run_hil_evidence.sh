@@ -51,6 +51,9 @@ for i in $(seq 1 "$RUNS"); do
   restore_network
 done
 
+# Hide neighbour SSIDs from the Wi-Fi scans and the upstream network name before anything is committed.
+python tools/sanitize_logs.py "$OUT"
+
 # Fail the script (not the evidence) if a secret slipped into the saved files: the AP/Wi-Fi password from .env.
 if [ -f .env ]; then
   for key in WIFI_PASSWORD; do

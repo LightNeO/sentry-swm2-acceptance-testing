@@ -136,7 +136,7 @@ python -m pytest tests/hil/test_button_stage.py -m hil_stage --run-hil -k k3_k4
 | `HIL-BTN-10` | K4+K1 2 с з VERBOSE -> EMERGENCY |
 | `HIL-GD-07` | Guard ARMED через UART/sonar precondition, K4 hold -> PANIC/ALARM; object placement remains physical precondition |
 
-Ці ID навмисно окремі й не записуються в основний `docs/results.json`. Генератор трасабіліті працює з 222 початковими кейсами, а HIL має власні докази виконання і не повинен створювати «осиротілі» TC.
+Ці ID навмисно окремі й не записуються в основний `docs/results.json`. Генератор трасабіліті працює з 220 кейсами, а HIL має власні докази виконання і не повинен створювати «осиротілі» TC.
 
 ## Межі та наступні кроки
 
