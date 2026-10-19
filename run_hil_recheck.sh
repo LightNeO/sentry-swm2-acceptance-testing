@@ -41,6 +41,8 @@ cd "$ROOT/framework" || exit 1
 restore_network() {
   nmcli connection up "$UPSTREAM_CON" ifname "$UPSTREAM_IF" >/dev/null 2>&1
   nmcli connection up "$HIL_AP_CONNECTION" ifname "$AP_IF" >/dev/null 2>&1
+  # Wait until the upstream really reaches the internet again, so the next run does not start without it.
+  for _ in $(seq 1 30); do ping -c1 -W1 -I "$UPSTREAM_IF" 1.1.1.1 >/dev/null 2>&1 && break; sleep 2; done
 }
 trap restore_network EXIT
 

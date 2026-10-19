@@ -46,6 +46,9 @@ def _running_image(dut) -> str:
 @pytest.mark.tc("TC-OTA-16")
 def test_ap_loss_during_slow_ota_download_is_survived(dut, managed_ap, slow_ota_server):
     wait_link(dut)
+    if not wait_internet(dut, 60):
+        # Seen in the evidence run 3: the stand's upstream had not recovered yet, so the board never got internet.
+        pytest.skip("precondition: the stand has no internet for the DUT before the test starts (check the upstream)")
     before = _running_image(dut)
 
     started = dut.exchange(f"ota url {slow_ota_server.image_url}", until=r"\[OTA\] downloading", timeout=20)
