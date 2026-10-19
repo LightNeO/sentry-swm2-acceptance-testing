@@ -97,113 +97,23 @@ pytest
 
 Python, pytest, pyserial, esptool. Власний UART-драйвер з парсером протоколу і фейковим транспортом для тестування самого фреймворку без заліза. Локальний HTTP-сервер для емуляції збоїв OTA. Mermaid-діаграма теоретичного HIL-стенда з логічним аналізатором і стимуляторами — `docs/hil_stand.md`.
 
-## Апаратна автоматизація кнопок
+## HIL-стадії
 
-У цій версії додано HIL-стимулятор на Arduino Nano для K1–K4. Nano отримує команди через USB serial і фізично замикає входи кнопок ESP32 на GND. Python-драйвер керує Nano, а `SwmDevice` читає фактичну відповідь DUT через UART.
+- **Кнопки (Arduino Nano).** Nano замикає входи кнопок K1–K4 ESP32 на GND із заданою тривалістю (A2–A5 через 1 кОм, програмний open-drain, жодного `HIGH` на лініях ESP32), а pytest перевіряє реакцію пристрою через UART. Схема підключення, протокол команд (`PRESS`, `HOLD`, `STOP`) і прошивка: [`hardware/button_stimulator/README.md`](hardware/button_stimulator/README.md), [`docs/hil_button_stage.md`](docs/hil_button_stage.md).
+- **Керований Wi-Fi.** Ноутбук з двома Wi-Fi адаптерами роздає AP `SENTRY-HIL` і підключений до upstream; NetworkManager дозволяє окремо вимикати AP або upstream, а для повільного OTA тест сам піднімає локальний OTA-сервер. Опис: [`docs/managed_ap.md`](docs/managed_ap.md), код: `framework/drivers/managed_ap.py`, тести: `framework/tests/wifi/`.
+- **Що лишається ручним.** RGB LED, діод, клацання реле і реальна відстань для HC-SR04 (типи `A+M` і `M` у `docs/test_cases.md`). Повний теоретичний стенд, який це закриває: [`docs/hil_stand.md`](docs/hil_stand.md).
 
-### Підключення
-
-| Arduino Nano | ESP32-S3 | Кнопка |
-|---|---|---|
-| A2 через 1 кОм | GPIO41 | K1 / beacon |
-| A3 через 1 кОм | GPIO40 | K2 / valve |
-| A4 через 1 кОм | GPIO39 | K3 / sonar |
-| A5 через 1 кОм | GPIO38 | K4 / Guard/Alert |
-| GND | GND | спільна земля |
-
-Прошивка Nano працює в режимі open-drain: натиснення — `OUTPUT/LOW`, відпускання — `INPUT/high-Z`. Nano не подає `HIGH` на GPIO ESP32. Для постійного стенду все одно бажані оптопари або NPN/open-collector каскади, оскільки Nano працює з 5 V, а ESP32 — з 3.3 V.
-
-Детальна схема, протокол і застереження описані в [`hardware/button_stimulator/README.md`](hardware/button_stimulator/README.md) та [`docs/hil_button_stage.md`](docs/hil_button_stage.md).
-
-Керування Wi-Fi стендом описане в [`docs/managed_ap.md`](docs/managed_ap.md). Код контролера — `framework/drivers/managed_ap.py`.
-
-### Команди Nano
-
-UART Nano: `115200 8N1`.
-
-```text
-PING
-STATUS
-PRESS K1 150
-HOLD K4 1500
-HOLD K3+K4 2200
-STOP
-```
-
-Після дії Nano повертає підтвердження, наприклад `OK K3+K4 2200`. Діапазон тривалості — 1–10000 мс. Для комбінацій у HIL-тестах використовується 2200 мс: на точній межі 2000 мс ESP32 іноді встигає побачити release раніше, ніж розпізнає hold.
-
-### Прошивка Nano
-
-Для цієї плати з CH340 і signature `ATmega328P` використовується профіль із новішим avrdude:
+### Запуск стендових стадій
 
 ```bash
-cd hardware/button_stimulator
-pio run -e nanoatmega328avrdude8 --target upload --upload-port /dev/ttyUSB0
-```
-
-Перевірити Nano окремо від ESP32 можна так:
-
-```bash
-pio device monitor -p /dev/ttyUSB0 -b 115200
-```
-
-Очікувані відповіді: `PING` → `PONG`, `STATUS` → `READY`.
-
-### Запуск HIL-стадії
-
-У поточному стенді Arduino — `/dev/ttyUSB0`, ESP32 — `/dev/ttyUSB1`. Перед запуском краще перевірити порти через `pio device list` або `/dev/serial/by-id`.
-
-```bash
-export BUTTON_STIM_PORT=/dev/ttyUSB0
-export SWM_PORT=/dev/ttyUSB1
-
+export BUTTON_STIM_PORT=/dev/ttyUSB0 SWM_PORT=/dev/ttyUSB1
+export HIL_AP_CONNECTION=SENTRY-HIL HIL_UPSTREAM_CONNECTION=<профіль upstream>
 cd framework
 python -m pytest tests/hil -m hil_stage --run-hil --keep-logs
-```
-
-Без `--run-hil` фізичні тести пропускаються, тому звичайні `unit` і `functional` прогони не намагаються керувати Arduino.
-
-Managed Wi-Fi stage запускається окремо, бо може тимчасово вимкнути AP або upstream:
-
-```bash
-export HIL_AP_CONNECTION=SENTRY-HIL
 python -m pytest tests/wifi -m managed_wifi --run-managed-wifi --keep-logs
 ```
 
-`TC-WF-01`–`TC-WF-07` і `TC-WF-10`–`TC-WF-17` перевіряють connect/reconnect lifecycle через `SENTRY-HIL`. `TC-WF-18` перевіряє AP loss і recovery. `TC-OTA-23/25/26/31` перевіряють network faults та OTA server profile. `TC-OTA-16` (обрив AP посеред повільного OTA) автоматизований у `tests/wifi/test_slow_ota.py`: тест сам піднімає локальний OTA-сервер на ноутбуці стенда (`drivers/ota_server_process.py`, `--slow 20`) і вимикає AP на 10% завантаження; запуск — `python -m pytest tests/wifi/test_slow_ota.py -m managed_wifi --run-managed-wifi`. Перевірки unsupported security, DHCP/no-DHCP, слабкого сигналу та NTP fault не входять до поточного scope.
-
-### Що тепер автоматизовано
-
-Окрема стадія містить тести `HIL-BTN-01`…`HIL-BTN-07`, `HIL-BTN-09`, `HIL-BTN-10` та `HIL-GD-07`:
-
-- K1: натискання і UART-подія Beacon;
-- K2: натискання, Valve і pulse із завершенням;
-- K3: запуск і зупинка active pinging;
-- K4: підтвердження Alert;
-- K3+K4: перехід у VERBOSE;
-- K4+K1: заборона EMERGENCY із NORMAL/DEBUG та вхід із VERBOSE;
-- K1–K4 без login: `E003`;
-- K1–K3 у EMERGENCY: `E005` для 2.1.0;
-- K4 hold у Guard: PANIC/ALARM, якщо перед стендом є потрібний об’єкт для sonar;
-- Guard `TC-GD-11/12` і Alert `TC-AL-11` уже мають окремі UART-автотести у `framework/tests/functional/`.
-- Wi-Fi connect за номером і SSID через `SENTRY-HIL`;
-- Wi-Fi password/SSID негативні сценарії: `E101`, `E102`, `E111`, `E112`;
-- reconnect, forget, disconnect, scan, `net`, ping і time;
-- AP loss із `W110`, DHCP recovery та повторне підключення ESP32;
-- upstream/WAN loss при активному AP;
-- OTA network cases: недоступний server/path, custom OTA server і `E002/E402/E411` fault evidence.
-
-Класифікація в `docs/test_cases.md` оновлена так:
-
-- `A` — stimulus і перевірка повністю автоматичні;
-- `A+M` — UART-частина автоматична, але LED, фізичне реле, sonar або electrical debounce ще треба перевіряти вручну;
-- `M` — повністю ручна частина, наприклад візуальні RGB-патерни без камери.
-
-### Що все ще manual
-
-Arduino не доводить сам по собі, що реле фізично клацнуло, LED має правильний колір або HC-SR04 бачить потрібну відстань. Для повної автоматизації цих частин потрібні logic analyzer для GPIO4/GPIO8, камера/фотодатчик для LED та окремий distance stimulator. Тому `TC-BTN-01`, `TC-BTN-02`, `TC-BTN-03`, `TC-BTN-04`, `TC-BTN-08`, `TC-GD-07` і `TC-AL-11` залишаються `A+M`.
-
-Детальна карта того, що перенесено з manual у HIL, знаходиться в [`docs/hil_button_stage.md`](docs/hil_button_stage.md). Старі ручні логи не видалялись: вони залишаються доказом початкового прогону та джерелом очікуваних UART-подій.
+Номери портів залежать від порядку підключення (`pio device list` показує, де Nano `1a86:7523`, а де ESP32 `0403:6001`). Без `--run-hil` і `--run-managed-wifi` ці тести пропускаються, тож звичайні прогони не керують Arduino і мережею ноутбука. Результати стенда: [`logs/hil/README.md`](logs/hil/README.md).
 
 ## Тестова документація:
 
