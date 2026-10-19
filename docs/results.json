@@ -470,9 +470,9 @@
   },
   "TC-OTA-31": {
     "21": "PASS",
-    "23": "PARTIAL",
+    "23": "PASS",
     "bugs": [],
-    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt: PASS 1/3 (випадкові розриви Wi-Fi; причина — перезапуск AP у фікстурі, виправлено ensure_baseline) — потрібен новий прогін."
+    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt (прогін після виправлення baseline): PASS 3/3."
   },
   "TC-OTA-32": {
     "21": "PASS",
@@ -680,9 +680,9 @@
     "evidence": "logs/v2.3.0/manual/partE_ota_bad_images.log: E407 wrong firmware 'fw_1' (expected 'sentry_fw7')."
   },
   "TC-OTA-25": {
-    "23": "PARTIAL",
+    "23": "PASS",
     "bugs": [],
-    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt: (а) AP down → E002 після W110 — PASS 3/3; (б) upstream down → E402 — PASS 1/3, у решті E002 через AP blip після вимкнення upstream; E411 не спостерігався (OBS-06)."
+    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt (прогін після виправлення baseline): (а) AP down → E002 після W110, PASS 3/3; (б) upstream down → E411 (internet: NO, run 1) або E402 (internet: OK, run 2-3), не E002; див. OBS-06."
   },
   "TC-GD-11": {
     "23": "FAIL",

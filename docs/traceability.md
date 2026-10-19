@@ -14,7 +14,7 @@
 | Req | Ver | P | Тип | Тест-кейси | 2.1.0 | 2.3.0 | Баги |
 |---|---|---|---|---|---|---|---|
 | AC-1a | 21 | P2 | A | TC-AC-01 | PASS | PASS | — |
-| AC-1b | 21 | P1 | A | TC-AC-02, TC-OTA-25 | PARTIAL | PARTIAL | — |
+| AC-1b | 21 | P1 | A | TC-AC-02, TC-OTA-25 | PARTIAL | PASS | — |
 | AC-1c | 21 | P1 | A | TC-AC-03, TC-AC-04 | PASS | PASS | — |
 | AC-1d | 21 | P1 | A | TC-AC-05, TC-RES-05 | PARTIAL | — | — |
 | AC-2a | 21 | P2 | A | TC-AC-06, TC-AC-09 | PASS | PASS | — |
@@ -78,7 +78,7 @@
 | OTA-9 | 21 | P1 | A+M | TC-OTA-15, TC-OTA-16, TC-OTA-17, TC-OTA-18, TC-OTA-19, TC-OTA-20, TC-OTA-21, TC-OTA-22, TC-OTA-23, TC-OTA-24, TC-OTA-25, TC-OTA-26 | PARTIAL | PARTIAL | — |
 | OTA-10 | 21 | P1 | A | TC-OTA-27, TC-OTA-28, TC-GD-19 | PARTIAL | PARTIAL | — |
 | OTA-11 | 21 | P2 | A | TC-OTA-17, TC-OTA-18, TC-OTA-19, TC-OTA-29, TC-OTA-30 | PARTIAL | PARTIAL | — |
-| OTA-12 | 21 | P2 | A | TC-OTA-31 | PASS | PARTIAL | — |
+| OTA-12 | 21 | P2 | A | TC-OTA-31 | PASS | PASS | — |
 | LM-1 | 21 | P2 | A+M | TC-LM-01, TC-LM-02, TC-LM-03 | PASS | PARTIAL | — |
 | LM-2a | 21 | P2 | A+M | TC-LM-04 | PASS | PASS | — |
 | LM-2b | 21 | P1 | A+M | TC-LM-05, TC-LM-06 | PARTIAL | PARTIAL | — |

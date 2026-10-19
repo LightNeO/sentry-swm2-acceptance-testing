@@ -43,7 +43,9 @@ def test_ap_loss_makes_ota_check_require_wifi(dut, managed_ap):
 def test_upstream_loss_keeps_test_ap_up(dut, managed_ap):
     """Upstream (WAN) down with the test AP up. Observed on the stand: NetworkManager's shared AP blips when the
     upstream goes down, so the DUT may log W110 and re-associate. Wait for the link to settle first, then
-    'ota check' has to report the server as unreachable (E402), not E002 (the Wi-Fi link is up)."""
+    'ota check' has to report the server/internet as unreachable, not E002 (the Wi-Fi link is up). Which code depends
+    on the firmware's own internet flag (`status`: internet): E411 'no internet' when it is already NO, E402 'cannot
+    reach OTA server' when it still believes the internet is OK and the attempt times out (logs/hil/recheck)."""
     wait_link(dut)
     managed_ap.upstream_down()
     try:
@@ -58,7 +60,7 @@ def test_upstream_loss_keeps_test_ap_up(dut, managed_ap):
             ota = dut.exchange("ota check", until=r"E\d{3}|\[OTA\] stable", timeout=30)
             if not ota.has_code("E002"):
                 break
-        assert ota.has_code("E402"), ota
+        assert ota.has_code("E402") or ota.has_code("E411"), ota
     finally:
         managed_ap.upstream_up()
         wait_link(dut)
