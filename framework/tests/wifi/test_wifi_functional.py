@@ -6,6 +6,8 @@ import re
 
 import pytest
 
+from tests.helpers import reconnect_with_retries
+
 
 pytestmark = pytest.mark.managed_wifi
 
@@ -74,12 +76,12 @@ def test_wrong_password_is_rejected(dut_raw, settings, managed_ap):
 
 
 @pytest.mark.tc("TC-WF-07")
-def test_unknown_ssid_is_rejected(dut_raw, managed_ap):
+def test_unknown_ssid_is_rejected(dut_raw, settings, managed_ap):
     try:
-        text = _connect(dut_raw, "SENTRY-HIL-NOT-FOUND", "12345678")
+        text = _connect(dut_raw, settings["ssid"] + "-NOT-FOUND", settings["wifi_password"])
         assert "E102" in text
     finally:
-        _connect(dut_raw, "SENTRY-HIL", "12345678")
+        _connect(dut_raw, settings["ssid"], settings["wifi_password"])
 
 
 @pytest.mark.tc("TC-WF-10")
@@ -94,8 +96,8 @@ def test_reconnect_without_saved_network_gives_e113(dut_raw, managed_ap, setting
 @pytest.mark.tc("TC-WF-11")
 def test_reconnect_after_disconnect_restores_link(dut_raw, settings, managed_ap):
     dut_raw.exchange("disconnect", idle=1.0)
-    result = dut_raw.exchange("reconnect", until=r"connected to|E1\d\d", timeout=30)
-    assert result.search(r"connected to") or result.has_code("E101"), result
+    result = reconnect_with_retries(dut_raw)  # E101 is retried (OBS-01) but never counts as success
+    assert result.search(r"connected to"), result
 
 
 @pytest.mark.tc("TC-WF-12")

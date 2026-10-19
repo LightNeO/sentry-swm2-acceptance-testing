@@ -149,3 +149,7 @@ python -m pytest tests/hil/test_button_stage.py -m hil_stage --run-hil -k k3_k4
 - `BUG-008` — перший Alert не підтверджується через `alert ack <id>`.
 
 Наступний технічний крок після кнопкової стадії — додати timestamp/event ID у протокол Arduino, щоб у доказах корелювати момент фізичного stimulus із UART-подією. Потім додавати logic analyzer для GPIO4/GPIO8 і окремий distance stimulus, не називаючи неповне UART-покриття повною фізичною автоматизацією.
+
+## Результати прогонів
+
+Підсумок усіх запусків HIL-стадії та керованого Wi-Fi на Linux-стенді: [`logs/hil/SUMMARY.md`](../logs/hil/SUMMARY.md). Станом на останній прогін усі 14 тестів кнопок і HIL-GD-07 проходять на 2.3.0; `HIL-BTN-09` вимагає прошивки 2.1.0.

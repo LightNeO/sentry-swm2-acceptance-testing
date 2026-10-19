@@ -6,23 +6,23 @@ import time
 
 import pytest
 
-from tests.helpers import wait_link
+from tests.helpers import reconnect_with_retries, wait_link
 
 pytestmark = pytest.mark.managed_wifi
 
 
 @pytest.mark.tc("TC-WF-18")
 def test_ap_loss_emits_wifi_loss_and_recovers(dut, managed_ap):
-    recovered = None
     managed_ap.ap_down()
     try:
         loss = dut.wait_for(r"W110 wifi connection lost", timeout=15)
         assert "W110" in loss.text
     finally:
         managed_ap.ap_up()
-        recovered = dut.exchange("reconnect", until=r"connected to|W114|E1\d\d", timeout=30)
 
-    assert recovered.search(r"connected to|fleet network reachable|already connected") or recovered.has_code("E101"), recovered
+    # E101 is retried (OBS-01) but never counts as recovery.
+    recovered = reconnect_with_retries(dut)
+    assert recovered.search(r"connected to|already connected"), recovered
 
 
 @pytest.mark.tc("TC-OTA-25")

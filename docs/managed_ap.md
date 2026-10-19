@@ -1,11 +1,14 @@
 # Керований Wi-Fi стенд
 
+> Ім'я upstream-мережі і пароль тестової AP у документі замінені на плейсхолдери `<upstream>` та `<AP_PASSWORD>`.
+> Реальні значення задаються змінними `HIL_UPSTREAM_CONNECTION` і `WIFI_PASSWORD` (файл `framework/.env`, у git не потрапляє).
+
 ## Топологія
 
 У v3 ноутбук використовує два Wi-Fi адаптери:
 
 ```text
-USB dongle wlp0s21f0u2 -> NeO -> upstream/internet
+USB dongle wlp0s21f0u2 -> <upstream> -> upstream/internet
 
 built-in wlp1s0 -> SENTRY-HIL -> ESP32 DUT
 ```
@@ -15,10 +18,10 @@ built-in wlp1s0 -> SENTRY-HIL -> ESP32 DUT
 ```text
 AP profile: SENTRY-HIL
 SSID: SENTRY-HIL
-password: 12345678
+password: <AP_PASSWORD>
 AP interface: wlp1s0
 AP address: 10.42.0.1/24
-upstream profile: NeO
+upstream profile: <upstream>
 upstream interface: wlp0s21f0u2
 ```
 
@@ -36,7 +39,7 @@ ip -br addr
 Очікується:
 
 ```text
-wlp0s21f0u2 -> connected -> NeO
+wlp0s21f0u2 -> connected -> <upstream>
 wlp1s0      -> connected -> SENTRY-HIL
 wlp1s0      -> type AP -> channel 6
 ```
@@ -56,7 +59,7 @@ command -v dnsmasq
 ```bash
 export HIL_AP_CONNECTION=SENTRY-HIL
 export HIL_AP_INTERFACE=wlp1s0
-export HIL_UPSTREAM_CONNECTION=NeO
+export HIL_UPSTREAM_CONNECTION=<upstream>
 export HIL_UPSTREAM_INTERFACE=wlp0s21f0u2
 ```
 
@@ -75,11 +78,11 @@ export HIL_UPSTREAM_INTERFACE=wlp0s21f0u2
 
 ```text
 WIFI_SSID=SENTRY-HIL
-WIFI_PASSWORD=12345678
+WIFI_PASSWORD=<AP_PASSWORD>
 SWM_PORT=/dev/ttyUSB1
 ```
 
-Перед запуском переконатися, що ESP32 вже підключена до `SENTRY-HIL`. USB-донгл ноутбука при цьому продовжує працювати як upstream через `NeO`.
+Перед запуском переконатися, що ESP32 вже підключена до `SENTRY-HIL`. USB-донгл ноутбука при цьому продовжує працювати як upstream через `<upstream>`.
 
 ```bash
 export BUTTON_STIM_PORT=/dev/ttyUSB0
@@ -113,16 +116,16 @@ DUT втрачає association. Це сценарій `TC-WF-18` і Wi-Fi interr
 
 ### WAN down
 
-Спостереження зі стенду (логи `logs/hil/`): коли `NeO` вимикається, NetworkManager перезапускає shared-режим, і ESP32 на кілька секунд втрачає AP (`W110 ... reason 7`) та перепідключається. Тобто WAN down не завжди ізольований від AP blip, тест чекає, поки зв'язок стабілізується.
+Спостереження зі стенду (логи `logs/hil/`): коли `<upstream>` вимикається, NetworkManager перезапускає shared-режим, і ESP32 на кілька секунд втрачає AP (`W110 ... reason 7`) та перепідключається. Тобто WAN down не завжди ізольований від AP blip, тест чекає, поки зв'язок стабілізується.
 
 ```bash
-nmcli connection down NeO
+nmcli connection down <upstream>
 ```
 
 `SENTRY-HIL` і DHCP залишаються активними, але upstream/internet зникає. Це не те саме, що AP down. Після тесту upstream треба повернути:
 
 ```bash
-nmcli connection up NeO ifname wlp0s21f0u2
+nmcli connection up <upstream> ifname wlp0s21f0u2
 ```
 
 ### No DHCP і weak RSSI
@@ -134,7 +137,7 @@ nmcli connection up NeO ifname wlp0s21f0u2
 Після будь-якого Wi-Fi-тесту мають бути активні:
 
 ```text
-NeO on wlp0s21f0u2
+<upstream> on wlp0s21f0u2
 SENTRY-HIL on wlp1s0
 dnsmasq available
 ```
@@ -142,7 +145,7 @@ dnsmasq available
 Якщо тест упав посередині, перевірити:
 
 ```bash
-nmcli connection up NeO ifname wlp0s21f0u2
+nmcli connection up <upstream> ifname wlp0s21f0u2
 nmcli connection up SENTRY-HIL ifname wlp1s0
 ```
 

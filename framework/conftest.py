@@ -112,6 +112,21 @@ def settings() -> dict[str, str]:
 
 
 # --------------------------------------------------------------------------- hardware session
+INTERNET_WAIT_S = 40.0
+
+
+def _wait_internet(device: SwmDevice, timeout: float = INTERNET_WAIT_S) -> bool:
+    """Poll ``status`` until the DUT itself reports 'internet: OK'."""
+    deadline = time.monotonic() + timeout
+    while True:
+        m = device.exchange("status", idle=0.8).search(r"internet:\s+(\w+)")
+        if m and m.group(1).upper() == "OK":
+            return True
+        if time.monotonic() >= deadline:
+            return False
+        time.sleep(3)
+
+
 @pytest.fixture(scope="session")
 def device_session(request: pytest.FixtureRequest, settings: dict[str, str]):
     """Open the DUT once per run, bring it to: Wi-Fi up, profile registered, logged out."""
@@ -125,13 +140,11 @@ def device_session(request: pytest.FixtureRequest, settings: dict[str, str]):
         if not has_saved_network(boot.text) and not (settings["ssid"] and settings["wifi_password"]):
             pytest.fail("DUT has no saved Wi-Fi network: set WIFI_SSID and WIFI_PASSWORD in framework/.env")
         wifi = device.ensure_wifi(boot.text, settings["ssid"], settings["wifi_password"])
-        transient_hil_e105 = (
-            os.environ.get("HIL_AP_CONNECTION")
-            and wifi.has_code("E105")
-            and "got ip" in wifi.text
-            and "connected to" in wifi.text
-        )
-        if wifi.timed_out or (wifi.errors and not transient_hil_e105):
+        if set(wifi.errors) == {"E105"} and "connected to" in wifi.text:
+            # E105 right after 'connected' is the internet check not finished yet: wait for it instead of ignoring it.
+            if not _wait_internet(device):
+                pytest.fail(f"Wi-Fi is up but there is no internet for {INTERNET_WAIT_S:.0f} s (E105)\n{wifi.text}")
+        elif wifi.timed_out or wifi.errors:
             pytest.fail(f"Wi-Fi bring-up failed: {wifi.errors or 'timeout'}\n{wifi.text}")
         reg = device.register(settings["login"], settings["password"])
         if reg.errors and not reg.has_code("E202"):  # E202: profile already exists, which is fine

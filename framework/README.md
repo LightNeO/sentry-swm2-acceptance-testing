@@ -35,6 +35,7 @@ python -m pytest tests/hil -m hil_stage --run-hil              # Arduino-сти�
 python -m pytest tests/wifi -m managed_wifi --run-managed-wifi  # керований AP/WAN (HIL_AP_CONNECTION=SENTRY-HIL, Linux + NetworkManager)
 python tools/sanitize_logs.py ../logs/hil      # сховати імена чужих мереж перед комітом
 # з кореня репозиторію: bash run_hil_evidence.sh (повний прогін x3), bash run_hil_recheck.sh (лише виправлені тести)
+# bash run_hil_recheck_strict.sh (TC-WF-11/12/18, TC-OTA-25 після посилення перевірок; потрібна HIL_UPSTREAM_CONNECTION)
 ```
 
 Порт шукається за USB VID/PID (`SWM_VID`).

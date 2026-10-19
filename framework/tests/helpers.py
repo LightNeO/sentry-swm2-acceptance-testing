@@ -46,6 +46,20 @@ def lockout_seconds(resp: Response) -> int | None:
     return int(m.group(1)) if m else None
 
 
+def reconnect_with_retries(dut, attempts: int = 3, pause: float = 2.0):
+    """'reconnect' that survives the known first-attempt E101 (OBS-01): retry on E101 only, log every retry in the
+    transcript, and return the last reply. Anything else (or E101 on every attempt) is returned as it is, so the
+    caller's assert still fails when the link really does not come back."""
+    reply = None
+    for attempt in range(1, attempts + 1):
+        reply = dut.exchange("reconnect", until=r"connected to|W114|E1\d\d", timeout=30)
+        if not reply.has_code("E101"):
+            break
+        dut.transcript.add("TX", f"<retry {attempt}/{attempts}: reconnect returned E101>")
+        time.sleep(pause)
+    return reply
+
+
 def wait_link(dut, timeout: float = 45.0) -> bool:
     """Wait until the DUT has its Wi-Fi link, nudging it with 'reconnect' (the first attempt may give E101, OBS-01)."""
     deadline = time.monotonic() + timeout

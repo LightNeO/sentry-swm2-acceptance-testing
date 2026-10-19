@@ -39,7 +39,7 @@
 | Сигнальний вогонь | вбудований RGB LED | 48 |
 | Панель оператора | кнопки K1–K4 | 41, 40, 39, 38 |
 | Консоль | USB-UART FTDI FT232R (VID:PID 0403:6001), 115200 8N1 | 43/44 |
-| Мережа | USB dongle `wlp0s21f0u2` → `NeO`; вбудований `wlp1s0` → AP `SENTRY-HIL`, 2.4 GHz | — |
+| Мережа | USB dongle `wlp0s21f0u2` → `<upstream>`; вбудований `wlp1s0` → AP `SENTRY-HIL`, 2.4 GHz | — |
 | Хост | Linux, Python, pyserial, pytest, esptool, NetworkManager, dnsmasq | — |
 
 Порт не жорстко прописується: драйвер шукає його за VID/PID (`ESP32_VID=0403`).
@@ -85,7 +85,7 @@
 
 ## 5. Критерії входу / виходу
 
-**Вхід:** плата прошита `v2.1.0` після `erase-flash`; boot log містить `fw v2.1.0` і `ready. state 1 NORMAL`; AP `SENTRY-HIL` активний; upstream `NeO` підключений через USB dongle; всі кнопки/датчик/реле/діод підключені та перевірені.
+**Вхід:** плата прошита `v2.1.0` після `erase-flash`; boot log містить `fw v2.1.0` і `ready. state 1 NORMAL`; AP `SENTRY-HIL` активний; upstream `<upstream>` підключений через USB dongle; всі кнопки/датчик/реле/діод підключені та перевірені.
 
 **Вихід:**
 - усі P1-кейси виконані на обох версіях;
@@ -113,7 +113,7 @@ Severity: Blocker / Critical / Major / Minor / Trivial. Priority: P1–P3 (за 
 | Пароль | `Pass1234` (6–32) |
 | Новий пароль для `passwd` | `NewPass99` |
 | Wi-Fi SSID / пароль | з `.env`, у логах → `***` |
-| HIL AP | `SENTRY-HIL`, керується NetworkManager; upstream — окремий профіль `NeO` |
+| HIL AP | `SENTRY-HIL`, керується NetworkManager; upstream — окремий профіль `<upstream>` |
 | PIN Guard | 1234 (за замовч.), тестовий 4321 |
 
 Тестові кроки відтворюють межі: див. колонку «Межі» в `requirements.md`.
