@@ -64,11 +64,16 @@ def test_unreachable_ota_path_returns_e405(dut, managed_ap, missing_ota_server):
 
 @pytest.mark.tc("TC-OTA-31")
 def test_custom_ota_server_is_saved_by_device(dut, managed_ap):
-    wait_link(dut)
-    result = dut.exchange("ota server http://10.42.0.1:8000/fw7/")
+    status = None
     try:
-        assert not result.has_code("E001"), result
-        status = dut.exchange("ota server")
-        assert "10.42.0.1:8000" in status.text
+        # The link can drop between the two commands (then the server is not saved and E002 is answered): retry.
+        for _ in range(3):
+            wait_link(dut)
+            result = dut.exchange("ota server http://10.42.0.1:8000/fw7/")
+            assert not result.has_code("E001"), result
+            status = dut.exchange("ota server")
+            if "10.42.0.1:8000" in status.text:
+                break
+        assert "10.42.0.1:8000" in status.text, status
     finally:
         _restore_default_server(dut)

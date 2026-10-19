@@ -33,6 +33,35 @@ def test_ap_and_upstream_use_only_named_connections():
     assert runner.commands.index(ap_down) < runner.commands.index(upstream_down)
 
 
+def test_baseline_does_not_restart_connections_that_are_already_active():
+    class ActiveRunner(FakeRunner):
+        def run(self, args):
+            self.commands.append(list(args))
+            if args[:6] == ["nmcli", "-t", "-f", "NAME", "connection", "show"]:
+                return "NeO\nSENTRY-HIL\n"
+            return "ok\n"
+
+    runner = ActiveRunner()
+    ManagedAp(runner, ap_connection="SENTRY-HIL", upstream_connection="NeO").ensure_baseline()
+
+    assert not any(cmd[:3] == ["nmcli", "connection", "up"] for cmd in runner.commands)
+
+
+def test_baseline_brings_up_only_the_connection_that_is_down():
+    class OneDownRunner(FakeRunner):
+        def run(self, args):
+            self.commands.append(list(args))
+            if args[:6] == ["nmcli", "-t", "-f", "NAME", "connection", "show"]:
+                return "NeO\n"
+            return "ok\n"
+
+    runner = OneDownRunner()
+    ManagedAp(runner, ap_connection="SENTRY-HIL", ap_interface="wlp1s0", upstream_connection="NeO").ensure_baseline()
+
+    ups = [cmd for cmd in runner.commands if cmd[:3] == ["nmcli", "connection", "up"]]
+    assert ups == [["nmcli", "connection", "up", "SENTRY-HIL", "ifname", "wlp1s0"]]
+
+
 def test_snapshot_collects_three_host_views():
     runner = FakeRunner()
     ap = ManagedAp(runner)

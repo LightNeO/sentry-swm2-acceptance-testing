@@ -451,8 +451,8 @@
   },
   "TC-OTA-23": {
     "21": "PASS",
-    "evidence": "logs/v2.1.0/manual/group6_ota.log | logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS у 2 із 3 прогонів, run 1: ERROR на логіні (каскад від попередніх падінь); тест доопрацьовано, потрібен повторний прогін (run_hil_recheck.sh).",
-    "23": "PARTIAL",
+    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt: PASS 3/3 після додавання очікування зв'язку; перший прогін 2/3 (ERROR на логіні через каскад).",
+    "23": "PASS",
     "bugs": []
   },
   "TC-OTA-27": {
@@ -472,7 +472,7 @@
     "21": "PASS",
     "23": "PARTIAL",
     "bugs": [],
-    "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS у 2 із 3 прогонів, run 3: випадковий розрив Wi-Fi під час тесту; тест доопрацьовано, потрібен повторний прогін (run_hil_recheck.sh)."
+    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt: PASS 1/3 (випадкові розриви Wi-Fi; причина — перезапуск AP у фікстурі, виправлено ensure_baseline) — потрібен новий прогін."
   },
   "TC-OTA-32": {
     "21": "PASS",
@@ -682,7 +682,7 @@
   "TC-OTA-25": {
     "23": "PARTIAL",
     "bugs": [],
-    "evidence": "logs/hil/managed_wifi_run1-3.txt: (а) E402 до W110 і E002 після W110, (б) E402; E411 не спостерігався (OBS-06). Тести виправлено, потрібен повторний прогін."
+    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt: (а) AP down → E002 після W110 — PASS 3/3; (б) upstream down → E402 — PASS 1/3, у решті E002 через AP blip після вимкнення upstream; E411 не спостерігався (OBS-06)."
   },
   "TC-GD-11": {
     "23": "FAIL",
@@ -767,5 +767,10 @@
     "23": "PASS",
     "bugs": [],
     "evidence": "logs/hil/managed_wifi_run1.txt, run2, run3 (Linux-стенд, 2.3.0, 3 прогони): PASS 3/3."
+  },
+  "TC-WF-12": {
+    "23": "PASS",
+    "bugs": [],
+    "evidence": "logs/hil/recheck/managed_wifi_recheck_run1-3.txt: PASS 3/3 після виправлення тесту (перший прогін: FAIL 3/3 через reboot_dut)."
   }
 }

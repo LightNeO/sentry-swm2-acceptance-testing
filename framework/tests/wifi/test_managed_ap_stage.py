@@ -50,9 +50,14 @@ def test_upstream_loss_keeps_test_ap_up(dut, managed_ap):
         snapshot = managed_ap.snapshot()
         assert "SENTRY-HIL" in snapshot.devices
         assert "wlp1s0" in snapshot.wifi
-        time.sleep(5)  # let the AP blip (if any) and the DUT's re-association pass
-        assert wait_link(dut), "DUT did not get its Wi-Fi link back after the upstream went down"
-        ota = dut.exchange("ota check", until=r"E\d{3}|\[OTA\] stable", timeout=30)
+        # The AP blip can come several seconds after the upstream went down, so a link that looked fine a moment
+        # ago may be gone when 'ota check' runs (E002). Retry until the answer is about the server, not the link.
+        ota = None
+        for _ in range(4):
+            assert wait_link(dut), "DUT did not get its Wi-Fi link back after the upstream went down"
+            ota = dut.exchange("ota check", until=r"E\d{3}|\[OTA\] stable", timeout=30)
+            if not ota.has_code("E002"):
+                break
         assert ota.has_code("E402"), ota
     finally:
         managed_ap.upstream_up()

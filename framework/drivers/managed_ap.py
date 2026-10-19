@@ -70,9 +70,19 @@ class ManagedAp:
         self.runner.run(["nmcli", "connection", "down", self.upstream_connection])
         return self.snapshot()
 
+    def active_connections(self) -> set[str]:
+        out = self.runner.run(["nmcli", "-t", "-f", "NAME", "connection", "show", "--active"])
+        return {line.strip() for line in out.splitlines() if line.strip()}
+
     def ensure_baseline(self) -> NetworkSnapshot:
-        self.upstream_up()
-        return self.ap_up()
+        """Bring up only what is down. 'nmcli connection up' on an active AP re-activates it, which drops the
+        DUT's Wi-Fi (W110 reason 7) - seen on the stand as random link loss at the start of a test."""
+        active = self.active_connections()
+        if self.upstream_connection not in active:
+            self.upstream_up()
+        if self.ap_connection not in active:
+            self.ap_up()
+        return self.snapshot()
 
     def cleanup(self) -> None:
         """Best effort restore. Preserve the original error from a test."""
