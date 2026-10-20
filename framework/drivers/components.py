@@ -104,6 +104,13 @@ class Alerts(_Component):
     def list(self) -> Response:
         return self._run("alert list")
 
+    def test(self, level: str = "", **kw) -> Response:
+        return self._run(f"alert test {level}".rstrip(), **kw)
+
+    def ack(self, alert_id: str | int | None = None) -> Response:
+        """Acknowledge one alert by id, or the last one when no id is given."""
+        return self._run("alert ack" if alert_id is None else f"alert ack {alert_id}")
+
     def ack_all(self) -> Response:
         return self._run("alert ack all", idle=0.8)
 
@@ -114,3 +121,45 @@ class Alerts(_Component):
         """Acknowledge and clear everything, so the next test starts from an empty list."""
         self.ack_all()
         self.clear()
+
+
+class Sonar(_Component):
+    def measure(self, count: int | None = None, **kw) -> Response:
+        return self._run("distance" if count is None else f"distance {count}", **kw)
+
+    def calibrate(self, reference_cm: int, **kw) -> Response:
+        return self._run(f"distance calibrate {reference_cm}", **kw)
+
+    def calibrate_reset(self) -> Response:
+        return self._run("distance calibrate reset")
+
+    def set_alarm(self, cm: int) -> Response:
+        return self._run(f"distance alarm {cm}")
+
+    def alarm_off(self) -> Response:
+        return self._run("distance alarm off")
+
+    def set_filter(self, enabled: bool) -> Response:
+        return self._run(f"distance filter {'on' if enabled else 'off'}")
+
+    def stats(self) -> Response:
+        return self._run("distance stats")
+
+    def history(self) -> Response:
+        return self._run("distance history")
+
+
+class Ota(_Component):
+    def install(self, version: str, **kw) -> Response:
+        return self._run(f"ota install {version}", **kw)
+
+    def set_url(self, url: str = "") -> Response:
+        return self._run(f"ota url {url}".rstrip())
+
+    def server(self) -> Response:
+        return self._run("ota server")
+
+
+class Wifi(_Component):
+    def net(self) -> Response:
+        return self._run("net")

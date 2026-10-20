@@ -99,3 +99,47 @@ def test_options_are_passed_through_to_exchange():
     dev, _ = make({"guard arm": "I (1) sentry: [WATCH] arming\n"})
     r = dev.guard.arm(idle=0.01, timeout=0.5)
     assert r.has("arming") and not r.timed_out
+
+
+def test_alert_sonar_ota_wifi_commands():
+    dev, t = make({})
+    dev.alerts.test("info")
+    dev.alerts.test()
+    dev.alerts.ack()
+    dev.alerts.ack(7)
+    dev.sonar.measure()
+    dev.sonar.measure(6)
+    dev.sonar.calibrate(20)
+    dev.sonar.calibrate_reset()
+    dev.sonar.set_alarm(30)
+    dev.sonar.alarm_off()
+    dev.sonar.set_filter(True)
+    dev.sonar.set_filter(False)
+    dev.sonar.stats()
+    dev.sonar.history()
+    dev.ota.install("2.3.0")
+    dev.ota.set_url("http://x")
+    dev.ota.set_url()
+    dev.ota.server()
+    dev.wifi.net()
+    assert t.sent == [
+        "alert test info",
+        "alert test",
+        "alert ack",
+        "alert ack 7",
+        "distance",
+        "distance 6",
+        "distance calibrate 20",
+        "distance calibrate reset",
+        "distance alarm 30",
+        "distance alarm off",
+        "distance filter on",
+        "distance filter off",
+        "distance stats",
+        "distance history",
+        "ota install 2.3.0",
+        "ota url http://x",
+        "ota url",
+        "ota server",
+        "net",
+    ]

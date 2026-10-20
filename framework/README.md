@@ -13,6 +13,7 @@ framework/
 │   ├── redaction.py           # маскування паролів -> ***
 │   ├── transport.py           # SerialTransport (реальний UART) + FakeTransport (для unit-тестів)
 │   ├── device_driver.py       # SwmDevice: команди, промпти, перезавантаження, Wi-Fi, login
+│   ├── components.py          # dut.lamp / relay / guard / alerts / sonar / ota / wifi: одна команда = один метод, повертає Response
 │   ├── button_stimulator.py   # керування Arduino Nano: press/hold/комбінації K1-K4
 │   ├── managed_ap.py          # керований AP/upstream через NetworkManager
 │   └── ota_server_process.py  # локальний OTA-сервер як підпроцес (повільний OTA)

@@ -7,7 +7,7 @@ from __future__ import annotations
 import re
 import time
 
-from drivers.components import Alerts, Guard, Lamp, Relay
+from drivers.components import Alerts, Guard, Lamp, Ota, Relay, Sonar, Wifi
 from drivers.protocol import BOOT_READY_RE, VERSION_RE, Response, clean_text
 from drivers.redaction import Redactor
 from drivers.transport import Transport
@@ -69,6 +69,9 @@ class SwmDevice:
         self.relay = Relay(self)
         self.guard = Guard(self)
         self.alerts = Alerts(self)
+        self.sonar = Sonar(self)
+        self.ota = Ota(self)
+        self.wifi = Wifi(self)
 
     # ------------------------------------------------------------------ low level
     def _collect(self, timeout: float, idle: float, until: str | None) -> tuple[str, bool]:

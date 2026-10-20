@@ -36,6 +36,16 @@ class ErrorCode(str, Enum):
     E805 = "E805"  # no sonar reading to arm on
     E807 = "E807"  # PIN change while armed
     E808 = "E808"  # guard zone out of range
+    E400 = "E400"  # missing argument
+    E414 = "E414"  # bad OTA version format
+    E415 = "E415"  # OTA version not on the server
+    E418 = "E418"  # OTA url scheme
+    E706 = "E706"  # sonar calibration reference out of range
+    E851 = "E851"  # unknown alert id
+    W852 = "W852"  # alert already acknowledged
+    W853 = "W853"  # nothing to acknowledge
+    E854 = "E854"  # bad alert level
+    E855 = "E855"  # clear with unacknowledged alerts
 
 
 @dataclass(frozen=True)
