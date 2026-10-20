@@ -11,17 +11,6 @@ import pytest
 pytestmark = [pytest.mark.functional, pytest.mark.since_2_3_0]
 
 
-@pytest.fixture
-def alerts_clean(dut):
-    """Start with an empty, fully acknowledged alert list."""
-    dut.exchange("alert ack all", idle=0.8)
-    dut.exchange("alert clear", idle=0.8)
-    assert dut.exchange("alert list").has("no alerts")
-    yield dut
-    dut.exchange("alert ack all", idle=0.8)
-    dut.exchange("alert clear", idle=0.8)
-
-
 @pytest.mark.tc("TC-AL-10")
 @pytest.mark.parametrize("level,error", [("info", None), ("warning", None), ("critical", None), ("foo", "E854"), ("", "E854")])
 def test_alert_test_levels(alerts_clean, level, error):

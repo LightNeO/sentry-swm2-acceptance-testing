@@ -30,7 +30,7 @@ def test_each_relay_switch_adds_exactly_one_to_cycles(dut):
 def test_cycles_counter_survives_reboot(dut, reboot_dut, settings):
     before = relay_cycles(dut)
     reboot_dut()
-    assert dut.login(settings["login"], settings["password"]).has("on watch")
+    assert dut.login(settings.login, settings.password).has("on watch")
     assert relay_cycles(dut) == before
 
 

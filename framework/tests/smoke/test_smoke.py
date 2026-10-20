@@ -44,7 +44,7 @@ def test_help_lists_command_groups_and_access_marks(dut_raw):
 @pytest.mark.tc("TC-AU-17")
 def test_whoami_reports_user_access(dut, settings):
     r = dut.exchange("whoami")
-    assert r.search(rf"user: {settings['login']}, access: user")
+    assert r.search(rf"user: {settings.login}, access: user")
 
 
 @pytest.mark.tc("TC-AC-03")

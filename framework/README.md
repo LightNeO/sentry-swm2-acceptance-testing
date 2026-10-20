@@ -7,6 +7,7 @@
 ```
 framework/
 ├── drivers/
+│   ├── config.py              # Settings (логін, Wi-Fi; секрети поза repr), StandConfig (стенд), завантаження .env
 │   ├── protocol.py            # парсер виводу пристрою (без I/O)
 │   ├── redaction.py           # маскування паролів -> ***
 │   ├── transport.py           # SerialTransport (реальний UART) + FakeTransport (для unit-тестів)
@@ -15,14 +16,15 @@ framework/
 │   ├── managed_ap.py          # керований AP/upstream через NetworkManager
 │   └── ota_server_process.py  # локальний OTA-сервер як підпроцес (повільний OTA)
 ├── tests/
+│   ├── conftest.py            # фікстури, спільні для кількох папок (guard_clean)
 │   ├── unit/                  # перевірка самого фреймворку, без заліза
 │   ├── smoke/                 # пристрій живий і ідентифікований
-│   ├── functional/            # межі діапазонів та інше за PRD
-│   ├── hil/                   # Arduino-кнопки (потрібен --run-hil)
-│   ├── wifi/                  # керований Wi-Fi і OTA fault-injection (потрібен --run-managed-wifi)
+│   ├── functional/            # межі діапазонів та інше за PRD (conftest.py: clean_account, alerts_clean, guard_fresh)
+│   ├── hil/                   # Arduino-кнопки (потрібен --run-hil; conftest.py: stimulator)
+│   ├── wifi/                  # керований Wi-Fi і OTA (потрібен --run-managed-wifi; conftest.py: stand, managed_ap, OTA-сервери)
 │   └── helpers.py             # спільні функції тестів
 ├── tools/                     # одноразові скрипти доказів і генератор трасабіліті
-├── conftest.py                # fixtures, логи-докази, запис результатів
+├── conftest.py                # сесійний пристрій, baseline, логін, опції та хуки, транскрипти, запис результатів
 ├── pytest.ini                 # маркери
 └── requirements.txt
 ```

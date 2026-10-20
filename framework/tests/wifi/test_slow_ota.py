@@ -1,36 +1,20 @@
 """TC-OTA-16: the Wi-Fi access point disappears in the middle of an OTA download (slow local server).
 
-Stand notes: the OTA server runs on the stand laptop (Linux), reached through the test AP (HIL_AP_ADDRESS, default
-10.42.0.1) on a port the firewall allows (HIL_OTA_PORT, default 53317). The image is the one the board already runs, so
+Stand notes: the OTA server runs on the stand laptop (Linux), reached through the test AP (StandConfig: HIL_AP_ADDRESS,
+HIL_OTA_PORT) on a port the firewall allows (see tests/wifi/conftest.py, fixture slow_ota_server). The image is the one the board already runs, so
 the run never downgrades (W409 'same version - reinstalling' is expected) and is interrupted long before it finishes.
 Server files are not in git: `python fw_7/tools/ota_server.py --download` fetches them.
 """
 
 from __future__ import annotations
 
-import os
 import re
 
 import pytest
 
-from drivers.ota_server_process import OtaServerProcess, firmware_available
 from tests.helpers import wait_internet, wait_link
 
 pytestmark = pytest.mark.managed_wifi
-
-SLOW_KB_S = 20
-AP_ADDRESS = os.environ.get("HIL_AP_ADDRESS", "10.42.0.1")
-OTA_PORT = int(os.environ.get("HIL_OTA_PORT", "53317"))
-
-
-@pytest.fixture
-def slow_ota_server(dut):
-    version = dut.fw_version
-    if not firmware_available(version):
-        pytest.skip(f"no server image for v{version}: run `python fw_7/tools/ota_server.py --download` first")
-    with OtaServerProcess(OTA_PORT, slow_kb_s=SLOW_KB_S) as server:
-        server.image_url = f"http://{AP_ADDRESS}:{OTA_PORT}/fw7/v{version}/sentry_fw7.bin"
-        yield server
 
 
 def _running_image(dut) -> str:

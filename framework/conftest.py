@@ -6,8 +6,8 @@ Unit tests don't touch any of this.
 
 from __future__ import annotations
 
-import json
 import hashlib
+import json
 import os
 import re
 import time
@@ -15,6 +15,7 @@ from pathlib import Path
 
 import pytest
 
+from drivers.config import Settings, load_env
 from drivers.device_driver import SwmDevice, has_saved_network
 from drivers.redaction import Redactor
 from drivers.transport import SerialTransport, find_port
@@ -26,19 +27,11 @@ RESULTS_FILE = ROOT / "docs" / "results.json"
 LOG_DIR = ROOT / "logs" / "auto"
 
 
-def _load_env() -> None:
-    """Load framework/.env into os.environ; real env vars still win."""
-    path = FRAMEWORK_DIR / ".env"
-    if not path.exists():
-        return
-    for line in path.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if line and not line.startswith("#") and "=" in line:
-            key, _, value = line.partition("=")
-            os.environ.setdefault(key.strip(), value.strip())
+load_env()
 
-
-_load_env()
+# what the session learned about the DUT, shared with the reporting hooks
+FW_KEY = pytest.StashKey[str]()  # firmware key of the run: "2.1.0" -> "21"
+RESULTS_KEY = pytest.StashKey[dict]()  # TC id -> PASS/FAIL for --record
 
 
 # --------------------------------------------------------------------------- options and hooks
@@ -50,15 +43,16 @@ def pytest_addoption(parser: pytest.Parser) -> None:
 
 
 def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
-    """Keep physical HIL tests out of normal and CI-free pytest runs."""
-    if config.getoption("--run-hil"):
-        return
+    """Stand stages are opt-in: they drive real hardware (Arduino) or toggle the laptop's network."""
+    run_hil = config.getoption("--run-hil")
+    run_wifi = config.getoption("--run-managed-wifi") and os.environ.get("HIL_AP_CONNECTION")
     skip_hil = pytest.mark.skip(reason="physical HIL stage requires --run-hil")
+    skip_wifi = pytest.mark.skip(reason="managed Wi-Fi stage requires --run-managed-wifi and HIL_AP_CONNECTION")
     for item in items:
-        if item.get_closest_marker("hil_stage"):
+        if not run_hil and item.get_closest_marker("hil_stage"):
             item.add_marker(skip_hil)
-        if item.get_closest_marker("managed_wifi") and not config.getoption("--run-managed-wifi"):
-            item.add_marker(pytest.mark.skip(reason="managed Wi-Fi stage requires --run-managed-wifi"))
+        if not run_wifi and item.get_closest_marker("managed_wifi"):
+            item.add_marker(skip_wifi)
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
@@ -68,9 +62,8 @@ def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo):
     rep = outcome.get_result()
     setattr(item, f"rep_{rep.when}", rep)
     if rep.when == "call" and item.config.getoption("--record"):
-        fwkey = getattr(item.config, "_swm_fwkey", None)
-        if fwkey:
-            bucket = item.config.__dict__.setdefault("_swm_results", {})
+        if item.config.stash.get(FW_KEY, None):
+            bucket = item.config.stash.setdefault(RESULTS_KEY, {})
             for marker in item.iter_markers("tc"):
                 for tc in marker.args:
                     status = {"passed": "PASS", "failed": "FAIL"}.get(rep.outcome)
@@ -82,8 +75,8 @@ def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo):
 def pytest_sessionfinish(session: pytest.Session) -> None:
     """Merge recorded statuses into docs/results.json (traceability.md gets regenerated from this later)."""
     config = session.config
-    bucket = getattr(config, "_swm_results", None)
-    fwkey = getattr(config, "_swm_fwkey", None)
+    bucket = config.stash.get(RESULTS_KEY, None)
+    fwkey = config.stash.get(FW_KEY, None)
     if not bucket or not fwkey:
         return
     data = json.loads(RESULTS_FILE.read_text(encoding="utf-8")) if RESULTS_FILE.exists() else {}
@@ -93,23 +86,9 @@ def pytest_sessionfinish(session: pytest.Session) -> None:
 
 
 # --------------------------------------------------------------------------- configuration
-class Settings(dict):
-    """Config dict with repr hidden - pytest dumps fixture args on failure and the Wi-Fi password can't leak that way."""
-
-    def __repr__(self) -> str:
-        return "<Settings: values hidden>"
-
-    __str__ = __repr__
-
-
 @pytest.fixture(scope="session")
-def settings() -> dict[str, str]:
-    return Settings({
-        "login": os.environ.get("TEST_LOGIN", "qa_swm"),
-        "password": os.environ.get("TEST_PASSWORD", "Pass1234"),
-        "ssid": os.environ.get("WIFI_SSID", ""),
-        "wifi_password": os.environ.get("WIFI_PASSWORD", ""),
-    })
+def settings() -> Settings:
+    return Settings.from_env()
 
 
 # --------------------------------------------------------------------------- hardware session
@@ -117,29 +96,29 @@ INTERNET_WAIT_S = 40.0
 
 
 @pytest.fixture(scope="session")
-def device_session(request: pytest.FixtureRequest, settings: dict[str, str]):
+def device_session(request: pytest.FixtureRequest, settings: Settings):
     """Open the DUT once per run, bring it to: Wi-Fi up, profile registered, logged out."""
     port = os.environ.get("SWM_PORT") or find_port()
-    redactor = Redactor([settings["wifi_password"]])
+    redactor = Redactor([settings.wifi_password])
     device = SwmDevice(SerialTransport(port), redactor)
     try:
         boot = device.hard_reset()
         version = device.version()
-        request.config._swm_fwkey = "".join(version.split(".")[:2])  # "2.1.0" -> "21"
-        if not has_saved_network(boot.text) and not (settings["ssid"] and settings["wifi_password"]):
+        request.config.stash[FW_KEY] = "".join(version.split(".")[:2])  # "2.1.0" -> "21"
+        if not has_saved_network(boot.text) and not (settings.ssid and settings.wifi_password):
             pytest.fail("DUT has no saved Wi-Fi network: set WIFI_SSID and WIFI_PASSWORD in framework/.env")
-        wifi = device.ensure_wifi(boot.text, settings["ssid"], settings["wifi_password"])
+        wifi = device.ensure_wifi(boot.text, settings.ssid, settings.wifi_password)
         if set(wifi.errors) == {"E105"} and "connected to" in wifi.text:
             # E105 right after 'connected' is the internet check not finished yet: wait for it instead of ignoring it.
             if not wait_internet(device, INTERNET_WAIT_S):
                 pytest.fail(f"Wi-Fi is up but there is no internet for {INTERNET_WAIT_S:.0f} s (E105)\n{wifi.text}")
         elif wifi.timed_out or wifi.errors:
             pytest.fail(f"Wi-Fi bring-up failed: {wifi.errors or 'timeout'}\n{wifi.text}")
-        reg = device.register(settings["login"], settings["password"])
+        reg = device.register(settings.login, settings.password)
         if reg.errors and not reg.has_code("E202"):  # E202: profile already exists, which is fine
             pytest.fail(f"register failed: {reg.errors}\n{reg.text}")
-        device.boot_text = boot.text  # type: ignore[attr-defined]
-        device.fw_version = version  # type: ignore[attr-defined]
+        device.boot_text = boot.text
+        device.fw_version = version
         yield device
     finally:
         try:
@@ -148,41 +127,25 @@ def device_session(request: pytest.FixtureRequest, settings: dict[str, str]):
             device.close()
 
 
-@pytest.fixture(scope="session")
-def fw_version(device_session: SwmDevice) -> str:
-    return device_session.fw_version  # type: ignore[attr-defined]
-
-
 def _version_tuple(v: str) -> tuple[int, ...]:
     return tuple(int(x) for x in v.split("."))
 
 
-def _restore_baseline(device: SwmDevice, settings: dict[str, str]) -> None:
+def _restore_baseline(device: SwmDevice, settings: Settings) -> None:
     """Get back to baseline: logged out, NORMAL, lamp/relay off, Wi-Fi up. Reboot if stuck (EMERGENCY/hang)."""
     r = device.logout()
     stuck = r.timed_out or any(c in r.codes for c in ("E001", "E005", "E304"))
     if stuck:
         boot = device.reboot()
-        device.ensure_wifi(boot.text, settings["ssid"], settings["wifi_password"])
+        device.ensure_wifi(boot.text, settings.ssid, settings.wifi_password)
     elif not device.link_up():  # test may have dropped Wi-Fi or rebooted the board
-        device.ensure_wifi("known network", settings["ssid"], settings["wifi_password"])
-
-
-def login_waiting_out_lockout(device: SwmDevice, login: str, password: str, max_wait: float = 40.0):
-    """Login, waiting out a lockout (E207/E210, 30 s) if the account is locked - don't let it cascade into the next test."""
-    r = device.login(login, password)
-    deadline = time.monotonic() + max_wait
-    while ("E207" in r.codes or "E210" in r.codes) and time.monotonic() < deadline:
-        m = r.search(r"Try again in (\d+) s")
-        time.sleep((int(m.group(1)) if m else 5) + 1)
-        r = device.login(login, password)
-    return r
+        device.ensure_wifi("known network", settings.ssid, settings.wifi_password)
 
 
 @pytest.fixture
-def dut_raw(request: pytest.FixtureRequest, device_session: SwmDevice, settings: dict[str, str]):
+def dut_raw(request: pytest.FixtureRequest, device_session: SwmDevice, settings: Settings):
     """DUT at baseline, NOT logged in. For access-control and login tests."""
-    version = _version_tuple(device_session.fw_version)  # type: ignore[attr-defined]
+    version = _version_tuple(device_session.fw_version)
     if request.node.get_closest_marker("since_2_3_0") and version < (2, 3, 0):
         pytest.skip("requires firmware >= 2.3.0")
     if request.node.get_closest_marker("only_2_1_0") and version != (2, 1, 0):
@@ -195,21 +158,21 @@ def dut_raw(request: pytest.FixtureRequest, device_session: SwmDevice, settings:
 
 
 @pytest.fixture
-def reboot_dut(device_session: SwmDevice, settings: dict[str, str]):
+def reboot_dut(device_session: SwmDevice, settings: Settings):
     """Callable: soft-reboot (not RTS - keeps Wi-Fi reliable), bring Wi-Fi back up, return the boot log."""
 
     def _reboot():
         boot = device_session.reboot()
-        device_session.ensure_wifi(boot.text, settings["ssid"], settings["wifi_password"])
+        device_session.ensure_wifi(boot.text, settings.ssid, settings.wifi_password)
         return boot
 
     return _reboot
 
 
 @pytest.fixture
-def dut(dut_raw: SwmDevice, settings: dict[str, str]):
+def dut(dut_raw: SwmDevice, settings: Settings):
     """dut_raw, but logged in as the test user."""
-    r = login_waiting_out_lockout(dut_raw, settings["login"], settings["password"])
+    r = dut_raw.login_waiting_out_lockout(settings.login, settings.password)
     if "on watch" not in r.text:
         pytest.fail(f"Cannot log in for the test: {r.codes}\n{r.text}")
     return dut_raw
@@ -220,7 +183,7 @@ def _write_transcript(request: pytest.FixtureRequest, device: SwmDevice) -> None
     failed = getattr(request.node, "rep_call", None) is not None and request.node.rep_call.failed
     if not (failed or request.config.getoption("--keep-logs")):
         return
-    version = getattr(device, "fw_version", "unknown")
+    version = device.fw_version
     folder = LOG_DIR / f"v{version}"
     folder.mkdir(parents=True, exist_ok=True)
     raw_name = re.sub(r"[^\w.-]+", "_", request.node.nodeid.split("::", 1)[-1])

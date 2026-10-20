@@ -14,7 +14,9 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, ".")
-import conftest  # noqa: F401  (loads framework/.env into os.environ)
+from drivers.config import load_env
+
+load_env()  # framework/.env into os.environ
 
 from drivers.device_driver import SwmDevice
 from drivers.redaction import Redactor

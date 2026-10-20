@@ -13,28 +13,9 @@ import time
 
 import pytest
 
-from conftest import login_waiting_out_lockout
+from tests.helpers import DEFAULT_PIN
 
 pytestmark = [pytest.mark.functional, pytest.mark.since_2_3_0]
-
-DEFAULT_PIN = "1234"
-
-
-@pytest.fixture
-def guard_clean(dut):
-    """Guard disarmed, PIN back to the documented default, zone back to default 50 cm."""
-    dut.exchange("guard disarm " + DEFAULT_PIN, idle=0.8)  # ignore result: may already be disarmed
-    r = dut.exchange("guard status")
-    if "disarmed" not in r.text:
-        # PIN may not be the default from a previous test; try the two PINs this suite ever sets.
-        for pin in ("4321", "0000", DEFAULT_PIN):
-            dut.exchange(f"guard disarm {pin}", idle=0.8)
-    dut.exchange(f"guard pin {DEFAULT_PIN} {DEFAULT_PIN}", idle=0.8)  # no-op if already default; ignore E803
-    dut.exchange("guard zone 50")
-    dut.exchange("alert ack all", idle=0.8)
-    dut.exchange("alert clear", idle=0.8)  # isolate from CIC alerts left by earlier Guard/Alert tests
-    yield dut
-    dut.exchange("guard disarm " + DEFAULT_PIN, idle=0.8)
 
 
 @pytest.mark.tc("TC-GD-01")
@@ -152,18 +133,10 @@ def test_logout_does_not_disarm_guard(guard_clean, settings):
     guard_clean.exchange("guard arm")
     time.sleep(11)
     guard_clean.logout()
-    guard_clean.login(settings["login"], settings["password"])
+    guard_clean.login(settings.login, settings.password)
     status = guard_clean.exchange("guard status")
     assert "disarmed" not in status.text.split("\n")[0], f"logout must not disarm Guard (GD-5c):\n{status}"
     guard_clean.exchange(f"guard disarm {DEFAULT_PIN}")
-
-
-@pytest.fixture
-def guard_fresh(guard_clean, reboot_dut, settings):
-    """Guard test that starts with a rebooted board, so the wrong-PIN counter does not carry over from earlier tests."""
-    reboot_dut()
-    login_waiting_out_lockout(guard_clean, settings["login"], settings["password"])
-    return guard_clean
 
 
 def _arm_and_wait(dev):

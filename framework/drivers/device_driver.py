@@ -61,6 +61,8 @@ class SwmDevice:
         self.timeout = timeout
         self.idle = idle
         self.transcript = Transcript()
+        self.boot_text = ""  # boot log of the session (set by the session fixture)
+        self.fw_version = "unknown"  # e.g. "2.3.0"
 
     # ------------------------------------------------------------------ low level
     def _collect(self, timeout: float, idle: float, until: str | None) -> tuple[str, bool]:
@@ -202,6 +204,16 @@ class SwmDevice:
 
     def login(self, login: str, password: str) -> Response:
         return self.exchange(f"login {login} {password}", until=r"on watch|E\d{3}", timeout=8)
+
+    def login_waiting_out_lockout(self, login: str, password: str, max_wait: float = 40.0) -> Response:
+        """Login, waiting out a lockout (E207/E210, 30 s) if the account is locked, so it does not cascade into the next test."""
+        r = self.login(login, password)
+        deadline = time.monotonic() + max_wait
+        while ("E207" in r.codes or "E210" in r.codes) and time.monotonic() < deadline:
+            m = r.search(r"Try again in (\d+) s")
+            time.sleep((int(m.group(1)) if m else 5) + 1)
+            r = self.login(login, password)
+        return r
 
     def logout(self) -> Response:
         return self.exchange("logout")

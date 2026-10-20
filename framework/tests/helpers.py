@@ -8,6 +8,9 @@ import time
 from drivers.protocol import Response
 
 
+DEFAULT_PIN = "1234"  # Guard PIN documented in the PRD
+
+
 def status_field(dut, name: str) -> str:
     """Value of a ``status`` line, e.g. status_field(dut, 'state') -> '1 NORMAL'; 'user' -> 'qa_swm (user)'."""
     m = dut.exchange("status", idle=0.8).search(rf"{name}:\s+(.+)")

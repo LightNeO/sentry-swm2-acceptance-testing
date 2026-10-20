@@ -45,7 +45,7 @@ def test_lamp_settings_survive_reboot_but_lamp_itself_turns_off(dut, reboot_dut,
     dut.exchange("lamp mode breathe")
     dut.exchange("lamp on")
     reboot_dut()
-    assert dut.login(settings["login"], settings["password"]).has("on watch")
+    assert dut.login(settings.login, settings.password).has("on watch")
     r = dut.exchange("lamp status")
     assert r.has("off,"), f"lamp must be OFF right after reboot:\n{r}"
     assert r.has("color (0,255,0)") and r.has("brightness 42%") and r.has("mode breathe"), f"color/brightness/mode must survive reboot:\n{r}"

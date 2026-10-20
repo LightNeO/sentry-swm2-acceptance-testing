@@ -12,7 +12,9 @@ from pathlib import Path
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 sys.path.insert(0, ".")
-import conftest  # noqa: F401
+from drivers.config import load_env
+
+load_env()  # framework/.env into os.environ
 
 from drivers.device_driver import SwmDevice
 from drivers.redaction import Redactor
