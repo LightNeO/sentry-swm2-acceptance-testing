@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from enum import Enum
 
 ANSI_RE = re.compile(r"\x1b\[[0-9;?]*[A-Za-z]")
 LOG_RE = re.compile(r"([IWE]) \((\d+)\) ([\w.]+): (.*)")
@@ -17,6 +18,24 @@ CODE_RE = re.compile(r"\b([EW]\d{3})\b")
 NOISE_PREFIXES = ("[NAV]", "[ACU]", "[PWR]", "[HW]")
 BOOT_READY_RE = re.compile(r"ready\. state 1 NORMAL")
 VERSION_RE = re.compile(r"fw v(\d+\.\d+\.\d+)")
+
+
+class ErrorCode(str, Enum):
+    """Console error/warning codes the tests check for (the full list is in docs/requirements.md).
+
+    Members are plain strings, so ``resp.has_code(ErrorCode.E808)`` and ``resp.has_code("E808")`` are the same call."""
+
+    W510 = "W510"  # lamp already on/off
+    E509 = "E509"  # lamp scene is empty
+    W605 = "W605"  # relay schedule is not running
+    E602 = "E602"  # relay switch rate limit
+    W801 = "W801"  # guard already arming
+    W802 = "W802"  # guard not armed
+    E803 = "E803"  # wrong guard PIN
+    E804 = "E804"  # bad PIN format
+    E805 = "E805"  # no sonar reading to arm on
+    E807 = "E807"  # PIN change while armed
+    E808 = "E808"  # guard zone out of range
 
 
 @dataclass(frozen=True)
@@ -74,7 +93,7 @@ class Response:
     def errors(self) -> list[str]:
         return [c for c in self.codes if c.startswith("E")]
 
-    def has_code(self, code: str) -> bool:
+    def has_code(self, code: str | ErrorCode) -> bool:
         return code in self.codes
 
     def has(self, substring: str) -> bool:

@@ -7,6 +7,7 @@ from __future__ import annotations
 import re
 import time
 
+from drivers.components import Alerts, Guard, Lamp, Relay
 from drivers.protocol import BOOT_READY_RE, VERSION_RE, Response, clean_text
 from drivers.redaction import Redactor
 from drivers.transport import Transport
@@ -64,6 +65,10 @@ class SwmDevice:
         self.transcript = Transcript()
         self.boot_text = ""  # boot log of the session (set by the session fixture)
         self.fw_version = "unknown"  # e.g. "2.3.0"
+        self.lamp = Lamp(self)
+        self.relay = Relay(self)
+        self.guard = Guard(self)
+        self.alerts = Alerts(self)
 
     # ------------------------------------------------------------------ low level
     def _collect(self, timeout: float, idle: float, until: str | None) -> tuple[str, bool]:

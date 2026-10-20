@@ -4,6 +4,7 @@ import time
 
 import pytest
 
+from drivers.protocol import ErrorCode
 from tests.functional.test_states import to_emergency
 from tests.helpers import relay_cycles, telemetry_intervals_ms
 
@@ -16,10 +17,10 @@ RATE_LIMIT_PAUSE = 1.1  # PRD RL-1: at most 2 switches per second (E602), so kee
 def test_each_relay_switch_adds_exactly_one_to_cycles(dut):
     """RL-2: one switch on OR off = +1."""
     start = relay_cycles(dut)
-    dut.exchange("relay on")
+    dut.relay.on()
     after_on = relay_cycles(dut)
     time.sleep(RATE_LIMIT_PAUSE)
-    dut.exchange("relay off")
+    dut.relay.off()
     after_off = relay_cycles(dut)
     assert after_on - start == 1, f"'relay on' must add 1 to cycles, added {after_on - start} ({start} -> {after_on})"
     assert after_off - after_on == 1, f"'relay off' must add 1 to cycles, added {after_off - after_on} ({after_on} -> {after_off})"
@@ -36,15 +37,15 @@ def test_cycles_counter_survives_reboot(dut, reboot_dut, settings):
 
 @pytest.mark.tc("TC-RL-02")
 def test_relay_status_format(dut):
-    assert dut.exchange("relay status").search(r"\[VALVE\] (closed|OPEN), auto (on|off), cycles \d+")
+    assert dut.relay.status().search(r"\[VALVE\] (closed|OPEN), auto (on|off), cycles \d+")
 
 
 @pytest.mark.tc("TC-RL-02")
 def test_relay_switch_rate_limit_gives_e602(dut):
     codes = []
-    for cmd in ("relay on", "relay off", "relay on"):  # three switches within a fraction of a second
-        codes += dut.exchange(cmd, idle=0.15, timeout=1.5).codes
-    assert "E602" in codes, f"third switch within 1 s must give E602, got {codes}"
+    for switch in (dut.relay.on, dut.relay.off, dut.relay.on):  # three switches within a fraction of a second
+        codes += switch(idle=0.15, timeout=1.5).codes
+    assert ErrorCode.E602 in codes, f"third switch within 1 s must give E602, got {codes}"
 
 
 @pytest.mark.tc("TC-HL-01")

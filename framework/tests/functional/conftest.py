@@ -15,12 +15,10 @@ def clean_account(dut_raw, settings):
 @pytest.fixture
 def alerts_clean(dut):
     """Start with an empty, fully acknowledged alert list."""
-    dut.exchange("alert ack all", idle=0.8)
-    dut.exchange("alert clear", idle=0.8)
-    assert dut.exchange("alert list").has("no alerts")
+    dut.alerts.reset()
+    assert dut.alerts.list().has("no alerts")
     yield dut
-    dut.exchange("alert ack all", idle=0.8)
-    dut.exchange("alert clear", idle=0.8)
+    dut.alerts.reset()
 
 
 @pytest.fixture
