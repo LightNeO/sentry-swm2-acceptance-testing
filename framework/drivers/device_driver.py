@@ -10,6 +10,7 @@ import time
 from drivers.protocol import BOOT_READY_RE, VERSION_RE, Response, clean_text
 from drivers.redaction import Redactor
 from drivers.transport import Transport
+from drivers.waiting import wait_until
 
 CRLF = "\r\n"
 
@@ -198,6 +199,39 @@ class SwmDevice:
         r = self.exchange("status", idle=0.6)
         m = r.search(r"link:\s*(.+)")
         return bool(m) and "down" not in m.group(1).lower()
+
+    def reconnect_with_retries(self, attempts: int = 3, pause: float = 2.0) -> Response:
+        """'reconnect' that survives the known first-attempt E101 (OBS-01): retry on E101 only, log every retry in the
+        transcript, and return the last reply. Anything else (or E101 on every attempt) is returned as it is, so the
+        caller's assert still fails when the link really does not come back."""
+        reply = None
+        for attempt in range(1, attempts + 1):
+            reply = self.exchange("reconnect", until=r"connected to|W114|E1\d\d", timeout=30)
+            if not reply.has_code("E101"):
+                break
+            self.transcript.add("TX", f"<retry {attempt}/{attempts}: reconnect returned E101>")
+            time.sleep(pause)
+        return reply
+
+    def wait_for_link(self, timeout: float = 45.0) -> bool:
+        """Wait until the DUT has its Wi-Fi link, nudging it with 'reconnect' (the first attempt may give E101, OBS-01)."""
+
+        def link_or_nudge() -> bool:
+            if self.link_up():
+                return True
+            self.exchange("reconnect", until=r"connected to|W114|E1\d\d", timeout=20)
+            return False
+
+        return wait_until(link_or_nudge, timeout, interval=2.0) or self.link_up()
+
+    def wait_for_internet(self, timeout: float = 40.0) -> bool:
+        """Poll ``status`` until the DUT itself reports 'internet: OK' (its own check lags a few seconds behind the link)."""
+
+        def internet_ok() -> bool:
+            m = self.exchange("status", idle=0.8).search(r"internet:\s+(\w+)")
+            return bool(m) and m.group(1).upper() == "OK"
+
+        return wait_until(internet_ok, timeout, interval=3.0)
 
     def register(self, login: str, password: str) -> Response:
         return self.exchange(f"register {login} {password}", until=r"registered|E\d{3}", timeout=8)

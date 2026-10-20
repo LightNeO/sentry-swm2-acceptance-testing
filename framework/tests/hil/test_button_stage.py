@@ -11,7 +11,6 @@ import time
 
 import pytest
 
-
 pytestmark = [pytest.mark.hil_stage]
 
 
@@ -132,5 +131,5 @@ def test_k1_k2_k3_are_blocked_in_emergency(dut, stimulator):
     # ST-3e explicitly covers K1-K3; K4 has Guard/Alert-specific behavior.
     for button in ("K1", "K2", "K3"):
         stimulator.press(button, 150)
-        text = _event(dut, rf"E005 buttons blocked in EMERGENCY")
+        text = _event(dut, r"E005 buttons blocked in EMERGENCY")
         assert "E005" in text

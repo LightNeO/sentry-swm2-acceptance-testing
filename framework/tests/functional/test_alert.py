@@ -44,7 +44,7 @@ def test_ack_without_id_acknowledges_the_last_one(alerts_clean):
     r = alerts_clean.exchange("alert ack")
     assert r.has(f"#{id2} acknowledged") and r.has("Unacked: 1"), r
     listing = alerts_clean.exchange("alert list").text
-    row1 = next(l for l in listing.split("\n") if f"#{id1}" in l)
+    row1 = next(line for line in listing.split("\n") if f"#{id1}" in line)
     assert "*" in row1, f"#{id1} must still be unacked:\n{listing}"
 
 
@@ -56,7 +56,7 @@ def test_ack_by_id_acknowledges_exactly_that_one(alerts_clean):
     r = alerts_clean.exchange(f"alert ack {id1}")
     assert r.has(f"#{id1} acknowledged") and r.has("Unacked: 2"), r
     listing = alerts_clean.exchange("alert list").text
-    row1 = next(l for l in listing.split("\n") if f"#{id1}" in l)
+    row1 = next(line for line in listing.split("\n") if f"#{id1}" in line)
     assert "*" not in row1, f"#{id1} must be acknowledged (no '*'):\n{listing}"
 
 

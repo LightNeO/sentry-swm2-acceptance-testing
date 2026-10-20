@@ -32,7 +32,7 @@ class Settings:
     wifi_password: str = field(repr=False)
 
     @classmethod
-    def from_env(cls) -> "Settings":
+    def from_env(cls) -> Settings:
         return cls(
             login=os.environ.get("TEST_LOGIN", "qa_swm"),
             password=os.environ.get("TEST_PASSWORD", "Pass1234"),
@@ -53,7 +53,7 @@ class StandConfig:
     ota_port: int
 
     @classmethod
-    def from_env(cls) -> "StandConfig":
+    def from_env(cls) -> StandConfig:
         return cls(
             ap_connection=os.environ.get("HIL_AP_CONNECTION", "SENTRY-HIL"),
             ap_interface=os.environ.get("HIL_AP_INTERFACE", "wlp1s0"),

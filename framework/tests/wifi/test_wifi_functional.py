@@ -6,9 +6,6 @@ import re
 
 import pytest
 
-from tests.helpers import reconnect_with_retries
-
-
 pytestmark = pytest.mark.managed_wifi
 
 
@@ -96,7 +93,7 @@ def test_reconnect_without_saved_network_gives_e113(dut_raw, managed_ap, setting
 @pytest.mark.tc("TC-WF-11")
 def test_reconnect_after_disconnect_restores_link(dut_raw, settings, managed_ap):
     dut_raw.exchange("disconnect", idle=1.0)
-    result = reconnect_with_retries(dut_raw)  # E101 is retried (OBS-01) but never counts as success
+    result = dut_raw.reconnect_with_retries()  # E101 is retried (OBS-01) but never counts as success
     assert result.search(r"connected to"), result
 
 

@@ -37,9 +37,9 @@ def run(d: SwmDevice, cmd: str, **kw) -> "object":
     kw.setdefault("idle", 1.0)
     r = d.exchange(cmd, **kw)
     log(f"> {cmd}")
-    for l in r.without_noise():
-        if "[TELEMETRY #" not in l.raw:
-            log("  " + l.raw)
+    for line in r.without_noise():
+        if "[TELEMETRY #" not in line.raw:
+            log("  " + line.raw)
     return r
 
 

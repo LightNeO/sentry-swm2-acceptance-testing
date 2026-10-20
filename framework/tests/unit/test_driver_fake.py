@@ -177,8 +177,6 @@ def test_link_up_parses_status():
 
 
 def test_reconnect_with_retries_retries_only_on_e101_and_logs_it():
-    from tests.helpers import reconnect_with_retries
-
     script = {
         "reconnect": [
             "E (1) sentry: E101 wrong password for 'CMF'\n",
@@ -186,17 +184,15 @@ def test_reconnect_with_retries_retries_only_on_e101_and_logs_it():
         ]
     }
     dev, t = make(script)
-    r = reconnect_with_retries(dev, attempts=3, pause=0.01)
+    r = dev.reconnect_with_retries(attempts=3, pause=0.01)
     assert r.search(r"connected to")
     assert t.sent == ["reconnect", "reconnect"]
     assert "retry 1/3" in dev.transcript.render()
 
 
 def test_reconnect_with_retries_does_not_hide_a_link_that_never_comes_back():
-    from tests.helpers import reconnect_with_retries
-
     dev, t = make({"reconnect": "E (1) sentry: E101 wrong password for 'CMF'\n"})
-    r = reconnect_with_retries(dev, attempts=3, pause=0.01)
+    r = dev.reconnect_with_retries(attempts=3, pause=0.01)
     assert r.has_code("E101")
     assert not r.search(r"connected to")
     assert t.sent.count("reconnect") == 3

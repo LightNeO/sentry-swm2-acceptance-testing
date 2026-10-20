@@ -12,8 +12,6 @@ import re
 
 import pytest
 
-from tests.helpers import wait_internet, wait_link
-
 pytestmark = pytest.mark.managed_wifi
 
 
@@ -29,8 +27,8 @@ def _running_image(dut) -> str:
 
 @pytest.mark.tc("TC-OTA-16")
 def test_ap_loss_during_slow_ota_download_is_survived(dut, managed_ap, slow_ota_server):
-    wait_link(dut)
-    if not wait_internet(dut, 60):
+    dut.wait_for_link()
+    if not dut.wait_for_internet(60):
         # Seen in the evidence run 3: the stand's upstream had not recovered yet, so the board never got internet.
         pytest.skip("precondition: the stand has no internet for the DUT before the test starts (check the upstream)")
     before = _running_image(dut)
@@ -49,9 +47,9 @@ def test_ap_loss_during_slow_ota_download_is_survived(dut, managed_ap, slow_ota_
     assert "W110" in reaction, reaction
     assert "retry 1/3" in reaction, reaction
 
-    assert wait_link(dut), "DUT did not get its Wi-Fi link back after the access point returned"
+    assert dut.wait_for_link(), "DUT did not get its Wi-Fi link back after the access point returned"
     assert _running_image(dut) == before, "the interrupted download must not change the running image"
 
-    assert wait_internet(dut), "no internet after the access point returned"
+    assert dut.wait_for_internet(), "no internet after the access point returned"
     check = dut.exchange("ota check", until=r"E\d{3}|\[OTA\] stable", timeout=30)
     assert not check.errors, check

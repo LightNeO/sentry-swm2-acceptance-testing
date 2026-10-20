@@ -8,6 +8,7 @@
 framework/
 ├── drivers/
 │   ├── config.py              # Settings (логін, Wi-Fi; секрети поза repr), StandConfig (стенд), завантаження .env
+│   ├── waiting.py             # wait_until: єдиний polling-помічник
 │   ├── protocol.py            # парсер виводу пристрою (без I/O)
 │   ├── redaction.py           # маскування паролів -> ***
 │   ├── transport.py           # SerialTransport (реальний UART) + FakeTransport (для unit-тестів)
@@ -24,14 +25,20 @@ framework/
 │   ├── wifi/                  # керований Wi-Fi і OTA (потрібен --run-managed-wifi; conftest.py: stand, managed_ap, OTA-сервери)
 │   └── helpers.py             # спільні функції тестів
 ├── tools/                     # одноразові скрипти доказів і генератор трасабіліті
-├── conftest.py                # сесійний пристрій, baseline, логін, опції та хуки, транскрипти, запис результатів
-├── pytest.ini                 # маркери
-└── requirements.txt
+├── swm_plugins/               # pytest-плагіни (підключаються з conftest.py через pytest_plugins)
+│   ├── stages.py              # --run-hil, --run-managed-wifi: стенд лише за явним прапорцем
+│   ├── evidence.py            # --keep-logs (транскрипти), --record (docs/results.json)
+│   ├── device.py              # settings, device_session -> dut_raw -> dut, reboot_dut
+│   └── state.py               # шляхи й ключі стану
+├── conftest.py                # точка входу: .env і pytest_plugins
+├── pyproject.toml             # налаштування pytest (маркери) і ruff
+└── requirements.txt           # pytest, pyserial, esptool
 ```
 
 ## Запуск
 
 ```bash
+# встановлення: pip install -r requirements.txt (лінтер, за потреби: pip install ruff; ruff check .)
 # налаштування: cp .env.example .env і заповнити
 python -m pytest tests/unit                  # без пристрою
 python -m pytest tests/smoke                 # потрібен DUT на UART

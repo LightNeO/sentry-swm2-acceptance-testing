@@ -64,7 +64,7 @@ class OtaServerProcess:
             proc.kill()
             proc.wait()
 
-    def __enter__(self) -> "OtaServerProcess":
+    def __enter__(self) -> OtaServerProcess:
         self.start()
         return self
 

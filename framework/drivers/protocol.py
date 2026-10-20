@@ -61,14 +61,14 @@ class Response:
     lines: list[LogLine] = field(default_factory=list)
 
     @classmethod
-    def from_text(cls, command: str, text: str, timed_out: bool = False, elapsed: float = 0.0) -> "Response":
-        lines = [parse_line(l) for l in text.split("\n") if l.strip()]
+    def from_text(cls, command: str, text: str, timed_out: bool = False, elapsed: float = 0.0) -> Response:
+        lines = [parse_line(line) for line in text.split("\n") if line.strip()]
         return cls(command, text, timed_out, elapsed, lines)
 
     @property
     def codes(self) -> list[str]:
         """All E###/W### codes, in order."""
-        return [c for l in self.lines for c in l.codes]
+        return [code for line in self.lines for code in line.codes]
 
     @property
     def errors(self) -> list[str]:
@@ -84,7 +84,7 @@ class Response:
         return re.search(pattern, self.text)
 
     def without_noise(self) -> list[LogLine]:
-        return [l for l in self.lines if not l.is_noise]
+        return [line for line in self.lines if not line.is_noise]
 
     def __str__(self) -> str:
         return self.text

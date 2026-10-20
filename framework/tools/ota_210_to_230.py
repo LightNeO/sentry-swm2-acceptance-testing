@@ -4,7 +4,6 @@ OTA 2.1.0 -> 2.3.0 beta, check what survived. Saves transcript to logs/ota/.
 
 import os
 import sys
-import time
 from pathlib import Path
 
 sys.path.insert(0, ".")
@@ -26,7 +25,7 @@ OUT = Path("../logs/ota/ota_2.1.0_to_2.3.0_beta.log")
 def run(d: SwmDevice, cmd: str, **kw) -> str:
     kw.setdefault("idle", 1.0)
     r = d.exchange(cmd, **kw)
-    print(f"> {cmd}\n  " + "\n  ".join(l.raw for l in r.without_noise() if "[TELEMETRY #" not in l.raw))
+    print(f"> {cmd}\n  " + "\n  ".join(line.raw for line in r.without_noise() if "[TELEMETRY #" not in line.raw))
     return r.text
 
 

@@ -4,8 +4,8 @@ import time
 
 import pytest
 
-from tests.helpers import relay_cycles, telemetry_intervals_ms
 from tests.functional.test_states import to_emergency
+from tests.helpers import relay_cycles, telemetry_intervals_ms
 
 pytestmark = [pytest.mark.functional]
 
