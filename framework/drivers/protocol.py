@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from enum import Enum
 
 ANSI_RE = re.compile(r"\x1b\[[0-9;?]*[A-Za-z]")
 LOG_RE = re.compile(r"([IWE]) \((\d+)\) ([\w.]+): (.*)")
@@ -17,6 +18,34 @@ CODE_RE = re.compile(r"\b([EW]\d{3})\b")
 NOISE_PREFIXES = ("[NAV]", "[ACU]", "[PWR]", "[HW]")
 BOOT_READY_RE = re.compile(r"ready\. state 1 NORMAL")
 VERSION_RE = re.compile(r"fw v(\d+\.\d+\.\d+)")
+
+
+class ErrorCode(str, Enum):
+    """Console error/warning codes the tests check for (the full list is in docs/requirements.md).
+
+    Members are plain strings, so ``resp.has_code(ErrorCode.E808)`` and ``resp.has_code("E808")`` are the same call."""
+
+    W510 = "W510"  # lamp already on/off
+    E509 = "E509"  # lamp scene is empty
+    W605 = "W605"  # relay schedule is not running
+    E602 = "E602"  # relay switch rate limit
+    W801 = "W801"  # guard already arming
+    W802 = "W802"  # guard not armed
+    E803 = "E803"  # wrong guard PIN
+    E804 = "E804"  # bad PIN format
+    E805 = "E805"  # no sonar reading to arm on
+    E807 = "E807"  # PIN change while armed
+    E808 = "E808"  # guard zone out of range
+    E400 = "E400"  # missing argument
+    E414 = "E414"  # bad OTA version format
+    E415 = "E415"  # OTA version not on the server
+    E418 = "E418"  # OTA url scheme
+    E706 = "E706"  # sonar calibration reference out of range
+    E851 = "E851"  # unknown alert id
+    W852 = "W852"  # alert already acknowledged
+    W853 = "W853"  # nothing to acknowledge
+    E854 = "E854"  # bad alert level
+    E855 = "E855"  # clear with unacknowledged alerts
 
 
 @dataclass(frozen=True)
@@ -61,20 +90,20 @@ class Response:
     lines: list[LogLine] = field(default_factory=list)
 
     @classmethod
-    def from_text(cls, command: str, text: str, timed_out: bool = False, elapsed: float = 0.0) -> "Response":
-        lines = [parse_line(l) for l in text.split("\n") if l.strip()]
+    def from_text(cls, command: str, text: str, timed_out: bool = False, elapsed: float = 0.0) -> Response:
+        lines = [parse_line(line) for line in text.split("\n") if line.strip()]
         return cls(command, text, timed_out, elapsed, lines)
 
     @property
     def codes(self) -> list[str]:
         """All E###/W### codes, in order."""
-        return [c for l in self.lines for c in l.codes]
+        return [code for line in self.lines for code in line.codes]
 
     @property
     def errors(self) -> list[str]:
         return [c for c in self.codes if c.startswith("E")]
 
-    def has_code(self, code: str) -> bool:
+    def has_code(self, code: str | ErrorCode) -> bool:
         return code in self.codes
 
     def has(self, substring: str) -> bool:
@@ -84,7 +113,7 @@ class Response:
         return re.search(pattern, self.text)
 
     def without_noise(self) -> list[LogLine]:
-        return [l for l in self.lines if not l.is_noise]
+        return [line for line in self.lines if not line.is_noise]
 
     def __str__(self) -> str:
         return self.text

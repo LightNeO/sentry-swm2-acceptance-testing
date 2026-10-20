@@ -7,29 +7,39 @@
 ```
 framework/
 ├── drivers/
+│   ├── config.py              # Settings (логін, Wi-Fi; секрети поза repr), StandConfig (стенд), завантаження .env
+│   ├── waiting.py             # wait_until: єдиний polling-помічник
 │   ├── protocol.py            # парсер виводу пристрою (без I/O)
 │   ├── redaction.py           # маскування паролів -> ***
 │   ├── transport.py           # SerialTransport (реальний UART) + FakeTransport (для unit-тестів)
 │   ├── device_driver.py       # SwmDevice: команди, промпти, перезавантаження, Wi-Fi, login
+│   ├── components.py          # dut.lamp / relay / guard / alerts / sonar / ota / wifi: одна команда = один метод, повертає Response
 │   ├── button_stimulator.py   # керування Arduino Nano: press/hold/комбінації K1-K4
 │   ├── managed_ap.py          # керований AP/upstream через NetworkManager
 │   └── ota_server_process.py  # локальний OTA-сервер як підпроцес (повільний OTA)
 ├── tests/
+│   ├── conftest.py            # фікстури, спільні для кількох папок (guard_clean)
 │   ├── unit/                  # перевірка самого фреймворку, без заліза
 │   ├── smoke/                 # пристрій живий і ідентифікований
-│   ├── functional/            # межі діапазонів та інше за PRD
-│   ├── hil/                   # Arduino-кнопки (потрібен --run-hil)
-│   ├── wifi/                  # керований Wi-Fi і OTA fault-injection (потрібен --run-managed-wifi)
+│   ├── functional/            # межі діапазонів та інше за PRD (conftest.py: clean_account, alerts_clean, guard_fresh)
+│   ├── hil/                   # Arduino-кнопки (потрібен --run-hil; conftest.py: stimulator)
+│   ├── wifi/                  # керований Wi-Fi і OTA (потрібен --run-managed-wifi; conftest.py: stand, managed_ap, OTA-сервери)
 │   └── helpers.py             # спільні функції тестів
 ├── tools/                     # одноразові скрипти доказів і генератор трасабіліті
-├── conftest.py                # fixtures, логи-докази, запис результатів
-├── pytest.ini                 # маркери
-└── requirements.txt
+├── swm_plugins/               # pytest-плагіни (підключаються з conftest.py через pytest_plugins)
+│   ├── stages.py              # --run-hil, --run-managed-wifi: стенд лише за явним прапорцем
+│   ├── evidence.py            # --keep-logs (транскрипти), --record (docs/results.json)
+│   ├── device.py              # settings, device_session -> dut_raw -> dut, reboot_dut
+│   └── state.py               # шляхи й ключі стану
+├── conftest.py                # точка входу: .env і pytest_plugins
+├── pyproject.toml             # налаштування pytest (маркери) і ruff
+└── requirements.txt           # pytest, pyserial, esptool
 ```
 
 ## Запуск
 
 ```bash
+# встановлення: pip install -r requirements.txt (лінтер, за потреби: pip install ruff; ruff check .)
 # налаштування: cp .env.example .env і заповнити
 python -m pytest tests/unit                  # без пристрою
 python -m pytest tests/smoke                 # потрібен DUT на UART

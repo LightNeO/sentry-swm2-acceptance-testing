@@ -1,37 +1,10 @@
 """Network fault cases around OTA."""
 
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from threading import Thread
-
 import pytest
-
-from tests.helpers import wait_link
-
 
 pytestmark = pytest.mark.managed_wifi
 
-
-class NotFoundHandler(BaseHTTPRequestHandler):
-    def do_GET(self):  # noqa: N802 - stdlib handler API
-        self.send_response(404)
-        self.end_headers()
-
-    def log_message(self, *_args):
-        pass
-
-
-@pytest.fixture
-def missing_ota_server():
-    # UFW already permits 53317 on the test interface; avoid changing firewall
-    # rules just to allocate a temporary high port.
-    server = ThreadingHTTPServer(("10.42.0.1", 53317), NotFoundHandler)
-    thread = Thread(target=server.serve_forever, daemon=True)
-    thread.start()
-    try:
-        yield f"http://10.42.0.1:{server.server_port}"
-    finally:
-        server.shutdown()
-        server.server_close()
+CUSTOM_OTA_PORT = 8000
 
 
 def _restore_default_server(dut) -> None:
@@ -40,15 +13,15 @@ def _restore_default_server(dut) -> None:
     for _ in range(3):
         if not dut.exchange("ota server default").has_code("E002"):
             return
-        wait_link(dut)
+        dut.wait_for_link()
 
 
 @pytest.mark.tc("TC-OTA-23")
-def test_unreachable_ota_server_returns_e402(dut, managed_ap):
+def test_unreachable_ota_server_returns_e402(dut, managed_ap, stand):
     # Port 53317 is allowed by the test-interface firewall, but no server is
     # started for this case, so the DUT gets a quick connection refusal.
-    wait_link(dut)
-    dut.exchange("ota server http://10.42.0.1:53317/fw7/")
+    dut.wait_for_link()
+    dut.exchange(f"ota server http://{stand.ap_address}:{stand.ota_port}/fw7/")
     try:
         result = dut.exchange("ota check", timeout=15)
         assert result.has_code("E402"), result
@@ -63,17 +36,18 @@ def test_unreachable_ota_path_returns_e405(dut, managed_ap, missing_ota_server):
 
 
 @pytest.mark.tc("TC-OTA-31")
-def test_custom_ota_server_is_saved_by_device(dut, managed_ap):
+def test_custom_ota_server_is_saved_by_device(dut, managed_ap, stand):
+    custom = f"{stand.ap_address}:{CUSTOM_OTA_PORT}"  # only saved by the board, nothing has to listen there
     status = None
     try:
         # The link can drop between the two commands (then the server is not saved and E002 is answered): retry.
         for _ in range(3):
-            wait_link(dut)
-            result = dut.exchange("ota server http://10.42.0.1:8000/fw7/")
+            dut.wait_for_link()
+            result = dut.exchange(f"ota server http://{custom}/fw7/")
             assert not result.has_code("E001"), result
             status = dut.exchange("ota server")
-            if "10.42.0.1:8000" in status.text:
+            if custom in status.text:
                 break
-        assert "10.42.0.1:8000" in status.text, status
+        assert custom in status.text, status
     finally:
         _restore_default_server(dut)

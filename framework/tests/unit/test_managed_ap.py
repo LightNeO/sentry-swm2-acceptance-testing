@@ -4,7 +4,6 @@ import pytest
 
 from drivers.managed_ap import ManagedAp, NetworkCommandError, NetworkSnapshot
 
-
 pytestmark = pytest.mark.unit
 
 

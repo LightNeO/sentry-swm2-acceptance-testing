@@ -6,42 +6,15 @@ the Arduino controller and need --run-hil to execute.
 
 from __future__ import annotations
 
-import os
 import re
 import time
 
 import pytest
 
-from drivers.button_stimulator import ButtonStimulator
-
-
-pytestmark = [
-    pytest.mark.hil_stage,
-    pytest.mark.skipif(
-        not os.environ.get("BUTTON_STIM_PORT"),
-        reason="set BUTTON_STIM_PORT to run the physical button stage",
-    ),
-]
+pytestmark = [pytest.mark.hil_stage]
 
 
 MIN_OBJECT_CM = 15.0  # the stand object must be clearly outside the 10 cm guard zone (readings vary by a few cm)
-
-
-@pytest.fixture
-def guard_clean(dut):
-    """Reset Guard/Alert state for the partial K4 PANIC scenario."""
-    dut.exchange("guard disarm 1234", idle=0.8)
-    dut.exchange("guard zone 50")
-    dut.exchange("alert ack all", idle=0.8)
-    dut.exchange("alert clear", idle=0.8)
-    yield dut
-    dut.exchange("guard disarm 1234", idle=0.8)
-
-
-@pytest.fixture
-def stimulator() -> ButtonStimulator:
-    with ButtonStimulator() as stimulator:
-        yield stimulator
 
 
 def _event(dut, pattern: str, timeout: float = 3.0) -> str:
@@ -158,5 +131,5 @@ def test_k1_k2_k3_are_blocked_in_emergency(dut, stimulator):
     # ST-3e explicitly covers K1-K3; K4 has Guard/Alert-specific behavior.
     for button in ("K1", "K2", "K3"):
         stimulator.press(button, 150)
-        text = _event(dut, rf"E005 buttons blocked in EMERGENCY")
+        text = _event(dut, r"E005 buttons blocked in EMERGENCY")
         assert "E005" in text

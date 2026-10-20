@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
-import os
 import subprocess
+from collections.abc import Sequence
 from dataclasses import dataclass
-from typing import Sequence
+
+from drivers.config import StandConfig
 
 
 class NetworkCommandError(RuntimeError):
@@ -40,13 +41,14 @@ class ManagedAp:
         upstream_connection: str | None = None,
         upstream_interface: str | None = None,
     ) -> None:
+        stand = StandConfig.from_env()
         self.runner = runner or CommandRunner()
-        self.ap_connection = ap_connection or os.environ.get("HIL_AP_CONNECTION", "SENTRY-HIL")
-        self.ap_interface = ap_interface or os.environ.get("HIL_AP_INTERFACE", "wlp1s0")
-        self.upstream_connection = upstream_connection or os.environ.get("HIL_UPSTREAM_CONNECTION", "")
+        self.ap_connection = ap_connection or stand.ap_connection
+        self.ap_interface = ap_interface or stand.ap_interface
+        self.upstream_connection = upstream_connection or stand.upstream_connection
         if not self.upstream_connection:
             raise ValueError("set HIL_UPSTREAM_CONNECTION to the NetworkManager profile of the stand's upstream network")
-        self.upstream_interface = upstream_interface or os.environ.get("HIL_UPSTREAM_INTERFACE", "wlp0s21f0u2")
+        self.upstream_interface = upstream_interface or stand.upstream_interface
 
     def snapshot(self) -> NetworkSnapshot:
         return NetworkSnapshot(

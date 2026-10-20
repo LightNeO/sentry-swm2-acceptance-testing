@@ -72,7 +72,7 @@ class ButtonStimulator:
             finally:
                 self.serial.close()
 
-    def __enter__(self) -> "ButtonStimulator":
+    def __enter__(self) -> ButtonStimulator:
         return self
 
     def __exit__(self, *_: object) -> None:

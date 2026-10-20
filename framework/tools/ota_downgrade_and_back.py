@@ -12,7 +12,9 @@ from pathlib import Path
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 sys.path.insert(0, ".")
-import conftest  # noqa: F401
+from drivers.config import load_env
+
+load_env()  # framework/.env into os.environ
 
 from drivers.device_driver import SwmDevice
 from drivers.redaction import Redactor
@@ -35,9 +37,9 @@ def run(d: SwmDevice, cmd: str, **kw) -> "object":
     kw.setdefault("idle", 1.0)
     r = d.exchange(cmd, **kw)
     log(f"> {cmd}")
-    for l in r.without_noise():
-        if "[TELEMETRY #" not in l.raw:
-            log("  " + l.raw)
+    for line in r.without_noise():
+        if "[TELEMETRY #" not in line.raw:
+            log("  " + line.raw)
     return r
 
 

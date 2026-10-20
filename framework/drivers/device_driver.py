@@ -7,9 +7,11 @@ from __future__ import annotations
 import re
 import time
 
+from drivers.components import Alerts, Guard, Lamp, Ota, Relay, Sonar, Wifi
 from drivers.protocol import BOOT_READY_RE, VERSION_RE, Response, clean_text
 from drivers.redaction import Redactor
 from drivers.transport import Transport
+from drivers.waiting import wait_until
 
 CRLF = "\r\n"
 
@@ -61,6 +63,15 @@ class SwmDevice:
         self.timeout = timeout
         self.idle = idle
         self.transcript = Transcript()
+        self.boot_text = ""  # boot log of the session (set by the session fixture)
+        self.fw_version = "unknown"  # e.g. "2.3.0"
+        self.lamp = Lamp(self)
+        self.relay = Relay(self)
+        self.guard = Guard(self)
+        self.alerts = Alerts(self)
+        self.sonar = Sonar(self)
+        self.ota = Ota(self)
+        self.wifi = Wifi(self)
 
     # ------------------------------------------------------------------ low level
     def _collect(self, timeout: float, idle: float, until: str | None) -> tuple[str, bool]:
@@ -197,11 +208,54 @@ class SwmDevice:
         m = r.search(r"link:\s*(.+)")
         return bool(m) and "down" not in m.group(1).lower()
 
+    def reconnect_with_retries(self, attempts: int = 3, pause: float = 2.0) -> Response:
+        """'reconnect' that survives the known first-attempt E101 (OBS-01): retry on E101 only, log every retry in the
+        transcript, and return the last reply. Anything else (or E101 on every attempt) is returned as it is, so the
+        caller's assert still fails when the link really does not come back."""
+        reply = None
+        for attempt in range(1, attempts + 1):
+            reply = self.exchange("reconnect", until=r"connected to|W114|E1\d\d", timeout=30)
+            if not reply.has_code("E101"):
+                break
+            self.transcript.add("TX", f"<retry {attempt}/{attempts}: reconnect returned E101>")
+            time.sleep(pause)
+        return reply
+
+    def wait_for_link(self, timeout: float = 45.0) -> bool:
+        """Wait until the DUT has its Wi-Fi link, nudging it with 'reconnect' (the first attempt may give E101, OBS-01)."""
+
+        def link_or_nudge() -> bool:
+            if self.link_up():
+                return True
+            self.exchange("reconnect", until=r"connected to|W114|E1\d\d", timeout=20)
+            return False
+
+        return wait_until(link_or_nudge, timeout, interval=2.0) or self.link_up()
+
+    def wait_for_internet(self, timeout: float = 40.0) -> bool:
+        """Poll ``status`` until the DUT itself reports 'internet: OK' (its own check lags a few seconds behind the link)."""
+
+        def internet_ok() -> bool:
+            m = self.exchange("status", idle=0.8).search(r"internet:\s+(\w+)")
+            return bool(m) and m.group(1).upper() == "OK"
+
+        return wait_until(internet_ok, timeout, interval=3.0)
+
     def register(self, login: str, password: str) -> Response:
         return self.exchange(f"register {login} {password}", until=r"registered|E\d{3}", timeout=8)
 
     def login(self, login: str, password: str) -> Response:
         return self.exchange(f"login {login} {password}", until=r"on watch|E\d{3}", timeout=8)
+
+    def login_waiting_out_lockout(self, login: str, password: str, max_wait: float = 40.0) -> Response:
+        """Login, waiting out a lockout (E207/E210, 30 s) if the account is locked, so it does not cascade into the next test."""
+        r = self.login(login, password)
+        deadline = time.monotonic() + max_wait
+        while ("E207" in r.codes or "E210" in r.codes) and time.monotonic() < deadline:
+            m = r.search(r"Try again in (\d+) s")
+            time.sleep((int(m.group(1)) if m else 5) + 1)
+            r = self.login(login, password)
+        return r
 
     def logout(self) -> Response:
         return self.exchange("logout")
