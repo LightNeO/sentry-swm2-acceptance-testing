@@ -47,16 +47,16 @@ flowchart TB
     DUT -- Wi-Fi --> AP
     AP --- SRV
     TA -- запускає підпроцес --> SRV
-    NM -. NAT .-> UP
+    NM -. "NAT" .-> UP
 
     TA -- керування --> STIM_D
     TA -- керування --> PWR
     PWR -- USB power cut --> DUT
     STIM_D -- фізична відстань --> DUT
 
-    DUT -. GPIO4/GPIO8 .-> OBS_LA
-    DUT -. світло LED .-> OBS_CAM
-    DUT -. 3.3V/5V рейки .-> OBS_MM
+    DUT -. "GPIO4, GPIO8" .-> OBS_LA
+    DUT -. "світло LED" .-> OBS_CAM
+    DUT -. "рейки 3.3 В і 5 В" .-> OBS_MM
     OBS_LA --> TA
     OBS_CAM --> TA
     OBS_MM --> TA
